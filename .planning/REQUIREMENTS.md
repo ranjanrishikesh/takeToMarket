@@ -176,102 +176,102 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | — | Pending |
-| FOUND-02 | — | Pending |
-| FOUND-03 | — | Pending |
-| FOUND-04 | — | Pending |
-| FOUND-05 | — | Pending |
-| FOUND-06 | — | Pending |
-| FOUND-07 | — | Pending |
-| ONBD-01 | — | Pending |
-| ONBD-02 | — | Pending |
-| ONBD-03 | — | Pending |
-| ONBD-04 | — | Pending |
-| ONBD-05 | — | Pending |
-| ONBD-06 | — | Pending |
-| ONBD-07 | — | Pending |
-| ONBD-08 | — | Pending |
-| ONBD-09 | — | Pending |
-| ONBD-10 | — | Pending |
-| ONBD-11 | — | Pending |
-| LIFE-01 | — | Pending |
-| LIFE-02 | — | Pending |
-| LIFE-03 | — | Pending |
-| LIFE-04 | — | Pending |
-| LIFE-05 | — | Pending |
-| LIFE-06 | — | Pending |
-| LIFE-07 | — | Pending |
-| LIFE-08 | — | Pending |
-| LIFE-09 | — | Pending |
-| LIFE-10 | — | Pending |
-| LIFE-11 | — | Pending |
-| LIFE-12 | — | Pending |
-| LIFE-13 | — | Pending |
-| LIFE-14 | — | Pending |
-| LIFE-15 | — | Pending |
-| LIFE-16 | — | Pending |
-| LIFE-17 | — | Pending |
-| GATE-01 | — | Pending |
-| GATE-02 | — | Pending |
-| GATE-03 | — | Pending |
-| GATE-04 | — | Pending |
-| GATE-05 | — | Pending |
-| GATE-06 | — | Pending |
-| GATE-07 | — | Pending |
-| GATE-08 | — | Pending |
-| GATE-09 | — | Pending |
-| GATE-10 | — | Pending |
-| GATE-11 | — | Pending |
-| GATE-12 | — | Pending |
-| POSN-01 | — | Pending |
-| POSN-02 | — | Pending |
-| POSN-03 | — | Pending |
-| POSN-04 | — | Pending |
-| POSN-05 | — | Pending |
-| PLAY-01 | — | Pending |
-| PLAY-02 | — | Pending |
-| PLAY-03 | — | Pending |
-| PLAY-04 | — | Pending |
-| PLAY-05 | — | Pending |
-| PLAY-06 | — | Pending |
-| PLAY-07 | — | Pending |
-| PLAY-08 | — | Pending |
-| PLAY-09 | — | Pending |
-| PLAY-10 | — | Pending |
-| PLAY-11 | — | Pending |
-| STAT-01 | — | Pending |
-| STAT-02 | — | Pending |
-| STAT-03 | — | Pending |
-| STAT-04 | — | Pending |
-| STAT-05 | — | Pending |
-| UTIL-01 | — | Pending |
-| UTIL-02 | — | Pending |
-| UTIL-03 | — | Pending |
-| UTIL-04 | — | Pending |
-| UTIL-05 | — | Pending |
-| UTIL-06 | — | Pending |
-| UTIL-07 | — | Pending |
-| UTIL-08 | — | Pending |
-| UTIL-09 | — | Pending |
-| UTIL-10 | — | Pending |
-| META-01 | — | Pending |
-| META-02 | — | Pending |
-| META-03 | — | Pending |
-| META-04 | — | Pending |
-| DIST-01 | — | Pending |
-| DIST-02 | — | Pending |
-| DIST-03 | — | Pending |
-| DIST-04 | — | Pending |
-| LRNG-01 | — | Pending |
-| LRNG-02 | — | Pending |
-| LRNG-03 | — | Pending |
-| LRNG-04 | — | Pending |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| FOUND-06 | Phase 1 | Pending |
+| FOUND-07 | Phase 1 | Pending |
+| ONBD-01 | Phase 2 | Pending |
+| ONBD-02 | Phase 2 | Pending |
+| ONBD-03 | Phase 2 | Pending |
+| ONBD-04 | Phase 2 | Pending |
+| ONBD-05 | Phase 2 | Pending |
+| ONBD-06 | Phase 2 | Pending |
+| ONBD-07 | Phase 2 | Pending |
+| ONBD-08 | Phase 2 | Pending |
+| ONBD-09 | Phase 2 | Pending |
+| ONBD-10 | Phase 2 | Pending |
+| ONBD-11 | Phase 2 | Pending |
+| LIFE-01 | Phase 3 | Pending |
+| LIFE-02 | Phase 3 | Pending |
+| LIFE-03 | Phase 3 | Pending |
+| LIFE-04 | Phase 3 | Pending |
+| LIFE-05 | Phase 3 | Pending |
+| LIFE-06 | Phase 4 | Pending |
+| LIFE-07 | Phase 4 | Pending |
+| LIFE-08 | Phase 4 | Pending |
+| LIFE-09 | Phase 4 | Pending |
+| LIFE-10 | Phase 5 | Pending |
+| LIFE-11 | Phase 5 | Pending |
+| LIFE-12 | Phase 5 | Pending |
+| LIFE-13 | Phase 5 | Pending |
+| LIFE-14 | Phase 9 | Pending |
+| LIFE-15 | Phase 9 | Pending |
+| LIFE-16 | Phase 9 | Pending |
+| LIFE-17 | Phase 9 | Pending |
+| GATE-01 | Phase 4 | Pending |
+| GATE-02 | Phase 4 | Pending |
+| GATE-03 | Phase 4 | Pending |
+| GATE-04 | Phase 4 | Pending |
+| GATE-05 | Phase 4 | Pending |
+| GATE-06 | Phase 4 | Pending |
+| GATE-07 | Phase 4 | Pending |
+| GATE-08 | Phase 4 | Pending |
+| GATE-09 | Phase 4 | Pending |
+| GATE-10 | Phase 4 | Pending |
+| GATE-11 | Phase 4 | Pending |
+| GATE-12 | Phase 4 | Pending |
+| POSN-01 | Phase 6 | Pending |
+| POSN-02 | Phase 6 | Pending |
+| POSN-03 | Phase 6 | Pending |
+| POSN-04 | Phase 6 | Pending |
+| POSN-05 | Phase 6 | Pending |
+| PLAY-01 | Phase 8 | Pending |
+| PLAY-02 | Phase 8 | Pending |
+| PLAY-03 | Phase 8 | Pending |
+| PLAY-04 | Phase 9 | Pending |
+| PLAY-05 | Phase 8 | Pending |
+| PLAY-06 | Phase 8 | Pending |
+| PLAY-07 | Phase 8 | Pending |
+| PLAY-08 | Phase 9 | Pending |
+| PLAY-09 | Phase 9 | Pending |
+| PLAY-10 | Phase 9 | Pending |
+| PLAY-11 | Phase 9 | Pending |
+| STAT-01 | Phase 7 | Pending |
+| STAT-02 | Phase 7 | Pending |
+| STAT-03 | Phase 7 | Pending |
+| STAT-04 | Phase 7 | Pending |
+| STAT-05 | Phase 7 | Pending |
+| UTIL-01 | Phase 10 | Pending |
+| UTIL-02 | Phase 10 | Pending |
+| UTIL-03 | Phase 10 | Pending |
+| UTIL-04 | Phase 10 | Pending |
+| UTIL-05 | Phase 10 | Pending |
+| UTIL-06 | Phase 10 | Pending |
+| UTIL-07 | Phase 10 | Pending |
+| UTIL-08 | Phase 10 | Pending |
+| UTIL-09 | Phase 10 | Pending |
+| UTIL-10 | Phase 7 | Pending |
+| META-01 | Phase 9 | Pending |
+| META-02 | Phase 9 | Pending |
+| META-03 | Phase 9 | Pending |
+| META-04 | Phase 9 | Pending |
+| DIST-01 | Phase 10 | Pending |
+| DIST-02 | Phase 10 | Pending |
+| DIST-03 | Phase 10 | Pending |
+| DIST-04 | Phase 10 | Pending |
+| LRNG-01 | Phase 9 | Pending |
+| LRNG-02 | Phase 9 | Pending |
+| LRNG-03 | Phase 9 | Pending |
+| LRNG-04 | Phase 9 | Pending |
 
 **Coverage:**
 - v1 requirements: 80 total
-- Mapped to phases: 0
-- Unmapped: 80 ⚠️
+- Mapped to phases: 80
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-21*
-*Last updated: 2026-04-21 after initial definition*
+*Last updated: 2026-04-21 after roadmap creation*
