@@ -35,7 +35,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. bin/ttm-tools.cjs runs slug generation and state timestamp operations using only Node.js built-ins
   4. .marketing/ directory structure is created with CAMPAIGNS/ and PLAYBOOKS/ subdirectories
   5. Two-tier context loading strategy is defined -- compact summaries load universally, full documents load only when needed
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 01-01-PLAN.md -- Plugin manifest, 27 SKILL.md command stubs, and project files
+- [ ] 01-02-PLAN.md -- bin/ttm-tools.cjs CLI utility with modular lib/ architecture
+- [ ] 01-03-PLAN.md -- Reference file templates, dual-runtime templates, workflow directory scaffolding
 
 ### Phase 2: Onboarding Interview
 **Goal**: A new user can run /ttm-init and have all reference files generated from a guided interview, ready for campaign work
@@ -149,7 +153,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Plugin Scaffold and Tooling | 0/TBD | Not started | - |
+| 1. Plugin Scaffold and Tooling | 0/3 | Planning complete | - |
 | 2. Onboarding Interview | 0/TBD | Not started | - |
 | 3. Campaign Creation and Briefing | 0/TBD | Not started | - |
 | 4. Content Production and Verification | 0/TBD | Not started | - |
