@@ -1,0 +1,277 @@
+# Requirements: takeToMarket
+
+**Defined:** 2026-04-21
+**Core Value:** Every marketing asset ships with a verifiable outcome metric and passes through a positioning-invariant quality gate wall — no asset ships without both, ever.
+
+## v1 Requirements
+
+Requirements for initial release. Each maps to roadmap phases.
+
+### Foundation
+
+- [ ] **FOUND-01**: Plugin directory structure follows Claude Code plugin format (.claude-plugin/plugin.json, skills/, workflows/, templates/, bin/)
+- [ ] **FOUND-02**: SKILL.md entry point with YAML frontmatter routing all `/ttm-*` commands to workflow files (under 300 lines)
+- [ ] **FOUND-03**: Modular file architecture — no single file exceeds 500 lines; each slash command is one minimal file
+- [ ] **FOUND-04**: Two-tier context loading strategy — compact summaries (<200 words) load universally, full documents load only when needed
+- [ ] **FOUND-05**: `bin/ttm-tools.cjs` CLI utility for deterministic operations (slug generation, state timestamps, atomic writes) using Node.js built-ins only
+- [ ] **FOUND-06**: Dual-runtime support — CLAUDE.md generated for Claude Code, AGENTS.md generated for Codex
+- [ ] **FOUND-07**: `.marketing/` directory structure created with all required subdirectories (CAMPAIGNS/, PLAYBOOKS/)
+
+### Onboarding
+
+- [ ] **ONBD-01**: `/ttm-init` interview-driven onboarding that generates POSITIONING.md from structured questioning with specificity validation
+- [ ] **ONBD-02**: `/ttm-init` generates BRAND.md (voice archetype, tone per context, banned words, proof points, examples)
+- [ ] **ONBD-03**: `/ttm-init` generates ICP.md (primary segment, JTBD, pains, triggers, anti-ICP, customer language library)
+- [ ] **ONBD-04**: `/ttm-init` generates CHANNELS.md (active channels, baselines, dormant channels, banned channels, budget allocation)
+- [ ] **ONBD-05**: `/ttm-init` generates STATE.md (decisions in flight, blockers, experiments, recent lessons)
+- [ ] **ONBD-06**: `/ttm-init` generates METRICS.md (primary outcome metric, secondary metrics, leading indicators, baselines, attribution model)
+- [ ] **ONBD-07**: `/ttm-init` generates COMPETITORS.md (direct competitors, positioning map, share of voice baseline)
+- [ ] **ONBD-08**: `/ttm-init` generates CALENDAR.md (quarterly themes, launch calendar, always-on cadence, blackout dates)
+- [ ] **ONBD-09**: `/ttm-init` generates LEARNINGS.md (initialized empty with root-cause taxonomy structure)
+- [ ] **ONBD-10**: POSITIONING.md uses structured checklist format (primary differentiator phrase, category, target audience, must-include proof points, must-not-say terms) for reliable drift detection
+- [ ] **ONBD-11**: `/ttm-init` validates specificity of generated reference files — rejects vague outputs and re-asks
+
+### Campaign Lifecycle
+
+- [ ] **LIFE-01**: `/ttm-new-campaign <slug>` creates `CAMPAIGNS/<slug>/` directory with initialized state, links to reference files
+- [ ] **LIFE-02**: `/ttm-research <slug>` (Discover phase) performs market/audience research for the campaign — SERP analysis, competitor content, AI-answer citations, ambient narrative
+- [ ] **LIFE-03**: `/ttm-brief <slug>` (Brief phase) generates campaign brief with mandatory fields: goal, outcome metric, target value, measurement window, ICP segment, positioning anchor, hook, proof points, channel mix, assets list, success/failure criteria
+- [ ] **LIFE-04**: Brief phase enforces outcome metric — refuses to proceed without both output metric and outcome metric defined
+- [ ] **LIFE-05**: Brief phase runs positioning check gate before proceeding to Produce
+- [ ] **LIFE-06**: `/ttm-produce <slug>` (Produce phase) generates content assets in fresh 200K-token contexts loaded with brief + positioning + brand + ICP + relevant playbook
+- [ ] **LIFE-07**: Produce phase supports wave-parallel execution for multi-asset campaigns — hero asset first, then derivatives
+- [ ] **LIFE-08**: `/ttm-verify <slug>` (Verify phase) runs all applicable quality gates on every asset, producing pass/fail report with line-level feedback
+- [ ] **LIFE-09**: Verify phase runs in a separate context from Produce to prevent self-evaluation bias
+- [ ] **LIFE-10**: `/ttm-review <slug>` (Review phase) presents assets with structured review checklist forcing specific questions (positioning reinforcement, outcome realism, claim substantiation, competitor differentiation)
+- [ ] **LIFE-11**: `/ttm-fix <slug>` (Fix phase) performs root cause → fix brief → re-produce in isolated context → re-verify cycle
+- [ ] **LIFE-12**: Fix phase capped at 3 attempts per asset before escalating to human
+- [ ] **LIFE-13**: `/ttm-ship <slug>` (Ship phase) generates launch checklist: tracking installed, UTMs confirmed, funnel tested, assets finalized, monitoring configured
+- [ ] **LIFE-14**: `/ttm-measure <slug>` (Measure phase) accepts manually pasted analytics data and analyzes against outcome metrics using last-touch, linear, and time-decay attribution models
+- [ ] **LIFE-15**: Measure phase reports outcome metric first, output metric second — outcome-blind by default
+- [ ] **LIFE-16**: `/ttm-learn <slug>` (Learn phase) extracts lessons, proposes edits to reference files (BRAND.md, ICP.md, CHANNELS.md, POSITIONING.md) with human approval gate per edit
+- [ ] **LIFE-17**: Learn phase logs failures with explicit root-cause narratives to LEARNINGS.md
+
+### Quality Gates
+
+- [ ] **GATE-01**: Positioning drift gate — checks asset against structured POSITIONING.md fields, returns PASS/WARN/FAIL
+- [ ] **GATE-02**: Claim accuracy gate — verifies every factual/numeric claim against approved proof points in BRAND.md
+- [ ] **GATE-03**: Voice drift gate — checks tone matches BRAND.md voice archetype, flags banned words
+- [ ] **GATE-04**: Outcome alignment gate — verifies asset is tagged with specific outcome metric, not just output
+- [ ] **GATE-05**: Funnel integrity gate — validates CTA → next step → conversion path works end-to-end
+- [ ] **GATE-06**: UTM hygiene gate — validates correct source/medium/campaign/content per CHANNELS.md schema
+- [ ] **GATE-07**: Compliance gate — checks legal/regulatory claims, required disclaimers, PII handling
+- [ ] **GATE-08**: Competitor collision gate — detects if asset reads like competitor content or borrows their frame
+- [ ] **GATE-09**: ICP fit gate — verifies hook speaks to ICP segment using customer language, not generic/aspirational copy
+- [ ] **GATE-10**: Format correctness gate — validates platform-specific format (char limits, aspect ratios, safe zones, dark-mode)
+- [ ] **GATE-11**: Gate tiering — Tier 1 (blocking: positioning drift, claim accuracy, outcome alignment) vs Tier 2 (advisory: remaining gates)
+- [ ] **GATE-12**: Deviation reports with 3 options: Correct (rewrite), Accept+log (ship with documented exception), Escalate (trigger positioning shift)
+
+### Positioning Invariant
+
+- [ ] **POSN-01**: POSITIONING.md loaded into every phase context (as compact summary in non-produce phases, full in produce/verify)
+- [ ] **POSN-02**: POSITIONING.md is read-only during campaign execution — cannot be edited from within a campaign
+- [ ] **POSN-03**: `/ttm-positioning-shift` requires explicit reasoning for shift, migration plan for existing assets, deprecation schedule, human approval
+- [ ] **POSN-04**: `/ttm-positioning-check` samples N recent assets and reports: % on-positioning, types of drift, bleeding into customer-facing materials
+- [ ] **POSN-05**: Positioning drift log maintained with date and reasoning for every intentional adjustment
+
+### Playbooks
+
+- [ ] **PLAY-01**: Base playbook inheritance model — discipline playbooks extend base with additive gates and channel-specific checks
+- [ ] **PLAY-02**: SEO playbook — title/H1 alignment, search-intent match, schema.org markup, internal-link density, Core Web Vitals budget, thin-content detection for pSEO
+- [ ] **PLAY-03**: AEO playbook — quote-worthy sentences (3+ per asset), FAQPage/HowTo schema, author/expert markup, cross-domain fact consistency
+- [ ] **PLAY-04**: YouTube playbook — thumbnail contrast/clutter heuristics, hook in first 5 seconds, description SEO, timestamps, end-screen CTA, title+thumbnail click-fit
+- [ ] **PLAY-05**: LinkedIn playbook — opener hook (no "I" start), native content vs link-posting, visual asset ratios, reply path consideration
+- [ ] **PLAY-06**: Social playbook — platform-specific rules (X/Twitter no rhetorical questions, Instagram carousel ratios), native vs link format
+- [ ] **PLAY-07**: Email playbook — subject/preview spam-trigger scan, dark-mode rendering, unsubscribe/address present, deliverability checks (SPF/DKIM/DMARC, content-to-image ratio)
+- [ ] **PLAY-08**: Paid Ads playbook — ad-to-landing-page message match, creative variety, audience-creative fit, bid strategy alignment
+- [ ] **PLAY-09**: Affiliate playbook — creative kit completeness, attribution/cookie logic, commission structure sanity (LTV/CAC math)
+- [ ] **PLAY-10**: PR/Media playbook — media list structure, pitch angle-per-journalist, embargo management, earned media measurement
+- [ ] **PLAY-11**: Events playbook — pre/during/post campaign phases, webinar funnels, community building, sponsorship ROI
+
+### State Management
+
+- [ ] **STAT-01**: `/ttm-state` displays current campaign states, decisions in flight, blockers, in-progress experiments
+- [ ] **STAT-02**: `/ttm-resume <slug>` resumes paused campaign at its last completed phase
+- [ ] **STAT-03**: `/ttm-archive <slug>` finalizes campaign, moves to archive, updates LEARNINGS.md
+- [ ] **STAT-04**: `/ttm-health` validates `.marketing/` directory integrity, reference file completeness, state consistency
+- [ ] **STAT-05**: Campaign state persists across sessions via `CAMPAIGNS/<slug>/` directory files
+
+### Utility Commands
+
+- [ ] **UTIL-01**: `/ttm-brand-refresh` updates BRAND.md with new proof points, deprecates expired ones
+- [ ] **UTIL-02**: `/ttm-icp-refresh` updates ICP.md from new customer data (calls, reviews, feedback)
+- [ ] **UTIL-03**: `/ttm-competitor-scan` on-demand competitor analysis, updates COMPETITORS.md
+- [ ] **UTIL-04**: `/ttm-seo-audit` technical + content SEO audit of a URL or sitemap
+- [ ] **UTIL-05**: `/ttm-aeo-check <query>` checks citation status across AI engines for a query
+- [ ] **UTIL-06**: `/ttm-keyword-map` generates keyword cluster map with intent tags
+- [ ] **UTIL-07**: `/ttm-email-preflight` deliverability + dark-mode + spam-trigger scan
+- [ ] **UTIL-08**: `/ttm-affiliate-kit` generates creative kit for affiliate partners
+- [ ] **UTIL-09**: `/ttm-repurpose <source-asset>` fans out long-form → derivative assets across channels with full brief → produce → verify per derivative
+- [ ] **UTIL-10**: `/ttm-next` guides user to the right next command based on current campaign state
+
+### Meta-Gates
+
+- [ ] **META-01**: Portfolio balance gate — checks if campaign leaves system over-indexed on one channel
+- [ ] **META-02**: Calendar collision gate — detects if too many assets shipping in same window for audience absorption
+- [ ] **META-03**: Theme consistency gate — verifies all campaign assets across channels tell the same story
+- [ ] **META-04**: Learning plan gate — checks campaign has a testable hypothesis, not just pure execution
+
+### Distribution
+
+- [ ] **DIST-01**: Git clone installation — user copies skill folder into `.claude/skills/` or `.codex/`, works immediately
+- [ ] **DIST-02**: npm package — `npx taketomarket` installs with runtime detection (Claude Code vs Codex)
+- [ ] **DIST-03**: Post-install validation that runs `/ttm-health` to confirm correct setup
+- [ ] **DIST-04**: README.md with installation, quickstart, and reference documentation
+
+### Learning System
+
+- [ ] **LRNG-01**: LEARNINGS.md maintains root-cause taxonomy (positioning drift, weak hook, wrong channel, bad timing, unverifiable claim, broken funnel, creative fatigue)
+- [ ] **LRNG-02**: Every campaign outcome delta → lesson extraction → LEARNINGS.md entry
+- [ ] **LRNG-03**: Pattern extraction — winning hooks, winning angles, winning formats across campaigns
+- [ ] **LRNG-04**: LEARNINGS.md loaded into Brief phase of future campaigns to prevent repeating mistakes
+
+## v2 Requirements
+
+Deferred to future release. Tracked but not in current roadmap.
+
+### Team Support
+
+- **TEAM-01**: Concurrent edit handling for `.marketing/` state files with conflict resolution
+- **TEAM-02**: Role-based access to `/ttm-positioning-shift` (founder/CMO only)
+- **TEAM-03**: Multi-user campaign assignment and handoff
+
+### MCP Integrations
+
+- **MCPI-01**: Google Analytics MCP integration for automated measurement data
+- **MCPI-02**: Google Search Console MCP integration for SEO measurement
+- **MCPI-03**: HubSpot MCP integration for pipeline/CRM data
+- **MCPI-04**: Customer.io / ActiveCampaign MCP for email metrics
+- **MCPI-05**: Rewardful / PartnerStack MCP for affiliate data
+
+### Automation
+
+- **AUTO-01**: Automated weekly competitor scan via cron/scheduled agent
+- **AUTO-02**: AEO citation tracker — crawl top 50 target queries weekly across 5 AI engines
+- **AUTO-03**: Monthly positioning audit automation (scheduled sampling)
+- **AUTO-04**: Automated LEARNINGS.md pattern detection and reference file update proposals
+
+## Out of Scope
+
+Explicitly excluded. Documented to prevent scope creep.
+
+| Feature | Reason |
+|---------|--------|
+| Real-time analytics dashboard | SaaS feature, not skill feature — Claude Code skills write files, don't serve UIs |
+| Direct publishing / scheduling integration | Fragile external dependencies; takeToMarket produces verified assets, hands off to existing publishing tools |
+| One-click campaign generation | Defeats the spec-driven approach; skips brief, quality gates, outcome definition |
+| Visual / image generation | Claude Code is text-based; Produce phase generates creative briefs for designers instead |
+| A/B test infrastructure management | Requires traffic splitting, stat significance — infrastructure concerns beyond skill scope |
+| CRM integration / lead scoring | SaaS feature requiring auth, API management, data sync |
+| Template engine / dynamic templating | AI fills Markdown templates directly; no Handlebars/Jinja needed |
+| Background process execution | Skills run when invoked, not in background; automation deferred to v2 scheduled agents |
+
+## Traceability
+
+Which phases cover which requirements. Updated during roadmap creation.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| FOUND-01 | — | Pending |
+| FOUND-02 | — | Pending |
+| FOUND-03 | — | Pending |
+| FOUND-04 | — | Pending |
+| FOUND-05 | — | Pending |
+| FOUND-06 | — | Pending |
+| FOUND-07 | — | Pending |
+| ONBD-01 | — | Pending |
+| ONBD-02 | — | Pending |
+| ONBD-03 | — | Pending |
+| ONBD-04 | — | Pending |
+| ONBD-05 | — | Pending |
+| ONBD-06 | — | Pending |
+| ONBD-07 | — | Pending |
+| ONBD-08 | — | Pending |
+| ONBD-09 | — | Pending |
+| ONBD-10 | — | Pending |
+| ONBD-11 | — | Pending |
+| LIFE-01 | — | Pending |
+| LIFE-02 | — | Pending |
+| LIFE-03 | — | Pending |
+| LIFE-04 | — | Pending |
+| LIFE-05 | — | Pending |
+| LIFE-06 | — | Pending |
+| LIFE-07 | — | Pending |
+| LIFE-08 | — | Pending |
+| LIFE-09 | — | Pending |
+| LIFE-10 | — | Pending |
+| LIFE-11 | — | Pending |
+| LIFE-12 | — | Pending |
+| LIFE-13 | — | Pending |
+| LIFE-14 | — | Pending |
+| LIFE-15 | — | Pending |
+| LIFE-16 | — | Pending |
+| LIFE-17 | — | Pending |
+| GATE-01 | — | Pending |
+| GATE-02 | — | Pending |
+| GATE-03 | — | Pending |
+| GATE-04 | — | Pending |
+| GATE-05 | — | Pending |
+| GATE-06 | — | Pending |
+| GATE-07 | — | Pending |
+| GATE-08 | — | Pending |
+| GATE-09 | — | Pending |
+| GATE-10 | — | Pending |
+| GATE-11 | — | Pending |
+| GATE-12 | — | Pending |
+| POSN-01 | — | Pending |
+| POSN-02 | — | Pending |
+| POSN-03 | — | Pending |
+| POSN-04 | — | Pending |
+| POSN-05 | — | Pending |
+| PLAY-01 | — | Pending |
+| PLAY-02 | — | Pending |
+| PLAY-03 | — | Pending |
+| PLAY-04 | — | Pending |
+| PLAY-05 | — | Pending |
+| PLAY-06 | — | Pending |
+| PLAY-07 | — | Pending |
+| PLAY-08 | — | Pending |
+| PLAY-09 | — | Pending |
+| PLAY-10 | — | Pending |
+| PLAY-11 | — | Pending |
+| STAT-01 | — | Pending |
+| STAT-02 | — | Pending |
+| STAT-03 | — | Pending |
+| STAT-04 | — | Pending |
+| STAT-05 | — | Pending |
+| UTIL-01 | — | Pending |
+| UTIL-02 | — | Pending |
+| UTIL-03 | — | Pending |
+| UTIL-04 | — | Pending |
+| UTIL-05 | — | Pending |
+| UTIL-06 | — | Pending |
+| UTIL-07 | — | Pending |
+| UTIL-08 | — | Pending |
+| UTIL-09 | — | Pending |
+| UTIL-10 | — | Pending |
+| META-01 | — | Pending |
+| META-02 | — | Pending |
+| META-03 | — | Pending |
+| META-04 | — | Pending |
+| DIST-01 | — | Pending |
+| DIST-02 | — | Pending |
+| DIST-03 | — | Pending |
+| DIST-04 | — | Pending |
+| LRNG-01 | — | Pending |
+| LRNG-02 | — | Pending |
+| LRNG-03 | — | Pending |
+| LRNG-04 | — | Pending |
+
+**Coverage:**
+- v1 requirements: 80 total
+- Mapped to phases: 0
+- Unmapped: 80 ⚠️
+
+---
+*Requirements defined: 2026-04-21*
+*Last updated: 2026-04-21 after initial definition*
