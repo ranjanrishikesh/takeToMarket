@@ -8,7 +8,6 @@ Orchestrates a 6-section interview with specificity validation, then generates
 <required_reading>
 @${CLAUDE_PLUGIN_ROOT}/workflows/setup/init-questions.md
 @${CLAUDE_PLUGIN_ROOT}/workflows/setup/init-validation.md
-@${CLAUDE_PLUGIN_ROOT}/references/context-loading.md
 </required_reading>
 
 <process>
