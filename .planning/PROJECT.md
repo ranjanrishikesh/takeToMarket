@@ -16,6 +16,8 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 - [x] `bin/ttm-tools.cjs` CLI utility for deterministic operations (slug, timestamp, state, health, commit) — Validated in Phase 1: Plugin Scaffold and Tooling
 - [x] Reference file templates with two-tier context loading (`_SUMMARY`/`END_SUMMARY`) — Validated in Phase 1: Plugin Scaffold and Tooling
 - [x] Dual-runtime support via CLAUDE.md and AGENTS.md templates with identical positioning-as-invariant rules — Validated in Phase 1: Plugin Scaffold and Tooling
+- [x] Interview-driven onboarding (`/ttm-init`) with 6-section guided interview, specificity validation, and generation of all 9 reference files — Validated in Phase 2: Onboarding Interview
+- [x] Vague/generic output rejection with banned phrase detection and re-prompt logic — Validated in Phase 2: Onboarding Interview
 
 ### Active
 
@@ -103,4 +105,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after Phase 1 completion*
+*Last updated: 2026-04-22 after Phase 2 completion*
