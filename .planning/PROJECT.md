@@ -12,7 +12,10 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Plugin scaffold with `.claude-plugin/plugin.json` manifest and 27 `/ttm-*` SKILL.md stubs — Validated in Phase 1: Plugin Scaffold and Tooling
+- [x] `bin/ttm-tools.cjs` CLI utility for deterministic operations (slug, timestamp, state, health, commit) — Validated in Phase 1: Plugin Scaffold and Tooling
+- [x] Reference file templates with two-tier context loading (`_SUMMARY`/`END_SUMMARY`) — Validated in Phase 1: Plugin Scaffold and Tooling
+- [x] Dual-runtime support via CLAUDE.md and AGENTS.md templates with identical positioning-as-invariant rules — Validated in Phase 1: Plugin Scaffold and Tooling
 
 ### Active
 
@@ -100,4 +103,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-21 after initialization*
+*Last updated: 2026-04-22 after Phase 1 completion*
