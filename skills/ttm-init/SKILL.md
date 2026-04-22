@@ -4,7 +4,7 @@ description: >
   Interview-driven onboarding that generates all .marketing/ reference files
   from structured questioning. Use when setting up takeToMarket for a new project.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read Write Bash Glob Grep AskUserQuestion
 ---
 
 # /ttm-init
