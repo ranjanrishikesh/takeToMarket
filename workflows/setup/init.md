@@ -384,6 +384,18 @@ Once all checks pass, update state:
 node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs state update status initialized
 ```
 
+**Warning tracking:** If any interview section accumulated 3 or more SPECIFICITY_WARNING flags
+during the interview, append to `.marketing/STATE.md` under a `## Follow-up Needed` heading:
+- Section [N] ([name]): [count] specificity warnings -- recommend re-running with [relevant /ttm-* command]
+
+Use these commands per section:
+- Section 1 (Positioning): `/ttm-positioning-check`
+- Section 2 (Brand): `/ttm-brand-refresh`
+- Section 3 (ICP): `/ttm-icp-refresh`
+- Section 4 (Channels): `/ttm-health`
+- Section 5 (Competitors): `/ttm-competitor-scan`
+- Section 6 (Metrics/Calendar): `/ttm-health`
+
 ---
 
 ## Step 12: Summary
