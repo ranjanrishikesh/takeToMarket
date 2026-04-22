@@ -49,9 +49,13 @@ function cmdCommit(message, files, raw) {
     error('at least one file required for commit');
   }
 
+  const MAX_MESSAGE_LENGTH = 500;
   const sanitized = sanitizeMessage(message);
   if (!sanitized) {
     error('commit message empty after sanitization');
+  }
+  if (sanitized.length > MAX_MESSAGE_LENGTH) {
+    error(`commit message too long (${sanitized.length} chars, max ${MAX_MESSAGE_LENGTH})`);
   }
 
   // Validate file paths stay within project directory
