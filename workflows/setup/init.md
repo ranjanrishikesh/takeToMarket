@@ -206,7 +206,7 @@ takeToMarket > SECTION 5: COMPETITORS
 
 This section collects data for **COMPETITORS.md**.
 
-No structured questions for this section. Ask all 3 freeform questions from init-questions.md Section 5 in sequence.
+No structured questions for this section. Ask all 4 freeform questions from init-questions.md Section 5 in sequence.
 
 **Specificity validation for Section 5:**
 

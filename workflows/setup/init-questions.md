@@ -166,6 +166,7 @@ None -- competitor analysis requires nuanced freeform answers.
 1. "Name your top 3 direct competitors. For each: what is their positioning, key strength, and key weakness?"
 2. "If you drew a 2x2 positioning map for your category, what would the two axes be? Where do you and your competitors fall on it?"
 3. "Estimate share of voice: who dominates the conversation in your space? On which channels?"
+4. "What content do your competitors publish? Which formats and channels do they focus on, and what seems to work for them?"
 
 ### Template Fields Collected
 
