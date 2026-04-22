@@ -43,10 +43,11 @@ switch (command) {
     break;
   }
   case 'state': {
-    const subCmd = args[1];
+    const stateArgs = args.slice(1).filter(a => a !== '--raw');
+    const subCmd = stateArgs[0];
     const { cmdStateRead, cmdStateUpdate } = require('./lib/state.cjs');
     if (subCmd === 'read') cmdStateRead(raw);
-    else if (subCmd === 'update') cmdStateUpdate(args[2], args[3], raw);
+    else if (subCmd === 'update') cmdStateUpdate(stateArgs[1], stateArgs[2], raw);
     else error('state subcommand required: read, update');
     break;
   }
