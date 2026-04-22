@@ -107,12 +107,14 @@ function parseFrontmatter(content) {
   if (!content || !content.startsWith('---')) {
     return { frontmatter: {}, body: content || '' };
   }
-  const endIndex = content.indexOf('\n---', 3);
+  // Normalize line endings before parsing (handles Windows \r\n)
+  const normalized = content.replace(/\r\n/g, '\n');
+  const endIndex = normalized.indexOf('\n---', 3);
   if (endIndex === -1) {
     return { frontmatter: {}, body: content };
   }
-  const fmBlock = content.substring(4, endIndex).trim();
-  const body = content.substring(endIndex + 4).trimStart();
+  const fmBlock = normalized.substring(4, endIndex).trim();
+  const body = normalized.substring(endIndex + 4).trimStart();
   const frontmatter = {};
   for (const line of fmBlock.split('\n')) {
     const colonIndex = line.indexOf(':');
