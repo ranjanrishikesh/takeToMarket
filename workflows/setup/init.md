@@ -27,6 +27,18 @@ if echo "$ARGUMENTS" | grep -q -- '--text'; then TEXT_MODE=true; fi
 
 If `AskUserQuestion` tool is not available in the current runtime, set `TEXT_MODE=true`.
 
+When TEXT_MODE is active, replace each AskUserQuestion with a plain-text numbered list:
+```
+[HEADER]
+[QUESTION]
+  1. [OPTION_1_LABEL] -- [OPTION_1_DESCRIPTION]
+  2. [OPTION_2_LABEL] -- [OPTION_2_DESCRIPTION]
+  ...
+Type the number of your choice:
+```
+
+For multiSelect questions, instruct the user: "Type the numbers of your choices separated by commas (e.g., 1,3,5):"
+
 ---
 
 ## Step 1: Pre-flight
