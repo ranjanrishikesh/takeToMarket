@@ -66,7 +66,11 @@ Plans:
   3. User runs /ttm-brief and receives a campaign brief with all mandatory fields (goal, outcome metric, target value, measurement window, ICP segment, positioning anchor, hook, proof points, channel mix, assets list)
   4. Brief refuses to proceed without both an output metric and an outcome metric defined
   5. Brief runs a positioning check gate before allowing progression to Produce
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 03-01-PLAN.md -- Campaign CLI utility (bin/lib/campaign.cjs) and templates (campaign-state.md, campaign-research.md)
+- [ ] 03-02-PLAN.md -- /ttm-new-campaign workflow and /ttm-research workflow with web search + manual paste hybrid
+- [ ] 03-03-PLAN.md -- /ttm-brief workflow with outcome metric enforcement and positioning check gate
 
 ### Phase 4: Content Production and Verification
 **Goal**: Users can produce content assets in quality-isolated contexts and verify them against a 10-gate quality wall with structured deviation handling
@@ -159,7 +163,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 |-------|----------------|--------|-----------|
 | 1. Plugin Scaffold and Tooling | 0/3 | Planning complete | - |
 | 2. Onboarding Interview | 0/3 | Planning complete | - |
-| 3. Campaign Creation and Briefing | 0/TBD | Not started | - |
+| 3. Campaign Creation and Briefing | 0/3 | Planning complete | - |
 | 4. Content Production and Verification | 0/TBD | Not started | - |
 | 5. Review, Fix, and Ship | 0/TBD | Not started | - |
 | 6. Positioning Invariant System | 0/TBD | Not started | - |
