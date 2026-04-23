@@ -536,22 +536,19 @@ If WebSearch is not available or fails:
 | A2 | Windows symlinks require admin privileges, making them unreliable for cross-platform skills | Architecture Patterns (Pattern 2) | If Windows has fixed symlink permissions, symlinks become a viable option for reference file access |
 | A3 | The existing `parseFrontmatter()` cannot handle nested YAML objects | Common Pitfalls (Pitfall 2) | If it can, the dot-notation flattening is unnecessary |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Campaign state subcommand scope**
    - What we know: `ttm-tools.cjs state read/update` operates on global `.marketing/STATE.md`. Campaign state is at `.marketing/CAMPAIGNS/<slug>/STATE.md`.
-   - What's unclear: Should we add a `campaign` subcommand (`ttm-tools.cjs campaign state read <slug>`) or extend the existing `state` subcommand with an optional `--campaign <slug>` flag?
-   - Recommendation: Add a `campaign` subcommand with sub-subcommands (`campaign init <slug> <name>`, `campaign state <slug>`, `campaign update <slug> <field> <value>`). This keeps the API clean and separates concerns.
+   - RESOLVED: Add a `campaign` subcommand with sub-subcommands (`campaign init <slug> <name>`, `campaign state <slug>`, `campaign update <slug> <field> <value>`). This keeps the API clean and separates concerns. Implemented in Plan 03-01 Task 1.
 
 2. **Global STATE.md update on campaign creation**
    - What we know: Global `.marketing/STATE.md` has frontmatter fields `current_campaign` and `campaigns` (array). Per-campaign STATE.md tracks individual campaign state.
-   - What's unclear: Should `new-campaign` update the global STATE.md `campaigns` list and `current_campaign`?
-   - Recommendation: Yes. The workflow should update global state to reflect the new campaign. `ttm-tools.cjs campaign init` should handle both campaign STATE.md creation and global STATE.md update.
+   - RESOLVED: Yes. The new-campaign workflow (Plan 03-02 Task 1 Step 5) updates global STATE.md `campaigns` list and `current_campaign` after campaign directory creation.
 
 3. **Research depth vs. context budget**
    - What we know: Context loading strategy budgets ~2,000 tokens for Tier 1 summaries. Research workflow loads Tier 2 for COMPETITORS.md.
-   - What's unclear: How much context does the research workflow consume when also doing web searches and pasting competitor content?
-   - Recommendation: Keep research workflow focused. Generate RESEARCH.md output to be consumable in under 3,000 tokens so /ttm-brief can load it without context pressure.
+   - RESOLVED: Keep research workflow focused. Generate RESEARCH.md output to be consumable in under 3,000 tokens so /ttm-brief can load it without context pressure. Applied as a guideline in Plan 03-02 Task 2.
 
 ## Validation Architecture
 
