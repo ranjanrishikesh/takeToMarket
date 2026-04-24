@@ -82,7 +82,7 @@ Read campaign-specific files (always full-load per context-loading.md rule 4):
 
 Check campaign exists:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign state ${SLUG} --raw
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign state "${SLUG}" --raw
 ```
 
 If result shows `exists: false`: Tell the user the campaign does not exist and suggest running `/ttm-new-campaign` first. Exit.
@@ -285,10 +285,14 @@ Write `BRIEF_CONTENT` to `.marketing/CAMPAIGNS/${SLUG}/BRIEF.md`.
 
 Update campaign state:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign update ${SLUG} phase briefed
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign update ${SLUG} phase.briefed $(node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs timestamp --raw)
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign update ${SLUG} gate.outcome_metric pass
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign update ${SLUG} gate.positioning_check [pass|warn]
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" phase briefed
+TIMESTAMP=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" timestamp --raw)
+if [ -z "$TIMESTAMP" ]; then
+  echo "Error: could not get timestamp"; exit 1
+fi
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" phase.briefed "$TIMESTAMP"
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" gate.outcome_metric pass
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" gate.positioning_check [pass|warn]
 ```
 
 Replace `[pass|warn]` with the actual gate result from Step 6.

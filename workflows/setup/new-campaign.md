@@ -18,7 +18,7 @@ takeToMarket > CREATING CAMPAIGN
 
 Run init status check:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs init --raw
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" init --raw
 ```
 
 **If result is "not initialized":**
@@ -38,7 +38,7 @@ Use the response as the campaign name input.
 
 Generate the slug deterministically via CLI:
 ```bash
-CAMPAIGN_SLUG=$(node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs slug "$ARGUMENTS" --raw)
+CAMPAIGN_SLUG=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" slug "$ARGUMENTS" --raw)
 ```
 
 Store the result as `CAMPAIGN_SLUG`. Store the original input as `CAMPAIGN_NAME`.
@@ -70,7 +70,7 @@ Continue to Step 4.
 
 Run the campaign init command:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign init ${CAMPAIGN_SLUG} "${CAMPAIGN_NAME}"
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign init "${CAMPAIGN_SLUG}" "${CAMPAIGN_NAME}"
 ```
 
 This creates:
@@ -96,7 +96,7 @@ If any item is missing, report the error and exit.
 
 Set the current campaign in the global STATE.md:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs state update current_campaign ${CAMPAIGN_SLUG}
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" state update current_campaign "${CAMPAIGN_SLUG}"
 ```
 
 ---

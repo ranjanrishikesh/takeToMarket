@@ -47,7 +47,7 @@ If `$SLUG` is empty: ask the user "Which campaign should I research? Provide the
 
 Check the campaign exists:
 ```bash
-ls .marketing/CAMPAIGNS/${SLUG}/STATE.md 2>/dev/null && echo "exists" || echo "missing"
+ls ".marketing/CAMPAIGNS/${SLUG}/STATE.md" 2>/dev/null && echo "exists" || echo "missing"
 ```
 
 **If "missing":**
@@ -57,7 +57,7 @@ Exit -- do not continue.
 **If "exists":**
 Read campaign state:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign state ${SLUG} --raw
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign state "${SLUG}" --raw
 ```
 
 Read the full campaign STATE.md (campaign files are always full-loaded per context-loading.md rule 4):
@@ -218,11 +218,15 @@ Write the completed research to:
 
 Update the campaign phase and timestamp:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign update ${SLUG} phase researched
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" phase researched
 ```
 
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs campaign update ${SLUG} phase.researched $(node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs timestamp --raw)
+TIMESTAMP=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" timestamp --raw)
+if [ -z "$TIMESTAMP" ]; then
+  echo "Error: could not get timestamp"; exit 1
+fi
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" phase.researched "$TIMESTAMP"
 ```
 
 Count the total insights generated across all sections.
