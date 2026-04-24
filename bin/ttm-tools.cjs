@@ -66,6 +66,9 @@ switch (command) {
     const campaignArgs = args.slice(1).filter(a => a !== '--raw');
     const subCmd = campaignArgs[0];
     const slug = campaignArgs[1];
+    if (slug && /\s/.test(slug)) {
+      error('campaign slug must not contain whitespace -- use hyphens');
+    }
     if (subCmd === 'init') cmdCampaignInit(slug, campaignArgs.slice(2).join(' '), raw);
     else if (subCmd === 'state') cmdCampaignState(slug, raw);
     else if (subCmd === 'update') cmdCampaignUpdate(slug, campaignArgs[2], campaignArgs[3], raw);
