@@ -68,7 +68,7 @@ Plans:
   5. Brief runs a positioning check gate before allowing progression to Produce
 **Plans:** 3 plans
 Plans:
-- [ ] 03-01-PLAN.md -- Campaign CLI utility (bin/lib/campaign.cjs) and templates (campaign-state.md, campaign-research.md)
+- [x] 03-01-PLAN.md -- Campaign CLI utility (bin/lib/campaign.cjs) and templates (campaign-state.md, campaign-research.md)
 - [ ] 03-02-PLAN.md -- /ttm-new-campaign workflow and /ttm-research workflow with web search + manual paste hybrid
 - [ ] 03-03-PLAN.md -- /ttm-brief workflow with outcome metric enforcement and positioning check gate
 
