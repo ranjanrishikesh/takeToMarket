@@ -1,3 +1,6 @@
+<!-- DOCUMENTATION ONLY: This template documents the expected STATE.md shape.
+     The authoritative source that generates STATE.md is bin/lib/campaign.cjs
+     (cmdCampaignInit). Changes here do NOT affect generated output. -->
 ---
 campaign: [SLUG]
 name: [CAMPAIGN_NAME]
