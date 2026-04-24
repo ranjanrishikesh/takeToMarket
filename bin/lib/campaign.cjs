@@ -144,10 +144,11 @@ function cmdCampaignInit(slug, name, raw) {
  */
 function cmdCampaignState(slug, raw) {
   const statePath = resolveCampaignStatePath(slug);
+  const safe = slug ? slug.toLowerCase().replace(/[^a-z0-9-]/g, '') : '';
   const content = safeReadFile(statePath);
   if (content === null) {
     output(
-      { exists: false, error: `Campaign STATE.md not found for slug: ${slug}` },
+      { exists: false, error: `Campaign STATE.md not found for slug: ${safe}` },
       raw,
       'not found'
     );
