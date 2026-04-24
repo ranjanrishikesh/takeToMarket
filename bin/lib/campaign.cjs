@@ -167,9 +167,21 @@ function cmdCampaignState(slug, raw) {
  * @param {string} value - New value for the field
  * @param {boolean} raw - Whether to output raw string
  */
+const ALLOWED_FIELDS = new Set([
+  'phase', 'name', 'last_updated',
+  'phase.created', 'phase.researched', 'phase.briefed', 'phase.produced',
+  'phase.verified', 'phase.reviewed', 'phase.fixed', 'phase.shipped',
+  'phase.measured', 'phase.learned',
+  'gate.positioning_check', 'gate.outcome_metric',
+  'current_campaign',
+]);
+
 function cmdCampaignUpdate(slug, field, value, raw) {
   if (!field) error('field name required for campaign update');
   if (value === undefined || value === null) error('value required for campaign update');
+  if (!ALLOWED_FIELDS.has(field)) {
+    error(`Unknown state field: ${field}. Allowed: ${[...ALLOWED_FIELDS].join(', ')}`);
+  }
 
   const statePath = resolveCampaignStatePath(slug);
   const content = safeReadFile(statePath);
