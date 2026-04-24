@@ -18,6 +18,9 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 - [x] Dual-runtime support via CLAUDE.md and AGENTS.md templates with identical positioning-as-invariant rules — Validated in Phase 1: Plugin Scaffold and Tooling
 - [x] Interview-driven onboarding (`/ttm-init`) with 6-section guided interview, specificity validation, and generation of all 9 reference files — Validated in Phase 2: Onboarding Interview
 - [x] Vague/generic output rejection with banned phrase detection and re-prompt logic — Validated in Phase 2: Onboarding Interview
+- [x] Campaign creation (`/ttm-new-campaign`) with full scaffold (STATE.md, BRIEF.md, RESEARCH.md, ASSETS/) — Validated in Phase 3: Campaign Creation and Briefing
+- [x] Market research (`/ttm-research`) with web search + manual paste hybrid and confidence scores — Validated in Phase 3: Campaign Creation and Briefing
+- [x] Brief generation (`/ttm-brief`) with outcome metric enforcement and positioning check gate — Validated in Phase 3: Campaign Creation and Briefing
 
 ### Active
 
@@ -105,4 +108,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after Phase 2 completion*
+*Last updated: 2026-04-23 after Phase 3 completion*
