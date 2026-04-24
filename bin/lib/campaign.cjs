@@ -63,6 +63,11 @@ function cmdCampaignInit(slug, name, raw) {
     error('campaign directory path escapes project directory');
   }
 
+  // Guard against overwriting an existing campaign (TOCTOU defense)
+  if (fs.existsSync(statePath)) {
+    error(`Campaign already exists: ${safe}. Delete the directory first or use a different slug.`);
+  }
+
   // Create CAMPAIGNS/<slug>/ASSETS/ (recursive creates all intermediate dirs)
   fs.mkdirSync(assetsDir, { recursive: true });
 
