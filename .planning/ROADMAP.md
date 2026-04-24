@@ -69,8 +69,8 @@ Plans:
 **Plans:** 3 plans
 Plans:
 - [x] 03-01-PLAN.md -- Campaign CLI utility (bin/lib/campaign.cjs) and templates (campaign-state.md, campaign-research.md)
-- [ ] 03-02-PLAN.md -- /ttm-new-campaign workflow and /ttm-research workflow with web search + manual paste hybrid
-- [ ] 03-03-PLAN.md -- /ttm-brief workflow with outcome metric enforcement and positioning check gate
+- [x] 03-02-PLAN.md -- /ttm-new-campaign workflow and /ttm-research workflow with web search + manual paste hybrid
+- [x] 03-03-PLAN.md -- /ttm-brief workflow with outcome metric enforcement and positioning check gate
 
 ### Phase 4: Content Production and Verification
 **Goal**: Users can produce content assets in quality-isolated contexts and verify them against a 10-gate quality wall with structured deviation handling
