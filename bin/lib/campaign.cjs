@@ -93,6 +93,19 @@ function cmdCampaignInit(slug, name, raw) {
     'phase.learned: null',
     'gate.positioning_check: null',
     'gate.outcome_metric: null',
+    'gate.positioning_drift: null',
+    'gate.claim_accuracy: null',
+    'gate.voice_drift: null',
+    'gate.outcome_alignment: null',
+    'gate.funnel_integrity: null',
+    'gate.utm_hygiene: null',
+    'gate.compliance: null',
+    'gate.competitor_collision: null',
+    'gate.icp_fit: null',
+    'gate.format_correctness: null',
+    'verify.run_count: null',
+    'verify.last_run: null',
+    'verify.overall_result: null',
     '---',
     '',
     `# Campaign: ${name}`,
@@ -179,6 +192,13 @@ const ALLOWED_FIELDS = new Set([
   'phase.verified', 'phase.reviewed', 'phase.fixed', 'phase.shipped',
   'phase.measured', 'phase.learned',
   'gate.positioning_check', 'gate.outcome_metric',
+  // Phase 4: Per-gate verification results (GATE-01 through GATE-10)
+  'gate.positioning_drift', 'gate.claim_accuracy', 'gate.voice_drift',
+  'gate.outcome_alignment', 'gate.funnel_integrity', 'gate.utm_hygiene',
+  'gate.compliance', 'gate.competitor_collision', 'gate.icp_fit',
+  'gate.format_correctness',
+  // Phase 4: Verification run metadata
+  'verify.run_count', 'verify.last_run', 'verify.overall_result',
   'current_campaign',
 ]);
 

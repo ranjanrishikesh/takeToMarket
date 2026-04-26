@@ -19,6 +19,19 @@ phase.measured: null
 phase.learned: null
 gate.positioning_check: null
 gate.outcome_metric: null
+gate.positioning_drift: null
+gate.claim_accuracy: null
+gate.voice_drift: null
+gate.outcome_alignment: null
+gate.funnel_integrity: null
+gate.utm_hygiene: null
+gate.compliance: null
+gate.competitor_collision: null
+gate.icp_fit: null
+gate.format_correctness: null
+verify.run_count: null
+verify.last_run: null
+verify.overall_result: null
 ---
 
 # Campaign: [CAMPAIGN_NAME]
