@@ -520,22 +520,16 @@ The asset must:
 | A3 | DEVIATIONS.md append can be done deterministically via ttm-tools.cjs | Pitfall 6 | If not built as a CLI subcommand, workflow-driven appends may have formatting inconsistency |
 | A4 | Each gate evaluation prompt fits within reasonable token limits (~5-10K per gate including asset content) | Pitfall 1 | If assets are very long, may need to chunk gate evaluation |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Playbook stub content for Phase 4**
-   - What we know: Playbook loading mechanism must be built; playbook content is Phase 8
-   - What's unclear: Should Phase 4 create skeleton playbook files with just the frontmatter/structure, or should the loading mechanism handle missing files gracefully?
-   - Recommendation: Create minimal stub files (`playbooks/seo.md`, etc.) with structure but no content, AND handle missing files gracefully. Belt and suspenders.
+   - RESOLVED: Create minimal stub files AND handle missing files gracefully (belt and suspenders). Implemented in Plan 04-02 produce.md playbook loading with graceful fallback.
 
 2. **Agent definition files**
-   - What we know: STACK.md planned `agents/ttm-producer.md` and `agents/ttm-verifier.md`
-   - What's unclear: Whether these are needed given that Task() accepts inline prompts. Agent definition files may be redundant if the workflow constructs the prompt dynamically.
-   - Recommendation: Create `agents/ttm-producer.md` as a reusable prompt template loaded by the workflow. This keeps the workflow lean and the producer instructions modifiable without changing workflow logic.
+   - RESOLVED: Create `agents/ttm-producer.md` as a reusable prompt template. Keeps workflow lean. Implemented in Plan 04-01 Task 2.
 
 3. **Correct (D-09 option 1) implementation**
-   - What we know: "Correct" triggers /ttm-fix for a specific finding
-   - What's unclear: /ttm-fix is Phase 5 scope. What does "Correct" do in Phase 4?
-   - Recommendation: Phase 4 records the "Correct" choice and sets campaign state to indicate fix needed. Phase 5's /ttm-fix then acts on it. Do not implement fix logic in Phase 4.
+   - RESOLVED: Phase 4 records "Correct" choice and sets state to `fix_needed`. Phase 5's /ttm-fix acts on it. Correct option displays: "Recorded — addressable via /ttm-fix in Phase 5." Implemented in Plan 04-04 verify.md Step 6.
 
 ## Environment Availability
 
