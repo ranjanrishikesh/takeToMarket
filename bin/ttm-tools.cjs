@@ -75,6 +75,18 @@ switch (command) {
     else error('campaign subcommand required: init, state, update');
     break;
   }
+  case 'deviation': {
+    const devArgs = args.slice(1).filter(a => a !== '--raw');
+    const devCmd = devArgs[0];
+    if (devCmd === 'append') {
+      const { cmdDeviationAppend } = require('./lib/deviation.cjs');
+      const parsed = parseNamedArgs(args.slice(2));
+      cmdDeviationAppend(parsed.named.slug, parsed.named.gate, parsed.named.result, parsed.named.justification, parsed.named.asset, raw);
+    } else {
+      error('deviation subcommand required: append');
+    }
+    break;
+  }
   case 'health': {
     const { cmdHealth } = require('./lib/health.cjs');
     cmdHealth(raw);
@@ -82,6 +94,6 @@ switch (command) {
   }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, health`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, health`
     );
 }
