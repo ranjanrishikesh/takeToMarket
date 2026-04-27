@@ -85,8 +85,8 @@ Plans:
 **Plans:** 4 plans
 Plans:
 - [x] 04-01-PLAN.md -- Infrastructure: extend campaign.cjs state fields, create templates and producer agent
-- [ ] 04-02-PLAN.md -- /ttm-produce workflow with hero-first Task() orchestration
-- [ ] 04-03-PLAN.md -- Quality gate system: expand base-gates.md and create gate-evaluation.md
+- [x] 04-02-PLAN.md -- /ttm-produce workflow with hero-first Task() orchestration
+- [x] 04-03-PLAN.md -- Quality gate system: expand base-gates.md and create gate-evaluation.md
 - [ ] 04-04-PLAN.md -- /ttm-verify workflow with 10-gate evaluation and deviation handling
 
 ### Phase 5: Review, Fix, and Ship
