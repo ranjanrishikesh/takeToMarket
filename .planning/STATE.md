@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-04-28T09:01:00.000Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-04-28T09:05:41.000Z"
 last_activity: 2026-04-28
 progress:
   total_phases: 10
   completed_phases: 4
   total_plans: 17
-  completed_plans: 14
-  percent: 82
+  completed_plans: 15
+  percent: 88
 ---
 
 # Project State
@@ -26,17 +26,17 @@ See: .planning/PROJECT.md (updated 2026-04-21)
 ## Current Position
 
 Phase: 5 of 10 (review-fix-and-ship)
-Plan: 1 of 4 complete
-Status: In progress -- 05-01-PLAN.md complete
-Last activity: 2026-04-28 - Completed 05-01-PLAN.md
+Plan: 2 of 4 complete
+Status: In progress -- 05-02-PLAN.md complete
+Last activity: 2026-04-28 - Completed 05-02-PLAN.md
 
-Progress: [████████░░] 82%
+Progress: [████████░░] 88%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 14
+- Total plans completed: 15
 - Average duration: -
 - Total execution time: 0 hours
 
@@ -70,6 +70,10 @@ Recent decisions affecting current work:
 - [05-01]: Ship checklist items tagged [AI]/[HUMAN] for dynamic auto-check vs manual-confirm
 - [05-01]: Fix brief template includes preservation constraints to prevent oscillating gate regressions
 - [05-01]: Fix log is campaign-level (not per-asset) for cleaner escalation display
+- [05-02]: Review workflow uses @-reference to review-checklist.md for question content (420 lines, under limit)
+- [05-02]: Revision feedback stored as per-asset REVIEW-FEEDBACK-[NAME].md files for fix loop input
+- [05-02]: MANIFEST.json extended with review_status and review_feedback_file per asset
+- [05-02]: Auto-trigger /ttm-fix is user instruction, not direct invocation (review not forked)
 
 ### Pending Todos
 
@@ -91,6 +95,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-04-28T09:01:00Z
-Stopped at: Completed 05-01-PLAN.md
-Resume file: .planning/phases/05-review-fix-and-ship/05-02-PLAN.md
+Last session: 2026-04-28T09:05:41Z
+Stopped at: Completed 05-02-PLAN.md
+Resume file: .planning/phases/05-review-fix-and-ship/05-03-PLAN.md
