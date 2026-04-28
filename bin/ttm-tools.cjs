@@ -81,7 +81,14 @@ switch (command) {
     if (devCmd === 'append') {
       const { cmdDeviationAppend } = require('./lib/deviation.cjs');
       const parsed = parseNamedArgs(args.slice(2));
-      cmdDeviationAppend(parsed.named.slug, parsed.named.gate, parsed.named.result, parsed.named.justification, parsed.named.asset, raw);
+      const extra = {
+        gate_id: parsed.named['gate-id'],
+        tier: parsed.named.tier,
+        finding: parsed.named.finding,
+        action: parsed.named.action,
+        run: parsed.named.run,
+      };
+      cmdDeviationAppend(parsed.named.slug, parsed.named.gate, parsed.named.result, parsed.named.justification, parsed.named.asset, raw, extra);
     } else {
       error('deviation subcommand required: append');
     }

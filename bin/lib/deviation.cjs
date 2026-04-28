@@ -56,8 +56,9 @@ function sanitizeJustification(text) {
  * @param {string} justification - User justification text
  * @param {string} asset - Asset filename
  * @param {boolean} raw - Whether to output raw string
+ * @param {object} [extra] - Additional named fields: gate_id, tier, finding, action, run
  */
-function cmdDeviationAppend(slug, gate, result, justification, asset, raw) {
+function cmdDeviationAppend(slug, gate, result, justification, asset, raw, extra) {
   if (!slug || !slug.trim()) error('slug required for deviation append');
   if (!gate || !gate.trim()) error('gate required for deviation append');
   if (!result || !result.trim()) error('result required for deviation append');
@@ -120,17 +121,20 @@ function cmdDeviationAppend(slug, gate, result, justification, asset, raw) {
   }
 
   // Build table row entry
+  const opts = extra || {};
   const tierMap = {
     positioning_drift: 'T1', claim_accuracy: 'T1', voice_drift: 'T2',
     outcome_alignment: 'T1', funnel_integrity: 'T2', utm_hygiene: 'T2',
     compliance: 'T2', competitor_collision: 'T2', icp_fit: 'T2',
     format_correctness: 'T2',
   };
-  const tier = tierMap[gateLower] || 'T2';
+  const tier = (opts.tier || tierMap[gateLower] || 'T2').toString().substring(0, 10);
   const actionMap = { accepted: 'Accept+log', correct: 'Correct', escalated: 'Escalate' };
-  const action = actionMap[resultLower] || resultLower;
+  const action = sanitizeJustification(opts.action || '') || actionMap[resultLower] || resultLower;
+  const finding = sanitizeJustification(opts.finding || '') || '--';
+  const run = (opts.run || '--').toString().replace(/\|/g, '-').substring(0, 20);
 
-  const newRow = `| ${timestamp} | ${gateLower} | ${tier} | ${resultLower} | ${safeAsset} | -- | ${action} | ${safeJustification} | -- |`;
+  const newRow = `| ${timestamp} | ${gateLower} | ${tier} | ${resultLower} | ${safeAsset} | ${finding} | ${action} | ${safeJustification} | ${run} |`;
 
   // Append after the last line of content
   const updated = content.trimEnd() + '\n' + newRow + '\n';
