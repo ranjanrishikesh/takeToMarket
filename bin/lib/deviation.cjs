@@ -30,7 +30,7 @@ const ALLOWED_RESULTS = new Set(['accepted', 'correct', 'escalated']);
 
 /**
  * Sanitize justification text to prevent injection.
- * Strips backticks, $(), newlines, and pipe characters.
+ * Strips backticks, all $ signs, newlines, pipe chars, and redirects.
  * @param {string} text - Raw justification
  * @returns {string} Sanitized text (max 100 chars)
  */
@@ -38,10 +38,11 @@ function sanitizeJustification(text) {
   if (!text) return '';
   return text
     .replace(/`/g, "'")
-    .replace(/\$\(/g, '(')
+    .replace(/\$/g, '')
     .replace(/\n/g, ' ')
     .replace(/\r/g, '')
     .replace(/\|/g, '-')
+    .replace(/[<>]/g, '')
     .substring(0, 100)
     .trim();
 }
