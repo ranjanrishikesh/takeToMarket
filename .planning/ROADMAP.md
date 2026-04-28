@@ -116,9 +116,9 @@ Plans:
   4. User runs /ttm-positioning-check and receives a report showing percentage on-positioning across recent assets, types of drift detected, and bleeding-into-customer-facing-materials analysis
 **Plans:** 4 plans
 Plans:
-- [ ] 06-01-PLAN.md -- CLI infrastructure: drift-log.cjs module, campaign list subcommand, DRIFT-LOG.md template
+- [x] 06-01-PLAN.md -- CLI infrastructure: drift-log.cjs module, campaign list subcommand, DRIFT-LOG.md template
 - [ ] 06-02-PLAN.md -- /ttm-positioning-check drift audit workflow with GATE-01 reuse and report generation
-- [ ] 06-03-PLAN.md -- Read-only POSITIONING.md enforcement in lifecycle workflows, context-loading update, auto-suggest in ship
+- [x] 06-03-PLAN.md -- Read-only POSITIONING.md enforcement in lifecycle workflows, context-loading update, auto-suggest in ship
 - [ ] 06-04-PLAN.md -- /ttm-positioning-shift controlled change workflow with approval gate and migration planning
 
 ### Phase 7: State Management and Campaign Operations
