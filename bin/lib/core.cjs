@@ -121,9 +121,10 @@ function parseFrontmatter(content) {
     if (colonIndex === -1) continue;
     const key = line.substring(0, colonIndex).trim();
     let value = line.substring(colonIndex + 1).trim();
-    // Strip surrounding quotes
-    if ((value.startsWith('"') && value.endsWith('"')) ||
-        (value.startsWith("'") && value.endsWith("'"))) {
+    // Strip surrounding quotes and unescape escaped quotes for round-trip safety
+    if (value.startsWith('"') && value.endsWith('"')) {
+      value = value.slice(1, -1).replace(/\\"/g, '"');
+    } else if (value.startsWith("'") && value.endsWith("'")) {
       value = value.slice(1, -1);
     }
     frontmatter[key] = value;
