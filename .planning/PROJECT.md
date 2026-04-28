@@ -25,6 +25,9 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 - [x] 10-gate quality wall (`/ttm-verify`) with summary + line-level feedback, soft fail with override — Validated in Phase 4: Content Production and Verification
 - [x] 3-option deviation handling (Correct/Accept+log/Escalate) with full audit trail — Validated in Phase 4: Content Production and Verification
 - [x] Context isolation between Produce and Verify via `context: fork` — Validated in Phase 4: Content Production and Verification
+- [x] Human review (`/ttm-review`) with hero-first structured checklist, 4 mandatory questions, Approve/Revise/Reject per asset — Validated in Phase 5: Review, Fix, and Ship
+- [x] Root-cause fix loop (`/ttm-fix`) with AI diagnosis + user confirm, Task() re-production, 10-gate re-verification, 3-attempt cap — Validated in Phase 5: Review, Fix, and Ship
+- [x] Launch checklist (`/ttm-ship`) with dynamic per-campaign checklist, AI auto-checks + human confirms, per-asset ship status — Validated in Phase 5: Review, Fix, and Ship
 
 ### Active
 
@@ -112,4 +115,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-28 after Phase 4 completion*
+*Last updated: 2026-04-28 after Phase 5 completion*
