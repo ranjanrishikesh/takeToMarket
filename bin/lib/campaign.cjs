@@ -303,7 +303,11 @@ function cmdCampaignList(filter, sinceArg, raw) {
     }
 
     if (lastAuditTimestamp) {
-      filtered = shippedCampaigns.filter(c => c['phase.shipped'] > lastAuditTimestamp);
+      filtered = shippedCampaigns.filter(c => {
+        const shipped = Date.parse(c['phase.shipped']);
+        const audit   = Date.parse(lastAuditTimestamp);
+        return !isNaN(shipped) && !isNaN(audit) && shipped > audit;
+      });
     } else {
       // No prior audit -- include all shipped campaigns
       filtered = shippedCampaigns;
@@ -315,7 +319,10 @@ function cmdCampaignList(filter, sinceArg, raw) {
     filtered = campaigns.filter(c => {
       if (c.phase === 'archived') return false;
       const ts = c.last_updated || c['phase.produced'];
-      return ts && ts !== 'null' && ts > cutoff;
+      if (!ts || ts === 'null') return false;
+      const tsMs    = Date.parse(ts);
+      const cutMs   = Date.parse(cutoff);
+      return !isNaN(tsMs) && !isNaN(cutMs) && tsMs > cutMs;
     });
   }
 
