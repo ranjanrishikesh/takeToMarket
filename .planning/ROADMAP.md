@@ -120,7 +120,7 @@ Plans:
 - [x] 06-02-PLAN.md -- /ttm-positioning-check drift audit workflow with GATE-01 reuse and report generation
 - [x] 06-03-PLAN.md -- Read-only POSITIONING.md enforcement in lifecycle workflows, context-loading update, auto-suggest in ship
 - [x] 06-04-PLAN.md -- /ttm-positioning-shift controlled change workflow with approval gate and migration planning
-- [ ] 06-05-PLAN.md -- Gap closure: dedicated Bleeding Analysis section in positioning-check workflow and report
+- [x] 06-05-PLAN.md -- Gap closure: dedicated Bleeding Analysis section in positioning-check workflow and report
 
 ### Phase 7: State Management and Campaign Operations
 **Goal**: Users can manage campaign state across sessions, recover from interruptions, and get guided navigation through the lifecycle
