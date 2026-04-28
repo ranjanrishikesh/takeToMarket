@@ -197,6 +197,45 @@ After evaluating all assets:
 
 ---
 
+## Step 5b: Bleeding Analysis
+
+```
+takeToMarket > ANALYZING MUST-NOT-SAY BLEEDING
+```
+
+From the per-asset evaluation results collected in Step 4, extract all assets where
+Check 3 (Must-Not-Say Compliance) returned WARN or FAIL.
+
+For each must-not-say violation:
+
+1. **Classify the asset as customer-facing or non-customer-facing:**
+   - Customer-facing: landing pages, blog posts, ad copy, social posts, email campaigns,
+     any asset intended for external audience consumption
+   - Non-customer-facing: internal briefs, research docs, planning notes, strategy docs
+   - When ambiguous, classify as customer-facing (conservative default per
+     @positioning-check-report.md Bleeding Analysis rules)
+
+2. **Determine bleeding status:**
+   - Check 3 = FAIL (customer-facing asset): Mark as **BLEEDING** (Critical)
+   - Check 3 = WARN (non-customer-facing asset): Mark as **NOT BLEEDING** (Advisory)
+
+3. **Extract the specific must-not-say term and surrounding context** (10 words before
+   and after the term occurrence) for inclusion in the Bleeding Analysis report section.
+
+Calculate bleeding metrics:
+- **BLEEDING_COUNT:** Number of assets with Check 3 = FAIL (customer-facing violations)
+- **MNS_VIOLATION_COUNT:** Total assets with Check 3 = WARN or FAIL
+- **BLEEDING_RATE:** BLEEDING_COUNT / MNS_VIOLATION_COUNT * 100 (0% if no violations)
+
+Display:
+```
+  Bleeding: ${BLEEDING_COUNT} of ${MNS_VIOLATION_COUNT} must-not-say violations in customer-facing materials
+```
+
+These values feed into the Bleeding Analysis section of the report generated in Step 7.
+
+---
+
 ## Step 6: Trend Comparison
 
 Read `.marketing/DRIFT-LOG.md`. Find the most recent entry with Event = `audit`.
@@ -227,6 +266,7 @@ Generate the full audit report including:
 - Aggregate drift percentage with trend arrow
 - Per-asset results table (asset x check matrix with drift %)
 - Drift type breakdown (count per category)
+- Bleeding analysis (must-not-say violations classified by asset type with bleeding count and rate)
 - Findings detail for every WARN and FAIL result
 - Accepted deviations cross-reference
 - Trend comparison (if prior audit exists)
@@ -285,6 +325,7 @@ Next steps:
 - [ ] Per-asset drift percentage calculated (WARN+FAIL / 3 * 100)
 - [ ] Aggregate drift percentage calculated across all sampled assets
 - [ ] Drift categorized by type (differentiator, proof point, must-not-say)
+- [ ] Bleeding analysis classifies must-not-say violations by asset type (customer-facing vs non-customer-facing)
 - [ ] Accepted deviations cross-referenced from campaign DEVIATIONS.md files
 - [ ] Trend comparison shown if a prior audit exists in DRIFT-LOG.md
 - [ ] Report displayed to stdout in the standard format
