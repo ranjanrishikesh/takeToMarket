@@ -390,13 +390,14 @@ For each gate, use the worst result across all assets. If user chose Correct, us
 TIMESTAMP=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" timestamp --raw)
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.run_count ${RUN_NUMBER}
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.last_run "$TIMESTAMP"
-node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.overall_result [pass|warn|fail]
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.overall_result [pass|accepted|warn|fail]
 ```
 
 **Overall result logic:**
 - `pass` -- all gates PASS across all assets
-- `warn` -- any gate WARN but no gate FAIL (or all FAILs were Accept+logged)
-- `fail` -- any Tier 1 FAIL exists (even if Accept+logged -- the record shows it failed)
+- `accepted` -- one or more Tier 1 FAILs exist but ALL were Accept+logged (deviation documented, no outstanding action)
+- `warn` -- any gate WARN but no unresolved FAIL
+- `fail` -- any Tier 1 FAIL exists that was marked Correct (fix_needed) or is otherwise unresolved
 
 **Update campaign phase** (only if no Escalate was triggered):
 ```bash
