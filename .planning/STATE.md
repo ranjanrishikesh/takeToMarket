@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 5 planned
-last_updated: "2026-04-28T08:00:00.000Z"
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-04-28T09:01:00.000Z"
 last_activity: 2026-04-28
 progress:
   total_phases: 10
   completed_phases: 4
   total_plans: 17
-  completed_plans: 13
-  percent: 76
+  completed_plans: 14
+  percent: 82
 ---
 
 # Project State
@@ -25,18 +25,18 @@ See: .planning/PROJECT.md (updated 2026-04-21)
 
 ## Current Position
 
-Phase: 5
-Plan: Ready to execute (4 plans)
-Status: Phase 05 planned — ready to execute
-Last activity: 2026-04-28
+Phase: 5 of 10 (review-fix-and-ship)
+Plan: 1 of 4 complete
+Status: In progress -- 05-01-PLAN.md complete
+Last activity: 2026-04-28 - Completed 05-01-PLAN.md
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [████████░░] 82%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 13
+- Total plans completed: 14
 - Average duration: -
 - Total execution time: 0 hours
 
@@ -66,6 +66,10 @@ Recent decisions affecting current work:
 - [Roadmap]: 10-phase structure derived from 80 requirements across 11 categories; fine granularity applied
 - [Roadmap]: Phases 4 and 8 can run partially in parallel (playbooks depend on Phase 4, not Phase 5)
 - [Roadmap]: Phase 6 (Positioning Invariant) depends on Phase 4, not Phase 5, since positioning enforcement is needed during produce/verify
+- [05-01]: Review checklist extracted to reference file to keep review.md under 500-line limit
+- [05-01]: Ship checklist items tagged [AI]/[HUMAN] for dynamic auto-check vs manual-confirm
+- [05-01]: Fix brief template includes preservation constraints to prevent oscillating gate regressions
+- [05-01]: Fix log is campaign-level (not per-asset) for cleaner escalation display
 
 ### Pending Todos
 
@@ -87,6 +91,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-04-28
-Stopped at: Phase 5 planned
-Resume file: .planning/phases/05-review-fix-and-ship/05-01-PLAN.md
+Last session: 2026-04-28T09:01:00Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: .planning/phases/05-review-fix-and-ship/05-02-PLAN.md

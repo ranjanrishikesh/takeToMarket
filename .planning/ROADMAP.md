@@ -100,7 +100,7 @@ Plans:
   4. User runs /ttm-ship and receives a launch checklist confirming tracking installed, UTMs confirmed, funnel tested, assets finalized
 **Plans:** 4 plans
 Plans:
-- [ ] 05-01-PLAN.md -- Infrastructure: campaign.cjs state fields, SKILL.md updates, reference files and templates
+- [x] 05-01-PLAN.md -- Infrastructure: campaign.cjs state fields, SKILL.md updates, reference files and templates
 - [ ] 05-02-PLAN.md -- /ttm-review workflow with structured checklist and per-asset outcomes
 - [ ] 05-03-PLAN.md -- /ttm-fix workflow with root-cause loop, Task() re-production, and 3-attempt cap
 - [ ] 05-04-PLAN.md -- /ttm-ship workflow with dynamic launch checklist and per-asset shipping
@@ -175,7 +175,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 | 2. Onboarding Interview | 0/3 | Planning complete | - |
 | 3. Campaign Creation and Briefing | 0/3 | Planning complete | - |
 | 4. Content Production and Verification | 0/4 | Planning complete | - |
-| 5. Review, Fix, and Ship | 0/4 | Planning complete | - |
+| 5. Review, Fix, and Ship | 1/4 | In progress | - |
 | 6. Positioning Invariant System | 0/TBD | Not started | - |
 | 7. State Management and Campaign Operations | 0/TBD | Not started | - |
 | 8. Core Playbooks | 0/TBD | Not started | - |
