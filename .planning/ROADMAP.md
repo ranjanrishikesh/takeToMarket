@@ -132,7 +132,11 @@ Plans:
   3. User runs /ttm-archive and the campaign is finalized, moved to archive, and LEARNINGS.md is updated
   4. User runs /ttm-health and receives a validation report on .marketing/ directory integrity, reference file completeness, and state consistency
   5. User runs /ttm-next and receives guidance on the right next command based on current campaign state
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 07-01-PLAN.md -- CLI infrastructure: campaign archive, extended health checks, learnings extraction reference
+- [ ] 07-02-PLAN.md -- /ttm-state dashboard, /ttm-health audit, and /ttm-next routing workflows
+- [ ] 07-03-PLAN.md -- /ttm-resume recovery and /ttm-archive finalization workflows
 
 ### Phase 8: Core Playbooks
 **Goal**: Users can produce and verify content with discipline-specific knowledge and quality gates for the 5 highest-demand marketing channels
@@ -164,7 +168,7 @@ Plans:
 **Requirements**: DIST-01, DIST-02, DIST-03, DIST-04, UTIL-01, UTIL-02, UTIL-03, UTIL-04, UTIL-05, UTIL-06, UTIL-07, UTIL-08, UTIL-09
 **Success Criteria** (what must be TRUE):
   1. User can git clone the repo, copy the skill folder into .claude/skills/ or .codex/, and have all /ttm-* commands work immediately
-  2. User can run npx taketomarket and have the skill installed with runtime detection (Claude Code vs Codex) and post-install /ttm-health validation
+  2. User can run npx taketomarket and have the skill installed with runtime detection (Claude Code vs Codex) and post-install validation
   3. User can run /ttm-brand-refresh, /ttm-icp-refresh, and /ttm-competitor-scan to update reference files with new data
   4. User can run discipline-specific utility commands (/ttm-seo-audit, /ttm-aeo-check, /ttm-keyword-map, /ttm-email-preflight, /ttm-affiliate-kit)
   5. User can run /ttm-repurpose to fan out a long-form asset into derivative assets across channels with full brief-produce-verify per derivative
@@ -183,7 +187,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 | 4. Content Production and Verification | 0/4 | Planning complete | - |
 | 5. Review, Fix, and Ship | 4/4 | Complete | 2026-04-28 |
 | 6. Positioning Invariant System | 5/5 | Complete | 2026-04-28 |
-| 7. State Management and Campaign Operations | 0/TBD | Not started | - |
+| 7. State Management and Campaign Operations | 0/3 | Planning complete | - |
 | 8. Core Playbooks | 0/TBD | Not started | - |
 | 9. Measurement, Learning, and Remaining Playbooks | 0/TBD | Not started | - |
 | 10. Distribution and Polish | 0/TBD | Not started | - |
