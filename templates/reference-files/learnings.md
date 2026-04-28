@@ -23,7 +23,7 @@ Every lesson is categorized into one of these root causes:
 
 | Date | Campaign | Category | Lesson | Action Taken |
 |------|----------|----------|--------|-------------|
-| [populated during Learn phase] | | | | |
+<!-- LESSONS BELOW THIS LINE -->
 
 ## Pattern Extraction
 
