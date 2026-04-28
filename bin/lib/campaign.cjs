@@ -106,6 +106,15 @@ function cmdCampaignInit(slug, name, raw) {
     'verify.run_count: null',
     'verify.last_run: null',
     'verify.overall_result: null',
+    'review.run_count: null',
+    'review.last_run: null',
+    'review.overall_result: null',
+    'fix.run_count: null',
+    'fix.last_run: null',
+    'fix.overall_result: null',
+    'ship.status: null',
+    'ship.shipped_at: null',
+    'ship.checklist_result: null',
     '---',
     '',
     `# Campaign: ${name}`,
@@ -199,6 +208,12 @@ const ALLOWED_FIELDS = new Set([
   'gate.format_correctness',
   // Phase 4: Verification run metadata
   'verify.run_count', 'verify.last_run', 'verify.overall_result',
+  // Phase 5: Review tracking
+  'review.run_count', 'review.last_run', 'review.overall_result',
+  // Phase 5: Fix tracking
+  'fix.run_count', 'fix.last_run', 'fix.overall_result',
+  // Phase 5: Ship tracking
+  'ship.status', 'ship.shipped_at', 'ship.checklist_result',
   'current_campaign',
 ]);
 
