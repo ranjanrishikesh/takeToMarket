@@ -89,18 +89,12 @@ function cmdDeviationAppend(slug, gate, result, justification, asset, raw, extra
   const safeJustification = sanitizeJustification(justification || '');
   const timestamp = new Date().toISOString();
 
-  // If DEVIATIONS.md doesn't exist, copy from template
-  if (!fs.existsSync(deviationsPath)) {
-    const templatePath = path.resolve(__dirname, '..', '..', 'templates', 'deviation-log.md');
-    const template = safeReadFile(templatePath);
-    if (template) {
-      const content = template
-        .replace(/\[SLUG\]/g, safe)
-        .replace(/\[ISO_TIMESTAMP\]/g, timestamp);
-      safeWriteFile(deviationsPath, content);
-    } else {
-      // Fallback minimal template
-      const fallback = [
+  // Atomically create DEVIATIONS.md if it does not exist (prevents TOCTOU race)
+  const templatePath = path.resolve(__dirname, '..', '..', 'templates', 'deviation-log.md');
+  const template = safeReadFile(templatePath);
+  const initialContent = template
+    ? template.replace(/\[SLUG\]/g, safe).replace(/\[ISO_TIMESTAMP\]/g, timestamp)
+    : [
         '# Deviation Log',
         '',
         `**Campaign:** ${safe}`,
@@ -110,8 +104,11 @@ function cmdDeviationAppend(slug, gate, result, justification, asset, raw, extra
         '|-----------|------|------|--------|-------|---------|--------|---------------|------------|',
         '<!-- NEW ENTRIES BELOW THIS LINE -->',
       ].join('\n');
-      safeWriteFile(deviationsPath, fallback);
-    }
+  try {
+    fs.writeFileSync(deviationsPath, initialContent, { flag: 'wx', encoding: 'utf-8' });
+  } catch (e) {
+    if (e.code !== 'EEXIST') throw e;
+    // File already exists -- proceed to append
   }
 
   // Read current content and append new entry
