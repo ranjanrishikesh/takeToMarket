@@ -410,22 +410,25 @@ const PHASE_NEXT_COMMAND = {
 | A3 | Staleness threshold of 90 days and velocity threshold of 14 days are reasonable defaults | Common Pitfalls | User may want different thresholds. LOW risk -- discretion area, can adjust. |
 | A4 | `fs.renameSync` could fail across filesystems | Pitfall 1 | Extremely unlikely for subdirectories within same `.marketing/` tree. VERY LOW risk. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Campaign body content for decisions/blockers/experiments**
    - What we know: Current STATE.md template body only has "Phase:" and "Next step:" lines. No structured sections for decisions, blockers, or experiments.
    - What's unclear: Should /ttm-state read these from the global `.marketing/STATE.md` body (which has decisions/blockers/experiments sections from onboarding), or should campaigns grow their own decision/blocker sections in their STATE.md body during lifecycle execution?
    - Recommendation: Read from the global `.marketing/STATE.md` for portfolio-level decisions/blockers/experiments. Per-campaign status comes from campaign STATE.md frontmatter. The dashboard merges both. This aligns with D-03 which says "enriches with per-campaign STATE.md fields."
+   - RESOLVED: Read from global `.marketing/STATE.md` for portfolio-level data; per-campaign frontmatter for campaign-specific status. Dashboard merges both per D-03. Implemented in Plan 07-02 Task 1.
 
 2. **New ALLOWED_FIELDS for Phase 7**
    - What we know: campaign.cjs update function validates against ALLOWED_FIELDS allowlist.
    - What's unclear: Exact list of new fields needed (e.g., `archive.archived_at`, `archive.learnings_extracted`, `cancel.cancelled_at`, `cancel.reason`).
    - Recommendation: Add fields during implementation: `archive.archived_at`, `archive.learnings_extracted`, `cancel.cancelled_at`, `cancel.reason`. Also add `cancelled` and `archived` to the valid phase values.
+   - RESOLVED: Four fields added (`archive.archived_at`, `archive.learnings_extracted`, `cancel.cancelled_at`, `cancel.reason`) plus `cancelled`/`archived` phase values. Implemented in Plan 07-01 Task 1.
 
 3. **DRIFT-LOG.md audit scope in /ttm-health**
    - What we know: D-11 mentions DRIFT-LOG.md integrity check. Discretion area notes it may overlap with /ttm-positioning-check.
    - What's unclear: How deep should the DRIFT-LOG.md audit go?
    - Recommendation: Keep it structural -- validate the file exists, has correct table structure, no duplicate markers, entries are chronologically ordered. Do NOT re-evaluate positioning drift (that is /ttm-positioning-check's job). This avoids overlap.
+   - RESOLVED: Structural validation only (file exists, table structure, no duplicate markers, chronological order). No drift re-evaluation. Implemented in Plan 07-01 Task 2 `checkDriftLogIntegrity`.
 
 ## Project Constraints (from CLAUDE.md)
 
