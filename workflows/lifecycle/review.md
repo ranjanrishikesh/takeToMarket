@@ -364,7 +364,7 @@ Write the updated MANIFEST.json back to disk.
 
 ```bash
 TIMESTAMP=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" timestamp --raw)
-node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" review.run_count ${RUN_NUMBER}
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" review.run_count "${RUN_NUMBER}"
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" review.last_run "$TIMESTAMP"
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" review.overall_result "[approved|mixed|needs-fix]"
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" phase reviewed

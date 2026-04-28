@@ -321,7 +321,7 @@ node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" deviation append \
   --finding "[exact finding text]" \
   --action "Accept+log" \
   --justification "[user's justification]" \
-  --run ${RUN_NUMBER}
+  --run "${RUN_NUMBER}"
 ```
 
 Also update STATE.md gate field:
@@ -405,7 +405,7 @@ For each gate, use the worst result across all assets. If user chose Correct, us
 **Update verification metadata:**
 ```bash
 TIMESTAMP=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" timestamp --raw)
-node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.run_count ${RUN_NUMBER}
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.run_count "${RUN_NUMBER}"
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.last_run "$TIMESTAMP"
 node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" verify.overall_result [pass|accepted|warn|fail]
 ```
