@@ -246,7 +246,8 @@ Why are you accepting this deviation? (This will be logged to DEVIATIONS.md)
 Record the deviation using the CLI:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" deviation append "${SLUG}" \
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" deviation append \
+  --slug "${SLUG}" \
   --gate "[gate name]" \
   --gate-id "[GATE-XX]" \
   --tier [1|2] \
