@@ -251,6 +251,7 @@ Fill with actual values:
   },
   "hero": {
     "asset_id": 1,
+    "name": "01-${HERO_TYPE}-${HERO_CHANNEL}",
     "type": "${HERO_TYPE}",
     "channel": "${HERO_CHANNEL}",
     "playbook": "${HERO_PLAYBOOK_PATH_OR_NONE}",
@@ -259,6 +260,7 @@ Fill with actual values:
   "derivatives": [
     {
       "asset_id": 2,
+      "name": "02-${TYPE}-${CHANNEL}",
       "type": "${TYPE}",
       "channel": "${CHANNEL}",
       "playbook": "${PLAYBOOK_PATH_OR_NONE}",

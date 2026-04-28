@@ -9,6 +9,7 @@
   },
   "hero": {
     "asset_id": 1,
+    "name": "01-[ASSET_TYPE]-[CHANNEL]",
     "type": "[ASSET_TYPE]",
     "channel": "[CHANNEL]",
     "playbook": "[PLAYBOOK_PATH_OR_NONE]",
