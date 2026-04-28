@@ -505,17 +505,19 @@ if echo "$ARGUMENTS" | grep -q -- '--text'; then TEXT_MODE=true; fi
 | A2 | The `--from-escalate` argument for positioning-shift is informational only and does not change the workflow gates | Pitfall 5 | Low -- the verify workflow already exits cleanly on escalate |
 | A3 | Auto-suggest logic should live in the ship workflow as a post-completion check rather than relying on SKILL.md auto-invocation | Pitfall 6 | Medium -- if placed in ship.md, it only triggers after ship; if in SKILL.md, Claude could suggest at other times too. D-02 says "after every 3rd campaign ships" which points to ship.md. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **DRIFT-LOG.md Deprecation Backlog Updates**
    - What we know: D-05 says deprecation schedule is tracked in DRIFT-LOG.md. D-14 says DRIFT-LOG.md is append-only.
    - What's unclear: How does a user mark a deprecation item as "updated" (completed) if the log is append-only? Do we append a new "deprecation-complete" event type?
    - Recommendation: Add a `deprecation-update` event type to DRIFT-LOG.md. When a deprecated asset is updated, append a new row referencing the original deprecation entry. The backlog section at the bottom would need to be a rendered view (rebuilt by the CLI on each append) rather than manually maintained. Alternatively, keep the backlog table mutable while the audit trail table is append-only -- separating the two sections.
+   - RESOLVED: Dual-section design in drift-log.md template -- append-only Audit Trail section + mutable Deprecation Backlog section. Plan 06-01 implements this in the template and drift-log.cjs module.
 
 2. **Cross-Reference Format Between DRIFT-LOG.md and DEVIATIONS.md**
    - What we know: D-13 says drift log should cross-reference per-campaign accepted deviations.
    - What's unclear: Does the cross-reference happen at deviation-time (when accept+log is chosen in verify) or at audit-time (when /ttm-positioning-check runs)?
    - Recommendation: At audit-time. When /ttm-positioning-check runs, it reads each campaign's DEVIATIONS.md for positioning_drift entries and includes them in the audit report. A summary is appended to DRIFT-LOG.md as a `deviation` event type. This avoids modifying the verify workflow (which already writes to DEVIATIONS.md correctly).
+   - RESOLVED: Audit-time cross-reference. Plan 06-02 Step 5 reads DEVIATIONS.md from each campaign and includes positioning_drift deviations in the audit report, then appends a summary to DRIFT-LOG.md.
 
 ## Environment Availability
 
