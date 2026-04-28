@@ -74,8 +74,11 @@ switch (command) {
     else if (subCmd === 'state') cmdCampaignState(slug, raw);
     else if (subCmd === 'update') cmdCampaignUpdate(slug, campaignArgs[2], campaignArgs[3], raw);
     else if (subCmd === 'list') {
-      const filter = campaignArgs[1] || '';
-      const since = campaignArgs.find(a => a.match(/^\d+d$/)) || '';
+      const listParsed = parseNamedArgs(campaignArgs.slice(1));
+      // Support --since as a named flag (e.g., --since 30d)
+      const since = listParsed.named.since || listParsed.positional.find(a => a.match(/^\d+d$/)) || '';
+      // Filter is the first positional that starts with '--' (e.g., --active, --shipped-since-last-audit)
+      const filter = listParsed.positional.find(a => a.startsWith('--')) || '';
       cmdCampaignList(filter, since, raw);
     }
     else error('campaign subcommand required: init, state, update, list');
