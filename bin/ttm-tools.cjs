@@ -63,7 +63,7 @@ switch (command) {
     break;
   }
   case 'campaign': {
-    const { cmdCampaignInit, cmdCampaignState, cmdCampaignUpdate, cmdCampaignList } = require('./lib/campaign.cjs');
+    const { cmdCampaignInit, cmdCampaignState, cmdCampaignUpdate, cmdCampaignList, cmdCampaignArchive } = require('./lib/campaign.cjs');
     const campaignArgs = args.slice(1).filter(a => a !== '--raw');
     const subCmd = campaignArgs[0];
     const slug = campaignArgs[1];
@@ -81,7 +81,8 @@ switch (command) {
       const filter = listParsed.positional.find(a => a.startsWith('--')) || '';
       cmdCampaignList(filter, since, raw);
     }
-    else error('campaign subcommand required: init, state, update, list');
+    else if (subCmd === 'archive') cmdCampaignArchive(slug, raw);
+    else error('campaign subcommand required: init, state, update, list, archive');
     break;
   }
   case 'deviation': {
@@ -134,7 +135,8 @@ switch (command) {
   }
   case 'health': {
     const { cmdHealth } = require('./lib/health.cjs');
-    cmdHealth(raw);
+    const full = args.includes('--full');
+    cmdHealth(raw, full);
     break;
   }
   default:
