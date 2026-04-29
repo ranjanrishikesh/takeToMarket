@@ -156,6 +156,22 @@ SKILL.md ensures verify runs in a completely separate context from produce.
 
 ---
 
+## Step 4a: Apply Base Gate Overrides
+
+For each asset in ASSETS:
+
+1. Check if the asset's playbook was loaded (from MANIFEST.json `playbook` field)
+2. If playbook is "none", skip -- all base gates keep default tiers
+3. If playbook exists, read `## Base Gate Overrides` from `${CLAUDE_PLUGIN_ROOT}/playbooks/<type>.md`
+4. Parse the override table: record each base gate ID and its override tier
+5. Adjust tier classification for overridden gates for this asset's evaluation
+6. If section reads "None -- all base gates keep default tiers", no adjustments needed
+
+**IMPORTANT:** Overrides MUST be applied BEFORE Step 4 base gate evaluation so that
+overridden gates (e.g., GATE-10 to Tier 1 for SEO) use correct deviation handling.
+
+---
+
 ## Step 4: Evaluate Gates Per Asset
 
 ```
@@ -163,6 +179,7 @@ takeToMarket > EVALUATING QUALITY GATES
 ```
 
 For each asset in ASSETS:
+  Using the effective tiers from Step 4a (defaults if no overrides):
   For each of the 10 gates (in order from base-gates.md):
 
   1. **GATE-01: Positioning Drift** (Tier 1)
@@ -227,6 +244,23 @@ evaluation. This prevents shallow evaluation and ensures each gate gets full att
 
 ---
 
+## Step 4b: Evaluate Discipline Gates
+
+For each asset in ASSETS:
+
+1. Check if the asset's playbook was loaded (from MANIFEST.json `playbook` field)
+2. If playbook is "none": display "No discipline playbook -- base gates only" and skip
+3. If playbook exists, read `## Discipline Gates` section from the loaded playbook
+4. Parse each `### DISC-*` subsection as a gate definition
+5. For each discipline gate: evaluate using gate-evaluation.md structured output format,
+   using the tier from the gate definition. Record gate ID, tier, result, findings[]
+6. Append discipline gate results to the asset's gate results array
+7. Update the asset's aggregate to include discipline gate outcomes
+
+Same rules as base gates: evaluate each discipline gate SEPARATELY.
+
+---
+
 ## Step 5: Build Summary Table
 
 ```
@@ -252,6 +286,10 @@ Construct the summary table following the templates/verification-report.md forma
 | 8 | Competitor Collision (GATE-08) | T2 | [PASS|WARN|FAIL] | ... |
 | 9 | ICP Fit (GATE-09) | T2 | [PASS|WARN|FAIL] | ... |
 | 10 | Format Correctness (GATE-10) | T2 | [PASS|WARN|FAIL] | ... |
+| 11 | DISC-{DISC}-01: {Name} | T{n} | [PASS|WARN|FAIL] | [N/A] |
+| .. | ... | ... | ... | ... |
+
+Discipline gate rows appear after base gates. Show N/A for assets without a matching playbook.
 
 **Result:** [FAIL_COUNT] FAIL (Tier 1), [WARN_COUNT] WARN -- [action required | all clear]
 ```
@@ -273,7 +311,7 @@ using the structured output format from gate-evaluation.md:
 
 ## Step 6: Handle Tier 1 Deviations
 
-For each Tier 1 gate (GATE-01, GATE-02, GATE-04) that returned WARN or FAIL on any asset:
+For each Tier 1 gate (base or discipline, including overridden) that returned WARN or FAIL on any asset:
 
 Display the detailed finding (evidence + reference + recommendation).
 
@@ -352,7 +390,7 @@ Exit the workflow.
 
 ## Step 7: Display Tier 2 Findings
 
-For each Tier 2 gate (GATE-03, GATE-05 through GATE-10) that returned WARN or FAIL:
+For each Tier 2 gate (base or discipline, excluding overridden-to-Tier-1) that returned WARN or FAIL:
 
 Display as advisory:
 ```
@@ -402,6 +440,9 @@ node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign update "${SLUG}" gate.fo
 For each gate, use the worst result across all assets. If user chose Correct, use
 "fix_needed". If user chose Accept+log, use "accepted".
 
+**Discipline gates:** DISC-* results appear in the report/table but have no individual
+state fields. A Tier 1 discipline gate FAIL counts toward the overall result.
+
 **Update verification metadata:**
 ```bash
 TIMESTAMP=$(node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" timestamp --raw)
@@ -443,8 +484,8 @@ Next: Run /ttm-review ${SLUG} to conduct human review
 </process>
 
 <success_criteria>
-- [ ] All assets from MANIFEST.json evaluated against all 10 gates
-- [ ] Summary table displayed with PASS/WARN/FAIL per gate per asset
+- [ ] All assets from MANIFEST.json evaluated against all 10 base gates plus discipline gates from playbooks
+- [ ] Summary table displayed with PASS/WARN/FAIL per gate (base + discipline) per asset
 - [ ] Tier 1 failures prompted for Correct/Accept+log/Escalate
 - [ ] Accept+log deviations recorded in DEVIATIONS.md via ttm-tools.cjs CLI and STATE.md
 - [ ] VERIFICATION.md written with full report (summary table + detail findings)
