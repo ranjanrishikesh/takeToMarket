@@ -286,6 +286,11 @@ function cmdCampaignList(filter, sinceArg, raw) {
     campaigns.push({ slug: entry.name, ...frontmatter });
   }
 
+  // Enforce mutual exclusion of filter flags and --since
+  if (filter && sinceArg) {
+    error('--active/--shipped-since-last-audit and --since are mutually exclusive');
+  }
+
   let filtered = campaigns;
 
   if (filter === '--active') {
