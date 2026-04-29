@@ -226,7 +226,9 @@ const ALLOWED_FIELDS = new Set([
 
 function cmdCampaignUpdate(slug, field, value, raw) {
   if (!field) error('field name required for campaign update');
-  if (value === undefined || value === null) error('value required for campaign update');
+  if (value === undefined || value === null || value === '') {
+    error('value required for campaign update -- use "null" string to clear a field');
+  }
   if (!ALLOWED_FIELDS.has(field)) {
     error(`Unknown state field: ${field}. Allowed: ${[...ALLOWED_FIELDS].join(', ')}`);
   }
