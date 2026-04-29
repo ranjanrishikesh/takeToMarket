@@ -201,11 +201,41 @@ If a check is N/A (e.g., UTM hygiene for an asset without links), record:
 
 ---
 
+### Evaluating Discipline Gates (DISC-*)
+
+**Load:** Playbook file for this asset type (`${CLAUDE_PLUGIN_ROOT}/playbooks/<type>.md`)
+**Asset content:** Full asset text
+
+**Evaluate:**
+For each `### DISC-*` subsection in the playbook's `## Discipline Gates` section:
+
+1. Read the gate's **Checks** and **Against** fields to identify what is being evaluated and the reference data
+2. Evaluate each numbered criterion under **Evaluation Criteria** against the asset content
+3. Apply the same PASS/WARN/FAIL assessment and structured output format as base gates (see Structured Output Format above)
+4. Use the tier specified in the discipline gate definition (from the `-- Tier {1|2}` in the heading)
+
+**On failure:** Apply deviation handling based on the gate's tier:
+- Tier 1 discipline gates: Prompt user for Correct / Accept+log / Escalate (same as base Tier 1)
+- Tier 2 discipline gates: Report as advisory (same as base Tier 2)
+
+**Aggregation:** Same rule as base gates:
+- If ALL checks PASS: gate result = PASS
+- If ANY check is WARN and none FAIL: gate result = WARN
+- If ANY check is FAIL: gate result = FAIL
+- N/A checks are excluded from aggregation
+
+**Key rules:**
+- Evaluate each discipline gate separately (same as base gates -- no bundling)
+- Discipline gates must not duplicate base gate checks
+- If the asset has no playbook, skip discipline gate evaluation entirely
+
+---
+
 ## Deviation Handling (GATE-12)
 
 When a gate results in WARN or FAIL:
 
-### Tier 1 Failures (GATE-01, GATE-02, GATE-04)
+### Tier 1 Failures (GATE-01, GATE-02, GATE-04, base gates overridden to Tier 1, and Tier 1 DISC-* gates)
 
 Present the finding and prompt for action:
 
@@ -224,7 +254,7 @@ Type 1, 2, or 3:
 **Text-mode fallback:** When `TEXT_MODE=true`, present the same numbered list as plain text
 and read the user's response from the next message.
 
-### Tier 2 Findings (GATE-03, GATE-05 through GATE-10)
+### Tier 2 Findings (GATE-03, GATE-05 through GATE-10 unless overridden, and Tier 2 DISC-* gates)
 
 Report findings without requiring action:
 
@@ -298,6 +328,11 @@ After all gates are evaluated for all assets, display a summary table:
 | 2 | Claim Accuracy | T1 | PASS | PASS | ... |
 ...
 | 10 | Format Correctness | T2 | PASS | PASS | ... |
+| 11 | DISC-{DISC}-01: {Name} | T{n} | PASS | N/A | ... |
+| .. | ... | ... | ... | ... | ... |
+
+Discipline gate rows appear after the 10 base gates. For assets without a matching
+playbook, show N/A in that asset's column.
 
 **Result:** [count] FAIL, [count] WARN -- [action required | all clear]
 ```
