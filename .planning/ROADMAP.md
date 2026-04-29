@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 5: Review, Fix, and Ship** - Human review phase, root-cause fix loop with 3-attempt cap, ship phase with launch checklist
 - [x] **Phase 6: Positioning Invariant System** - Positioning-as-invariant enforcement, positioning shift workflow, drift detection and logging
 - [x] **Phase 7: State Management and Campaign Operations** - Campaign state persistence, resume, archive, health checks, /ttm-next guidance
-- [ ] **Phase 8: Core Playbooks** - Base playbook inheritance model plus SEO, AEO, Email, LinkedIn, and Social discipline playbooks with discipline-specific gates
+- [x] **Phase 8: Core Playbooks** - Base playbook inheritance model plus SEO, AEO, Email, LinkedIn, and Social discipline playbooks with discipline-specific gates
 - [ ] **Phase 9: Measurement, Learning, and Remaining Playbooks** - Measure phase with attribution models, Learn phase with root-cause taxonomy, YouTube/Paid Ads/Affiliate/PR-Media/Events playbooks, meta-gates
 - [ ] **Phase 10: Distribution and Polish** - Git clone installation, npm package, post-install validation, utility commands, documentation
 
@@ -192,6 +192,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 | 5. Review, Fix, and Ship | 4/4 | Complete | 2026-04-28 |
 | 6. Positioning Invariant System | 5/5 | Complete | 2026-04-28 |
 | 7. State Management and Campaign Operations | 3/3 | Complete | 2026-04-29 |
-| 8. Core Playbooks | 0/3 | Planning complete | - |
+| 8. Core Playbooks | 3/3 | Complete | 2026-04-29 |
 | 9. Measurement, Learning, and Remaining Playbooks | 0/TBD | Not started | - |
 | 10. Distribution and Polish | 0/TBD | Not started | - |

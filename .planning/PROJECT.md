@@ -39,6 +39,12 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 - [x] `/ttm-health` full audit with staleness detection, campaign velocity warnings, state consistency, DRIFT-LOG.md integrity, gate consistency — Validated in Phase 7: State Management and Campaign Operations
 - [x] `/ttm-next` multi-campaign portfolio routing with priority algorithm (pending reviews > fix loops > earlier phases > recency) — Validated in Phase 7: State Management and Campaign Operations
 - [x] Campaign state persistence across sessions via CAMPAIGNS/<slug>/ directory files — Validated in Phase 7: State Management and Campaign Operations
+- [x] Base playbook inheritance model with additive gates + weight override (discipline can promote base gates to Tier 1) — Validated in Phase 8: Core Playbooks
+- [x] SEO playbook with 7 discipline gates (title/H1, search intent, schema, internal links, thin content, meta description, Core Web Vitals) — Validated in Phase 8: Core Playbooks
+- [x] AEO playbook with 5 discipline gates (quote-worthy sentences, FAQ/HowTo schema, author markup, fact consistency, answer format) — Validated in Phase 8: Core Playbooks
+- [x] Email playbook with 7 discipline gates including DNS-based SPF/DKIM/DMARC deliverability checks — Validated in Phase 8: Core Playbooks
+- [x] LinkedIn playbook with 4 discipline gates (opener hooks, native content, professional tone, engagement path) — Validated in Phase 8: Core Playbooks
+- [x] Social playbook with 4 discipline gates and X/Twitter, Instagram, Facebook platform-specific subsections — Validated in Phase 8: Core Playbooks
 
 ### Active
 
@@ -126,4 +132,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-29 after Phase 7 completion*
+*Last updated: 2026-04-29 after Phase 8 completion*
