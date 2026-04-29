@@ -303,11 +303,15 @@ function cmdCampaignList(filter, sinceArg, raw) {
       const lines = driftLogContent.split('\n');
       for (const line of lines) {
         if (line.includes('| audit |') || line.includes('| audit|')) {
-          const match = line.match(/\|\s*(\d{4}-\d{2}-\d{2}T[^\s|]+)\s*\|/);
-          if (match) {
-            const ts = match[1];
-            if (!lastAuditTimestamp || ts > lastAuditTimestamp) {
-              lastAuditTimestamp = ts;
+          // Parse pipe-delimited columns by position rather than first-match regex
+          // Expected columns: ['', event_type, timestamp, source, details, affected, '']
+          const cols = line.split('|').map(c => c.trim());
+          if (cols.length >= 3) {
+            const ts = cols[2];
+            if (ts && ts.match(/^\d{4}-\d{2}-\d{2}T/)) {
+              if (!lastAuditTimestamp || ts > lastAuditTimestamp) {
+                lastAuditTimestamp = ts;
+              }
             }
           }
         }
