@@ -150,7 +150,7 @@ Plans:
   5. LinkedIn and Social playbooks enforce platform-specific content rules (opener hooks, native vs link format, visual ratios)
 **Plans:** 3 plans
 Plans:
-- [ ] 08-01-PLAN.md -- Base playbook inheritance contract, verify workflow extension, gate-evaluation discipline gate support
+- [x] 08-01-PLAN.md -- Base playbook inheritance contract, verify workflow extension, gate-evaluation discipline gate support
 - [ ] 08-02-PLAN.md -- SEO and AEO discipline playbooks with full gate definitions
 - [ ] 08-03-PLAN.md -- Email, LinkedIn, and Social discipline playbooks with full gate definitions
 
