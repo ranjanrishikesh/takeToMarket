@@ -30,6 +30,10 @@ Users can produce and verify content with discipline-specific knowledge and qual
 - **D-08:** Shared core + discipline-specific sections -- all 5 playbooks share a common template header (channel name, asset types, base gate overrides, production guidance, discipline gates, format rules). Each can add discipline-specific sections (SEO adds Schema Markup guidance, Email adds Deliverability, AEO adds Citation Optimization).
 - **D-09:** A base playbook template (`playbooks/base.md`) defines the shared structure and inheritance contract. It is NOT a playbook file itself (not loaded by produce) -- it is a template/reference that discipline playbooks follow.
 
+### Gate Scope Decisions (locked during plan verification)
+- **D-10:** SEO playbook gets 7 discipline gates (not 6) -- add DISC-SEO-07 for Core Web Vitals budget (LCP < 2.5s, CLS < 0.1, INP targets). Per PLAY-02, CWV is a required check.
+- **D-11:** Email playbook includes DNS-based deliverability checks for SPF/DKIM/DMARC. These records are publicly queryable via DNS lookups, so the AI can check them at verify time (e.g., dig TXT for SPF, DKIM selector lookup). Not just an advisory checklist -- an actual automated gate that queries DNS.
+
 ### Claude's Discretion
 - Exact gate definitions per discipline (researcher investigates best practices, requirements list the checks)
 - Whether to use YAML frontmatter in playbook files for metadata or keep them pure Markdown

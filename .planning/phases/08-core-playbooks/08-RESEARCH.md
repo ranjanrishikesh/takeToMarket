@@ -387,7 +387,7 @@ Include discipline gates in the summary table as additional rows after the base 
 | A3 | DISC-EMAIL-06: Single CTA above fold is best practice | Email Gates | Low -- well-established email marketing principle |
 | A4 | DISC-SOC-02: Native format preference criteria for each platform | Social Gates | Medium -- platform algorithms change frequently; criteria may need updates |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **YAML frontmatter in playbooks: yes or no?**
    - What we know: YAML frontmatter is standard across all Agent Skills. It would allow the verify workflow to quickly identify which discipline a playbook belongs to and what asset types it covers.
