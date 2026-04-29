@@ -148,7 +148,11 @@ Plans:
   3. AEO playbook enforces quote-worthy sentences, FAQ/HowTo schema, and cross-domain fact consistency
   4. Email playbook enforces subject/preview spam-trigger scan, dark-mode rendering, unsubscribe presence, and deliverability checks
   5. LinkedIn and Social playbooks enforce platform-specific content rules (opener hooks, native vs link format, visual ratios)
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 08-01-PLAN.md -- Base playbook inheritance contract, verify workflow extension, gate-evaluation discipline gate support
+- [ ] 08-02-PLAN.md -- SEO and AEO discipline playbooks with full gate definitions
+- [ ] 08-03-PLAN.md -- Email, LinkedIn, and Social discipline playbooks with full gate definitions
 
 ### Phase 9: Measurement, Learning, and Remaining Playbooks
 **Goal**: Users can close the feedback loop by measuring campaign outcomes, extracting lessons that improve future campaigns, and produce content across all 10 marketing disciplines
@@ -188,6 +192,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 | 5. Review, Fix, and Ship | 4/4 | Complete | 2026-04-28 |
 | 6. Positioning Invariant System | 5/5 | Complete | 2026-04-28 |
 | 7. State Management and Campaign Operations | 3/3 | Complete | 2026-04-29 |
-| 8. Core Playbooks | 0/TBD | Not started | - |
+| 8. Core Playbooks | 0/3 | Planning complete | - |
 | 9. Measurement, Learning, and Remaining Playbooks | 0/TBD | Not started | - |
 | 10. Distribution and Polish | 0/TBD | Not started | - |
