@@ -254,6 +254,12 @@ archive confirmation prevents data-loss on retry (duplicate rows) if archive wer
 
 Read `.marketing/LEARNINGS.md`.
 
+**Duplicate guard:** Before inserting rows, scan existing LEARNINGS.md content for
+any row containing `| ${SLUG} |` with today's date. If matching rows already exist
+for this campaign slug and today's date, skip insertion and log:
+"Learnings for ${SLUG} already present in LEARNINGS.md -- skipping duplicate write."
+This prevents duplicate lesson rows if the workflow is retried after a partial failure.
+
 Find the marker line: `<!-- LESSONS BELOW THIS LINE -->`
 
 **Marker validation (T-07-10 mitigation):**
