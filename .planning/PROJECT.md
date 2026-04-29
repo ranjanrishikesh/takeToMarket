@@ -33,6 +33,12 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 - [x] `/ttm-positioning-shift` controlled repositioning with reasoning, migration plan, deprecation schedule, mandatory human approval gate — Validated in Phase 6: Positioning Invariant System
 - [x] `/ttm-positioning-check` drift audit with time-window sampling, GATE-01 reuse, bleeding analysis, trend tracking, DRIFT-LOG.md logging — Validated in Phase 6: Positioning Invariant System
 - [x] Dual positioning drift log: POSITIONING.md History table (shifts only) + .marketing/DRIFT-LOG.md (all events including deviations cross-ref) — Validated in Phase 6: Positioning Invariant System
+- [x] `/ttm-state` campaign dashboard with all-campaigns view (active + archived), single-campaign detail, decisions/blockers/experiments — Validated in Phase 7: State Management and Campaign Operations
+- [x] `/ttm-resume` session recovery with auto-load context, interrupted fix/verify loop detection, and next-command guidance — Validated in Phase 7: State Management and Campaign Operations
+- [x] `/ttm-archive` campaign finalization with directory move to ARCHIVE/, structured learnings extraction to LEARNINGS.md, shipped-only guard — Validated in Phase 7: State Management and Campaign Operations
+- [x] `/ttm-health` full audit with staleness detection, campaign velocity warnings, state consistency, DRIFT-LOG.md integrity, gate consistency — Validated in Phase 7: State Management and Campaign Operations
+- [x] `/ttm-next` multi-campaign portfolio routing with priority algorithm (pending reviews > fix loops > earlier phases > recency) — Validated in Phase 7: State Management and Campaign Operations
+- [x] Campaign state persistence across sessions via CAMPAIGNS/<slug>/ directory files — Validated in Phase 7: State Management and Campaign Operations
 
 ### Active
 
@@ -120,4 +126,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-28 after Phase 6 completion*
+*Last updated: 2026-04-29 after Phase 7 completion*
