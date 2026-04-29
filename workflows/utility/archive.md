@@ -216,11 +216,41 @@ If user selects Cancel, exit without making any changes.
 
 ---
 
-## Step 5: Update LEARNINGS.md
+## Step 5: Execute Archive
+
+```
+takeToMarket > ARCHIVING CAMPAIGN
+```
+
+Run the archive CLI command:
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign archive "${SLUG}" --raw
+```
+
+Parse output and verify `archived: true`.
+
+If the command returns an error:
+- Display the error message to the user
+- Do NOT attempt to manually move files (the CLI handles all filesystem operations)
+- Do NOT update LEARNINGS.md -- the archive did not succeed
+- Exit with the error context
+
+The CLI command handles:
+- Moving the campaign directory to `.marketing/CAMPAIGNS/ARCHIVE/${SLUG}/`
+- Updating the campaign state to "archived"
+- Validating the campaign is in "shipped" phase before allowing archive
+
+---
+
+## Step 6: Update LEARNINGS.md
 
 ```
 takeToMarket > UPDATING LEARNINGS
 ```
+
+**Important:** This step runs only after the archive CLI command succeeds in Step 5.
+The campaign is now in ARCHIVE/ with phase set to "archived". Writing learnings after
+archive confirmation prevents data-loss on retry (duplicate rows) if archive were to fail.
 
 Read `.marketing/LEARNINGS.md`.
 
@@ -240,31 +270,6 @@ Write the updated LEARNINGS.md back to disk.
 Also update the Summary section at the top of LEARNINGS.md:
 - Increment "Total lessons" count by the number of new rows added
 - Update "Last lesson date" to today's date
-
----
-
-## Step 6: Execute Archive
-
-```
-takeToMarket > ARCHIVING CAMPAIGN
-```
-
-Run the archive CLI command:
-```bash
-node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" campaign archive "${SLUG}" --raw
-```
-
-Parse output and verify `archived: true`.
-
-If the command returns an error:
-- Display the error message to the user
-- Do NOT attempt to manually move files (the CLI handles all filesystem operations)
-- Exit with the error context
-
-The CLI command handles:
-- Moving the campaign directory to `.marketing/CAMPAIGNS/ARCHIVE/${SLUG}/`
-- Updating the campaign state to "archived"
-- Validating the campaign is in "shipped" phase before allowing archive
 
 ---
 
