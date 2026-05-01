@@ -166,9 +166,9 @@ Plans:
   5. Meta-gates check portfolio balance, calendar collision, theme consistency, and learning plan across campaigns
 **Plans:** 6 plans
 Plans:
-- [ ] 09-01-PLAN.md -- Infrastructure: campaign.cjs state fields, measurement templates, meta-gate evaluation reference
-- [ ] 09-02-PLAN.md -- YouTube and Paid Ads discipline playbooks
-- [ ] 09-03-PLAN.md -- Affiliate, PR/Media, and Events discipline playbooks
+- [x] 09-01-PLAN.md -- Infrastructure: campaign.cjs state fields, measurement templates, meta-gate evaluation reference
+- [x] 09-02-PLAN.md -- YouTube and Paid Ads discipline playbooks
+- [x] 09-03-PLAN.md -- Affiliate, PR/Media, and Events discipline playbooks
 - [ ] 09-04-PLAN.md -- /ttm-measure workflow with 3-pathway analytics input and attribution models
 - [ ] 09-05-PLAN.md -- /ttm-learn workflow with narrative+apply reference edits and root-cause logging
 - [ ] 09-06-PLAN.md -- Meta-gate integration into verify.md as Step 4c
