@@ -249,7 +249,7 @@ function checkDriftLogIntegrity(marketingDir) {
  */
 function checkGateConsistency(campaignsDir) {
   const checks = [];
-  const validGateValues = new Set(['null', 'pass', 'warn', 'fail']);
+  const validGateValues = new Set(['null', 'pass', 'warn', 'fail', 'fix_needed', 'accepted']);
 
   let entries;
   try {
