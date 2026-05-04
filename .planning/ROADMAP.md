@@ -197,7 +197,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -211,3 +211,21 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 | 8. Core Playbooks | 3/3 | Complete | 2026-04-29 |
 | 9. Measurement, Learning, and Remaining Playbooks | 6/6 | Complete | 2026-05-02 |
 | 10. Distribution and Polish | 5/5 | Complete | 2026-05-04 |
+| 11. Gap Closure | 0/3 | Planning complete | - |
+
+### Phase 11: Gap Closure
+**Goal**: Close all critical gaps and integration breaks identified in v1.0 milestone audit — fix 3 blockers (B-01, B-02, B-03), 1 partial requirement (GATE-12), 1 design decision conflict (LIFE-04), and 1 mapping mismatch (W-04)
+**Depends on**: Phase 10
+**Requirements**: LIFE-04, GATE-12, STAT-03, DIST-01, DIST-02, DIST-03, LRNG-01, LRNG-02, LRNG-03, LRNG-04, STAT-05, PLAY-01
+**Success Criteria** (what must be TRUE):
+  1. Full campaign lifecycle flow (init→archive) completes end-to-end — learn.md sets phase=learned, archive accepts learned campaigns (B-01 fix)
+  2. npm/git-clone install includes agents/ directory and post-install validation catches missing agents/ (B-02 fix)
+  3. learn.md, archive.md, learnings-extraction.md reference VERIFICATION.md not VERIFY-REPORT-*.md (B-03 fix)
+  4. Deviation accept+log records correctly — verify.md and gate-evaluation.md use --slug named arg (GATE-12 fix)
+  5. Playbook type-to-file mapping resolves correctly so discipline gates fire for all asset types (W-04 fix)
+  6. LIFE-04 conflict resolved — either REQUIREMENTS.md updated to match D-06 or brief enforces both metrics
+**Plans:** 3 plans
+Plans:
+- [ ] 11-01-PLAN.md -- B-01 + B-03: learn-to-archive lifecycle fix and VERIFY-REPORT filename correction
+- [ ] 11-02-PLAN.md -- B-02 + W-01: install.js agents/ directory and health.cjs gate value allowlist
+- [ ] 11-03-PLAN.md -- W-04 + LIFE-04 + GATE-12: playbook mapping, requirement text update, deviation arg verification
