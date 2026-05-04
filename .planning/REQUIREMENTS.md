@@ -101,11 +101,11 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **UTIL-01**: `/ttm-brand-refresh` updates BRAND.md with new proof points, deprecates expired ones
 - [x] **UTIL-02**: `/ttm-icp-refresh` updates ICP.md from new customer data (calls, reviews, feedback)
 - [x] **UTIL-03**: `/ttm-competitor-scan` on-demand competitor analysis, updates COMPETITORS.md
-- [ ] **UTIL-04**: `/ttm-seo-audit` technical + content SEO audit of a URL or sitemap
-- [ ] **UTIL-05**: `/ttm-aeo-check <query>` checks citation status across AI engines for a query
-- [ ] **UTIL-06**: `/ttm-keyword-map` generates keyword cluster map with intent tags
-- [ ] **UTIL-07**: `/ttm-email-preflight` deliverability + dark-mode + spam-trigger scan
-- [ ] **UTIL-08**: `/ttm-affiliate-kit` generates creative kit for affiliate partners
+- [x] **UTIL-04**: `/ttm-seo-audit` technical + content SEO audit of a URL or sitemap
+- [x] **UTIL-05**: `/ttm-aeo-check <query>` checks citation status across AI engines for a query
+- [x] **UTIL-06**: `/ttm-keyword-map` generates keyword cluster map with intent tags
+- [x] **UTIL-07**: `/ttm-email-preflight` deliverability + dark-mode + spam-trigger scan
+- [x] **UTIL-08**: `/ttm-affiliate-kit` generates creative kit for affiliate partners
 - [x] **UTIL-09**: `/ttm-repurpose <source-asset>` fans out long-form → derivative assets across channels with full brief → produce → verify per derivative
 - [ ] **UTIL-10**: `/ttm-next` guides user to the right next command based on current campaign state
 
@@ -247,11 +247,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UTIL-01 | Phase 10 | Complete |
 | UTIL-02 | Phase 10 | Complete |
 | UTIL-03 | Phase 10 | Complete |
-| UTIL-04 | Phase 10 | Pending |
-| UTIL-05 | Phase 10 | Pending |
-| UTIL-06 | Phase 10 | Pending |
-| UTIL-07 | Phase 10 | Pending |
-| UTIL-08 | Phase 10 | Pending |
+| UTIL-04 | Phase 10 | Complete |
+| UTIL-05 | Phase 10 | Complete |
+| UTIL-06 | Phase 10 | Complete |
+| UTIL-07 | Phase 10 | Complete |
+| UTIL-08 | Phase 10 | Complete |
 | UTIL-09 | Phase 10 | Complete |
 | UTIL-10 | Phase 7 | Pending |
 | META-01 | Phase 9 | Complete |
