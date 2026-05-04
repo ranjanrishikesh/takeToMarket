@@ -9,8 +9,6 @@ allowed-tools: Read Write Bash Glob Grep
 
 # /ttm-email-preflight
 
-**Status:** Not yet implemented (Phase 10)
-
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/email-preflight.md`
 
 This command will:

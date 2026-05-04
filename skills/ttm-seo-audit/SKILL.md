@@ -10,8 +10,6 @@ allowed-tools: Read Write Bash Glob Grep
 
 # /ttm-seo-audit
 
-**Status:** Not yet implemented (Phase 10)
-
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/seo-audit.md`
 
 This command will:

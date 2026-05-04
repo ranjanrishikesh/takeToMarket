@@ -9,8 +9,6 @@ allowed-tools: Read Write Bash Glob Grep
 
 # /ttm-competitor-scan
 
-**Status:** Not yet implemented (Phase 10)
-
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/reference-mgmt/competitor-scan.md`
 
 This command will:

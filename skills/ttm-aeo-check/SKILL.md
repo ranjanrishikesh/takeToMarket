@@ -10,8 +10,6 @@ allowed-tools: Read Write Bash Glob Grep
 
 # /ttm-aeo-check
 
-**Status:** Not yet implemented (Phase 10)
-
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/aeo-check.md`
 
 This command will:

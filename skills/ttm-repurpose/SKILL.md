@@ -10,8 +10,6 @@ allowed-tools: Read Write Bash Glob Grep Task
 
 # /ttm-repurpose
 
-**Status:** Not yet implemented (Phase 10)
-
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/repurpose.md`
 
 This command will:
