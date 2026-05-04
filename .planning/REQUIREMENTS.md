@@ -36,7 +36,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **LIFE-01**: `/ttm-new-campaign <slug>` creates `CAMPAIGNS/<slug>/` directory with initialized state, links to reference files
 - [ ] **LIFE-02**: `/ttm-research <slug>` (Discover phase) performs market/audience research for the campaign — SERP analysis, competitor content, AI-answer citations, ambient narrative
 - [ ] **LIFE-03**: `/ttm-brief <slug>` (Brief phase) generates campaign brief with mandatory fields: goal, outcome metric, target value, measurement window, ICP segment, positioning anchor, hook, proof points, channel mix, assets list, success/failure criteria
-- [ ] **LIFE-04**: Brief phase enforces outcome metric — refuses to proceed without both output metric and outcome metric defined
+- [ ] **LIFE-04**: Brief phase enforces outcome metric — refuses to proceed without outcome metric defined; output metric is requested but optional per D-06 (flagged in BRIEF.md when missing)
 - [ ] **LIFE-05**: Brief phase runs positioning check gate before proceeding to Produce
 - [ ] **LIFE-06**: `/ttm-produce <slug>` (Produce phase) generates content assets in fresh 200K-token contexts loaded with brief + positioning + brand + ICP + relevant playbook
 - [ ] **LIFE-07**: Produce phase supports wave-parallel execution for multi-asset campaigns — hero asset first, then derivatives
