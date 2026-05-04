@@ -19,6 +19,7 @@ const DIRS_TO_COPY = [
   'playbooks',
   'gates',
   'bin',
+  'agents',
 ];
 
 const FILES_TO_COPY = [
