@@ -45,6 +45,15 @@ Every marketing asset ships with a verifiable outcome metric and passes through 
 - [x] Email playbook with 7 discipline gates including DNS-based SPF/DKIM/DMARC deliverability checks — Validated in Phase 8: Core Playbooks
 - [x] LinkedIn playbook with 4 discipline gates (opener hooks, native content, professional tone, engagement path) — Validated in Phase 8: Core Playbooks
 - [x] Social playbook with 4 discipline gates and X/Twitter, Instagram, Facebook platform-specific subsections — Validated in Phase 8: Core Playbooks
+- [x] `/ttm-measure` with 3-pathway analytics input (MCP tool detection + CSV/MD paste + batch structured questions) and outcome-first attribution (time-decay default, last-touch/linear on request) — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] `/ttm-learn` with narrative+apply reference file edits, per-edit human approval gate, root-cause taxonomy logging to LEARNINGS.md — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] LEARNINGS.md compound learning with root-cause taxonomy (7 categories), pattern extraction (winning hooks/angles/formats), loaded into Brief phase — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] YouTube playbook with 6 discipline gates (thumbnail, hook-in-5s, description SEO, timestamps, end-screen, title+thumbnail fit) — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] Paid Ads playbook with 5 discipline gates (message match, creative variety, audience fit, bid alignment, landing page) — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] Affiliate playbook with 5 discipline gates (kit completeness, attribution logic, commission sanity, partner fit, disclosure) — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] PR/Media playbook with 5 discipline gates (media list, pitch angle, embargo, earned measurement, follow-up) — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] Events playbook with 5 discipline gates (pre/during/post phases, funnel, community, sponsorship ROI, content capture) — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
+- [x] Meta-gates (portfolio balance, calendar collision, theme consistency, learning plan) integrated into verify as Tier 2 advisory — Validated in Phase 9: Measurement, Learning, and Remaining Playbooks
 
 ### Active
 
@@ -132,4 +141,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-29 after Phase 8 completion*
+*Last updated: 2026-05-04 after Phase 9 completion*
