@@ -36,7 +36,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **LIFE-01**: `/ttm-new-campaign <slug>` creates `CAMPAIGNS/<slug>/` directory with initialized state, links to reference files
 - [ ] **LIFE-02**: `/ttm-research <slug>` (Discover phase) performs market/audience research for the campaign — SERP analysis, competitor content, AI-answer citations, ambient narrative
 - [ ] **LIFE-03**: `/ttm-brief <slug>` (Brief phase) generates campaign brief with mandatory fields: goal, outcome metric, target value, measurement window, ICP segment, positioning anchor, hook, proof points, channel mix, assets list, success/failure criteria
-- [ ] **LIFE-04**: Brief phase enforces outcome metric — refuses to proceed without outcome metric defined; output metric is requested but optional per D-06 (flagged in BRIEF.md when missing)
+- [x] **LIFE-04**: Brief phase enforces outcome metric — refuses to proceed without outcome metric defined; output metric is requested but optional per D-06 (flagged in BRIEF.md when missing)
 - [ ] **LIFE-05**: Brief phase runs positioning check gate before proceeding to Produce
 - [ ] **LIFE-06**: `/ttm-produce <slug>` (Produce phase) generates content assets in fresh 200K-token contexts loaded with brief + positioning + brand + ICP + relevant playbook
 - [ ] **LIFE-07**: Produce phase supports wave-parallel execution for multi-asset campaigns — hero asset first, then derivatives
@@ -64,7 +64,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **GATE-09**: ICP fit gate — verifies hook speaks to ICP segment using customer language, not generic/aspirational copy
 - [ ] **GATE-10**: Format correctness gate — validates platform-specific format (char limits, aspect ratios, safe zones, dark-mode)
 - [ ] **GATE-11**: Gate tiering — Tier 1 (blocking: positioning drift, claim accuracy, outcome alignment) vs Tier 2 (advisory: remaining gates)
-- [ ] **GATE-12**: Deviation reports with 3 options: Correct (rewrite), Accept+log (ship with documented exception), Escalate (trigger positioning shift)
+- [x] **GATE-12**: Deviation reports with 3 options: Correct (rewrite), Accept+log (ship with documented exception), Escalate (trigger positioning shift)
 
 ### Positioning Invariant
 
@@ -76,7 +76,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Playbooks
 
-- [ ] **PLAY-01**: Base playbook inheritance model — discipline playbooks extend base with additive gates and channel-specific checks
+- [x] **PLAY-01**: Base playbook inheritance model — discipline playbooks extend base with additive gates and channel-specific checks
 - [ ] **PLAY-02**: SEO playbook — title/H1 alignment, search-intent match, schema.org markup, internal-link density, Core Web Vitals budget, thin-content detection for pSEO
 - [ ] **PLAY-03**: AEO playbook — quote-worthy sentences (3+ per asset), FAQPage/HowTo schema, author/expert markup, cross-domain fact consistency
 - [ ] **PLAY-04**: YouTube playbook — thumbnail contrast/clutter heuristics, hook in first 5 seconds, description SEO, timestamps, end-screen CTA, title+thumbnail click-fit
@@ -92,9 +92,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **STAT-01**: `/ttm-state` displays current campaign states, decisions in flight, blockers, in-progress experiments
 - [ ] **STAT-02**: `/ttm-resume <slug>` resumes paused campaign at its last completed phase
-- [ ] **STAT-03**: `/ttm-archive <slug>` finalizes campaign, moves to archive, updates LEARNINGS.md
+- [x] **STAT-03**: `/ttm-archive <slug>` finalizes campaign, moves to archive, updates LEARNINGS.md
 - [ ] **STAT-04**: `/ttm-health` validates `.marketing/` directory integrity, reference file completeness, state consistency
-- [ ] **STAT-05**: Campaign state persists across sessions via `CAMPAIGNS/<slug>/` directory files
+- [x] **STAT-05**: Campaign state persists across sessions via `CAMPAIGNS/<slug>/` directory files
 
 ### Utility Commands
 
@@ -125,10 +125,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Learning System
 
-- [ ] **LRNG-01**: LEARNINGS.md maintains root-cause taxonomy (positioning drift, weak hook, wrong channel, bad timing, unverifiable claim, broken funnel, creative fatigue)
-- [ ] **LRNG-02**: Every campaign outcome delta → lesson extraction → LEARNINGS.md entry
-- [ ] **LRNG-03**: Pattern extraction — winning hooks, winning angles, winning formats across campaigns
-- [ ] **LRNG-04**: LEARNINGS.md loaded into Brief phase of future campaigns to prevent repeating mistakes
+- [x] **LRNG-01**: LEARNINGS.md maintains root-cause taxonomy (positioning drift, weak hook, wrong channel, bad timing, unverifiable claim, broken funnel, creative fatigue)
+- [x] **LRNG-02**: Every campaign outcome delta → lesson extraction → LEARNINGS.md entry
+- [x] **LRNG-03**: Pattern extraction — winning hooks, winning angles, winning formats across campaigns
+- [x] **LRNG-04**: LEARNINGS.md loaded into Brief phase of future campaigns to prevent repeating mistakes
 
 ## v2 Requirements
 
@@ -197,7 +197,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIFE-01 | Phase 3 | Pending |
 | LIFE-02 | Phase 3 | Pending |
 | LIFE-03 | Phase 3 | Pending |
-| LIFE-04 | Phase 3 | Pending |
+| LIFE-04 | Phase 3 | Complete |
 | LIFE-05 | Phase 3 | Pending |
 | LIFE-06 | Phase 4 | Pending |
 | LIFE-07 | Phase 4 | Pending |
@@ -222,13 +222,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GATE-09 | Phase 4 | Pending |
 | GATE-10 | Phase 4 | Pending |
 | GATE-11 | Phase 4 | Pending |
-| GATE-12 | Phase 4 | Pending |
+| GATE-12 | Phase 4 | Complete |
 | POSN-01 | Phase 6 | Pending |
 | POSN-02 | Phase 6 | Pending |
 | POSN-03 | Phase 6 | Pending |
 | POSN-04 | Phase 6 | Pending |
 | POSN-05 | Phase 6 | Pending |
-| PLAY-01 | Phase 8 | Pending |
+| PLAY-01 | Phase 8 | Complete |
 | PLAY-02 | Phase 8 | Pending |
 | PLAY-03 | Phase 8 | Pending |
 | PLAY-04 | Phase 9 | Pending |
@@ -241,9 +241,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PLAY-11 | Phase 9 | Pending |
 | STAT-01 | Phase 7 | Pending |
 | STAT-02 | Phase 7 | Pending |
-| STAT-03 | Phase 7 | Pending |
+| STAT-03 | Phase 7 | Complete |
 | STAT-04 | Phase 7 | Pending |
-| STAT-05 | Phase 7 | Pending |
+| STAT-05 | Phase 7 | Complete |
 | UTIL-01 | Phase 10 | Complete |
 | UTIL-02 | Phase 10 | Complete |
 | UTIL-03 | Phase 10 | Complete |
@@ -262,10 +262,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DIST-02 | Phase 10 | Complete |
 | DIST-03 | Phase 10 | Complete |
 | DIST-04 | Phase 10 | Complete |
-| LRNG-01 | Phase 9 | Pending |
-| LRNG-02 | Phase 9 | Pending |
-| LRNG-03 | Phase 9 | Pending |
-| LRNG-04 | Phase 9 | Pending |
+| LRNG-01 | Phase 9 | Complete |
+| LRNG-02 | Phase 9 | Complete |
+| LRNG-03 | Phase 9 | Complete |
+| LRNG-04 | Phase 9 | Complete |
 
 **Coverage:**
 - v1 requirements: 80 total
