@@ -137,19 +137,58 @@ Store the parsed list as `ASSETS_LIST` with the total count as `TOTAL_ASSETS`.
 
 For each asset in `ASSETS_LIST`:
 
-1. Map the asset type to a playbook file path: `${CLAUDE_PLUGIN_ROOT}/playbooks/${TYPE}.md`
-   (where TYPE is the asset type slug, e.g., `blog-post`, `email`, `linkedin-post`)
+1. Map the asset type to a discipline playbook using the PLAYBOOK_MAP lookup table:
 
-2. Check if the playbook file exists:
+   **PLAYBOOK_MAP** (asset type slug -> playbook filename):
+
+   | Asset Type | Playbook File | Discipline |
+   |------------|--------------|------------|
+   | blog-post | seo.md | SEO |
+   | landing-page | seo.md | SEO |
+   | pillar-page | seo.md | SEO |
+   | programmatic-seo | seo.md | SEO |
+   | faq-page | aeo.md | AEO |
+   | knowledge-base | aeo.md | AEO |
+   | how-to-guide | aeo.md | AEO |
+   | email | email.md | Email |
+   | email-sequence | email.md | Email |
+   | newsletter | email.md | Email |
+   | linkedin-post | linkedin.md | LinkedIn |
+   | linkedin-article | linkedin.md | LinkedIn |
+   | linkedin-carousel | linkedin.md | LinkedIn |
+   | social-post | social.md | Social |
+   | twitter-thread | social.md | Social |
+   | instagram-carousel | social.md | Social |
+   | youtube-video | youtube.md | YouTube |
+   | youtube-short | youtube.md | YouTube |
+   | paid-ad | paid-ads.md | Paid Ads |
+   | google-ad | paid-ads.md | Paid Ads |
+   | meta-ad | paid-ads.md | Paid Ads |
+   | affiliate-kit | affiliate.md | Affiliate |
+   | affiliate-creative | affiliate.md | Affiliate |
+   | press-release | pr-media.md | PR/Media |
+   | media-pitch | pr-media.md | PR/Media |
+   | event-landing | events.md | Events |
+   | webinar-funnel | events.md | Events |
+   | event-recap | events.md | Events |
+
+   For the given asset type:
+   - Look up the asset type in PLAYBOOK_MAP
+   - If found: set `PLAYBOOK_FILE` to the mapped filename
+   - If NOT found: set `PLAYBOOK_FILE` to the asset type slug with `.md` extension (fallback: `${TYPE}.md`)
+
+2. Resolve the playbook file path: `${CLAUDE_PLUGIN_ROOT}/playbooks/${PLAYBOOK_FILE}`
+
+3. Check if the playbook file exists:
    ```bash
-   test -f "${CLAUDE_PLUGIN_ROOT}/playbooks/${TYPE}.md"
+   test -f "${CLAUDE_PLUGIN_ROOT}/playbooks/${PLAYBOOK_FILE}"
    ```
 
-3. If playbook exists: Record the full path as the asset's `playbook_path`.
+4. If playbook exists: Record the full path as the asset's `playbook_path`.
 
-4. If playbook does NOT exist: Log a warning:
+5. If playbook does NOT exist: Log a warning:
    ```
-   takeToMarket > WARNING: No playbook found for "${TYPE}" -- producing with base context only
+   takeToMarket > WARNING: No playbook found for "${TYPE}" (tried ${PLAYBOOK_FILE}) -- producing with base context only
    ```
    Set the asset's `playbook_path` to `"none"`.
 
