@@ -211,7 +211,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
 | 8. Core Playbooks | 3/3 | Complete | 2026-04-29 |
 | 9. Measurement, Learning, and Remaining Playbooks | 6/6 | Complete | 2026-05-02 |
 | 10. Distribution and Polish | 5/5 | Complete | 2026-05-04 |
-| 11. Gap Closure | 0/3 | Planning complete | - |
+| 11. Gap Closure | 3/3 | Complete   | 2026-05-04 |
 
 ### Phase 11: Gap Closure
 **Goal**: Close all critical gaps and integration breaks identified in v1.0 milestone audit — fix 3 blockers (B-01, B-02, B-03), 1 partial requirement (GATE-12), 1 design decision conflict (LIFE-04), and 1 mapping mismatch (W-04)
@@ -224,8 +224,8 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
   4. Deviation accept+log records correctly — verify.md and gate-evaluation.md use --slug named arg (GATE-12 fix)
   5. Playbook type-to-file mapping resolves correctly so discipline gates fire for all asset types (W-04 fix)
   6. LIFE-04 conflict resolved — either REQUIREMENTS.md updated to match D-06 or brief enforces both metrics
-**Plans:** 3 plans
+**Plans:** 3/3 plans complete
 Plans:
-- [ ] 11-01-PLAN.md -- B-01 + B-03: learn-to-archive lifecycle fix and VERIFY-REPORT filename correction
-- [ ] 11-02-PLAN.md -- B-02 + W-01: install.js agents/ directory and health.cjs gate value allowlist
-- [ ] 11-03-PLAN.md -- W-04 + LIFE-04 + GATE-12: playbook mapping, requirement text update, deviation arg verification
+- [x] 11-01-PLAN.md -- B-01 + B-03: learn-to-archive lifecycle fix and VERIFY-REPORT filename correction
+- [x] 11-02-PLAN.md -- B-02 + W-01: install.js agents/ directory and health.cjs gate value allowlist
+- [x] 11-03-PLAN.md -- W-04 + LIFE-04 + GATE-12: playbook mapping, requirement text update, deviation arg verification
