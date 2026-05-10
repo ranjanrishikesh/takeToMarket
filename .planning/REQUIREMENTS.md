@@ -55,4 +55,29 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| (Filled by roadmapper) | | |
+| TEST-01 | Phase 13 | Pending |
+| TEST-02 | Phase 13 | Pending |
+| TEST-03 | Phase 13 | Pending |
+| TEST-04 | Phase 13 | Pending |
+| TEST-05 | Phase 13 | Pending |
+| TEST-06 | Phase 13 | Pending |
+| TEST-07 | Phase 13 | Pending |
+| TEST-08 | Phase 12 | Pending |
+| TEST-09 | Phase 14 | Pending |
+| TEST-10 | Phase 14 | Pending |
+| TEST-11 | Phase 12 | Pending |
+| PKG-01 | Phase 15 | Pending |
+| PKG-02 | Phase 15 | Pending |
+| PKG-03 | Phase 15 | Pending |
+| PKG-04 | Phase 15 | Pending |
+| PKG-05 | Phase 15 | Pending |
+| PKG-06 | Phase 15 | Pending |
+| PKG-07 | Phase 15 | Pending |
+| CLI-01 | Phase 15 | Pending |
+| CLI-02 | Phase 15 | Pending |
+| PUB-01 | Phase 15 | Pending |
+| PUB-02 | Phase 16 | Pending |
+| PUB-03 | Phase 16 | Pending |
+| PUB-04 | Phase 16 | Pending |
+| PUB-05 | Phase 16 | Pending |
+| PUB-06 | Phase 16 | Pending |
