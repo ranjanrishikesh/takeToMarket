@@ -115,9 +115,12 @@ Delivered: Full 9-phase campaign lifecycle (init→learn), 27 `/ttm-*` commands,
 - Publish to npm registry
 - Validate post-publish install
 
+**Progress:**
+- Phase 12 complete — Test infrastructure established (require.main guard on install.js, node:test runner, test helpers, 9 passing tests)
+
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-05-11 after v1.1 milestone start*
+*Last updated: 2026-05-11 after Phase 12 completion*
