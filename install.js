@@ -283,4 +283,18 @@ function printResults(results) {
   }
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  main,
+  detectRuntime,
+  validateInstall,
+  copyDirSync,
+  dirExists,
+  fileExists,
+  printResults,
+  DIRS_TO_COPY,
+  FILES_TO_COPY,
+};
