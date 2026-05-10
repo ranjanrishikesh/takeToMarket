@@ -66,7 +66,14 @@ Plans:
   3. state.cjs tests verify state read and state update operations
   4. campaign.cjs tests verify campaign init, state, update, and list operations
   5. health.cjs, commit.cjs, and core.cjs each have passing test files
-**Plans**: TBD
+**Plans:** 4 plans
+
+Plans:
+**Wave 1** *(all 4 plans run in parallel -- no file overlap)*
+- [ ] 13-01-PLAN.md — Unit tests for core.cjs (7 exports) and slug.cjs (2 exports)
+- [ ] 13-02-PLAN.md — Unit tests for state.cjs (2 exports) and commit.cjs (1 export)
+- [ ] 13-03-PLAN.md — Unit tests for health.cjs (2 exports: cmdHealth basic+full, cmdInit)
+- [ ] 13-04-PLAN.md — Extend helpers.cjs with createMockCampaign; unit tests for campaign.cjs (6 exports)
 
 ### Phase 14: E2E & Integration Tests
 **Goal**: The full install flow is validated end-to-end in isolated environments proving the user experience works
@@ -122,7 +129,7 @@ Phases execute in numeric order: 12 -> 13 -> 14 -> 15 -> 16
 | 10. Distribution and Polish | v1.0 | 5/5 | Complete | 2026-05-04 |
 | 11. Gap Closure | v1.0 | 3/3 | Complete | 2026-05-04 |
 | 12. Test Infrastructure & Installer Refactor | v1.1 | 2/2 | Complete    | 2026-05-10 |
-| 13. Unit Tests for bin/lib Modules | v1.1 | 0/? | Not started | - |
+| 13. Unit Tests for bin/lib Modules | v1.1 | 0/4 | Planning | - |
 | 14. E2E & Integration Tests | v1.1 | 0/? | Not started | - |
 | 15. Package Metadata & CLI Polish | v1.1 | 0/? | Not started | - |
 | 16. Canary Publish & Final Release | v1.1 | 0/? | Not started | - |
