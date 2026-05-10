@@ -50,7 +50,10 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 **Plans:** 2 plans
 
 Plans:
+**Wave 1**
 - [ ] 12-01-PLAN.md — Refactor install.js with require.main guard + module.exports; add scripts.test to package.json
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 12-02-PLAN.md — Create test/helpers.cjs shared utilities and test/install.test.cjs smoke test
 
 ### Phase 13: Unit Tests for bin/lib Modules
