@@ -6,6 +6,9 @@
   "bin": {
     "taketomarket": "./install.js"
   },
+  "scripts": {
+    "test": "node --test"
+  },
   "files": [
     ".claude-plugin/",
     "skills/",
