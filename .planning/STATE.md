@@ -2,9 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Publish Prep & Gap Closure
-status: ready_to_plan
-last_updated: "2026-05-11"
-last_activity: 2026-05-11
+status: planning
+stopped_at: Phase 12 context gathered
+last_updated: "2026-05-10T19:41:02.530Z"
+last_activity: 2026-05-11 — Roadmap created for v1.1 milestone
 progress:
   total_phases: 5
   completed_phases: 0
@@ -90,6 +91,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-11
-Stopped at: Roadmap created for v1.1 milestone — ready to plan Phase 12
-Resume file: None
+Last session: 2026-05-10T19:41:02.523Z
+Stopped at: Phase 12 context gathered
+Resume file: .planning/phases/12-test-infrastructure-installer-refactor/12-CONTEXT.md
