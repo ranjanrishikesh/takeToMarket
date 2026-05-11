@@ -16,22 +16,22 @@
 
 ## Package Metadata & Fixes
 
-- [ ] **PKG-01**: package.json includes `repository` field pointing to github.com/rishikeshranjan/takeToMarket
-- [ ] **PKG-02**: package.json includes `homepage` field
-- [ ] **PKG-03**: package.json includes `bugs` field with GitHub issues URL
-- [ ] **PKG-04**: package.json includes `author` field with name
-- [ ] **PKG-05**: package.json `files[]` includes `agents/` directory (BUG FIX — install.js copies it but tarball excludes it)
-- [ ] **PKG-06**: package.json keywords expanded for npm discoverability
-- [ ] **PKG-07**: LICENSE file exists at repo root and matches MIT declaration
+- [x] **PKG-01**: package.json includes `repository` field pointing to github.com/rishikeshranjan/takeToMarket
+- [x] **PKG-02**: package.json includes `homepage` field
+- [x] **PKG-03**: package.json includes `bugs` field with GitHub issues URL
+- [x] **PKG-04**: package.json includes `author` field with name
+- [x] **PKG-05**: package.json `files[]` includes `agents/` directory (BUG FIX — install.js copies it but tarball excludes it)
+- [x] **PKG-06**: package.json keywords expanded for npm discoverability
+- [x] **PKG-07**: LICENSE file exists at repo root and matches MIT declaration
 
 ## CLI Polish
 
-- [ ] **CLI-01**: `npx taketomarket --version` prints current version and exits
-- [ ] **CLI-02**: Install output shows version banner at start
+- [x] **CLI-01**: `npx taketomarket --version` prints current version and exits
+- [x] **CLI-02**: Install output shows version banner at start
 
 ## Publish & Validation
 
-- [ ] **PUB-01**: `npm pack --dry-run` shows all expected files without .planning/ or .git/ leakage
+- [x] **PUB-01**: `npm pack --dry-run` shows all expected files without .planning/ or .git/ leakage
 - [ ] **PUB-02**: Package published to npm as `taketomarket@0.1.0` (canary)
 - [ ] **PUB-03**: `npx taketomarket --dry-run` works from clean environment after publish
 - [ ] **PUB-04**: `pnpm dlx taketomarket --dry-run` works from clean environment after publish
@@ -66,16 +66,16 @@
 | TEST-09 | Phase 14 | Complete |
 | TEST-10 | Phase 14 | Complete |
 | TEST-11 | Phase 12 | Complete |
-| PKG-01 | Phase 15 | Pending |
-| PKG-02 | Phase 15 | Pending |
-| PKG-03 | Phase 15 | Pending |
-| PKG-04 | Phase 15 | Pending |
-| PKG-05 | Phase 15 | Pending |
-| PKG-06 | Phase 15 | Pending |
-| PKG-07 | Phase 15 | Pending |
-| CLI-01 | Phase 15 | Pending |
-| CLI-02 | Phase 15 | Pending |
-| PUB-01 | Phase 15 | Pending |
+| PKG-01 | Phase 15 | Complete |
+| PKG-02 | Phase 15 | Complete |
+| PKG-03 | Phase 15 | Complete |
+| PKG-04 | Phase 15 | Complete |
+| PKG-05 | Phase 15 | Complete |
+| PKG-06 | Phase 15 | Complete |
+| PKG-07 | Phase 15 | Complete |
+| CLI-01 | Phase 15 | Complete |
+| CLI-02 | Phase 15 | Complete |
+| PUB-01 | Phase 15 | Complete |
 | PUB-02 | Phase 16 | Pending |
 | PUB-03 | Phase 16 | Pending |
 | PUB-04 | Phase 16 | Pending |
