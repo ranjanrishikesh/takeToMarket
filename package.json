@@ -13,7 +13,7 @@
   },
   "author": "Rishikesh Ranjan <59333266+ranjanrishikesh@users.noreply.github.com>",
   "bin": {
-    "taketomarket": "./install.js"
+    "taketomarket": "install.js"
   },
   "scripts": {
     "test": "node --test"
