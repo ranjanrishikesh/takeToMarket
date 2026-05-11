@@ -421,17 +421,15 @@ function createMockCampaign(baseDir, slug, phase = 'created') {
 - [ ] `test/commit.test.cjs` -- covers TEST-06
 - [ ] Possible: extend `test/helpers.cjs` with createMockCampaign utility
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **commit.cjs: Real git repo vs mock execFileSync?**
+1. **commit.cjs: Real git repo vs mock execFileSync?** RESOLVED: Use real git repo in temp dir for consistency with D-06 philosophy. Chosen in 13-02-PLAN.md.
    - What we know: D-06 says "no fs mocking" but doesn't explicitly cover subprocess mocking. Real git repos in temp dirs are more realistic but slower.
-   - What's unclear: Whether the team prefers a real git repo in temp dir or mocking child_process.execFileSync.
-   - Recommendation: Use real git repo in temp dir for consistency with D-06 philosophy. It's only ~50ms overhead per test.
+   - Resolution: Real git repo in temp dir. ~50ms overhead per test is acceptable.
 
-2. **campaign.cjs: Should cmdCampaignArchive and cmdRepurposeManifest get tests?**
+2. **campaign.cjs: Should cmdCampaignArchive and cmdRepurposeManifest get tests?** RESOLVED: Yes, basic happy-path tests included in 13-04-PLAN.md.
    - What we know: TEST-04 specifies "campaign init, state, update, list." Archive and repurpose are additional exports.
-   - What's unclear: Whether D-03 "key edge cases" extends to these functions.
-   - Recommendation: Include basic happy-path tests for archive and repurposeManifest since they're part of the public API and D-03 says focus on "behaviors that would break npm publish quality." Claude's discretion per CONTEXT.md.
+   - Resolution: Include basic happy-path tests since they're part of the public API. Claude's discretion per CONTEXT.md D-03.
 
 ## Environment Availability
 
