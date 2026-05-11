@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "description": "Marketing operating system for Claude Code. Spec-driven campaigns with positioning-as-invariant enforcement, quality gate walls, and compound learnings.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rishikeshranjan/takeToMarket.git"
+  },
+  "homepage": "https://github.com/rishikeshranjan/takeToMarket#readme",
+  "bugs": {
+    "url": "https://github.com/rishikeshranjan/takeToMarket/issues"
+  },
+  "author": "Rishikesh Ranjan <59333266+ranjanrishikesh@users.noreply.github.com>",
   "bin": {
     "taketomarket": "./install.js"
   },
@@ -18,10 +27,26 @@
     "playbooks/",
     "gates/",
     "bin/",
+    "agents/",
     "settings.json",
-    "install.js"
+    "install.js",
+    "LICENSE",
+    "README.md"
   ],
-  "keywords": ["claude-code", "marketing", "campaigns", "agent-skills", "codex"],
+  "keywords": [
+    "claude-code",
+    "codex",
+    "marketing",
+    "campaigns",
+    "agent-skills",
+    "gtm",
+    "growth",
+    "positioning",
+    "content-marketing",
+    "marketing-automation",
+    "ai-agents",
+    "spec-driven"
+  ],
   "engines": {
     "node": ">=18"
   }

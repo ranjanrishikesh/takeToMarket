@@ -345,3 +345,72 @@ describe('install-e2e: unknown --runtime arg defaults to claude with warning', (
     );
   });
 });
+
+// ── Scenario 7: --version flag short-circuit (D-14, CLI-01) ──────────────────
+
+describe('install-e2e: --version flag prints version and exits without writing', () => {
+  let tmp;
+
+  before(() => {
+    tmp = createTempDir('ttm-e2e-version-');
+  });
+
+  after(() => {
+    tmp.cleanup();
+  });
+
+  it('prints exactly the package version + newline, exits 0, and creates no target directory', () => {
+    const expectedVersion = require('../package.json').version;
+    const result = runInstall(['--version'], envWithHome(tmp.dir));
+
+    assert.strictEqual(result.status, 0, `--version should exit 0 (stderr: ${result.stderr})`);
+    assert.strictEqual(
+      result.stdout,
+      `${expectedVersion}\n`,
+      `stdout should be exactly "${expectedVersion}\\n", got ${JSON.stringify(result.stdout)}`
+    );
+
+    // Short-circuit proof: no target dir created on either runtime.
+    const claudeTarget = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
+    const codexTarget = path.join(tmp.dir, '.codex', 'plugins', 'taketomarket');
+    assert.strictEqual(install.dirExists(claudeTarget), false, '.claude target NOT created');
+    assert.strictEqual(install.dirExists(codexTarget), false, '.codex target NOT created');
+  });
+
+  it('-v short form prints the same version + newline and exits 0', () => {
+    const expectedVersion = require('../package.json').version;
+    const result = runInstall(['-v'], envWithHome(tmp.dir));
+
+    assert.strictEqual(result.status, 0, `-v should exit 0 (stderr: ${result.stderr})`);
+    assert.strictEqual(
+      result.stdout,
+      `${expectedVersion}\n`,
+      `-v stdout should be exactly "${expectedVersion}\\n", got ${JSON.stringify(result.stdout)}`
+    );
+  });
+});
+
+// ── Scenario 8: install banner contains version (D-14, CLI-02) ───────────────
+
+describe('install-e2e: install banner contains version string', () => {
+  let tmp;
+
+  before(() => {
+    tmp = createTempDir('ttm-e2e-banner-');
+  });
+
+  after(() => {
+    tmp.cleanup();
+  });
+
+  it('stdout contains "takeToMarket installer vX.Y.Z" matching package.json version', () => {
+    const expectedVersion = require('../package.json').version;
+    const result = runInstall(['--runtime', 'claude'], envWithHome(tmp.dir));
+
+    assert.strictEqual(result.status, 0, `install should exit 0 (stderr: ${result.stderr})`);
+    assert.ok(
+      result.stdout.includes(`takeToMarket installer v${expectedVersion}`),
+      `stdout should contain "takeToMarket installer v${expectedVersion}", got: ${result.stdout.slice(0, 200)}`
+    );
+  });
+});
