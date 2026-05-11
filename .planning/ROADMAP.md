@@ -114,7 +114,10 @@ Plans:
   3. `pnpm dlx taketomarket --dry-run` works from a clean environment after canary publish
   4. Version is bumped to 1.0.0 and republished after canary validation
   5. npm 2FA is enabled on publisher account
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 16-01-PLAN.md — Canary publish 0.1.0, smoke via npx + pnpm dlx, bump to 1.0.0, final publish, git tag v1.0.0
 
 ## Progress
 
@@ -139,4 +142,4 @@ Phases execute in numeric order: 12 -> 13 -> 14 -> 15 -> 16
 | 13. Unit Tests for bin/lib Modules | v1.1 | 4/4 | Complete    | 2026-05-11 |
 | 14. E2E & Integration Tests | v1.1 | 1/1 | Complete    | 2026-05-11 |
 | 15. Package Metadata & CLI Polish | v1.1 | 1/1 | Complete    | 2026-05-11 |
-| 16. Canary Publish & Final Release | v1.1 | 0/? | Not started | - |
+| 16. Canary Publish & Final Release | v1.1 | 0/1 | Planned     | - |
