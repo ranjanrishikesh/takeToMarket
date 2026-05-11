@@ -52,8 +52,49 @@ function createMockHome(baseDir) {
   return baseDir;
 }
 
+/**
+ * Create a mock campaign directory with STATE.md inside .marketing/CAMPAIGNS/.
+ * Assumes .marketing/ already exists (call createMockMarketing first or create manually).
+ * @param {string} baseDir - Project root (with .marketing/ already created)
+ * @param {string} slug - Campaign slug
+ * @param {object} [opts] - Optional overrides
+ * @param {string} [opts.phase='created'] - Campaign phase
+ * @param {string} [opts.name] - Campaign name (defaults to 'Test Campaign <slug>')
+ * @param {object} [opts.extraFields] - Additional frontmatter fields to include
+ * @returns {string} Path to the created campaign directory
+ */
+function createMockCampaign(baseDir, slug, opts = {}) {
+  const phase = opts.phase || 'created';
+  const name = opts.name || `Test Campaign ${slug}`;
+  const campaignDir = path.join(baseDir, '.marketing', 'CAMPAIGNS', slug);
+  const assetsDir = path.join(campaignDir, 'ASSETS');
+  fs.mkdirSync(assetsDir, { recursive: true });
+  const timestamp = new Date().toISOString();
+  const frontmatterLines = [
+    '---',
+    `campaign: ${slug}`,
+    `name: ${name}`,
+    `created: ${timestamp}`,
+    `phase: ${phase}`,
+    `last_updated: ${timestamp}`,
+    `phase.created: ${timestamp}`,
+  ];
+  if (opts.extraFields) {
+    for (const [key, value] of Object.entries(opts.extraFields)) {
+      frontmatterLines.push(`${key}: ${value}`);
+    }
+  }
+  frontmatterLines.push('---');
+  frontmatterLines.push('');
+  frontmatterLines.push(`# Campaign: ${name}`);
+  const stateContent = frontmatterLines.join('\n');
+  fs.writeFileSync(path.join(campaignDir, 'STATE.md'), stateContent);
+  return campaignDir;
+}
+
 module.exports = {
   createTempDir,
   createMockMarketing,
   createMockHome,
+  createMockCampaign,
 };
