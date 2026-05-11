@@ -94,8 +94,8 @@ describe('package.json metadata (PKG-01..07 + D-04)', () => {
     );
   });
 
-  it('version remains 0.1.0 (Phase 16 owns version bump)', () => {
-    assert.strictEqual(pkg.version, '0.1.0');
+  it('version is a valid semver (Phase 16 bumped 0.1.0 → 1.0.0)', () => {
+    assert.match(pkg.version, /^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/);
   });
 
   it('zero runtime dependencies (CLAUDE.md constraint preserved)', () => {
