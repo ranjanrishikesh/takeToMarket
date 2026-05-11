@@ -32,7 +32,7 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 
 - [x] **Phase 12: Test Infrastructure & Installer Refactor** - Make install.js testable and establish test foundation (completed 2026-05-10)
 - [x] **Phase 13: Unit Tests for bin/lib Modules** - Comprehensive unit test coverage for all CJS modules (completed 2026-05-11)
-- [ ] **Phase 14: E2E & Integration Tests** - Full install flow validation in isolated environments
+- [x] **Phase 14: E2E & Integration Tests** - Full install flow validation in isolated environments (completed 2026-05-11)
 - [ ] **Phase 15: Package Metadata & CLI Polish** - Complete npm page metadata and CLI UX improvements
 - [ ] **Phase 16: Canary Publish & Final Release** - Safe two-step publish to npm registry
 
@@ -83,11 +83,11 @@ Plans:
   1. E2E test installs taketomarket into an isolated temp directory and verifies all expected files exist
   2. E2E test validates --dry-run produces correct validation output without writing files
   3. Tests use child process execution with overridden HOME to prevent pollution of real environment
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
 **Wave 1**
-- [ ] 14-01-PLAN.md — Create test/install-e2e.test.cjs covering all 6 E2E scenarios (claude/codex happy paths, auto-detect, --dry-run clean + installed, unknown --runtime warning) via child_process.execFileSync against isolated HOME
+- [x] 14-01-PLAN.md — Create test/install-e2e.test.cjs covering all 6 E2E scenarios (claude/codex happy paths, auto-detect, --dry-run clean + installed, unknown --runtime warning) via child_process.execFileSync against isolated HOME
 
 ### Phase 15: Package Metadata & CLI Polish
 **Goal**: The npm package page is complete and professional, and CLI provides version information
@@ -134,6 +134,6 @@ Phases execute in numeric order: 12 -> 13 -> 14 -> 15 -> 16
 | 11. Gap Closure | v1.0 | 3/3 | Complete | 2026-05-04 |
 | 12. Test Infrastructure & Installer Refactor | v1.1 | 2/2 | Complete    | 2026-05-10 |
 | 13. Unit Tests for bin/lib Modules | v1.1 | 4/4 | Complete    | 2026-05-11 |
-| 14. E2E & Integration Tests | v1.1 | 0/1 | Planned | - |
+| 14. E2E & Integration Tests | v1.1 | 1/1 | Complete   | 2026-05-11 |
 | 15. Package Metadata & CLI Polish | v1.1 | 0/? | Not started | - |
 | 16. Canary Publish & Final Release | v1.1 | 0/? | Not started | - |
