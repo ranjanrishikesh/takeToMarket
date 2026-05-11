@@ -1,15 +1,15 @@
 {
   "name": "taketomarket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Marketing operating system for Claude Code. Spec-driven campaigns with positioning-as-invariant enforcement, quality gate walls, and compound learnings.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rishikeshranjan/takeToMarket.git"
+    "url": "git+https://github.com/ranjanrishikesh/takeToMarket.git"
   },
-  "homepage": "https://github.com/rishikeshranjan/takeToMarket#readme",
+  "homepage": "https://github.com/ranjanrishikesh/takeToMarket#readme",
   "bugs": {
-    "url": "https://github.com/rishikeshranjan/takeToMarket/issues"
+    "url": "https://github.com/ranjanrishikesh/takeToMarket/issues"
   },
   "author": "Rishikesh Ranjan <59333266+ranjanrishikesh@users.noreply.github.com>",
   "bin": {
