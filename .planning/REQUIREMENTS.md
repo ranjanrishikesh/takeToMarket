@@ -2,13 +2,13 @@
 
 ## Testing Infrastructure
 
-- [ ] **TEST-01**: User can run `node --test` and all bin/lib modules pass unit tests
-- [ ] **TEST-02**: Unit tests cover slug.cjs (slug generation, timestamp formatting)
-- [ ] **TEST-03**: Unit tests cover state.cjs (state read, state update)
-- [ ] **TEST-04**: Unit tests cover campaign.cjs (campaign init, state, update, list)
-- [ ] **TEST-05**: Unit tests cover health.cjs (init check, directory validation)
-- [ ] **TEST-06**: Unit tests cover commit.cjs (commit message formatting)
-- [ ] **TEST-07**: Unit tests cover core.cjs (error handling, arg parsing)
+- [x] **TEST-01**: User can run `node --test` and all bin/lib modules pass unit tests
+- [x] **TEST-02**: Unit tests cover slug.cjs (slug generation, timestamp formatting)
+- [x] **TEST-03**: Unit tests cover state.cjs (state read, state update)
+- [x] **TEST-04**: Unit tests cover campaign.cjs (campaign init, state, update, list)
+- [x] **TEST-05**: Unit tests cover health.cjs (init check, directory validation)
+- [x] **TEST-06**: Unit tests cover commit.cjs (commit message formatting)
+- [x] **TEST-07**: Unit tests cover core.cjs (error handling, arg parsing)
 - [x] **TEST-08**: install.js has require.main guard for testability
 - [ ] **TEST-09**: E2E test validates full install flow in isolated temp directory
 - [ ] **TEST-10**: E2E test validates --dry-run produces correct validation output
@@ -55,13 +55,13 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| TEST-01 | Phase 13 | Pending |
-| TEST-02 | Phase 13 | Pending |
-| TEST-03 | Phase 13 | Pending |
-| TEST-04 | Phase 13 | Pending |
-| TEST-05 | Phase 13 | Pending |
-| TEST-06 | Phase 13 | Pending |
-| TEST-07 | Phase 13 | Pending |
+| TEST-01 | Phase 13 | Complete |
+| TEST-02 | Phase 13 | Complete |
+| TEST-03 | Phase 13 | Complete |
+| TEST-04 | Phase 13 | Complete |
+| TEST-05 | Phase 13 | Complete |
+| TEST-06 | Phase 13 | Complete |
+| TEST-07 | Phase 13 | Complete |
 | TEST-08 | Phase 12 | Complete |
 | TEST-09 | Phase 14 | Pending |
 | TEST-10 | Phase 14 | Pending |
