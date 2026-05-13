@@ -367,6 +367,24 @@ function readSkillDescriptions(packageRoot) {
 }
 
 /**
+ * Print slash commands available after install. Reads from npm package source.
+ * @param {string} [packageRoot] - Root of npm package (defaults to PACKAGE_ROOT = __dirname)
+ */
+function printInstallSummary(packageRoot = PACKAGE_ROOT) {
+  const skills = readSkillDescriptions(packageRoot);
+  console.log('');
+  console.log(`Installation complete! ${skills.length} skills installed.`);
+  console.log('');
+  console.log('Available commands:');
+  for (const { name, description } of skills) {
+    const cmd = `/taketomarket:${name}`.padEnd(42);
+    console.log(`  ${cmd} ${description}`);
+  }
+  console.log('');
+  console.log('Quick start: open any project in Claude Code and run /taketomarket:ttm-init');
+}
+
+/**
  * Detect which known runtimes are installed by checking their parent directories.
  * @param {string} [homeDir]
  * @returns {string[]} Names of detected runtimes (subset of RUNTIME_MENU)
@@ -679,6 +697,7 @@ module.exports = {
   copyDirSync,
   registerPlugin,
   readSkillDescriptions,
+  printInstallSummary,
   getInstalledRuntimes,
   dirExists,
   fileExists,

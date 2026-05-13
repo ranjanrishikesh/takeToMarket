@@ -303,3 +303,32 @@ describe('checkStatus', () => {
     assert.strictEqual(status.installed, false);
   });
 });
+
+describe('printInstallSummary', () => {
+  let tmp;
+  let output;
+  const origLog = console.log;
+
+  before(() => {
+    tmp = createTempDir();
+    for (const [name, desc] of [['ttm-init', 'Set up workspace.'], ['ttm-produce', 'Run production.']]) {
+      const dir = path.join(tmp.dir, 'skills', name);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, 'SKILL.md'),
+        `---\nname: ${name}\ndescription: >\n  ${desc}\n---\n`);
+    }
+  });
+
+  after(() => { tmp.cleanup(); console.log = origLog; });
+
+  it('prints slash command list from packageRoot/skills/', () => {
+    const lines = [];
+    console.log = (...args) => lines.push(args.join(' '));
+    install.printInstallSummary(tmp.dir);
+    console.log = origLog;
+    const joined = lines.join('\n');
+    assert.ok(joined.includes('/taketomarket:ttm-init'), 'includes ttm-init');
+    assert.ok(joined.includes('/taketomarket:ttm-produce'), 'includes ttm-produce');
+    assert.ok(joined.includes('Set up workspace'), 'includes description');
+  });
+});
