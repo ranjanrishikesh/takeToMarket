@@ -234,6 +234,58 @@ function registerPlugin(installPath, version, homeDir = os.homedir()) {
   console.log('  Registered in installed_plugins.json');
 }
 
+// ── Skill Introspection ───────────────────────────────────────────────────────
+
+/**
+ * Read skill names and descriptions from skills/ subdirectory of packageRoot.
+ * Parses the first content line of the 'description:' YAML frontmatter field.
+ * @param {string} packageRoot - Root of the npm package (use PACKAGE_ROOT in production)
+ * @returns {Array<{name: string, description: string}>} Sorted by name
+ */
+function readSkillDescriptions(packageRoot) {
+  const skillsDir = path.join(packageRoot, 'skills');
+  if (!dirExists(skillsDir)) return [];
+
+  const results = [];
+  try {
+    const entries = fs.readdirSync(skillsDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const skillFile = path.join(skillsDir, entry.name, 'SKILL.md');
+      if (!fileExists(skillFile)) continue;
+
+      const content = fs.readFileSync(skillFile, 'utf8');
+      const descMatch = content.match(/^description:\s*>\s*\n((?:[ \t]+.+\n?)+)/m);
+      let description = '';
+      if (descMatch) {
+        description = descMatch[1].split('\n')[0].trim().replace(/\.$/, '') + '.';
+      } else {
+        const inlineMatch = content.match(/^description:\s*(.+)$/m);
+        if (inlineMatch) description = inlineMatch[1].trim();
+      }
+
+      results.push({ name: entry.name, description });
+    }
+  } catch {
+    // ignore — skills dir may be empty or unreadable
+  }
+
+  return results.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * Detect which known runtimes are installed by checking their parent directories.
+ * @param {string} [homeDir]
+ * @returns {string[]} Names of detected runtimes (subset of RUNTIME_MENU)
+ */
+function getInstalledRuntimes(homeDir = os.homedir()) {
+  const targets = buildRuntimeTargets(homeDir);
+  return RUNTIME_MENU.filter(name => {
+    const t = targets[name];
+    return t.parentDir && dirExists(t.parentDir);
+  });
+}
+
 // ── Validation ───────────────────────────────────────────────────────────────
 
 /**
@@ -421,6 +473,8 @@ module.exports = {
   validateInstall,
   copyDirSync,
   registerPlugin,
+  readSkillDescriptions,
+  getInstalledRuntimes,
   dirExists,
   fileExists,
   printResults,

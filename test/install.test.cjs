@@ -211,3 +211,56 @@ describe('buildRuntimeTargets', () => {
     assert.strictEqual(targets.codex.partial, true);
   });
 });
+
+describe('readSkillDescriptions', () => {
+  let tmp;
+
+  before(() => {
+    tmp = createTempDir();
+    const skills = ['ttm-init', 'ttm-produce'];
+    for (const skill of skills) {
+      const dir = path.join(tmp.dir, 'skills', skill);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, 'SKILL.md'),
+        `---\nname: ${skill}\ndescription: >\n  Description for ${skill}.\n---\n`);
+    }
+  });
+
+  after(() => { tmp.cleanup(); });
+
+  it('returns array of {name, description} sorted by name', () => {
+    const result = install.readSkillDescriptions(tmp.dir);
+    assert.ok(Array.isArray(result));
+    assert.strictEqual(result.length, 2);
+    assert.strictEqual(result[0].name, 'ttm-init');
+    assert.strictEqual(result[0].description, 'Description for ttm-init.');
+    assert.strictEqual(result[1].name, 'ttm-produce');
+  });
+
+  it('skips dirs without SKILL.md', () => {
+    fs.mkdirSync(path.join(tmp.dir, 'skills', 'not-a-skill'), { recursive: true });
+    const result = install.readSkillDescriptions(tmp.dir);
+    assert.ok(result.every(r => r.name !== 'not-a-skill'));
+  });
+});
+
+describe('getInstalledRuntimes', () => {
+  let tmp;
+
+  before(() => {
+    tmp = createTempDir();
+    fs.mkdirSync(path.join(tmp.dir, '.claude'), { recursive: true });
+  });
+
+  after(() => { tmp.cleanup(); });
+
+  it('detects claude when ~/.claude exists', () => {
+    const result = install.getInstalledRuntimes(tmp.dir);
+    assert.ok(result.includes('claude'));
+  });
+
+  it('does not include codex when ~/.codex missing', () => {
+    const result = install.getInstalledRuntimes(tmp.dir);
+    assert.ok(!result.includes('codex'));
+  });
+});
