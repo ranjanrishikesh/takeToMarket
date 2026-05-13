@@ -3,3 +3,6 @@
 
 # GSD build artifacts — not needed by users
 .planning/
+
+# User's private marketing data
+.marketing/
