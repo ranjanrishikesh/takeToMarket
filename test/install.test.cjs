@@ -80,3 +80,76 @@ describe('install.js fileExists', () => {
     assert.strictEqual(install.fileExists(path.join(tmp.dir, 'nope.txt')), false);
   });
 });
+
+describe('registerPlugin', () => {
+  let tmp;
+
+  before(() => { tmp = createTempDir(); });
+  after(() => { tmp.cleanup(); });
+
+  it('creates installed_plugins.json with correct structure', () => {
+    const installPath = path.join(tmp.dir, 'plugin');
+    const homeDir = tmp.dir;
+    install.registerPlugin(installPath, '2.0.0', homeDir);
+
+    const registryPath = path.join(homeDir, '.claude', 'plugins', 'installed_plugins.json');
+    assert.ok(install.fileExists(registryPath), 'registry file created');
+    const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+    assert.strictEqual(registry.version, 2, 'root version is 2');
+    assert.ok(registry.plugins, 'has plugins object');
+    const entry = registry.plugins['taketomarket@npm'];
+    assert.ok(Array.isArray(entry) && entry.length === 1, 'entry is array of 1');
+    assert.strictEqual(entry[0].scope, 'user');
+    assert.strictEqual(entry[0].installPath, installPath);
+    assert.strictEqual(entry[0].version, '2.0.0');
+    assert.ok(entry[0].installedAt, 'installedAt set');
+    assert.ok(entry[0].lastUpdated, 'lastUpdated set');
+  });
+
+  it('preserves existing plugins when upserting taketomarket entry', () => {
+    const homeDir2 = path.join(tmp.dir, 'home2');
+    fs.mkdirSync(path.join(homeDir2, '.claude', 'plugins'), { recursive: true });
+    const registryPath = path.join(homeDir2, '.claude', 'plugins', 'installed_plugins.json');
+    fs.writeFileSync(registryPath, JSON.stringify({
+      version: 2,
+      plugins: {
+        'other-plugin@npm': [{ scope: 'user', installPath: '/some/path', version: '1.0.0',
+          installedAt: '2026-01-01T00:00:00.000Z', lastUpdated: '2026-01-01T00:00:00.000Z', gitCommitSha: null }],
+      },
+    }));
+
+    install.registerPlugin('/new/path', '2.0.0', homeDir2);
+    const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+    assert.ok(registry.plugins['other-plugin@npm'], 'existing plugin preserved');
+    assert.ok(registry.plugins['taketomarket@npm'], 'new entry added');
+  });
+
+  it('preserves installedAt but updates lastUpdated on reinstall', () => {
+    const homeDir3 = path.join(tmp.dir, 'home3');
+    const installPath = path.join(homeDir3, 'plugin');
+    install.registerPlugin(installPath, '2.0.0', homeDir3);
+    const registryPath = path.join(homeDir3, '.claude', 'plugins', 'installed_plugins.json');
+    const first = JSON.parse(fs.readFileSync(registryPath, 'utf8')).plugins['taketomarket@npm'][0];
+
+    install.registerPlugin(installPath, '2.0.1', homeDir3);
+    const second = JSON.parse(fs.readFileSync(registryPath, 'utf8')).plugins['taketomarket@npm'][0];
+
+    assert.strictEqual(second.installedAt, first.installedAt, 'installedAt unchanged');
+    assert.strictEqual(second.version, '2.0.1', 'version updated');
+  });
+
+  it('backs up corrupted JSON and recreates', () => {
+    const homeDir4 = path.join(tmp.dir, 'home4');
+    const pluginsDir = path.join(homeDir4, '.claude', 'plugins');
+    fs.mkdirSync(pluginsDir, { recursive: true });
+    const registryPath = path.join(pluginsDir, 'installed_plugins.json');
+    fs.writeFileSync(registryPath, 'not valid json {{{');
+
+    install.registerPlugin('/some/path', '2.0.0', homeDir4);
+
+    assert.ok(install.fileExists(registryPath + '.bak'), 'backup created');
+    assert.ok(install.fileExists(registryPath), 'registry recreated');
+    const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+    assert.strictEqual(registry.version, 2);
+  });
+});

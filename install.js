@@ -116,6 +116,53 @@ function copyDirSync(src, dest) {
   }
 }
 
+// ── Plugin Registration ───────────────────────────────────────────────────────
+
+/**
+ * Register taketomarket in Claude Code's installed_plugins.json.
+ * Preserves existing plugins. Atomic write (tmp → rename).
+ * @param {string} installPath - Absolute path to the installed plugin directory
+ * @param {string} version - Plugin version string (e.g., '2.0.0')
+ * @param {string} [homeDir] - Home directory (defaults to os.homedir(); injectable for tests)
+ */
+function registerPlugin(installPath, version, homeDir = os.homedir()) {
+  const registryPath = path.join(homeDir, '.claude', 'plugins', 'installed_plugins.json');
+  const pluginsDir = path.dirname(registryPath);
+
+  let registry = { version: 2, plugins: {} };
+  if (fileExists(registryPath)) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      registry = parsed;
+      if (!registry.plugins) registry.plugins = {};
+      if (!registry.version) registry.version = 2;
+    } catch {
+      fs.renameSync(registryPath, registryPath + '.bak');
+      console.warn('  Warning: installed_plugins.json was corrupted. Backed up to .bak and recreated.');
+      registry = { version: 2, plugins: {} };
+    }
+  }
+
+  const now = new Date().toISOString();
+  const existing = (registry.plugins['taketomarket@npm'] || [])[0];
+
+  registry.plugins['taketomarket@npm'] = [{
+    scope: 'user',
+    installPath,
+    version,
+    installedAt: existing?.installedAt ?? now,
+    lastUpdated: now,
+    gitCommitSha: null,
+  }];
+
+  const tmpPath = registryPath + '.tmp';
+  fs.mkdirSync(pluginsDir, { recursive: true });
+  fs.writeFileSync(tmpPath, JSON.stringify(registry, null, 2) + '\n', 'utf8');
+  fs.renameSync(tmpPath, registryPath);
+
+  console.log('  Registered in installed_plugins.json');
+}
+
 // ── Validation ───────────────────────────────────────────────────────────────
 
 /**
@@ -268,6 +315,9 @@ Options:
     process.exit(1);
   }
 
+  // Register with Claude Code
+  registerPlugin(targetDir, VERSION);
+
   console.log('Installation complete!');
   console.log('');
   console.log('Quick start:');
@@ -299,6 +349,7 @@ module.exports = {
   detectRuntime,
   validateInstall,
   copyDirSync,
+  registerPlugin,
   dirExists,
   fileExists,
   printResults,
