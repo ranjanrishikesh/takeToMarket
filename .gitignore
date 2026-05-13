@@ -1,0 +1,2 @@
+# Claude Code local settings — machine-specific, contains absolute paths
+.claude/settings.local.json
