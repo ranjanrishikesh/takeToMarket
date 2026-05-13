@@ -10,6 +10,8 @@
   "homepage": "https://www.npmjs.com/package/taketomarket",
   "repository": "https://github.com/ranjanrishikesh/takeToMarket",
   "license": "MIT",
+  "keywords": ["marketing", "campaigns", "positioning", "quality-gates", "agent-skills"],
+  "category": "productivity",
   "source": "git",
   "sourceUrl": "https://github.com/ranjanrishikesh/takeToMarket.git",
   "skills": [

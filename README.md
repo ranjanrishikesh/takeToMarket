@@ -45,7 +45,7 @@ Flags:
 
 ```
 /plugin marketplace add ranjanrishikesh/takeToMarket
-/plugin install taketomarket@takeToMarket
+/plugin install taketomarket
 ```
 
 This uses the Claude Code plugin system to install directly from the GitHub repo. Run both commands in Claude Code's chat.

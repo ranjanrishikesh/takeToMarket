@@ -170,6 +170,11 @@ describe('parseRuntimeChoices', () => {
     assert.deepStrictEqual(result, ['claude', 'codex', 'cursor', 'windsurf', 'gemini', 'agents']);
   });
 
+  it('parses "1,7" as all named runtimes', () => {
+    assert.deepStrictEqual(install.parseRuntimeChoices('1,7'),
+      ['claude', 'codex', 'cursor', 'windsurf', 'gemini', 'agents']);
+  });
+
   it('parses "8" as custom', () => {
     assert.deepStrictEqual(install.parseRuntimeChoices('8'), ['custom']);
   });

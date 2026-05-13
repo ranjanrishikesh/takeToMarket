@@ -47,6 +47,7 @@ function parseRuntimeChoices(input) {
   for (const part of parts) {
     const n = parseInt(part, 10);
     if (isNaN(n) || n < 1 || n > 8) return null;
+    if (n === 7) return [...RUNTIME_MENU];
     if (n === 8) return ['custom'];
     names.add(RUNTIME_MENU[n - 1]);
   }
