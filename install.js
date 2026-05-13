@@ -27,6 +27,77 @@ const FILES_TO_COPY = [
   'settings.json',
 ];
 
+// ── Runtime Selection ─────────────────────────────────────────────────────────
+
+const RUNTIME_MENU = ['claude', 'codex', 'cursor', 'windsurf', 'gemini'];
+
+/**
+ * Parse user input from the runtime selection prompt.
+ * @param {string} input - Raw user input (e.g., '1,3' or '6')
+ * @returns {string[]|null} Array of runtime names, or null if invalid
+ */
+function parseRuntimeChoices(input) {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+  if (trimmed === '6') return [...RUNTIME_MENU];
+  if (trimmed === '7') return ['custom'];
+
+  const parts = trimmed.split(',').map(s => s.trim());
+  const names = new Set();
+  for (const part of parts) {
+    const n = parseInt(part, 10);
+    if (isNaN(n) || n < 1 || n > 7) return null;
+    if (n === 7) return ['custom'];
+    names.add(RUNTIME_MENU[n - 1]);
+  }
+  return [...names];
+}
+
+/**
+ * Build the install target map for all known runtimes.
+ * @param {string} [homeDir] - Home directory (injectable for tests)
+ * @returns {Object.<string, {label, dir, parentDir, register, partial}>}
+ */
+function buildRuntimeTargets(homeDir = os.homedir()) {
+  return {
+    claude: {
+      label: 'Claude Code',
+      dir: path.join(homeDir, '.claude', 'plugins', 'taketomarket'),
+      parentDir: path.join(homeDir, '.claude'),
+      register: true,
+      partial: false,
+    },
+    codex: {
+      label: 'Codex (OpenAI)',
+      dir: path.join(homeDir, '.codex', 'plugins', 'taketomarket'),
+      parentDir: path.join(homeDir, '.codex'),
+      register: false,
+      partial: true,
+    },
+    cursor: {
+      label: 'Cursor',
+      dir: path.join(homeDir, '.cursor', 'rules'),
+      parentDir: path.join(homeDir, '.cursor'),
+      register: false,
+      partial: true,
+    },
+    windsurf: {
+      label: 'Windsurf',
+      dir: path.join(homeDir, '.codeium', 'windsurf'),
+      parentDir: path.join(homeDir, '.codeium'),
+      register: false,
+      partial: true,
+    },
+    gemini: {
+      label: 'Gemini CLI',
+      dir: path.join(homeDir, '.gemini'),
+      parentDir: path.join(homeDir, '.gemini'),
+      register: false,
+      partial: true,
+    },
+  };
+}
+
 // ── Runtime detection ────────────────────────────────────────────────────────
 
 /**
@@ -353,6 +424,9 @@ module.exports = {
   dirExists,
   fileExists,
   printResults,
+  parseRuntimeChoices,
+  buildRuntimeTargets,
   DIRS_TO_COPY,
   FILES_TO_COPY,
+  RUNTIME_MENU,
 };

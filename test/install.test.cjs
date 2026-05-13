@@ -153,3 +153,61 @@ describe('registerPlugin', () => {
     assert.strictEqual(registry.version, 2);
   });
 });
+
+describe('parseRuntimeChoices', () => {
+  it('parses single choice', () => {
+    assert.deepStrictEqual(install.parseRuntimeChoices('1'), ['claude']);
+  });
+
+  it('parses comma-separated choices', () => {
+    assert.deepStrictEqual(install.parseRuntimeChoices('1,3'), ['claude', 'cursor']);
+  });
+
+  it('parses "6" as all named runtimes', () => {
+    const result = install.parseRuntimeChoices('6');
+    assert.deepStrictEqual(result, ['claude', 'codex', 'cursor', 'windsurf', 'gemini']);
+  });
+
+  it('parses "7" as custom', () => {
+    assert.deepStrictEqual(install.parseRuntimeChoices('7'), ['custom']);
+  });
+
+  it('returns null for empty input', () => {
+    assert.strictEqual(install.parseRuntimeChoices(''), null);
+  });
+
+  it('returns null for out-of-range input', () => {
+    assert.strictEqual(install.parseRuntimeChoices('8'), null);
+  });
+
+  it('returns null for non-numeric input', () => {
+    assert.strictEqual(install.parseRuntimeChoices('abc'), null);
+  });
+
+  it('deduplicates choices', () => {
+    assert.deepStrictEqual(install.parseRuntimeChoices('1,1'), ['claude']);
+  });
+});
+
+describe('buildRuntimeTargets', () => {
+  it('returns an object with expected keys', () => {
+    const targets = install.buildRuntimeTargets('/fake/home');
+    assert.ok(targets.claude, 'has claude');
+    assert.ok(targets.codex, 'has codex');
+    assert.ok(targets.cursor, 'has cursor');
+    assert.ok(targets.windsurf, 'has windsurf');
+    assert.ok(targets.gemini, 'has gemini');
+  });
+
+  it('claude target has register: true and uses provided homeDir', () => {
+    const targets = install.buildRuntimeTargets('/test/home');
+    assert.strictEqual(targets.claude.register, true);
+    assert.ok(targets.claude.dir.startsWith('/test/home'));
+  });
+
+  it('non-claude targets have register: false and partial: true initially', () => {
+    const targets = install.buildRuntimeTargets('/test/home');
+    assert.strictEqual(targets.codex.register, false);
+    assert.strictEqual(targets.codex.partial, true);
+  });
+});
