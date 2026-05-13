@@ -41,9 +41,14 @@ Flags:
 
 > Status: pending marketplace approval. Check https://github.com/ranjanrishikesh/takeToMarket for current status.
 
-### Option 3 — Direct from GitHub
+### Option 3 — Direct from GitHub (Claude Code)
 
-> Status: pending verification. Use Option 1 or Option 4 in the meantime.
+```
+/plugin marketplace add ranjanrishikesh/takeToMarket
+/plugin install taketomarket@takeToMarket
+```
+
+This uses the Claude Code plugin system to install directly from the GitHub repo. Run both commands in Claude Code's chat.
 
 ### Option 4 — Manual (advanced)
 
@@ -60,6 +65,20 @@ node install.js
 /ttm-new-campaign     # create first campaign
 /ttm-produce          # run production wave
 ```
+
+## Runtime Notes
+
+Commands vary by tool:
+
+| Runtime | Install path | Invocation |
+|---------|-------------|------------|
+| Claude Code | `~/.claude/skills/` | `/ttm-init` |
+| Codex | `~/.codex/skills/` or `~/.agents/skills/` | `$ttm-init` or mention by name |
+| Cursor | `~/.cursor/skills/` | `/ttm-init` |
+| Windsurf | `~/.codeium/windsurf/skills/` | `@ttm-init` |
+| Gemini CLI | `~/.gemini/skills/` | automatic or `/skills enable` |
+
+All non-Claude runtimes also support `~/.agents/skills/` as a universal path. Select **option 6** during install to use it.
 
 ## Campaign Lifecycle
 
