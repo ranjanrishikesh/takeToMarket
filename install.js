@@ -98,6 +98,99 @@ function buildRuntimeTargets(homeDir = os.homedir()) {
   };
 }
 
+/**
+ * Interactively ask user which runtimes to install to.
+ * Falls back to auto-detect when stdin is not a TTY or --runtime flag is set.
+ * @param {string[]} args - process.argv slice
+ * @param {string} [homeDir]
+ * @returns {Promise<Array<{label, dir, parentDir, register, partial}>>}
+ */
+async function promptRuntimeSelection(args, homeDir = os.homedir()) {
+  // Legacy --runtime flag: bypass interactive prompt
+  const runtimeIdx = args.indexOf('--runtime');
+  if (runtimeIdx !== -1 && runtimeIdx + 1 < args.length) {
+    const name = args[runtimeIdx + 1].toLowerCase();
+    const allTargets = buildRuntimeTargets(homeDir);
+    if (!allTargets[name] && name !== 'custom') {
+      console.warn(`Warning: Unknown runtime "${name}". Defaulting to claude.`);
+      return [allTargets.claude];
+    }
+    return name === 'custom' ? [] : [allTargets[name]];
+  }
+
+  // Non-TTY fallback: auto-detect installed runtimes
+  if (!process.stdin.isTTY) {
+    const detected = getInstalledRuntimes(homeDir);
+    const allTargets = buildRuntimeTargets(homeDir);
+    if (detected.length === 0) {
+      console.log('Note: No known runtimes detected. Defaulting to Claude Code.');
+      return [allTargets.claude];
+    }
+    console.log(`Note: Non-interactive mode. Auto-detected: ${detected.join(', ')}`);
+    return detected.map(name => allTargets[name]);
+  }
+
+  // Interactive prompt
+  const { createInterface } = require('node:readline');
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+
+  const ask = (question) => new Promise(resolve => rl.question(question, resolve));
+
+  console.log('');
+  console.log('Which AI coding tool(s) are you using? (select all that apply)');
+  console.log('');
+  console.log('  1. Claude Code');
+  console.log('  2. Codex (OpenAI)');
+  console.log('  3. Cursor');
+  console.log('  4. Windsurf');
+  console.log('  5. Gemini CLI');
+  console.log('  6. All of the above');
+  console.log('  7. Let me type a custom path');
+  console.log('');
+
+  let choices = null;
+  let attempts = 0;
+  while (choices === null && attempts < 2) {
+    const input = await ask('Your choice (comma-separated, e.g. 1,3): ');
+    choices = parseRuntimeChoices(input);
+    if (choices === null) {
+      console.log('Invalid input. Please enter numbers 1-7 separated by commas.');
+      attempts++;
+    }
+  }
+
+  if (choices === null) {
+    rl.close();
+    console.error('Invalid input after 2 attempts. Exiting.');
+    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/takeToMarket/issues');
+    process.exit(1);
+  }
+
+  let customPath = null;
+  if (choices.includes('custom')) {
+    customPath = await ask('Enter install path: ');
+    customPath = customPath.trim();
+    if (!customPath) {
+      rl.close();
+      console.error('Custom path cannot be empty.');
+      process.exit(1);
+    }
+  }
+
+  rl.close();
+
+  const allTargets = buildRuntimeTargets(homeDir);
+  const result = [];
+  for (const name of choices) {
+    if (name === 'custom') {
+      result.push({ label: 'Custom', dir: customPath, parentDir: null, register: false, partial: false });
+    } else {
+      result.push(allTargets[name]);
+    }
+  }
+  return result;
+}
+
 // ── Runtime detection ────────────────────────────────────────────────────────
 
 /**
@@ -480,6 +573,7 @@ module.exports = {
   printResults,
   parseRuntimeChoices,
   buildRuntimeTargets,
+  promptRuntimeSelection,
   DIRS_TO_COPY,
   FILES_TO_COPY,
   RUNTIME_MENU,
