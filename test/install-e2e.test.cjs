@@ -71,7 +71,7 @@ describe('install-e2e: claude happy path', () => {
     tmp.cleanup();
   });
 
-  it('exits 0, prints banner, and copies all DIRS_TO_COPY + FILES_TO_COPY to ~/.claude/plugins/taketomarket/', () => {
+  it('exits 0, prints banner, and installs skills to ~/.claude/skills/', () => {
     const result = runInstall(['--runtime', 'claude'], envWithHome(tmp.dir));
 
     assert.strictEqual(result.status, 0, `install should exit 0 (stderr: ${result.stderr})`);
@@ -80,41 +80,33 @@ describe('install-e2e: claude happy path', () => {
       'stdout contains banner "takeToMarket installer"'
     );
     assert.ok(
-      result.stdout.includes('Installing to Claude Code'),
-      'stdout contains "Installing to Claude Code"'
+      result.stdout.includes('Installing skills to Claude Code'),
+      'stdout contains "Installing skills to Claude Code"'
     );
     assert.ok(
       result.stdout.includes('Installation complete!'),
       'stdout contains "Installation complete!"'
     );
 
-    const targetDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
-
-    for (const d of install.DIRS_TO_COPY) {
-      assert.strictEqual(
-        install.dirExists(path.join(targetDir, d)),
-        true,
-        `DIRS_TO_COPY entry "${d}" exists at target`
-      );
-    }
-    for (const f of install.FILES_TO_COPY) {
-      assert.strictEqual(
-        install.fileExists(path.join(targetDir, f)),
-        true,
-        `FILES_TO_COPY entry "${f}" exists at target`
-      );
-    }
-
-    // Spot-check files (D-13)
+    // Skills installed to ~/.claude/skills/
+    const skillsDir = path.join(tmp.dir, '.claude', 'skills');
     assert.strictEqual(
-      install.fileExists(path.join(targetDir, 'bin', 'ttm-tools.cjs')),
+      install.fileExists(path.join(skillsDir, 'ttm-init', 'SKILL.md')),
       true,
-      'spot-check: bin/ttm-tools.cjs exists at target'
+      'spot-check: ttm-init/SKILL.md installed to ~/.claude/skills/'
+    );
+
+    // Shared package base copied to ~/.taketomarket/
+    const pkgBase = path.join(tmp.dir, '.taketomarket');
+    assert.strictEqual(
+      install.dirExists(path.join(pkgBase, 'workflows')),
+      true,
+      'workflows copied to ~/.taketomarket/'
     );
     assert.strictEqual(
-      install.fileExists(path.join(targetDir, 'skills', 'ttm-init', 'SKILL.md')),
+      install.fileExists(path.join(pkgBase, 'bin', 'ttm-tools.cjs')),
       true,
-      'spot-check: skills/ttm-init/SKILL.md exists at target'
+      'spot-check: bin/ttm-tools.cjs exists in ~/.taketomarket/'
     );
   });
 });
@@ -132,46 +124,25 @@ describe('install-e2e: codex happy path', () => {
     tmp.cleanup();
   });
 
-  it('exits 0, prints "Runtime: codex", and copies all files to ~/.codex/plugins/taketomarket/', () => {
+  it('exits 0, prints "Installing skills to Codex", and installs skills to ~/.codex/skills/', () => {
     const result = runInstall(['--runtime', 'codex'], envWithHome(tmp.dir));
 
     assert.strictEqual(result.status, 0, `install should exit 0 (stderr: ${result.stderr})`);
     assert.ok(
-      result.stdout.includes('Installing to Codex (OpenAI)'),
-      'stdout contains "Installing to Codex (OpenAI)"'
+      result.stdout.includes('Installing skills to Codex (OpenAI)'),
+      'stdout contains "Installing skills to Codex (OpenAI)"'
     );
     assert.ok(
       result.stdout.includes('Installation complete!'),
       'stdout contains "Installation complete!"'
     );
 
-    const targetDir = path.join(tmp.dir, '.codex', 'plugins', 'taketomarket');
-
-    for (const d of install.DIRS_TO_COPY) {
-      assert.strictEqual(
-        install.dirExists(path.join(targetDir, d)),
-        true,
-        `DIRS_TO_COPY entry "${d}" exists at codex target`
-      );
-    }
-    for (const f of install.FILES_TO_COPY) {
-      assert.strictEqual(
-        install.fileExists(path.join(targetDir, f)),
-        true,
-        `FILES_TO_COPY entry "${f}" exists at codex target`
-      );
-    }
-
-    // Spot-check files (D-13)
+    // Skills installed to ~/.codex/skills/
+    const skillsDir = path.join(tmp.dir, '.codex', 'skills');
     assert.strictEqual(
-      install.fileExists(path.join(targetDir, 'bin', 'ttm-tools.cjs')),
+      install.fileExists(path.join(skillsDir, 'ttm-init', 'SKILL.md')),
       true,
-      'spot-check: bin/ttm-tools.cjs exists at codex target'
-    );
-    assert.strictEqual(
-      install.fileExists(path.join(targetDir, 'skills', 'ttm-init', 'SKILL.md')),
-      true,
-      'spot-check: skills/ttm-init/SKILL.md exists at codex target'
+      'spot-check: ttm-init/SKILL.md installed to ~/.codex/skills/'
     );
   });
 });
@@ -196,15 +167,15 @@ describe('install-e2e: auto-detect runtime from .claude/', () => {
 
     assert.strictEqual(result.status, 0, `install should exit 0 (stderr: ${result.stderr})`);
     assert.ok(
-      result.stdout.includes('Installing to Claude Code'),
-      'stdout contains "Installing to Claude Code" (auto-detected)'
+      result.stdout.includes('Installing skills to Claude Code'),
+      'stdout contains "Installing skills to Claude Code" (auto-detected)'
     );
 
-    const targetDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
+    const skillsDir = path.join(tmp.dir, '.claude', 'skills');
     assert.strictEqual(
-      install.dirExists(path.join(targetDir, 'bin')),
+      install.fileExists(path.join(skillsDir, 'ttm-init', 'SKILL.md')),
       true,
-      'bin/ exists at claude auto-detected target (sanity check)'
+      'ttm-init/SKILL.md installed (auto-detected claude sanity check)'
     );
   });
 });
@@ -239,12 +210,12 @@ describe('install-e2e: --dry-run on clean HOME', () => {
       'stdout contains at least one "[PASS]" validation row'
     );
 
-    // Core D-14 assertion: target dir was NOT created.
-    const targetDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
+    // Core D-14 assertion: skills dir was NOT created.
+    const skillsDir = path.join(tmp.dir, '.claude', 'skills');
     assert.strictEqual(
-      install.dirExists(targetDir),
+      install.dirExists(skillsDir),
       false,
-      'target dir does NOT exist after dry-run on clean HOME'
+      'skills dir does NOT exist after dry-run on clean HOME'
     );
   });
 });
@@ -271,11 +242,11 @@ describe('install-e2e: --dry-run after a real install', () => {
       `prerequisite install should exit 0 (stderr: ${installResult.stderr})`
     );
 
-    const targetDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
+    const skillsDir = path.join(tmp.dir, '.claude', 'skills');
     assert.strictEqual(
-      install.dirExists(targetDir),
+      install.dirExists(skillsDir),
       true,
-      'target dir exists after first real install'
+      'skills dir exists after first real install'
     );
 
     // Second: dry-run on installed HOME
@@ -293,14 +264,14 @@ describe('install-e2e: --dry-run after a real install', () => {
 
     // Read-only proof: prior install still intact after dry-run.
     assert.strictEqual(
-      install.dirExists(targetDir),
+      install.dirExists(skillsDir),
       true,
-      'target dir still exists after dry-run (dry-run is read-only)'
+      'skills dir still exists after dry-run (dry-run is read-only)'
     );
     assert.strictEqual(
-      install.fileExists(path.join(targetDir, 'bin', 'ttm-tools.cjs')),
+      install.fileExists(path.join(skillsDir, 'ttm-init', 'SKILL.md')),
       true,
-      'spot-check file from prior install still present after dry-run'
+      'spot-check ttm-init skill from prior install still present after dry-run'
     );
   });
 });
@@ -334,15 +305,15 @@ describe('install-e2e: unknown --runtime arg defaults to claude with warning', (
       `stderr contains unknown runtime warning (got stderr: ${JSON.stringify(result.stderr)})`
     );
     assert.ok(
-      result.stdout.includes('Installing to Claude Code'),
-      'stdout contains "Installing to Claude Code" (defaulted from unknown)'
+      result.stdout.includes('Installing skills to Claude Code'),
+      'stdout contains "Installing skills to Claude Code" (defaulted from unknown)'
     );
 
-    const targetDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
+    const skillsDir = path.join(tmp.dir, '.claude', 'skills');
     assert.strictEqual(
-      install.dirExists(targetDir),
+      install.fileExists(path.join(skillsDir, 'ttm-init', 'SKILL.md')),
       true,
-      'claude target dir exists after unknown-runtime fallback install'
+      'ttm-init skill installed to claude skills dir after unknown-runtime fallback'
     );
   });
 });
@@ -371,11 +342,11 @@ describe('install-e2e: --version flag prints version and exits without writing',
       `stdout should be exactly "${expectedVersion}\\n", got ${JSON.stringify(result.stdout)}`
     );
 
-    // Short-circuit proof: no target dir created on either runtime.
-    const claudeTarget = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket');
-    const codexTarget = path.join(tmp.dir, '.codex', 'plugins', 'taketomarket');
-    assert.strictEqual(install.dirExists(claudeTarget), false, '.claude target NOT created');
-    assert.strictEqual(install.dirExists(codexTarget), false, '.codex target NOT created');
+    // Short-circuit proof: no skills dir created on either runtime.
+    const claudeSkills = path.join(tmp.dir, '.claude', 'skills');
+    const codexSkills = path.join(tmp.dir, '.codex', 'skills');
+    assert.strictEqual(install.dirExists(claudeSkills), false, '.claude/skills NOT created');
+    assert.strictEqual(install.dirExists(codexSkills), false, '.codex/skills NOT created');
   });
 
   it('-v short form prints the same version + newline and exits 0', () => {
@@ -471,10 +442,10 @@ describe('install-e2e: piped runtime selection', () => {
   });
 });
 
-// ── Scenario 12: --runtime claude installs and registers (v2/wave2) ──────────
+// ── Scenario 12: --runtime claude installs ttm-init skill (v2/wave2) ─────────
 
-describe('install-e2e: --runtime claude installs and registers', () => {
-  it('writes installed_plugins.json after install', () => {
+describe('install-e2e: --runtime claude installs ttm-init skill', () => {
+  it('installs ttm-init skill to ~/.claude/skills/', () => {
     const tmp = createTempDir();
     try {
       const result = runInstall(['--runtime', 'claude', '--yes'], {
@@ -482,11 +453,10 @@ describe('install-e2e: --runtime claude installs and registers', () => {
         HOME: tmp.dir,
       });
       assert.strictEqual(result.status, 0, `exit 0\n${result.stdout}\n${result.stderr}`);
-      const registryPath = path.join(tmp.dir, '.claude', 'plugins', 'installed_plugins.json');
-      assert.ok(fs.existsSync(registryPath), 'installed_plugins.json created');
-      const reg = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
-      assert.ok(reg.plugins['taketomarket@npm'], 'entry written');
-      assert.strictEqual(reg.plugins['taketomarket@npm'][0].scope, 'user');
+      const skillPath = path.join(tmp.dir, '.claude', 'skills', 'ttm-init', 'SKILL.md');
+      assert.ok(fs.existsSync(skillPath), 'ttm-init/SKILL.md installed');
+      const content = fs.readFileSync(skillPath, 'utf8');
+      assert.ok(!content.includes('${CLAUDE_PLUGIN_ROOT}'), 'CLAUDE_PLUGIN_ROOT replaced');
     } finally {
       tmp.cleanup();
     }

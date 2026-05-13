@@ -56,44 +56,34 @@ function parseRuntimeChoices(input) {
 /**
  * Build the install target map for all known runtimes.
  * @param {string} [homeDir] - Home directory (injectable for tests)
- * @returns {Object.<string, {label, dir, parentDir, register, partial}>}
+ * @returns {Object.<string, {label, skillsDir, parentDir}>}
  */
 function buildRuntimeTargets(homeDir = os.homedir()) {
   return {
     claude: {
       label: 'Claude Code',
-      dir: path.join(homeDir, '.claude', 'plugins', 'taketomarket'),
+      skillsDir: path.join(homeDir, '.claude', 'skills'),
       parentDir: path.join(homeDir, '.claude'),
-      register: true,
-      partial: false,
     },
     codex: {
       label: 'Codex (OpenAI)',
-      dir: path.join(homeDir, '.codex', 'plugins', 'taketomarket'),
+      skillsDir: path.join(homeDir, '.codex', 'skills'),
       parentDir: path.join(homeDir, '.codex'),
-      register: false,
-      partial: true,
     },
     cursor: {
       label: 'Cursor',
-      dir: path.join(homeDir, '.cursor', 'rules'),
+      skillsDir: path.join(homeDir, '.cursor', 'skills'),
       parentDir: path.join(homeDir, '.cursor'),
-      register: false,
-      partial: true,
     },
     windsurf: {
       label: 'Windsurf',
-      dir: path.join(homeDir, '.codeium', 'windsurf'),
+      skillsDir: path.join(homeDir, '.codeium', 'windsurf', 'skills'),
       parentDir: path.join(homeDir, '.codeium'),
-      register: false,
-      partial: true,
     },
     gemini: {
       label: 'Gemini CLI',
-      dir: path.join(homeDir, '.gemini'),
+      skillsDir: path.join(homeDir, '.gemini', 'skills'),
       parentDir: path.join(homeDir, '.gemini'),
-      register: false,
-      partial: true,
     },
   };
 }
@@ -183,7 +173,7 @@ async function promptRuntimeSelection(args, homeDir = os.homedir()) {
   const result = [];
   for (const name of choices) {
     if (name === 'custom') {
-      result.push({ label: 'Custom', dir: customPath, parentDir: null, register: false, partial: false });
+      result.push({ label: 'Custom', skillsDir: customPath, parentDir: null });
     } else {
       result.push(allTargets[name]);
     }
@@ -278,6 +268,68 @@ function copyDirSync(src, dest) {
       fs.copyFileSync(srcPath, destPath);
     }
   }
+}
+
+// ── Package Base & Per-Runtime Skill Install ──────────────────────────────────
+
+const PACKAGE_BASE_DIRS = ['workflows', 'templates', 'references', 'playbooks', 'gates', 'bin', 'agents'];
+const PACKAGE_BASE_FILES = ['settings.json', 'package.json'];
+
+/**
+ * Copy non-skill package files to ~/.taketomarket/ (shared across all runtimes).
+ * @param {string} packageRoot - Source npm package root
+ * @param {string} [homeDir]
+ */
+function copyPackageBase(packageRoot, homeDir = os.homedir()) {
+  const dest = path.join(homeDir, '.taketomarket');
+  fs.mkdirSync(dest, { recursive: true });
+
+  for (const dir of PACKAGE_BASE_DIRS) {
+    const src = path.join(packageRoot, dir);
+    if (dirExists(src)) {
+      copyDirSync(src, path.join(dest, dir));
+    }
+  }
+
+  for (const file of PACKAGE_BASE_FILES) {
+    const src = path.join(packageRoot, file);
+    if (fileExists(src)) {
+      fs.copyFileSync(src, path.join(dest, file));
+    }
+  }
+}
+
+/**
+ * Install individual skills into a runtime's skills directory.
+ * Replaces ${CLAUDE_PLUGIN_ROOT} in SKILL.md with absolute path to ~/.taketomarket.
+ * @param {string} skillsDir - Runtime's skills base dir (e.g. ~/.claude/skills/)
+ * @param {string} packageRoot - Source npm package root
+ * @param {string} [homeDir]
+ * @returns {number} Number of skills installed
+ */
+function installSkillsForRuntime(skillsDir, packageRoot, homeDir = os.homedir()) {
+  const packageBase = path.join(homeDir, '.taketomarket');
+  const srcSkillsDir = path.join(packageRoot, 'skills');
+  if (!dirExists(srcSkillsDir)) return 0;
+
+  fs.mkdirSync(skillsDir, { recursive: true });
+
+  let count = 0;
+  const entries = fs.readdirSync(srcSkillsDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const skillMdSrc = path.join(srcSkillsDir, entry.name, 'SKILL.md');
+    if (!fileExists(skillMdSrc)) continue;
+
+    let content = fs.readFileSync(skillMdSrc, 'utf8');
+    content = content.replace(/\$\{CLAUDE_PLUGIN_ROOT\}/g, packageBase);
+
+    const destSkillDir = path.join(skillsDir, entry.name);
+    fs.mkdirSync(destSkillDir, { recursive: true });
+    fs.writeFileSync(path.join(destSkillDir, 'SKILL.md'), content, 'utf8');
+    count++;
+  }
+  return count;
 }
 
 // ── Plugin Registration ───────────────────────────────────────────────────────
@@ -411,33 +463,22 @@ function shouldProceed(yesFlag) {
 /**
  * Read Claude Code install status for the checkStatus output.
  * @param {string} [homeDir]
- * @returns {{ installed: boolean, registered: boolean, skillCount: number, dir: string }}
+ * @returns {{ installed: boolean, skillCount: number, dir: string }}
  */
 function getClaudeStatus(homeDir = os.homedir()) {
-  const pluginDir = path.join(homeDir, '.claude', 'plugins', 'taketomarket');
-  const installed = dirExists(pluginDir);
-  if (!installed) return { installed: false, registered: false, skillCount: 0, dir: pluginDir };
+  const skillsDir = path.join(homeDir, '.claude', 'skills');
+  const probeSkill = path.join(skillsDir, 'ttm-init', 'SKILL.md');
+  const installed = fileExists(probeSkill);
+  if (!installed) return { installed: false, skillCount: 0, dir: skillsDir };
 
-  const skillsDir = path.join(pluginDir, 'skills');
   let skillCount = 0;
-  if (dirExists(skillsDir)) {
-    try {
-      skillCount = fs.readdirSync(skillsDir, { withFileTypes: true })
-        .filter(e => e.isDirectory() && fileExists(path.join(skillsDir, e.name, 'SKILL.md')))
-        .length;
-    } catch { /* ignore */ }
-  }
+  try {
+    skillCount = fs.readdirSync(skillsDir, { withFileTypes: true })
+      .filter(e => e.isDirectory() && e.name.startsWith('ttm-') && fileExists(path.join(skillsDir, e.name, 'SKILL.md')))
+      .length;
+  } catch { /* ignore */ }
 
-  const registryPath = path.join(homeDir, '.claude', 'plugins', 'installed_plugins.json');
-  let registered = false;
-  if (fileExists(registryPath)) {
-    try {
-      const reg = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
-      registered = !!(reg.plugins && reg.plugins['taketomarket@npm']);
-    } catch { /* ignore */ }
-  }
-
-  return { installed: true, registered, skillCount, dir: pluginDir };
+  return { installed: true, skillCount, dir: skillsDir };
 }
 
 /**
@@ -453,8 +494,7 @@ function checkStatus(version, homeDir = os.homedir()) {
 
   const claude = getClaudeStatus(homeDir);
   if (claude.installed) {
-    console.log(`Claude Code: INSTALLED (${claude.skillCount} skills, ${claude.dir.replace(homeDir, '~')})`);
-    console.log(`  registered: ${claude.registered ? 'yes (installed_plugins.json)' : 'NO — slash commands will not appear'}`);
+    console.log(`Claude Code: INSTALLED (${claude.skillCount} skills at ${claude.dir.replace(homeDir, '~')})`);
   } else {
     console.log('Claude Code: NOT INSTALLED');
   }
@@ -462,8 +502,8 @@ function checkStatus(version, homeDir = os.homedir()) {
   for (const name of ['codex', 'cursor', 'windsurf', 'gemini']) {
     const t = targets[name];
     const label = t.label.padEnd(12);
-    if (t.dir && dirExists(t.dir)) {
-      console.log(`${label} INSTALLED (${t.dir.replace(homeDir, '~')})`);
+    if (t.skillsDir && dirExists(t.skillsDir)) {
+      console.log(`${label} INSTALLED (${t.skillsDir.replace(homeDir, '~')})`);
     } else {
       console.log(`${label} NOT INSTALLED`);
     }
@@ -493,7 +533,7 @@ async function confirmInstall(targets, version, yesFlag) {
   console.log('');
   console.log('This will install to:');
   for (const t of targets) {
-    const shortDir = t.dir.replace(os.homedir(), '~');
+    const shortDir = t.skillsDir.replace(os.homedir(), '~');
     console.log(`  ${shortDir.padEnd(45)} (${t.label})`);
   }
   console.log('');
@@ -619,57 +659,25 @@ Options:
   // Confirmation
   await confirmInstall(targets, VERSION, yesFlag);
 
+  // Copy shared package files once
+  console.log('');
+  console.log('Copying package files to ~/.taketomarket/...');
+  copyPackageBase(PACKAGE_ROOT);
+
   // Install loop
   const results = [];
   for (const target of targets) {
     console.log('');
-    console.log(`Installing to ${target.label}...`);
+    console.log(`Installing skills to ${target.label}...`);
 
     if (target.parentDir && !dirExists(target.parentDir)) {
-      console.warn(`  Warning: ${target.label} doesn't appear to be installed (${target.parentDir} not found).`);
-      console.warn('  Installing anyway — files will be ready when you install the runtime.');
+      console.warn(`  Warning: ${target.label} not detected (${target.parentDir} not found). Installing anyway.`);
     }
 
     try {
-      if (dirExists(target.dir)) {
-        console.log('  Existing installation found. Removing before reinstall...');
-        fs.rmSync(target.dir, { recursive: true, force: true });
-      }
-
-      for (const dir of DIRS_TO_COPY) {
-        const srcDir = path.join(PACKAGE_ROOT, dir);
-        if (dirExists(srcDir)) {
-          console.log(`  Copying ${dir}/`);
-          copyDirSync(srcDir, path.join(target.dir, dir));
-        }
-      }
-
-      for (const file of FILES_TO_COPY) {
-        const srcFile = path.join(PACKAGE_ROOT, file);
-        if (fileExists(srcFile)) {
-          console.log(`  Copying ${file}`);
-          const destFile = path.join(target.dir, file);
-          fs.mkdirSync(path.dirname(destFile), { recursive: true });
-          fs.copyFileSync(srcFile, destFile);
-        }
-      }
-
-      if (target.register) {
-        registerPlugin(target.dir, VERSION);
-      }
-
-      const validation = validateInstall(target.dir);
-      printResults(validation);
-      const failures = validation.filter(r => r.status === 'fail');
-
-      if (failures.length > 0) {
-        results.push({ target, success: false, reason: 'validation failed' });
-      } else {
-        if (target.partial) {
-          console.log(`  [PARTIAL] ${target.label}: files copied — slash command registration coming in a future update`);
-        }
-        results.push({ target, success: true });
-      }
+      const count = installSkillsForRuntime(target.skillsDir, PACKAGE_ROOT);
+      console.log(`  Installed ${count} skills → ${target.skillsDir.replace(os.homedir(), '~')}`);
+      results.push({ target, success: true });
     } catch (err) {
       console.error(`  Error: ${err.message}`);
       results.push({ target, success: false, reason: err.message });
@@ -726,6 +734,8 @@ module.exports = {
   printResults,
   DIRS_TO_COPY,
   FILES_TO_COPY,
+  PACKAGE_BASE_DIRS,
+  PACKAGE_BASE_FILES,
   registerPlugin,
   parseRuntimeChoices,
   buildRuntimeTargets,
@@ -736,5 +746,7 @@ module.exports = {
   checkStatus,
   confirmInstall,
   printInstallSummary,
+  copyPackageBase,
+  installSkillsForRuntime,
   PACKAGE_ROOT,
 };

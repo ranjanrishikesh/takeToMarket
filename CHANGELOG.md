@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.0] — 2026-05-14
+
+### Fixed
+- Install skills to correct runtime-specific directories (flat skills, not plugin dir)
+- Claude Code: `~/.claude/skills/` — gives working `/ttm-*` commands immediately
+- Codex: `~/.codex/skills/`
+- Cursor: `~/.cursor/skills/`
+- Windsurf: `~/.codeium/windsurf/skills/`
+- Gemini CLI: `~/.gemini/skills/`
+- Replace `${CLAUDE_PLUGIN_ROOT}` in SKILL.md files with absolute `~/.taketomarket/` path
+
+### Added
+- `ttm-update` skill: check npm for updates and auto-install latest version
+- `~/.taketomarket/` as shared package base for all runtimes
+
 ## [2.0.0] — 2026-05-13
 
 ### Fixed

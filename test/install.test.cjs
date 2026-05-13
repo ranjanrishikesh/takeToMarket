@@ -18,7 +18,7 @@ describe('install.js module exports', () => {
       'validateInstall', 'copyDirSync', 'dirExists', 'fileExists', 'printResults',
       'registerPlugin', 'parseRuntimeChoices', 'buildRuntimeTargets', 'getInstalledRuntimes',
       'readSkillDescriptions', 'shouldProceed', 'getClaudeStatus', 'checkStatus',
-      'confirmInstall', 'printInstallSummary',
+      'confirmInstall', 'printInstallSummary', 'copyPackageBase', 'installSkillsForRuntime',
     ];
     for (const fn of expectedFns) {
       assert.strictEqual(typeof install[fn], 'function', `exports.${fn} is a function`);
@@ -197,16 +197,26 @@ describe('buildRuntimeTargets', () => {
     assert.ok(targets.gemini, 'has gemini');
   });
 
-  it('claude target has register: true and uses provided homeDir', () => {
+  it('claude target has correct skillsDir using provided homeDir', () => {
     const targets = install.buildRuntimeTargets('/test/home');
-    assert.strictEqual(targets.claude.register, true);
-    assert.ok(targets.claude.dir.startsWith('/test/home'));
+    assert.ok(targets.claude.skillsDir.startsWith('/test/home'), 'skillsDir uses homeDir');
+    assert.ok(targets.claude.skillsDir.includes('.claude/skills'), 'claude uses .claude/skills');
   });
 
-  it('non-claude targets have register: false and partial: true initially', () => {
+  it('each runtime has skillsDir and parentDir', () => {
     const targets = install.buildRuntimeTargets('/test/home');
-    assert.strictEqual(targets.codex.register, false);
-    assert.strictEqual(targets.codex.partial, true);
+    for (const name of ['claude', 'codex', 'cursor', 'windsurf', 'gemini']) {
+      assert.ok(targets[name].skillsDir, `${name} has skillsDir`);
+      assert.ok(targets[name].parentDir, `${name} has parentDir`);
+    }
+  });
+
+  it('correct skillsDir paths for all runtimes', () => {
+    const targets = install.buildRuntimeTargets('/home');
+    assert.ok(targets.codex.skillsDir.includes('.codex/skills'));
+    assert.ok(targets.cursor.skillsDir.includes('.cursor/skills'));
+    assert.ok(targets.windsurf.skillsDir.includes('.codeium/windsurf/skills'));
+    assert.ok(targets.gemini.skillsDir.includes('.gemini/skills'));
   });
 });
 
@@ -274,31 +284,59 @@ describe('checkStatus', () => {
 
   before(() => {
     tmp = createTempDir();
-    const pluginDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket', 'skills');
-    fs.mkdirSync(pluginDir, { recursive: true });
-    const skillDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket', 'skills', 'ttm-init');
+    const skillDir = path.join(tmp.dir, '.claude', 'skills', 'ttm-init');
     fs.mkdirSync(skillDir, { recursive: true });
     fs.writeFileSync(path.join(skillDir, 'SKILL.md'), '---\nname: ttm-init\n---\n');
-    const registryPath = path.join(tmp.dir, '.claude', 'plugins', 'installed_plugins.json');
-    fs.mkdirSync(path.dirname(registryPath), { recursive: true });
-    fs.writeFileSync(registryPath, JSON.stringify({
-      version: 2,
-      plugins: { 'taketomarket@npm': [{ scope: 'user', installPath: '/fake', version: '2.0.0',
-        installedAt: '2026-01-01T00:00:00.000Z', lastUpdated: '2026-01-01T00:00:00.000Z', gitCommitSha: null }] },
-    }));
   });
 
   after(() => { tmp.cleanup(); });
 
-  it('getClaudeStatus returns INSTALLED when plugin dir + registry entry exist', () => {
+  it('getClaudeStatus returns INSTALLED when ttm-init/SKILL.md exists', () => {
     const status = install.getClaudeStatus(tmp.dir);
     assert.strictEqual(status.installed, true);
-    assert.strictEqual(status.registered, true);
+    assert.ok(typeof status.skillCount === 'number', 'skillCount is a number');
   });
 
-  it('getClaudeStatus returns NOT INSTALLED when plugin dir missing', () => {
+  it('getClaudeStatus returns NOT INSTALLED when skills dir missing', () => {
     const status = install.getClaudeStatus(path.join(tmp.dir, 'nonexistent'));
     assert.strictEqual(status.installed, false);
+  });
+});
+
+describe('copyPackageBase', () => {
+  let tmp;
+
+  before(() => { tmp = createTempDir(); });
+  after(() => { tmp.cleanup(); });
+
+  it('copies workflows and templates to ~/.taketomarket/', () => {
+    install.copyPackageBase(install.PACKAGE_ROOT, tmp.dir);
+    const base = path.join(tmp.dir, '.taketomarket');
+    assert.ok(install.dirExists(base), '.taketomarket created');
+    assert.ok(install.dirExists(path.join(base, 'workflows')), 'workflows copied');
+    assert.ok(install.dirExists(path.join(base, 'templates')), 'templates copied');
+  });
+});
+
+describe('installSkillsForRuntime', () => {
+  let tmp;
+
+  before(() => { tmp = createTempDir(); });
+  after(() => { tmp.cleanup(); });
+
+  it('installs SKILL.md files and replaces ${CLAUDE_PLUGIN_ROOT}', () => {
+    const skillsDir = path.join(tmp.dir, 'skills');
+    const count = install.installSkillsForRuntime(skillsDir, install.PACKAGE_ROOT, tmp.dir);
+    assert.ok(count > 0, 'installed at least one skill');
+
+    // Check a skill was written
+    const initSkill = path.join(skillsDir, 'ttm-init', 'SKILL.md');
+    assert.ok(install.fileExists(initSkill), 'ttm-init/SKILL.md created');
+
+    // Check ${CLAUDE_PLUGIN_ROOT} was replaced
+    const content = fs.readFileSync(initSkill, 'utf8');
+    assert.ok(!content.includes('${CLAUDE_PLUGIN_ROOT}'), 'CLAUDE_PLUGIN_ROOT replaced');
+    assert.ok(content.includes('.taketomarket'), 'replaced with .taketomarket path');
   });
 });
 
