@@ -379,6 +379,118 @@ function getInstalledRuntimes(homeDir = os.homedir()) {
   });
 }
 
+// ── Status & Confirmation ─────────────────────────────────────────────────────
+
+/**
+ * Used by confirmInstall — extracted for testability.
+ * @param {boolean} yesFlag
+ * @returns {boolean} true if yesFlag is set (no prompt needed)
+ */
+function shouldProceed(yesFlag) {
+  return yesFlag === true;
+}
+
+/**
+ * Read Claude Code install status for the checkStatus output.
+ * @param {string} [homeDir]
+ * @returns {{ installed: boolean, registered: boolean, skillCount: number, dir: string }}
+ */
+function getClaudeStatus(homeDir = os.homedir()) {
+  const pluginDir = path.join(homeDir, '.claude', 'plugins', 'taketomarket');
+  const installed = dirExists(pluginDir);
+  if (!installed) return { installed: false, registered: false, skillCount: 0, dir: pluginDir };
+
+  const skillsDir = path.join(pluginDir, 'skills');
+  let skillCount = 0;
+  if (dirExists(skillsDir)) {
+    try {
+      skillCount = fs.readdirSync(skillsDir, { withFileTypes: true })
+        .filter(e => e.isDirectory() && fileExists(path.join(skillsDir, e.name, 'SKILL.md')))
+        .length;
+    } catch { /* ignore */ }
+  }
+
+  const registryPath = path.join(homeDir, '.claude', 'plugins', 'installed_plugins.json');
+  let registered = false;
+  if (fileExists(registryPath)) {
+    try {
+      const reg = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      registered = !!(reg.plugins && reg.plugins['taketomarket@npm']);
+    } catch { /* ignore */ }
+  }
+
+  return { installed: true, registered, skillCount, dir: pluginDir };
+}
+
+/**
+ * Print install status for all known runtimes and exit.
+ * @param {string} version
+ * @param {string} [homeDir]
+ */
+function checkStatus(version, homeDir = os.homedir()) {
+  const targets = buildRuntimeTargets(homeDir);
+  console.log('');
+  console.log(`takeToMarket v${version}`);
+  console.log('');
+
+  const claude = getClaudeStatus(homeDir);
+  if (claude.installed) {
+    console.log(`Claude Code: INSTALLED (${claude.skillCount} skills, ${claude.dir.replace(homeDir, '~')})`);
+    console.log(`  registered: ${claude.registered ? 'yes (installed_plugins.json)' : 'NO — slash commands will not appear'}`);
+  } else {
+    console.log('Claude Code: NOT INSTALLED');
+  }
+
+  for (const name of ['codex', 'cursor', 'windsurf', 'gemini']) {
+    const t = targets[name];
+    const label = t.label.padEnd(12);
+    if (t.dir && dirExists(t.dir)) {
+      console.log(`${label} INSTALLED (${t.dir.replace(homeDir, '~')})`);
+    } else {
+      console.log(`${label} NOT INSTALLED`);
+    }
+  }
+
+  console.log('');
+  console.log('Run `npx taketomarket` to install or reinstall.');
+  process.exit(0);
+}
+
+/**
+ * Interactively confirm install. Skipped when yesFlag is true.
+ * @param {Array<{label, dir}>} targets
+ * @param {string} version
+ * @param {boolean} yesFlag
+ * @returns {Promise<boolean>}
+ */
+async function confirmInstall(targets, version, yesFlag) {
+  if (shouldProceed(yesFlag)) return true;
+
+  const { createInterface } = require('node:readline');
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  const ask = (q) => new Promise(resolve => rl.question(q, resolve));
+
+  console.log('');
+  console.log(`takeToMarket v${version} — Marketing OS for AI coding tools`);
+  console.log('');
+  console.log('This will install to:');
+  for (const t of targets) {
+    const shortDir = t.dir.replace(os.homedir(), '~');
+    console.log(`  ${shortDir.padEnd(45)} (${t.label})`);
+  }
+  console.log('');
+
+  const answer = await ask('Proceed? [Y/n]: ');
+  rl.close();
+
+  const trimmed = answer.trim().toLowerCase();
+  if (trimmed === 'n') {
+    console.log('Installation cancelled.');
+    process.exit(0);
+  }
+  return true;
+}
+
 // ── Validation ───────────────────────────────────────────────────────────────
 
 /**
@@ -574,6 +686,10 @@ module.exports = {
   parseRuntimeChoices,
   buildRuntimeTargets,
   promptRuntimeSelection,
+  shouldProceed,
+  getClaudeStatus,
+  checkStatus,
+  confirmInstall,
   DIRS_TO_COPY,
   FILES_TO_COPY,
   RUNTIME_MENU,

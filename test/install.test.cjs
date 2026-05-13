@@ -264,3 +264,42 @@ describe('getInstalledRuntimes', () => {
     assert.ok(!result.includes('codex'));
   });
 });
+
+describe('shouldProceed (confirmInstall logic)', () => {
+  it('returns true immediately when yesFlag is true', () => {
+    assert.strictEqual(install.shouldProceed(true), true);
+  });
+});
+
+describe('checkStatus', () => {
+  let tmp;
+
+  before(() => {
+    tmp = createTempDir();
+    const pluginDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket', 'skills');
+    fs.mkdirSync(pluginDir, { recursive: true });
+    const skillDir = path.join(tmp.dir, '.claude', 'plugins', 'taketomarket', 'skills', 'ttm-init');
+    fs.mkdirSync(skillDir, { recursive: true });
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md'), '---\nname: ttm-init\n---\n');
+    const registryPath = path.join(tmp.dir, '.claude', 'plugins', 'installed_plugins.json');
+    fs.mkdirSync(path.dirname(registryPath), { recursive: true });
+    fs.writeFileSync(registryPath, JSON.stringify({
+      version: 2,
+      plugins: { 'taketomarket@npm': [{ scope: 'user', installPath: '/fake', version: '2.0.0',
+        installedAt: '2026-01-01T00:00:00.000Z', lastUpdated: '2026-01-01T00:00:00.000Z', gitCommitSha: null }] },
+    }));
+  });
+
+  after(() => { tmp.cleanup(); });
+
+  it('getClaudeStatus returns INSTALLED when plugin dir + registry entry exist', () => {
+    const status = install.getClaudeStatus(tmp.dir);
+    assert.strictEqual(status.installed, true);
+    assert.strictEqual(status.registered, true);
+  });
+
+  it('getClaudeStatus returns NOT INSTALLED when plugin dir missing', () => {
+    const status = install.getClaudeStatus(path.join(tmp.dir, 'nonexistent'));
+    assert.strictEqual(status.installed, false);
+  });
+});
