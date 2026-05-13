@@ -3,7 +3,7 @@
 **Date:** 2026-05-13
 **Scope:** All 21 improvements from `docs/improvements.md` (IMP-01 through IMP-21)
 **Version target:** 2.0.0
-**Structure:** 5 sequential waves ordered by dependency
+**Structure:** 6 sequential waves (Wave 0 = Research, Waves 1–5 = implementation)
 
 ---
 
@@ -18,37 +18,148 @@ Additionally: the repo must be made public and the README must be rewritten befo
 
 ---
 
+## Wave 0 — Research
+
+**Goal:** Lock in all unknowns before any code is written. Every implementation wave depends on Wave 0 findings.
+
+**All research runs before Wave 1.** No implementation begins until all research items have a recorded finding.
+
+Findings are written to `docs/research/v2-runtime-research.md` and used to populate the implementation waves' target maps and schemas.
+
+### R-01 — Verify `installed_plugins.json` schema (Claude Code)
+
+**Already inspected (2026-05-13).** Real schema found on machine:
+
+```json
+{
+  "version": 2,
+  "plugins": {
+    "superpowers@claude-plugins-official": [{
+      "scope": "user",
+      "installPath": "/Users/rishikeshranjan/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0",
+      "version": "5.1.0",
+      "installedAt": "2026-04-30T16:49:43.850Z",
+      "lastUpdated": "2026-05-06T18:59:36.713Z",
+      "gitCommitSha": "6efe32c9e2dd002d0c394e861e0529675d1ab32e"
+    }]
+  }
+}
+```
+
+**Key findings:**
+- Root is `{ version: 2, plugins: { ... } }` — not a flat object
+- User-scope entries have NO `projectPath` (project-scope entries do)
+- `installPath` points to the actual plugin dir on disk
+- `gitCommitSha` is present on all entries — for npm installs, use `null` or omit if Claude Code tolerates absence
+- `version` can be semver string (not SHA-only)
+
+**For takeToMarket's entry (user-scope, npm-installed):**
+```json
+"taketomarket@npm": [{
+  "scope": "user",
+  "installPath": "/Users/<user>/.claude/plugins/taketomarket",
+  "version": "2.0.0",
+  "installedAt": "<ISO timestamp>",
+  "lastUpdated": "<ISO timestamp>",
+  "gitCommitSha": null
+}]
+```
+
+**Open question:** Does Claude Code require `gitCommitSha` to be non-null? Must verify by testing — install with `null` and check if skills appear.
+
+### R-02 — Research Codex registration mechanism
+
+**Spike:** Does `~/.codex/plugins/installed_plugins.json` exist? Same schema as Claude Code?
+
+Find by:
+- Checking Codex official docs for plugin registration format
+- Looking inside `~/.codex/` on machines with Codex installed
+- Searching OpenAI Codex CLI repository for plugin loading code
+
+**Expected outcome:** Either same schema → extend `registerPlugin()`, or different schema → implement `registerCodexPlugin()`, or no registration mechanism → copy-only with note.
+
+### R-03 — Cursor: rules format + correct install path
+
+**Spike:** What is the correct path and format for user-level Cursor rules?
+
+- Project-level rules: `.cursor/rules/*.mdc` (inside each project)
+- User-level rules: location unknown — may be in Cursor app settings, not filesystem
+- `.mdc` frontmatter schema: research required
+
+Find by: Cursor official docs, `~/.cursor/` filesystem inspection, community resources.
+
+**Expected outcome:** Either user-level rules path confirmed + mdc format documented → implement adapter, or no user-level equivalent → mark "coming soon."
+
+### R-04 — Windsurf: rules format + install path
+
+**Spike:** Does Windsurf have a skills/commands system? Where does it look for user-level rules?
+
+- Check `~/.codeium/windsurf/` structure
+- Windsurf official docs for rules/memory system
+
+**Expected outcome:** Either confirmed format → design adapter, or no standardized format → mark "coming soon."
+
+### R-05 — Gemini CLI: existing GEMINI.md compatibility
+
+**Spike:** Does the existing `GEMINI.md` in the repo actually work with Gemini CLI?
+
+Steps:
+- Install Gemini CLI
+- Copy `GEMINI.md` to the Gemini CLI config location
+- Run `ttm-init` flow
+- Record: which tools are missing, which prompts fail, UX differences vs Claude Code
+
+**Note:** Requires Gemini CLI installed on machine — this is an environment prerequisite. If Gemini CLI access is not available, spike is blocked; document and defer IMP-11.
+
+**Expected outcome:** Updated `GEMINI.md` with validation status, or known-gap list.
+
+### R-06 — Marketplace submission requirements (IMP-06a)
+
+**Spike:** What does `anthropics/claude-plugins-official` require for external plugin listing?
+
+- Fetch `https://github.com/anthropics/claude-plugins-official` repo structure
+- Find `/external_plugins/` directory format and `plugin.json` schema
+- Find submission form and review criteria
+
+**Deliverable from Wave 0:** Prepared `plugin.json` file ready to submit. PR draft ready. Cannot submit until repo is public (Wave 5 gate).
+
+### R-07 — GitHub direct install syntax (IMP-07)
+
+**Spike:** Does Claude Code support `/plugin install github:owner/repo` or `/plugin install name@owner`?
+
+- Check Claude Code docs for direct GitHub install syntax
+- Test both forms if possible before repo is public
+
+**Deliverable:** Confirmed syntax or "not supported" finding. README Option 3 is written based on this.
+
+---
+
 ## Wave 1 — Safety + Critical Blockers
 
 **Items:** IMP-16, IMP-15, IMP-02
-
-**Goal:** Fix the two broken things (leaking local paths, broken slash commands) and wrong URL before any new work lands.
+**Depends on:** Wave 0 (R-01 schema verified)
 
 ### IMP-16 — Untrack `settings.local.json`
 
-`.claude/settings.local.json` is tracked in git and contains absolute paths with the local username (`/Users/rishikeshranjan/...`). This leaks local filesystem layout to every repo cloner.
+`.claude/settings.local.json` is tracked in git and contains absolute paths with local username. This leaks local filesystem layout to every repo cloner.
 
 **Steps:**
 1. Append to `.gitignore`: `.claude/settings.local.json`
 2. `git rm --cached .claude/settings.local.json`
 3. Commit: `chore: gitignore settings.local.json — prevents leaking local filesystem paths`
 
-No code changes. `.claude/settings.local.json` stays on disk locally; only removed from tracking.
-
 ### IMP-15 — Fix wrong GitHub URL
 
-README `git clone` section and install.js success message both reference `github.com/taketomarket/taketomarket` — this org/repo does not exist.
+README and install.js both reference `github.com/taketomarket/taketomarket` — this org/repo does not exist.
 
 **Fix everywhere:**
 - `README.md`: all instances → `https://github.com/ranjanrishikesh/takeToMarket`
-- `install.js` ~line 280: docs URL in success message → `https://github.com/ranjanrishikesh/takeToMarket#readme`
-- `.claude-plugin/plugin.json`: bump version from `"0.1.0"` to `"1.0.1"` to match npm package
+- `install.js` success message URL → `https://github.com/ranjanrishikesh/takeToMarket#readme`
+- `.claude-plugin/plugin.json`: bump version from `"0.1.0"` to `"1.0.1"`
 
 ### IMP-02 — Register in `installed_plugins.json`
 
-**The core fix.** Claude Code only sets `${CLAUDE_PLUGIN_ROOT}` for plugins registered in `~/.claude/plugins/installed_plugins.json`. Without this, skills appear to install but never surface as slash commands and always fail.
-
-**New function:** `registerPlugin(installPath, version)` in `install.js`:
+**The core fix.** Verified schema (Wave 0 R-01). New function `registerPlugin(installPath, version)`:
 
 ```js
 function registerPlugin(installPath, version) {
@@ -56,26 +167,30 @@ function registerPlugin(installPath, version) {
   const pluginsDir = path.dirname(registryPath);
 
   // Read existing registry
-  let registry = {};
+  let registry = { version: 2, plugins: {} };
   if (fileExists(registryPath)) {
     try {
-      registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      const parsed = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      registry = parsed;
+      if (!registry.plugins) registry.plugins = {};
     } catch {
       // Corrupted — back up and start fresh
       fs.renameSync(registryPath, registryPath + '.bak');
       console.warn('Warning: installed_plugins.json was corrupted. Backed up to .bak and recreated.');
+      registry = { version: 2, plugins: {} };
     }
   }
 
   const now = new Date().toISOString();
-  const existing = (registry['taketomarket@npm'] || [])[0];
+  const existing = (registry.plugins['taketomarket@npm'] || [])[0];
 
-  registry['taketomarket@npm'] = [{
+  registry.plugins['taketomarket@npm'] = [{
     scope: 'user',
     installPath,
     version,
     installedAt: existing?.installedAt ?? now,
     lastUpdated: now,
+    gitCommitSha: null,   // npm installs have no git SHA
   }];
 
   // Atomic write
@@ -88,7 +203,9 @@ function registerPlugin(installPath, version) {
 }
 ```
 
-Called in `main()` after file copy succeeds, only for Claude Code runtime (Codex registration is a Wave 4 spike — IMP-12).
+**Note on `gitCommitSha: null`:** Must verify during implementation that Claude Code accepts `null` (vs requiring a non-null SHA). If it rejects `null`, omit the field entirely.
+
+Called after file copy succeeds, Claude Code runtime only. Codex registration is Wave 4 IMP-12 based on Wave 0 R-02 findings.
 
 **Wave 1 files changed:** `.gitignore`, `README.md`, `install.js`, `.claude-plugin/plugin.json`
 
@@ -97,19 +214,18 @@ Called in `main()` after file copy succeeds, only for Claude Code runtime (Codex
 ## Wave 2 — Installer Overhaul
 
 **Items:** IMP-01, IMP-03, IMP-04, IMP-05
-
-**Goal:** Replace silent auto-detect with an interactive multi-runtime selection flow. Add UX polish: confirmation, `--check` flag, post-install summary.
+**Depends on:** Wave 0 (runtime paths and formats needed to build install target map)
 
 ### IMP-01 — Interactive runtime selection
 
 Replace `detectRuntime()` with `promptRuntimeSelection(args)`.
 
 **Flow:**
-1. If `--runtime <name>` flag present → use it (legacy compat, single runtime)
-2. If non-TTY stdin (CI/pipe) → auto-detect as today + print warning
+1. If `--runtime <name>` flag present → use it (legacy compat, single runtime, no prompt)
+2. If non-TTY stdin (CI/pipe) → auto-detect (check `~/.claude/`, `~/.codex/`) + print warning that interactive selection was skipped
 3. If interactive TTY → show multi-select prompt
 
-**Prompt format:**
+**Prompt:**
 ```
 Which AI coding tool(s) are you using? (select all that apply)
 
@@ -126,33 +242,45 @@ Your choice (comma-separated, e.g. 1,3):
 
 **Input parsing:**
 - Comma-separated integers: `1,3` → [claudeCode, cursor]
-- `6` → expand to [1,2,3,4,5] (all named runtimes)
+- `6` → expand to [1,2,3,4,5]
 - `7` → secondary prompt: `Enter install path:` → custom target
-- Invalid input → re-prompt once, then exit with error
+- Invalid input → re-prompt once, then exit with error + GitHub Issue link
+
+**Runtime validation:** Before installing to each target, check if the runtime's parent dir exists (e.g., `~/.claude/` for Claude Code). If missing:
+```
+Warning: Claude Code doesn't appear to be installed (~/.claude not found).
+Installing anyway — files will be ready when you install Claude Code.
+```
+Then proceed with the install.
+
+**Failure handling:** If a runtime's install fails, skip that runtime and continue with the others. Report failures in the final summary. Always print:
+```
+Something went wrong? File an issue: https://github.com/ranjanrishikesh/takeToMarket/issues
+```
+
+**Install target map** (paths subject to Wave 0 research — update if Wave 0 finds different paths):
+
+| Runtime | Plugin dir | Registration | Notes |
+|---------|-----------|-------------|-------|
+| Claude Code | `~/.claude/plugins/taketomarket/` | `installed_plugins.json` (IMP-02) | Fully implemented |
+| Codex | `~/.codex/plugins/taketomarket/` | Wave 4 IMP-12 (based on Wave 0 R-02) | Copy only in Wave 2 |
+| Cursor | Wave 0 R-03 finding | Wave 4 IMP-09 | Show "[partial]" in Wave 2 |
+| Windsurf | Wave 0 R-04 finding | Wave 4 IMP-10 | Show "[partial]" in Wave 2 |
+| Gemini CLI | Wave 0 R-05 finding | Wave 4 IMP-11 | Show "[partial]" in Wave 2 |
+| Custom | user-typed path | None | Always supported |
+
+For Wave 4 runtimes (Cursor, Windsurf, Gemini, Codex): installer copies files to the researched path and prints `[PARTIAL] <Runtime>: files copied — slash command registration coming in a future update`.
+
+Result: `promptRuntimeSelection()` returns `[{ name, dir, register }]`. Copy + registration loop runs once per target.
 
 **Implementation:** Pure Node.js `readline` — zero npm dependencies.
-
-**Install target map:**
-
-| Runtime | Plugin dir | Registration |
-|---------|-----------|-------------|
-| Claude Code | `~/.claude/plugins/taketomarket/` | `installed_plugins.json` (IMP-02) |
-| Codex | `~/.codex/plugins/taketomarket/` | Wave 4 spike (IMP-12) |
-| Cursor | `~/.cursor/rules/` | Wave 4 spike (IMP-09) |
-| Windsurf | `~/.codeium/windsurf/` | Wave 4 spike (IMP-10) |
-| Gemini CLI | `~/.gemini/` | Wave 4 validation (IMP-11) |
-| Custom | user-typed path | None |
-
-For Wave 4 runtimes (Cursor, Windsurf, Gemini, Codex): installer copies files and prints `[PARTIAL] <Runtime>: files copied — slash command registration pending research (see Wave 4)`.
-
-Result: `promptRuntimeSelection()` returns an array of target objects: `[{ name, dir, register }]`. The copy + registration loop runs once per target.
 
 ### IMP-03 — Confirmation prompt
 
 Fires after runtime selection, before any file writes. Skipped with `--yes` / `-y`.
 
 ```
-takeToMarket v1.0.1 — Marketing OS for Claude Code
+takeToMarket vX.X.X — Marketing OS for Claude Code
 
 This will install to:
   ~/.claude/plugins/taketomarket/    (Claude Code)
@@ -161,7 +289,8 @@ This will install to:
 Proceed? [Y/n]:
 ```
 
-Empty input or `y`/`Y` → proceed. `n`/`N` → `console.log('Installation cancelled.')` + `process.exit(0)`.
+Version shown dynamically from `VERSION` constant — never hardcoded.
+Empty input or `y`/`Y` → proceed. `n`/`N` → `Installation cancelled.` + `process.exit(0)`.
 
 **New function:** `confirmInstall(targets, version, yesFlag)` → returns boolean.
 
@@ -169,19 +298,17 @@ Empty input or `y`/`Y` → proceed. `n`/`N` → `console.log('Installation cance
 
 `npx taketomarket --check` → inspect install state without writing.
 
-Checks per runtime:
-- Plugin directory exists?
-- Skill count in `skills/` subdirectory?
-- For Claude Code: entry in `installed_plugins.json`?
+Checks ALL known runtimes (not just what user originally installed to — gives full picture of machine state):
 
-Output:
 ```
-takeToMarket v1.0.1
+takeToMarket vX.X.X
 
 Claude Code: INSTALLED (27 skills, ~/.claude/plugins/taketomarket)
   registered: yes (installed_plugins.json)
 Codex:       NOT INSTALLED
 Cursor:      NOT INSTALLED
+Windsurf:    NOT INSTALLED
+Gemini CLI:  NOT INSTALLED
 
 Run `npx taketomarket` to install or reinstall.
 ```
@@ -190,33 +317,35 @@ Run `npx taketomarket` to install or reinstall.
 
 ### IMP-05 — Post-install summary
 
-After all targets install successfully, dynamically discover skills and print slash commands.
+After all targets complete (success or skip), print all slash commands.
 
-Skill discovery: scan `<targetDir>/skills/` for directories containing `SKILL.md`. Sort alphabetically. Print as `/taketomarket:<dirname>`.
+**Skill discovery:** Scan `PACKAGE_ROOT/skills/` (npm package source — `__dirname/skills/`) for directories containing `SKILL.md`. This path is always correct regardless of runtime, since the npm package is always present. Sort alphabetically. Print as `/taketomarket:<dirname>`.
 
+Description per command: first line of `description:` YAML frontmatter from the skill's `SKILL.md`.
+
+**New function:** `printInstallSummary()` — no `targetDir` param, reads from `PACKAGE_ROOT`.
+
+### IMP-05 — Update `--help` text
+
+Add new flags to the help output:
 ```
-Installation complete! 27 skills installed.
-
-Available commands:
-  /taketomarket:ttm-aeo-check         Check citation status across AI engines
-  /taketomarket:ttm-affiliate-kit     Generate creative kit for affiliate partners
-  /taketomarket:ttm-archive           Archive a completed campaign
-  ... (all 27)
-
-Quick start: open any project in Claude Code and run /taketomarket:ttm-init
+Options:
+  --runtime <claude|codex>  Target runtime, skip interactive prompt (default: prompt)
+  --check                   Show install status without installing
+  --yes, -y                 Skip confirmation prompt (for CI/scripted use)
+  --dry-run                 Validate source without writing files
+  --version, -v             Print version
+  --help, -h                Show this help message
 ```
 
-Description for each command: read from `SKILL.md` `description:` frontmatter field (first line of multi-line value).
-
-**New function:** `printInstallSummary(targetDir)`.
-
-**Wave 2 files changed:** `install.js` only. New functions: `promptRuntimeSelection()`, `confirmInstall()`, `checkStatus()`, `printInstallSummary()`. `main()` refactored to orchestrate the new flow.
+**Wave 2 files changed:** `install.js` only. New functions: `promptRuntimeSelection()`, `confirmInstall()`, `checkStatus()`, `printInstallSummary()`. `main()` refactored. `--help` text updated.
 
 ---
 
 ## Wave 3 — README Overhaul
 
-**Items:** IMP-08, IMP-13, IMP-14, IMP-15 (IMP-15 already handled in Wave 1)
+**Items:** IMP-08, IMP-13, IMP-14, IMP-15 (IMP-15 already done in Wave 1)
+**Depends on:** Wave 0 R-07 (to know whether Options 2+3 in README are verified or placeholders)
 
 **Goal:** Rewrite README so any user can go from "found this repo" to "running first campaign" without additional help.
 
@@ -224,12 +353,10 @@ Description for each command: read from `SKILL.md` `description:` frontmatter fi
 
 ```
 # takeToMarket
-[tagline + core invariant — keep existing]
 
 ## What it is / What it isn't
 IS: marketing OS with positioning enforcement, quality gate walls, compound learnings.
 IS NOT: content generator, one-click blog writer, social media scheduler.
-[~100 words]
 
 ## Requirements
 - Node.js 18+
@@ -243,12 +370,12 @@ npx taketomarket
 # Interactive: asks which tool(s) you use, installs to all selected
 
 ### Option 2 — Claude Code plugin marketplace
+# [pending marketplace approval — status updated when available]
 /plugin install taketomarket@claude-plugins-official
-# (pending marketplace approval — see contributing)
 
 ### Option 3 — Direct from GitHub (Claude Code)
+# [syntax verified/updated based on Wave 0 R-07 findings]
 /plugin install taketomarket@ranjanrishikesh
-# (verify syntax — see docs/superpowers/specs/ for research findings)
 
 ### Option 4 — Manual (advanced)
 git clone https://github.com/ranjanrishikesh/takeToMarket
@@ -260,6 +387,18 @@ cd takeToMarket && node install.js
 /taketomarket:ttm-produce          # run production wave
 
 ## Campaign Lifecycle
+[numbered list showing full campaign flow]
+
+## Command Reference
+[table: 27 rows — command | description]
+
+## Verify Installation
+/taketomarket:ttm-health
+```
+
+**Campaign lifecycle** — the phase count in improvements.md says "9-phase" but lists 11 steps. Drop the count in README; just show the flow as a numbered list without a total count:
+
+```
 1. Init — set up workspace
 2. New Campaign — create campaign directory
 3. Research — discover market and audience
@@ -271,15 +410,9 @@ cd takeToMarket && node install.js
 9. Ship — launch checklist
 10. Measure — analytics vs outcome metrics
 11. Learn — extract lessons, update reference files
-
-## Command Reference
-[Table: 27 rows — command | description]
-
-## Verify Installation
-/taketomarket:ttm-health   # validates setup inside Claude Code
 ```
 
-**Command reference table** — populated from the 27 SKILL.md descriptions already extracted:
+**Command reference table** — 27 skills, descriptions from SKILL.md frontmatter:
 
 | Command | Description |
 |---------|-------------|
@@ -315,90 +448,44 @@ cd takeToMarket && node install.js
 
 ---
 
-## Wave 4 — Research Spikes + Multi-Runtime
+## Wave 4 — Multi-Runtime Implementation
 
-**Items:** IMP-06, IMP-07, IMP-09, IMP-10, IMP-11, IMP-12
+**Items:** IMP-06a (prep), IMP-07 (finalize), IMP-09, IMP-10, IMP-11, IMP-12
+**Depends on:** Wave 0 findings for each item
 
-**Approach:** Each spike defines "what to discover." Run spike → write findings → implement or document limitation. Spikes are sequential (later spike findings may affect installer code touched by earlier spikes).
+Each item's implementation is fully defined by its Wave 0 research spike findings. Wave 4 work is: take the findings → implement or document.
 
-### IMP-06 — Claude Code marketplace submission
+### IMP-12 — Codex registration (based on Wave 0 R-02)
 
-**Discover:**
-- Fetch `https://github.com/anthropics/claude-plugins-official` repo structure
-- Find `/external_plugins/` directory format and required `plugin.json` schema
-- Find submission process (form URL, PR requirements, review criteria)
+- If same schema as Claude Code → extend `registerPlugin(runtime, installPath, version)` to handle both
+- If different schema → implement `registerCodexPlugin(installPath, version)`
+- If no mechanism → add note to `checkStatus()` output and README
 
-**Implement:**
-- Create `/external_plugins/taketomarket/plugin.json` with correct schema
-- Submit form at `https://clau.de/plugin-directory-submission`
-- Open PR to `anthropics/claude-plugins-official`
+### IMP-09 — Cursor adapter (based on Wave 0 R-03)
 
-**Deliverable:** Submitted PR. Update README Option 2 with confirmed marketplace status.
+- If user-level rules path confirmed + `.mdc` format documented → write `bin/lib/cursor-adapter.cjs` that converts each `skills/ttm-*/SKILL.md` to the correct `.mdc` format; wire into installer Cursor target
+- If only project-level rules exist → write adapter but document that user must run installer per project
+- If no equivalent → update installer to show "[not supported]" instead of "[partial]" for Cursor; document in README
 
-### IMP-07 — GitHub direct install syntax
+### IMP-10 — Windsurf adapter (based on Wave 0 R-04)
 
-**Discover:**
-- Check Claude Code docs for `/plugin install` syntax supporting GitHub repos
-- Test: does `/plugin install taketomarket@ranjanrishikesh` work?
-- Test: does `/plugin install github:ranjanrishikesh/takeToMarket` work?
+- If standardized format confirmed → design and implement adapter
+- If no format → update installer to show "[not supported]" for Windsurf; document in README
 
-**Implement:**
-- Update README Option 3 with verified working syntax
-- If neither works: document limitation, remove Option 3 from README
+### IMP-11 — Gemini CLI (based on Wave 0 R-05)
 
-**Deliverable:** README updated with verified or removed Option 3.
-
-### IMP-09 — Cursor adapter
-
-**Discover:**
-- Inspect `~/.cursor/rules/` format (`.mdc` files)
-- Check if Cursor supports slash commands or only ambient rules
-- Find exact frontmatter schema for `.mdc` files
-
-**Implement:**
-- If slash commands supported: write `bin/lib/cursor-adapter.cjs` that converts each `skills/ttm-*/SKILL.md` to `~/.cursor/rules/ttm-<name>.mdc`; wire into installer for Cursor runtime target
-- If only ambient rules: generate a single `taketomarket.mdc` with condensed campaign lifecycle instructions; mark individual skill commands as "not supported"
-- If no equivalent: document limitation in README; installer menu shows "Cursor: coming soon"
-
-**Deliverable:** Working adapter OR documented limitation. Installer Cursor path updated accordingly.
-
-### IMP-10 — Windsurf adapter
-
-**Discover:**
-- Research Windsurf's current rules/skills format and install path (`~/.codeium/windsurf/`?)
-- Determine if Windsurf has a slash command system
-
-**Implement:**
-- If standardized format found: design adapter (scope TBD based on findings)
-- If no format: mark "coming soon" in installer; document in README
-
-**Deliverable:** Working adapter OR documented limitation.
-
-### IMP-11 — Gemini CLI validation
-
-**Discover:**
-- Install Gemini CLI
-- Run `ttm-init` flow using existing `GEMINI.md`
-- Record: which tools are missing, which prompts fail, UX differences vs Claude Code
-
-**Implement:**
 - Update `GEMINI.md` with confirmed-working and known-gap annotations
-- Fix any gaps that can be fixed in `GEMINI.md` without code changes
+- Fix any gaps addressable in `GEMINI.md` without code changes
 
-**Deliverable:** Updated `GEMINI.md` with validation status per skill.
+### IMP-06a — Marketplace PR preparation (Wave 0 R-06 deliverable carried forward)
 
-### IMP-12 — Codex registration fix
+- Create prepared `plugin.json` for `anthropics/claude-plugins-official` submission
+- PR is drafted but NOT submitted — submission requires public repo (Wave 5 gate)
 
-**Discover:**
-- Check if `~/.codex/plugins/installed_plugins.json` exists and matches Claude Code schema
-- If different: determine correct Codex registration mechanism
+### IMP-07 — Finalize README Options 2+3 (based on Wave 0 R-07)
 
-**Implement:**
-- If same schema as Claude Code: extend `registerPlugin()` to accept runtime param; call for both Claude Code and Codex targets
-- If different schema: implement `registerCodexPlugin()` with correct format
-- If no registration mechanism: document in README; Codex install remains file-copy-only
-
-**Deliverable:** Working Codex registration parity with IMP-02.
+- Update README with verified GitHub direct install syntax
+- If syntax doesn't work: remove Option 3 from README
 
 **Wave 4 files changed:** `install.js` (runtime adapters + registration), `bin/lib/cursor-adapter.cjs` (if Cursor adapter), `GEMINI.md`, `README.md` (Options 2+3 finalized).
 
@@ -406,55 +493,49 @@ cd takeToMarket && node install.js
 
 ## Wave 5 — Go-Public Checklist
 
-**Items:** IMP-17, IMP-18, IMP-19, IMP-20, IMP-21
+**Items:** IMP-17, IMP-18, IMP-19, IMP-20, IMP-21, IMP-06b
 
 **Executed in strict order. All required items before optional.**
 
 ### Required blockers (must complete before flipping public)
 
+Verify all prior waves' blockers are complete:
+- IMP-16 done (Wave 1): `.claude/settings.local.json` not tracked
+- IMP-02 done (Wave 1): installer registers in `installed_plugins.json`
+- IMP-15 done (Wave 1): README URLs are correct
+- IMP-14 done (Wave 3): how-to-use section exists
+
 **IMP-19 — Scan git history for secrets**
 
-Run:
 ```bash
 git log --all --full-history -p | grep -iE "(api_key|secret|password|token|sk-|Bearer)" | grep -v "^--" | head -30
 git log --all --full-history -p | grep "/Users/rishikeshranjan" | grep -v "^--" | head -20
 ```
 
-- If credentials found → `git filter-repo` scrub before proceeding (do NOT use deprecated `git filter-branch`)
-- If only local paths found (expected from old `settings.local.json` commits) → acceptable; document as no credentials exposed
-- If clean → proceed
-
-**IMP-16 already done in Wave 1.** Verify `.claude/settings.local.json` is no longer tracked.
-
-**IMP-02 already done in Wave 1.** Verify installer registers correctly.
-
-**IMP-15 already done in Wave 1.** Verify README URLs are correct.
-
-**IMP-14 already done in Wave 3.** Verify how-to-use section exists.
+- Credentials found → `git filter-repo` scrub (do NOT use deprecated `git filter-branch`)
+- Local paths only → acceptable; document as no credentials exposed
+- Clean → proceed
 
 ### Recommended before public
 
 **IMP-17 — `.planning/` directory**
 
-Decision: add to `.gitignore` going forward; leave existing history intact (no `git filter-repo` rewrite — build artifacts, no sensitive content).
-
-Steps:
+Add to `.gitignore` going forward; leave existing history intact (build artifacts, no sensitive content):
 1. Append `.planning/` to `.gitignore`
 2. Commit: `chore: gitignore .planning/ — build artifacts not needed by users`
 
 **IMP-18 — `idea.md`**
 
-Decision: delete it. Content is embodied in the product. `idea.md` explicitly names inspiration sources and competitor dynamics not intended for public consumption.
-
-Steps:
-1. Extract any positioning language still relevant → insert into README "What it is / What it isn't" section
-2. `git rm idea.md`
-3. Commit: `chore: remove idea.md — working doc served its purpose, positioning lives in README`
+Delete. Extract any relevant positioning → README "What it is / What it isn't":
+1. Read `idea.md`, extract positioning language worth keeping
+2. Insert into README
+3. `git rm idea.md`
+4. Commit: `chore: remove idea.md — working doc served its purpose`
 
 **IMP-20 — `CONTRIBUTING.md`**
 
-Create at repo root with:
-- Bug reporting: GitHub Issues
+Create at repo root:
+- Bug reporting: GitHub Issues at `https://github.com/ranjanrishikesh/takeToMarket/issues`
 - Feature proposals: open discussion first, then PR
 - Dev setup: `git clone https://github.com/ranjanrishikesh/takeToMarket && node --test`
 - Code style: zero npm dependencies, CJS for `bin/`, Markdown for skills
@@ -462,40 +543,61 @@ Create at repo root with:
 
 ### IMP-21 — Go-public execution
 
-Verify each gate in the IMP-21 checklist is green, then:
+Verify all blockers green, then:
 ```bash
 gh repo edit ranjanrishikesh/takeToMarket --visibility public
 ```
 
-**This is an irreversible public action — requires explicit user confirmation before executing.**
+**Irreversible. Requires explicit user confirmation before executing.**
 
-**After going public:**
-- IMP-06: Submit marketplace form + open PR to `anthropics/claude-plugins-official` (findings from Wave 4)
+### IMP-06b — Marketplace submission (post-public)
+
+After repo is public:
+- Submit the prepared `plugin.json` (Wave 4 IMP-06a deliverable)
+- Submit form at `https://clau.de/plugin-directory-submission`
+- Open PR to `anthropics/claude-plugins-official`
+- Update README Option 2 status
+
+### After going public
 - Announce: X, LinkedIn, Hacker News, Claude Discord
 - Add GitHub repo topics: `claude-code`, `marketing`, `ai-agents`, `codex`, `gtm`
 
-**Wave 5 files changed:** `.gitignore` (`.planning/` entry), `CONTRIBUTING.md` (new file), `README.md` (positioning extract from idea.md).
+**Wave 5 files changed:** `.gitignore` (`.planning/`), `CONTRIBUTING.md` (new), `README.md` (IMP-18 positioning extract, IMP-06b status update).
+
+---
+
+## Error Handling Pattern
+
+Any error during install (runtime copy fail, registration fail, validation fail) must:
+1. Log the specific failure with runtime name
+2. Skip that runtime and continue with others
+3. Print final summary showing successes and failures
+4. Always end with:
+```
+Something went wrong? File an issue: https://github.com/ranjanrishikesh/takeToMarket/issues
+```
+
+Exit 0 if at least one runtime installed successfully. Exit non-zero if all runtimes failed.
 
 ---
 
 ## Test Coverage
 
-Each wave must pass `node --test` before merging. New behavior to cover in tests:
+Each wave passes `node --test` before merging.
 
 | Wave | New behavior to test |
 |------|---------------------|
-| Wave 1 | `registerPlugin()`: creates entry, handles corruption, atomic write, updates `lastUpdated` on reinstall |
-| Wave 2 | `promptRuntimeSelection()`: input parsing, "6" expansion, custom path prompt, non-TTY fallback; `confirmInstall()`: y/n/empty handling, --yes bypass; `checkStatus()`: installed vs not installed output |
-| Wave 2 | `printInstallSummary()`: skill discovery, description extraction |
+| Wave 1 | `registerPlugin()`: correct `registry.plugins` nesting, preserves `registry.version`, creates entry, handles corruption, atomic write, updates `lastUpdated` on reinstall, `gitCommitSha: null` |
+| Wave 2 | `promptRuntimeSelection()`: comma-parsing, "6" expansion, custom path, non-TTY fallback, invalid input re-prompt; `confirmInstall()`: y/n/empty/--yes; `checkStatus()`: all runtimes checked; `printInstallSummary()`: reads from PACKAGE_ROOT/skills/ |
 | Wave 3 | No new code — visual review only |
-| Wave 4 | Per-adapter: unit tests for Cursor/Codex adapters if implemented |
+| Wave 4 | Per-adapter unit tests if implemented (Cursor, Codex) |
 | Wave 5 | No new code — checklist execution |
 
 ---
 
 ## Version Bump
 
-v2.0.0 on npm after Wave 5 completes and repo is public. Changelog entry to document all 21 improvements.
+`package.json` bumps to `2.0.0` when Wave 5 completes and repo is public. `CHANGELOG.md` created with all 21 improvements listed. `plugin.json` bumped to match.
 
 ---
 
@@ -503,11 +605,14 @@ v2.0.0 on npm after Wave 5 completes and repo is public. Changelog entry to docu
 
 | File | Wave | Change |
 |------|------|--------|
-| `.gitignore` | 1, 5 | Add `settings.local.json`, `.planning/` |
-| `README.md` | 1, 3, 4 | Fix URLs (W1), full rewrite (W3), finalize Options 2+3 (W4) |
+| `docs/research/v2-runtime-research.md` | 0 | Research findings (new file) |
+| `.gitignore` | 1, 5 | Add `settings.local.json` (W1), `.planning/` (W5) |
+| `README.md` | 1, 3, 4, 5 | Fix URLs (W1), full rewrite (W3), Options 2+3 (W4), IMP-18 extract (W5) |
 | `install.js` | 1, 2, 4 | `registerPlugin()` (W1), full overhaul (W2), adapter wiring (W4) |
 | `.claude-plugin/plugin.json` | 1 | Version bump to 1.0.1 |
 | `bin/lib/cursor-adapter.cjs` | 4 | New file (if Cursor adapter implemented) |
 | `GEMINI.md` | 4 | Validation annotations |
 | `idea.md` | 5 | Deleted |
 | `CONTRIBUTING.md` | 5 | New file |
+| `CHANGELOG.md` | 5 | New file |
+| `package.json` | 5 | Version bump to 2.0.0 |
