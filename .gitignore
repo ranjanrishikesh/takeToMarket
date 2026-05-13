@@ -1,2 +1,5 @@
 # Claude Code local settings — machine-specific, contains absolute paths
 .claude/settings.local.json
+
+# GSD build artifacts — not needed by users
+.planning/

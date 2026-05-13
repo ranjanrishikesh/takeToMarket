@@ -8,7 +8,7 @@ A marketing operating system for Claude Code and Codex. Spec-driven campaigns wi
 
 **IS:** A marketing OS that treats every campaign, asset, and channel as a spec-driven unit with a verifiable outcome, a positioning invariant, and a quality gate wall. Persistent state. Compound learnings. Nine-phase lifecycle enforcement.
 
-**IS NOT:** A content generator, one-click blog writer, or social media scheduler. takeToMarket does not generate random content — it enforces discipline on content you and your team produce.
+**IS NOT:** A content generator, one-click blog writer, or social media scheduler. Not a replacement for marketers — it is the operating system a marketer uses to ship more, drift less, and compound learnings. Not a reporting dashboard. Not a scheduler. takeToMarket enforces discipline; it does not generate random content.
 
 ## Requirements
 
