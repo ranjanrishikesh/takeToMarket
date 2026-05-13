@@ -6,3 +6,6 @@
 
 # User's private marketing data
 .marketing/
+
+# Internal dev notes
+docs/improvements.md

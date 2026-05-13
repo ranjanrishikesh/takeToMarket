@@ -36,7 +36,7 @@ Findings are written to `docs/research/v2-runtime-research.md` and used to popul
   "plugins": {
     "superpowers@claude-plugins-official": [{
       "scope": "user",
-      "installPath": "/Users/rishikeshranjan/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0",
+      "installPath": "/Users/<user>/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0",
       "version": "5.1.0",
       "installedAt": "2026-04-30T16:49:43.850Z",
       "lastUpdated": "2026-05-06T18:59:36.713Z",
