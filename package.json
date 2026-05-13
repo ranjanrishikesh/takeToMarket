@@ -1,6 +1,6 @@
 {
   "name": "taketomarket",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Marketing operating system for Claude Code. Spec-driven campaigns with positioning-as-invariant enforcement, quality gate walls, and compound learnings.",
   "license": "MIT",
   "repository": {

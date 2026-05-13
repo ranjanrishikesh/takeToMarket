@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.2.0] — 2026-05-14
+
+### Fixed
+- Slash command format: `/ttm-*` (flat install, no namespace) — was incorrectly shown as `/taketomarket:ttm-*` in README and post-install summary
+- `parseRuntimeChoices('1,7')` no longer returns `undefined` entries — comma-separated inputs that include `7` now correctly return all named runtimes
+
+### Added
+- `~/.agents/skills/` universal cross-runtime install target (option 6 in interactive prompt) — single copy serves Codex, Cursor, Windsurf, and Gemini CLI
+- `GEMINI.md` — setup and invocation guide for Gemini CLI users
+- `.claude-plugin/marketplace.json` — enables GitHub direct install via `/plugin marketplace add ranjanrishikesh/takeToMarket`
+- `SECURITY.md` — combined security policy and privacy policy (no data collection, no telemetry)
+- `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1
+- README Runtime Notes table — invocation syntax per runtime (`/ttm-*` for Claude Code & Cursor, `$ttm-*` for Codex, `@ttm-*` for Windsurf, model-driven for Gemini)
+
+### Documentation
+- Filled in research doc R-02 through R-07 with verified findings on Codex, Cursor, Windsurf, Gemini CLI skill paths, marketplace submission, and GitHub direct install
+- CLAUDE.md updated to reflect flat install architecture
+- README Option 3 now shows working two-step GitHub install syntax
+
 ## [2.1.0] — 2026-05-14
 
 ### Fixed
