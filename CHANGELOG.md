@@ -1,0 +1,33 @@
+# Changelog
+
+## [2.0.0] — 2026-05-13
+
+### Fixed
+- IMP-02: Register in installed_plugins.json — skills now appear as slash commands in Claude Code
+- IMP-15: Fix wrong GitHub URL (taketomarket/taketomarket → ranjanrishikesh/takeToMarket)
+- IMP-16: Gitignore settings.local.json — stops leaking local filesystem paths
+
+### Added
+- IMP-01: Interactive multi-runtime selection prompt (7 options: Claude Code, Codex, Cursor, Windsurf, Gemini CLI, All, Custom path)
+- IMP-03: Confirmation prompt before install; `--yes`/`-y` flag to skip for CI
+- IMP-04: `--check` flag to inspect install state without installing
+- IMP-05: Post-install summary listing available slash commands with descriptions
+- IMP-09: Cursor adapter — pending Wave 0 research (placeholder paths in place)
+- IMP-10: Windsurf adapter — pending Wave 0 research (placeholder paths in place)
+- IMP-11: Gemini CLI — pending Wave 0 research validation
+- IMP-12: Codex registration — pending Wave 0 research (Branch A/B/C from R-02)
+- IMP-20: CONTRIBUTING.md
+
+### Documentation
+- IMP-13/14: Full README rewrite — all install methods, quick start, command reference
+- IMP-17: .planning/ gitignored
+- IMP-18: idea.md removed, positioning extracted to README
+
+### Distribution
+- IMP-06: Marketplace submission prep (pending public repo + Anthropic approval)
+- IMP-07: GitHub direct install syntax — pending Wave 0 R-07 research
+
+## [1.0.1] — 2026-05-10
+
+- Fix GitHub username in repository.url, homepage, bugs fields
+- Update manifest guard to match corrected GitHub URLs
