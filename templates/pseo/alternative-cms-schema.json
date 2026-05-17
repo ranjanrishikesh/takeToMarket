@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Alternative Page CMS Schema",
+  "type": "object",
+  "required": ["slug", "competitorName", "tldr", "whyPeopleLeave", "whyWeAreTheAlternative"],
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "competitorName": { "type": "string" },
+    "tldr": { "type": "string", "minLength": 50, "maxLength": 400 },
+    "whyPeopleLeave": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": { "type": "string" }
+    },
+    "whyWeAreTheAlternative": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": { "type": "string" }
+    },
+    "featureParity": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "migrationSteps": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["step", "description"],
+        "properties": {
+          "step": { "type": "integer" },
+          "description": { "type": "string" },
+          "code": { "type": "string" },
+          "link": { "type": "string" }
+        }
+      }
+    },
+    "customerQuotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["quote", "name"],
+        "properties": {
+          "quote": { "type": "string" },
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "company": { "type": "string" }
+        }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer"],
+        "properties": {
+          "question": { "type": "string" },
+          "answer": { "type": "string" }
+        }
+      }
+    }
+  }
+}
