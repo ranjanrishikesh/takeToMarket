@@ -17,6 +17,9 @@
 - `workflows/lifecycle/review.md` and `workflows/lifecycle/verify.md` gain conditional landing/pSEO gate steps.
 - `workflows/lifecycle/ship.md` calls `/ttm-deploy` when landing/pSEO assets are in the campaign.
 
+### Notes
+- `shadcn/ui` is referenced in the P4 plan goals but intentionally NOT bundled in the scaffold. Adding `shadcn/ui` requires a separate init step (`npx shadcn@latest init`) that overlays files into the user's project. Users who want it can run that after `/ttm-landing` scaffolds the site. Re-evaluate bundling in P5.
+
 ## 2.3.0-rc.3 - 2026-05-18
 
 ### Added
