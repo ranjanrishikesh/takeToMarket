@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.3.0-rc.1 — 2026-05-17
+
+### Breaking
+- State folder renamed `.marketing/` → `.taketomarket/`. `/ttm-health` and `/ttm-update` auto-detect legacy folders and offer migration.
+- GitHub repo renamed `ranjanrishikesh/takeToMarket` → `ranjanrishikesh/taketomarket` (lowercase). Old URLs redirect.
+- `ttm-tools health --raw` JSON field renamed `marketing_dir` → `taketomarket_dir`.
+
+### Added
+- Audience-explicit identity across README, `package.json`, plugin manifests, `CLAUDE.md`, `GEMINI.md`, templates. Built for developerneurs + solopreneurs with zero marketing experience.
+- `references/obra-superpowers-conventions.md` — research output for obra/superpowers + gsd-build alignment.
+- `bin/lib/legacy-folder.cjs` — migration helper module with tests.
+- `node bin/ttm-tools.cjs legacy-folder check|migrate` subcommands.
+
+### Changed
+- Repo-wide path references updated `.marketing/` → `.taketomarket/`.
+
 ## [2.2.0] — 2026-05-14
 
 ### Fixed
