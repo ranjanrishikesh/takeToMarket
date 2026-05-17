@@ -1,3 +1,10 @@
+<!--
+  NOTE: This workflow was renamed `research.md` -> `discover.md` in v2.3.0.
+  The artifact filename (`RESEARCH.md`) and state-machine identifier
+  (`phase: researched`) are intentionally preserved for backward compatibility
+  with existing campaigns. Full literal rename is scheduled for v2.4.0.
+-->
+
 <purpose>
 Market and audience research workflow that generates a structured RESEARCH.md for a
 campaign. Detects WebSearch tool availability at runtime and falls back to manual paste

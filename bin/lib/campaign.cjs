@@ -8,6 +8,10 @@
  * Exports: cmdCampaignInit, cmdCampaignState, cmdCampaignUpdate, cmdCampaignList, cmdCampaignArchive
  */
 
+// NOTE: `phase: researched` is a state-machine identifier kept for backward
+// compatibility with existing STATE.md files. User-facing command names use
+// /ttm-discover (the v2.3.0 rename). Full literal rename is scheduled for v2.4.0.
+
 'use strict';
 
 const fs = require('fs');
