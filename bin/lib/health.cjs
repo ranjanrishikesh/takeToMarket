@@ -26,6 +26,7 @@ const REFERENCE_FILES = [
   'COMPETITORS.md',
   'METRICS.md',
   'LEARNINGS.md',
+  'PRODUCT-DNA.md',
 ];
 
 /**

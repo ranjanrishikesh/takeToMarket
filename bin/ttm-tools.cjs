@@ -17,6 +17,9 @@
  *   drift-log <sub> [args]   Drift log operations (append, deprecation)
  *   health                   Validate .taketomarket/ directory structure
  *   commit <msg> [--files]   Stage files and git commit
+ *   scan-codebase            Detect stack, monorepo, feature candidates
+ *   config <read|set>        Read or set .taketomarket/CONFIG.md
+ *   svg-render <in> <out>    Render SVG file to PNG via local converter
  */
 
 'use strict';
@@ -188,8 +191,49 @@ switch (command) {
     }
     break;
   }
+  case 'scan-codebase': {
+    const { scanCodebase } = require('./lib/codebase-scan.cjs');
+    const result = scanCodebase(process.cwd());
+    console.log(
+      raw
+        ? JSON.stringify(result)
+        : `Stack: ${result.stack.join(', ')}\nMonorepo: ${result.monorepo}\nFeature candidates: ${result.featureCandidates.join(', ')}`
+    );
+    break;
+  }
+  case 'config': {
+    const { readConfig, setConfig } = require('./lib/config.cjs');
+    const cfgArgs = args.slice(1).filter(a => a !== '--raw');
+    const sub = cfgArgs[0];
+    if (sub === 'read') {
+      const cfg = readConfig(process.cwd());
+      console.log(raw ? JSON.stringify(cfg) : JSON.stringify(cfg, null, 2));
+    } else if (sub === 'set') {
+      const key = cfgArgs[1];
+      let val = cfgArgs[2];
+      if (val === 'true') val = true;
+      else if (val === 'false') val = false;
+      setConfig(process.cwd(), key, val);
+      console.log(raw ? '{"ok":true}' : `Set ${key} = ${val}`);
+    } else {
+      error('config subcommand required: read, set');
+    }
+    break;
+  }
+  case 'svg-render': {
+    const { renderSvgToPng } = require('./lib/svg-render.cjs');
+    const svgArgs = args.slice(1).filter(a => a !== '--raw');
+    const result = renderSvgToPng(svgArgs[0], svgArgs[1]);
+    console.log(
+      raw
+        ? JSON.stringify(result)
+        : (result.ok ? `Rendered via ${result.renderer}` : `Error: ${result.error}`)
+    );
+    process.exit(result.ok ? 0 : 1);
+    break;
+  }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render`
     );
 }

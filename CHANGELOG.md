@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.3.0-rc.3 - 2026-05-18
+
+### Added
+- `/ttm-init` now generates `.taketomarket/PRODUCT-DNA.md` (code-scan + manifesto interview).
+- Brand color flow with WCAG accessibility checks. Output: `.taketomarket/BRAND.md` `## Colors` section + `.taketomarket/brand/colors.json`.
+- Logo flow with SVG-first generation + vision self-review loop (up to 3 rounds). Output: full asset set in `.taketomarket/brand/`.
+- YOLO mode (`.taketomarket/CONFIG.md` `yolo: true`) - non-critical onboarding questions skipped with defaults; critical questions always asked.
+- `references/brand-color-theory.md`, `references/logo-design-principles.md`, `references/codex-image-gen-research.md`.
+- `bin/lib/codebase-scan.cjs`, `bin/lib/config.cjs`, `bin/lib/svg-render.cjs` + tests.
+- `node bin/ttm-tools.cjs scan-codebase|config|svg-render` subcommands.
+
+### Changed
+- `templates/reference-files/brand.md` extended with `## Colors` + `## Logo` sections.
+- `workflows/setup/init-questions.md` - every question tagged `priority: critical | non-critical` for YOLO.
+- `workflows/setup/init.md` - inserts PRODUCT-DNA + brand-colors + logo sub-workflows after Section 3 (ICP).
+- `workflows/setup/init-validation.md` - adds PRODUCT-DNA, brand-colors, and logo validation rules.
+
 ## 2.3.0-rc.2 — 2026-05-17
 
 ### Added

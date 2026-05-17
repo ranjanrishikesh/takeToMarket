@@ -14,10 +14,11 @@ const { cmdHealth, cmdInit } = require('../bin/lib/health.cjs');
 const REFERENCE_FILES = [
   'POSITIONING.md', 'BRAND.md', 'ICP.md', 'CHANNELS.md', 'STATE.md',
   'CALENDAR.md', 'COMPETITORS.md', 'METRICS.md', 'LEARNINGS.md',
+  'PRODUCT-DNA.md',
 ];
 
 /**
- * Create a complete .taketomarket/ directory with CAMPAIGNS/ and all 9 reference files.
+ * Create a complete .taketomarket/ directory with CAMPAIGNS/ and all 10 reference files.
  * STATE.md gets valid frontmatter; other files get a heading.
  */
 function createFullMarketing(baseDir) {
@@ -90,8 +91,8 @@ describe('cmdHealth basic mode', () => {
       const stdout = captureStdout(() => cmdHealth(false, false));
       const parsed = JSON.parse(stdout);
       assert.ok(Array.isArray(parsed.checks), 'checks is an array');
-      // 2 dirs + 9 ref files = 11 minimum
-      assert.ok(parsed.checks.length >= 11, `expected >= 11 checks, got ${parsed.checks.length}`);
+      // 2 dirs + 10 ref files = 12 minimum
+      assert.ok(parsed.checks.length >= 12, `expected >= 12 checks, got ${parsed.checks.length}`);
       const marketingCheck = parsed.checks.find(c => c.name === 'taketomarket_dir');
       assert.ok(marketingCheck, 'has taketomarket_dir check');
       assert.strictEqual(marketingCheck.status, 'pass', 'taketomarket_dir passes');
@@ -358,8 +359,8 @@ describe('cmdInit', () => {
       const stdout = captureStdout(() => cmdInit(false));
       const parsed = JSON.parse(stdout);
       assert.strictEqual(parsed.initialized, true, 'should be initialized');
-      assert.strictEqual(parsed.reference_files_count, 9, 'all 9 ref files counted');
-      assert.strictEqual(parsed.total_expected, 9, 'total expected is 9');
+      assert.strictEqual(parsed.reference_files_count, 10, 'all 10 ref files counted');
+      assert.strictEqual(parsed.total_expected, 10, 'total expected is 10');
     });
 
     it('outputs "initialized" in raw mode', () => {
@@ -405,7 +406,7 @@ describe('cmdInit', () => {
 
     before(() => {
       tmp = createTempDir();
-      // Create .taketomarket/ with only STATE.md (1 of 9 files)
+      // Create .taketomarket/ with only STATE.md (1 of 10 files)
       const marketingDir = path.join(tmp.dir, '.taketomarket');
       fs.mkdirSync(marketingDir, { recursive: true });
       fs.writeFileSync(path.join(marketingDir, 'STATE.md'), '---\nstatus: active\n---\n# State\n');
