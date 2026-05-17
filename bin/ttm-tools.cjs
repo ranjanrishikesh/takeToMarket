@@ -246,7 +246,7 @@ switch (command) {
       const result = detectDeployPath(process.cwd());
       console.log(raw ? JSON.stringify(result) : `Preferred: ${result.preferred || 'none'}\nAvailable: ${result.available.join(', ') || 'none'}`);
     } else {
-      error('deploy subcommand required: detect');
+      error(`deploy subcommand required: detect${sub ? ` (got: ${sub})` : ''}`);
     }
     break;
   }
