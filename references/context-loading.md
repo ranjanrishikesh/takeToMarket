@@ -58,7 +58,7 @@ Tier 2 is the complete file content below `<!-- END_SUMMARY -->`. It includes de
 | /ttm-brand-refresh | Yes | BRAND.md |
 | /ttm-icp-refresh | Yes | ICP.md |
 | /ttm-competitor-scan | Yes | COMPETITORS.md |
-| /ttm-research | Yes | COMPETITORS.md |
+| /ttm-discover | Yes | COMPETITORS.md |
 
 ## Rules for Workflow Authors
 

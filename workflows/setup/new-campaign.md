@@ -108,11 +108,11 @@ takeToMarket > CAMPAIGN CREATED: ${CAMPAIGN_SLUG}
 
 .taketomarket/CAMPAIGNS/${CAMPAIGN_SLUG}/
   STATE.md       (phase: created)
-  RESEARCH.md    (pending -- run /ttm-research)
+  RESEARCH.md    (pending -- run /ttm-discover)
   BRIEF.md       (pending -- run /ttm-brief)
   ASSETS/        (empty -- populated by /ttm-produce)
 
-Next: Run /ttm-research ${CAMPAIGN_SLUG}
+Next: Run /ttm-discover ${CAMPAIGN_SLUG}
 ```
 
 </process>
