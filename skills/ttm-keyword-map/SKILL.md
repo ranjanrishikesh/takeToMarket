@@ -17,3 +17,8 @@ This command will:
 - Map clusters to campaign topics and content types
 - Prioritize clusters by opportunity and alignment with positioning
 - Output a structured keyword map for campaign planning
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

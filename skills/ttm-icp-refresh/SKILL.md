@@ -17,3 +17,8 @@ This command will:
 - Propose ICP updates with evidence citations
 - Validate changes don't conflict with POSITIONING.md
 - Update ICP.md with human approval gate
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

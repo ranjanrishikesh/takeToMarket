@@ -17,3 +17,8 @@ This command will:
 - Calculate positioning drift percentage and categorize drift types
 - Perform bleeding analysis (where positioning leaks into wrong territory)
 - Report findings with 3 options: Correct, Accept+log, Escalate to shift
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

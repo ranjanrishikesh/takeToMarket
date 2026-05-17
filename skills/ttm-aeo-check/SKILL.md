@@ -18,3 +18,8 @@ This command will:
 - Compare against competitor citations
 - Report AEO (Answer Engine Optimization) score
 - Suggest content improvements for better AI engine visibility
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

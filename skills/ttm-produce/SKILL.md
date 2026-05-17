@@ -12,3 +12,8 @@ allowed-tools: Read Write Bash Glob Grep Task
 # /ttm-produce
 
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/lifecycle/produce.md`
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

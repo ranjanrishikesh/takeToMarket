@@ -18,3 +18,8 @@ This command will:
 - Produce each derivative in a fresh context (wave-parallel)
 - Verify each derivative through the full quality gate wall
 - Track all derivatives as linked assets in the campaign
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

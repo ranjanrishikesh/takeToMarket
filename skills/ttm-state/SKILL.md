@@ -11,3 +11,8 @@ allowed-tools: Read Bash Glob
 # /ttm-state
 
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/utility/state.md`
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

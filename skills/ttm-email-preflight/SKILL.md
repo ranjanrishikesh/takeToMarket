@@ -17,3 +17,8 @@ This command will:
 - Validate deliverability factors (subject line length, preheader, etc.)
 - Verify links, UTM parameters, and unsubscribe compliance
 - Generate a preflight report with pass/fail per check
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

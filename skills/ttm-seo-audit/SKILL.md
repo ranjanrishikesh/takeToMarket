@@ -18,3 +18,8 @@ This command will:
 - Check against SEO playbook best practices
 - Generate an actionable audit report with priorities
 - Suggest fixes aligned with positioning and campaign goals
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->
