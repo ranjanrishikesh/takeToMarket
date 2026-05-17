@@ -1,10 +1,12 @@
 ---
 name: ttm-init
 description: >
-  Interview-driven onboarding that generates all .taketomarket/ reference files
-  from structured questioning. Use when setting up takeToMarket for a new project.
+  Interview-driven onboarding that generates .taketomarket/ reference files
+  (POSITIONING, BRAND, ICP, PRODUCT-DNA) with brand colors + logo. Supports
+  YOLO mode for non-critical question skipping. Use when setting up
+  takeToMarket for a new project.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep AskUserQuestion
+allowed-tools: Read Write Edit Bash Glob Grep AskUserQuestion
 ---
 
 # /ttm-init
