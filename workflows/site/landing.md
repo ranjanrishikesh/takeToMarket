@@ -10,6 +10,16 @@
 
 ---
 
+## Step 0: Prerequisite check
+
+Verify `/ttm-init` (P3) has run by reading `.taketomarket/brand/colors.json`. If the file is missing:
+
+```
+Run /ttm-init first to generate POSITIONING, BRAND, PRODUCT-DNA, ICP and brand colors.
+```
+
+Exit. Do not proceed — without `colors.json`, the `{{COLOR_*}}` placeholders in `app/tokens.css` will not substitute and the scaffolded site will render unstyled.
+
 ## Step 1: Choose site location
 
 Run:
@@ -45,6 +55,22 @@ Read POSITIONING.md, BRAND.md. Replace `{{SITE_TITLE}}`, `{{SITE_DESCRIPTION}}`,
 For each of 13 sections in `app/page.tsx`, generate content following references/landing-page-anatomy.md guidance. Load positioning differentiator, brand voice, PRODUCT-DNA worldview for context.
 
 Fill in component placeholders (`{{HERO_HEADLINE}}` etc.) with generated copy.
+
+## Step 4b: Inject Schema.org JSON-LD into each page
+
+Quality Gate 2 (`workflows/site/quality-gates.md`) requires a `<script type="application/ld+json">` block on every page. The scaffold ships without one — add it here.
+
+For each page generated under `app/`, inject a JSON-LD `<script>` into the page's JSX (top of the return tree is fine; Next.js will render it into the document head/body). Schema type to use per page (from `references/landing-page-anatomy.md`):
+
+- `app/page.tsx` (home): `Organization` + `WebSite` (combined in a single `@graph` array if both are needed).
+- `app/product/page.tsx`: `Product`.
+- `app/pricing/page.tsx`: `Product` with `offers` (or `Service` if SaaS).
+- `app/about/page.tsx`: `Organization` (extended with `founder`, `foundingDate`).
+- Every page with an FAQ section: add a `FAQPage` entry next to the page-type entry.
+
+Use values from POSITIONING.md (name, description, differentiator → about/description), BRAND.md (logo URL, social profiles → `sameAs`), and the generated copy itself (FAQ questions/answers → `FAQPage.mainEntity`).
+
+JSON-LD must be valid JSON. Render via `<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />`.
 
 ## Step 5: Generate /product, /pricing, /about pages
 
