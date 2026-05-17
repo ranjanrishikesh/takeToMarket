@@ -1,7 +1,7 @@
 ---
 name: ttm-research
 description: >
-  [DEPRECATED v2.3.0 → removed v2.4.0] Renamed to /ttm-discover.
+  [DEPRECATED v2.3.0 -> removed v2.4.0] Renamed to /ttm-discover.
 disable-model-invocation: true
 allowed-tools: Read
 ---
@@ -14,7 +14,7 @@ Print to user:
 
 ```
 ⚠️  /ttm-research is deprecated.
-   Use /ttm-discover instead. Running /ttm-discover now…
+   Use /ttm-discover instead. Running /ttm-discover now...
 ```
 
 Then invoke the `Skill` tool with `skill: ttm-discover` and pass through any arguments.

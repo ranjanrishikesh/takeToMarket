@@ -1,7 +1,7 @@
 ---
 name: ttm-email-preflight
 description: >
-  [DEPRECATED v2.3.0 → removed v2.4.0] Renamed to /ttm-email-check.
+  [DEPRECATED v2.3.0 -> removed v2.4.0] Renamed to /ttm-email-check.
 disable-model-invocation: true
 allowed-tools: Read
 ---
@@ -14,7 +14,7 @@ Print:
 
 ```
 ⚠️  /ttm-email-preflight is deprecated.
-   Use /ttm-email-check instead. Running /ttm-email-check now…
+   Use /ttm-email-check instead. Running /ttm-email-check now...
 ```
 
 Invoke `Skill` tool with `skill: ttm-email-check`.

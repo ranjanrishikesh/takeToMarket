@@ -1,7 +1,7 @@
 ---
 name: ttm-keyword-map
 description: >
-  [DEPRECATED v2.3.0 → removed v2.4.0] Merged into /ttm-seo keyword-map.
+  [DEPRECATED v2.3.0 -> removed v2.4.0] Merged into /ttm-seo keyword-map.
 disable-model-invocation: true
 allowed-tools: Read
 ---
@@ -14,7 +14,7 @@ Print:
 
 ```
 ⚠️  /ttm-keyword-map is deprecated.
-   Use /ttm-seo keyword-map [seed-keyword] instead. Running /ttm-seo keyword-map now…
+   Use /ttm-seo keyword-map [seed-keyword] instead. Running /ttm-seo keyword-map now...
 ```
 
 Invoke `Skill` tool with `skill: ttm-seo`, args: `keyword-map` plus any user-passed args.

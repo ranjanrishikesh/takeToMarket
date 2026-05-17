@@ -14,8 +14,8 @@ When scanning an asset:
 
 1. Read top to bottom. The catalog is grouped by family (CONTENT, LANGUAGE AND GRAMMAR, STYLE, COMMUNICATION, FILLER AND HEDGING).
 2. For each section, scan the **Words to watch** or pattern signature against the asset.
-3. When a match is found, the **Before** / **After** pair is the rewrite template — match the shape, not the exact words.
-4. Some patterns are absolute (curly quotes, sycophantic openers). Others are dosage-dependent (em dashes, rule-of-three) — flag only on overuse, not single occurrences.
+3. When a match is found, the **Before** / **After** pair is the rewrite template -- match the shape, not the exact words.
+4. Some patterns are absolute (curly quotes, sycophantic openers). Others are dosage-dependent (em dashes, rule-of-three) -- flag only on overuse, not single occurrences.
 
 ## CONTENT PATTERNS
 
