@@ -29,6 +29,33 @@ commands or manual actions the user should take.
 
 <process>
 
+## Step: Legacy folder check
+
+Before running the main audit, detect whether the project still uses the legacy
+`.marketing/` state directory and offer migration to the canonical `.taketomarket/`.
+
+Run the legacy-folder check:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" legacy-folder check --raw
+```
+
+Parse the JSON `state` field:
+
+- **legacy**: print `WARN: Legacy '.marketing/' folder detected.` Then use `AskUserQuestion`:
+  - question: "Migrate `.marketing/` to `.taketomarket/` now?"
+  - options: "Yes, migrate now" / "Skip for now"
+  - On Yes:
+    ```bash
+    node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" legacy-folder migrate --raw
+    ```
+    Then verify `.taketomarket/` exists.
+  - On Skip: continue to Step 1 with a note that the audit will report `.marketing/` paths.
+- **conflict**: print `ERROR: Both .marketing/ and .taketomarket/ exist. Manual resolution required.` Halt the workflow.
+- **current** or **none**: continue silently to Step 1.
+
+---
+
 ## Step 1: Run Health Audit
 
 ```
