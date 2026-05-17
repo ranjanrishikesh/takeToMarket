@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Comparison Page CMS Schema",
+  "type": "object",
+  "required": ["slug", "competitorName", "tldr", "comparisonTable"],
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "competitorName": { "type": "string" },
+    "tldr": { "type": "string", "minLength": 50, "maxLength": 400 },
+    "comparisonTable": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["feature", "product", "competitor"],
+        "properties": {
+          "feature": { "type": "string" },
+          "product": { "type": "string" },
+          "competitor": { "type": "string" }
+        }
+      }
+    },
+    "whenProductWins": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": { "type": "string" }
+    },
+    "whenCompetitorWins": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": { "type": "string" }
+    },
+    "pricing": {
+      "type": "object",
+      "required": ["product", "competitor"],
+      "properties": {
+        "product": { "type": "string" },
+        "competitor": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer"],
+        "properties": {
+          "question": { "type": "string" },
+          "answer": { "type": "string" }
+        }
+      }
+    }
+  }
+}

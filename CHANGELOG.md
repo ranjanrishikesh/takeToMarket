@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.3.0-rc.4 - 2026-05-18
+
+### Added
+- `/ttm-landing` — Next.js 15 + Tailwind v4 + React 19 marketing site scaffold with brand-token integration, 13-section home page anatomy, optional `/product`, `/pricing`, `/about` generation.
+- `/ttm-pseo` — programmatic SEO route generator for blog, use-case, comparison, alternative templates. JSON CMS input. AEO + SEO optimized.
+- `/ttm-deploy` — Vercel deploy with auto-detected best path (git-push, Vercel CLI, API token).
+- `references/landing-page-anatomy.md` + `references/pseo-page-anatomy.md` + 8 per-template anatomy/playbook files under `references/pseo-templates/`.
+- `templates/pseo/*.json` — JSON Schema CMS for each pSEO template.
+- `templates/site-scaffold/` — full Next.js 15 starter project template (app/, components/, lib/, public/, content/).
+- `bin/lib/site-location.cjs` + `bin/lib/deploy.cjs` (with tests for both).
+- `node bin/ttm-tools.cjs site-location|deploy detect` subcommands.
+- Landing-specific quality gates (positioning integrity, schema, performance budget, mobile, internal linking, llms.txt) at `workflows/site/quality-gates.md`.
+
+### Changed
+- `workflows/lifecycle/review.md` and `workflows/lifecycle/verify.md` gain conditional landing/pSEO gate steps.
+- `workflows/lifecycle/ship.md` calls `/ttm-deploy` when landing/pSEO assets are in the campaign.
+
+### Notes
+- `shadcn/ui` is referenced in the P4 plan goals but intentionally NOT bundled in the scaffold. Adding `shadcn/ui` requires a separate init step (`npx shadcn@latest init`) that overlays files into the user's project. Users who want it can run that after `/ttm-landing` scaffolds the site. Re-evaluate bundling in P5.
+
 ## 2.3.0-rc.3 - 2026-05-18
 
 ### Added

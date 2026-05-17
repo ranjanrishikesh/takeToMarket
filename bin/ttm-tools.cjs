@@ -232,8 +232,26 @@ switch (command) {
     process.exit(result.ok ? 0 : 1);
     break;
   }
+  case 'site-location': {
+    const { suggestSitePath } = require('./lib/site-location.cjs');
+    const result = suggestSitePath(process.cwd());
+    console.log(raw ? JSON.stringify(result) : `Default: ${result.default}\nMonorepo: ${result.monorepo}`);
+    break;
+  }
+  case 'deploy': {
+    const { detectDeployPath } = require('./lib/deploy.cjs');
+    const deployArgs = args.slice(1).filter(a => a !== '--raw');
+    const sub = deployArgs[0];
+    if (sub === 'detect') {
+      const result = detectDeployPath(process.cwd());
+      console.log(raw ? JSON.stringify(result) : `Preferred: ${result.preferred || 'none'}\nAvailable: ${result.available.join(', ') || 'none'}`);
+    } else {
+      error(`deploy subcommand required: detect${sub ? ` (got: ${sub})` : ''}`);
+    }
+    break;
+  }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render, site-location, deploy`
     );
 }

@@ -519,3 +519,12 @@ If SHIPPED_COUNT < 3, do not display anything.
 <output>
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (updated with ship_status and shipped_at per asset)
 </output>
+
+---
+
+## Step: Deploy landing/pSEO assets (conditional)
+
+If any asset in this campaign is a landing-page or pSEO asset:
+1. Invoke `/ttm-deploy` via Skill tool.
+2. Confirm a deploy URL was produced.
+3. Confirm `/ttm-deploy` wrote `last_deploy_url` to `.taketomarket/CONFIG.md` (its Step 4). `CONFIG.md` is the single source of truth — read back by `/ttm-verify`. Do not duplicate into the campaign's STATE.md.

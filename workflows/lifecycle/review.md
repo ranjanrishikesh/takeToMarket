@@ -430,3 +430,13 @@ After fixes, approved + fixed assets can ship together via `/ttm-ship ${SLUG}`.
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (updated with review_status per asset)
 - `.taketomarket/CAMPAIGNS/${SLUG}/REVIEW-FEEDBACK-*.md` (one per revised asset)
 </output>
+
+---
+
+## Step: Landing/pSEO quality gates (conditional)
+
+If any asset under review is a landing-page or pSEO asset (detect by path under `landing_path` config):
+
+Read and follow `${CLAUDE_PLUGIN_ROOT}/workflows/site/quality-gates.md`. Pass each gated asset through gates 1-6.
+
+If any gate fails: report failure to user with gate output. Recommend `/ttm-fix`.
