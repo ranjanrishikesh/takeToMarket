@@ -15,7 +15,7 @@
 ### GSD pattern
 
 - **Primary surface is `npx`.** README headline is literally `npx get-shit-done-cc@latest`. Plugin-marketplace install is not mentioned in the headline; npx is the entry point even though the package ships skills.
-- **Single installer, many runtimes.** `bin/install.js` (11 495 lines) is the universal installer. It prompts the user for runtime choice (Claude Code, OpenCode, Gemini CLI, Kilo, Codex, Copilot, Cursor, Windsurf, "and more"), supports `--global` / local install, and `--profile=core|standard` for surface budgeting.
+- **Single installer, many runtimes.** `bin/install.js` (10,840 lines) is the universal installer. It prompts the user for runtime choice (Claude Code, OpenCode, Gemini CLI, Kilo, Codex, Copilot, Cursor, Windsurf, "and more"), supports `--global` / local install, and `--profile=core|standard` for surface budgeting.
 - **`package.json` is the source of truth.** `name: get-shit-done-cc`, `version: 1.50.0-canary.0`, three bin entries (`get-shit-done-cc`, `gsd-sdk`, `gsd-tools`), `files` array enumerates 11 directories, `engines.node: ">=22.0.0"`, real runtime deps (`@anthropic-ai/claude-agent-sdk`, `ws`), optional `fallow`.
 - **README leans heavily on badges + social proof.** Eight badges at the top: npm version, npm downloads, GitHub Actions test status, Discord, X, $GSD token, GitHub stars, license. Plus "Trusted by engineers at Amazon, Google, Shopify, and Webflow" and three pull-quotes. Multi-language READMEs (`README.pt-BR.md`, `README.zh-CN.md`, `README.ja-JP.md`, `README.ko-KR.md`).
 - **Idempotent installer is a feature.** Troubleshooting section explicitly tells users `Re-run the installer — it's idempotent: npx get-shit-done-cc@latest`. `CLAUDE_CONFIG_DIR` env var documented for container use.
@@ -135,7 +135,7 @@
 - **Slash-command invocation is primary.** Users type `/gsd-plan-phase 1`; skills are entered explicitly, not through `Skill` tool auto-selection.
 - **State files are the persistence preamble.** Every skill's first action is to read `.planning/PROJECT.md`, `REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md`, `CONTEXT.md`. The skill instructions assume these files exist and use them as the cross-session memory.
 - **Subagent dispatch via `Task` tool** for fan-out work (planning, execution, verification). Each subagent gets a fresh 200K context loaded with exactly what it needs.
-- **Hooks at session boundaries.** `hooks/hooks.json` registers a `SessionStart` hook (matchers: `startup|clear|compact`) that runs `${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cmd session-start` — re-orients Claude to GSD conventions on every fresh session.
+- **Hooks at session boundaries.** Hooks are registered via plugin config; individual hook scripts live under `hooks/` (e.g. `gsd-session-state.sh`, `gsd-prompt-guard.js`). A `SessionStart` hook re-orients Claude to GSD conventions and injects project state on every fresh session.
 - **No `Skill` tool reliance.** Skills are designed for explicit user invocation; auto-triggering is rare. `disable-model-invocation` is typically `true`.
 - **Lint scripts enforce skill quality.** `scripts/lint-descriptions.cjs`, `lint-skill-deps.cjs`, `lint-command-contract.cjs` — the install pipeline rejects skills with vague descriptions or undeclared dependencies.
 
