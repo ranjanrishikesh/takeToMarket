@@ -153,3 +153,25 @@ Relevant commands for warn follow-ups:
 - Warning flag format: Add `<!-- SPECIFICITY_WARNING: [field] accepted after 2 retries -->` comment in generated file
 - After accepting with warning, continue to next question (do not block the interview)
 - Track total warnings per section; if a section has 3+ warnings, note in STATE.md for follow-up
+
+---
+
+## PRODUCT-DNA validation
+
+After Section "PRODUCT-DNA":
+- **Beliefs check:** require at least 3 distinct beliefs, each containing a specific claim (not "we care about X"). FAIL if any belief is a generic value statement.
+- **Worldview check:** minimum 80 words. FAIL if shorter. FAIL if it contains marketing buzzwords ("revolutionary", "innovative", "disruptive", "best-in-class") - push for specific motivation instead.
+- **JTBD check:** primary JTBD must be a verb-led, customer-centric phrase. FAIL "be the best at X" or "leader in Y".
+
+## Brand colors validation
+
+After Section "Brand Colors":
+- **Primary color contrast:** primary must pass WCAG AA on either light or dark backgrounds. FAIL if neither.
+- **Hex validity:** all colors must be valid hex codes (3, 6, or 8 chars). FAIL invalid.
+
+## Logo validation
+
+After Section "Logo":
+- **File presence:** all 8 logo files must exist in .taketomarket/brand/. FAIL missing.
+- **SVG validity:** each .svg file must parse as valid XML. FAIL malformed.
+- **Vision-review history:** BRAND.md `## Logo` section must include a non-empty vision-review history. FAIL empty.
