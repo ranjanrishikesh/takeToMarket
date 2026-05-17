@@ -230,6 +230,7 @@ switch (command) {
         : (result.ok ? `Rendered via ${result.renderer}` : `Error: ${result.error}`)
     );
     process.exit(result.ok ? 0 : 1);
+    break;
   }
   default:
     error(
