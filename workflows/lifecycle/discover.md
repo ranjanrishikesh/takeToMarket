@@ -233,7 +233,7 @@ Count the total insights generated across all sections.
 
 Display summary:
 ```
-takeToMarket > RESEARCH COMPLETE
+takeToMarket > DISCOVER COMPLETE
 
 Research saved to .taketomarket/CAMPAIGNS/${SLUG}/RESEARCH.md
 Method: [web-search|manual-paste|hybrid]
