@@ -12,3 +12,8 @@ allowed-tools: Read Write Bash Glob Grep
 # /ttm-measure
 
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/lifecycle/measure.md`
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

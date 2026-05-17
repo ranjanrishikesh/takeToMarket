@@ -1,20 +1,25 @@
 ---
 name: ttm-aeo-check
 description: >
-  Check citation status across AI engines for a query. Use to assess how
-  your content appears in AI-generated answers.
-argument-hint: "[query]"
+  [DEPRECATED v2.3.0 -> removed v2.4.0] Merged into /ttm-seo aeo.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read
 ---
 
-# /ttm-aeo-check
+# /ttm-aeo-check (DEPRECATED)
 
-Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/aeo-check.md`
+Merged into `/ttm-seo aeo` in v2.3.0.
 
-This command will:
-- Check how AI engines cite your content for the given query
-- Analyze citation quality and positioning accuracy
-- Compare against competitor citations
-- Report AEO (Answer Engine Optimization) score
-- Suggest content improvements for better AI engine visibility
+Print:
+
+```
+⚠️  /ttm-aeo-check is deprecated.
+   Use /ttm-seo aeo <query> instead. Running /ttm-seo aeo now...
+```
+
+Invoke `Skill` tool with `skill: ttm-seo`, args: `aeo` plus any user-passed args.
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

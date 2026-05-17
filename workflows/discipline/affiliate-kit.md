@@ -144,4 +144,27 @@ Product: ${PRODUCT_NAME} | Sections: 5 | File: .taketomarket/AFFILIATE-KIT-[slug
 
 Display summary of kit contents and confirm file location.
 
+---
+
+## Step 6: Final humanization (MANDATORY)
+
+Every external kit asset (partner email templates, kit copy, promotional snippets, etc.) MUST pass through `/ttm-humanize` before write.
+
+For each draft asset produced in this phase:
+1. Invoke `/ttm-humanize <draft-path>` via the Skill tool.
+2. Wait for the rewritten version.
+3. Write the humanized output to the final asset destination.
+4. Do not write the un-humanized draft.
+
+Internal state files (campaign briefs, manifests, STATE.md) are exempt.
+
 </process>
+
+<success_criteria>
+- [ ] All 5 sections generated (Approved Messaging, Email Swipes, Banner Specs, Tracking Requirements, Compliance Rules)
+- [ ] Approved claims and banned-language lists sourced from BRAND.md + POSITIONING.md
+- [ ] FTC disclosure included in every email swipe template
+- [ ] UTM format and attribution model present in tracking section
+- [ ] Kit file written to .taketomarket/AFFILIATE-KIT-[product-slug].md
+- [ ] Each external kit asset (partner emails, kit copy, snippets) passed through /ttm-humanize before write.
+</success_criteria>

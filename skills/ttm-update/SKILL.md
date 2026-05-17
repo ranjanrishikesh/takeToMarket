@@ -61,3 +61,8 @@ npx taketomarket@latest --yes
 ```
 
 4. If already up to date, confirm: "takeToMarket vX.X.X is up to date."
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

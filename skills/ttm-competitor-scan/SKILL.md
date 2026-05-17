@@ -17,3 +17,8 @@ This command will:
 - Update COMPETITORS.md with fresh intelligence
 - Flag competitive threats and opportunities
 - Inform upcoming campaign briefs with competitive context
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

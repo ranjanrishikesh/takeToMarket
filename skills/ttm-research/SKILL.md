@@ -1,13 +1,25 @@
 ---
 name: ttm-research
 description: >
-  Discover phase: perform market and audience research including SERP analysis,
-  competitor content audit, and ambient narrative mapping. Use after creating a campaign.
-argument-hint: "[campaign-slug]"
+  [DEPRECATED v2.3.0 -> removed v2.4.0] Renamed to /ttm-discover.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read
 ---
 
-# /ttm-research
+# /ttm-research (DEPRECATED)
 
-Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/lifecycle/research.md`
+This skill was renamed to `/ttm-discover` in v2.3.0 and will be removed in v2.4.0.
+
+Print to user:
+
+```
+⚠️  /ttm-research is deprecated.
+   Use /ttm-discover instead. Running /ttm-discover now...
+```
+
+Then invoke the `Skill` tool with `skill: ttm-discover` and pass through any arguments.
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

@@ -17,3 +17,8 @@ This command will:
 - Create a deprecation schedule for old positioning assets
 - Present the full change for human approval (mandatory gate)
 - Update POSITIONING.md only after approval
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

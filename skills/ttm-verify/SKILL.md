@@ -12,3 +12,8 @@ allowed-tools: Read Write Bash Glob Grep Task AskUserQuestion
 # /ttm-verify
 
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/lifecycle/verify.md`
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

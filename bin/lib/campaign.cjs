@@ -8,6 +8,10 @@
  * Exports: cmdCampaignInit, cmdCampaignState, cmdCampaignUpdate, cmdCampaignList, cmdCampaignArchive
  */
 
+// NOTE: `phase: researched` is a state-machine identifier kept for backward
+// compatibility with existing STATE.md files. User-facing command names use
+// /ttm-discover (the v2.3.0 rename). Full literal rename is scheduled for v2.4.0.
+
 'use strict';
 
 const fs = require('fs');
@@ -112,7 +116,7 @@ function cmdCampaignInit(slug, name, raw) {
     'ship.shipped_at': 'null',
     'ship.checklist_result': 'null',
   };
-  const bodyContent = `\n# Campaign: ${name}\n\nPhase: created\nNext step: Run \`/ttm-research ${safe}\` to gather market intelligence.\n`;
+  const bodyContent = `\n# Campaign: ${name}\n\nPhase: created\nNext step: Run \`/ttm-discover ${safe}\` to gather market intelligence.\n`;
   const stateContent = serializeFrontmatter(frontmatterObj, bodyContent);
 
   // TOCTOU-safe creation: wx flag fails atomically if file already exists

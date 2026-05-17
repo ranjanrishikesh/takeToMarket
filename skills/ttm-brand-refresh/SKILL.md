@@ -17,3 +17,8 @@ This command will:
 - Deprecate expired or outdated brand claims
 - Update voice and tone guidelines if needed
 - Validate changes against POSITIONING.md invariant
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

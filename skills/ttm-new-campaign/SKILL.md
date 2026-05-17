@@ -11,3 +11,8 @@ allowed-tools: Read Write Bash
 # /ttm-new-campaign
 
 Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/setup/new-campaign.md`
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

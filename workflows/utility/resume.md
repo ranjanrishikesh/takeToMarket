@@ -142,7 +142,7 @@ Use the phase-to-command mapping to suggest the exact next command:
 
 | Current Phase | Next Command | Notes |
 |---------------|-------------|-------|
-| `created` | `/ttm-research ${SLUG}` | Campaign exists but no research done |
+| `created` | `/ttm-discover ${SLUG}` | Campaign exists but no research done |
 | `researched` | `/ttm-brief ${SLUG}` | Research complete, needs brief |
 | `briefed` | `/ttm-produce ${SLUG}` | Brief ready, needs production |
 | `produced` | `/ttm-verify ${SLUG}` | Assets produced, needs verification |

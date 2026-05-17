@@ -17,3 +17,8 @@ This command will:
 - Include approved proof points and claims from BRAND.md
 - Package UTM-tagged links and tracking guidelines
 - Produce a complete creative kit document
+
+## Next steps
+
+See `${CLAUDE_PLUGIN_ROOT}/templates/next-step-footer.md`.
+<!-- next-step-footer -->

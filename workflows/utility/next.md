@@ -67,7 +67,7 @@ the phase-to-command mapping:
 
 | Current Phase | Next Command | Notes |
 |---------------|--------------|-------|
-| `created` | `/ttm-research <slug>` | New campaign needs research |
+| `created` | `/ttm-discover <slug>` | New campaign needs research |
 | `researched` | `/ttm-brief <slug>` | Research done, needs brief |
 | `briefed` | `/ttm-produce <slug>` | Brief ready, produce content |
 | `produced` | `/ttm-verify <slug>` | Content ready, verify quality |
