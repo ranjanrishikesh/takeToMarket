@@ -74,4 +74,4 @@ You should see directories like `ttm-init/`, `ttm-produce/`, etc.
 
 - Skills require both `name:` and `description:` in frontmatter — all takeToMarket skills include both
 - If your runtime supports it, `~/.agents/skills/` serves as a universal cross-runtime path — select option 6 during install to use it
-- For issues: https://github.com/ranjanrishikesh/takeToMarket/issues
+- For issues: https://github.com/ranjanrishikesh/taketomarket/issues

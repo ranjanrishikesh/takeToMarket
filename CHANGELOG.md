@@ -9,7 +9,7 @@
 ### Added
 - `~/.agents/skills/` universal cross-runtime install target (option 6 in interactive prompt) — single copy serves Codex, Cursor, Windsurf, and Gemini CLI
 - `GEMINI.md` — setup and invocation guide for Gemini CLI users
-- `.claude-plugin/marketplace.json` — enables GitHub direct install via `/plugin marketplace add ranjanrishikesh/takeToMarket`
+- `.claude-plugin/marketplace.json` — enables GitHub direct install via `/plugin marketplace add ranjanrishikesh/taketomarket`
 - `SECURITY.md` — combined security policy and privacy policy (no data collection, no telemetry)
 - `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1
 - README Runtime Notes table — invocation syntax per runtime (`/ttm-*` for Claude Code & Cursor, `$ttm-*` for Codex, `@ttm-*` for Windsurf, model-driven for Gemini)
@@ -38,7 +38,7 @@
 
 ### Fixed
 - IMP-02: Register in installed_plugins.json — skills now appear as slash commands in Claude Code
-- IMP-15: Fix wrong GitHub URL (taketomarket/taketomarket → ranjanrishikesh/takeToMarket)
+- IMP-15: Fix wrong GitHub URL (taketomarket/taketomarket → ranjanrishikesh/taketomarket)
 - IMP-16: Gitignore settings.local.json — stops leaking local filesystem paths
 
 ### Added

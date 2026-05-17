@@ -51,7 +51,7 @@ takeToMarket is a developer tool intended for adult professional use. It does no
 
 ### Open source verifiability
 
-takeToMarket is MIT-licensed open source. The full source code is at https://github.com/ranjanrishikesh/takeToMarket. You can inspect every file to verify the claims in this policy.
+takeToMarket is MIT-licensed open source. The full source code is at https://github.com/ranjanrishikesh/taketomarket. You can inspect every file to verify the claims in this policy.
 
 ---
 
@@ -111,5 +111,5 @@ Changes will be committed to the public GitHub repository and reflected in the `
 
 ## Contact
 
-- **Privacy questions:** open an issue at https://github.com/ranjanrishikesh/takeToMarket/issues (non-sensitive) or email me@rishikeshranjan.com
+- **Privacy questions:** open an issue at https://github.com/ranjanrishikesh/taketomarket/issues (non-sensitive) or email me@rishikeshranjan.com
 - **Security vulnerabilities:** email me@rishikeshranjan.com with subject `[security] ...` — do NOT open a public issue
