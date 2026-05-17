@@ -150,8 +150,32 @@ switch (command) {
     cmdHealth(raw, full);
     break;
   }
+  case 'legacy-folder': {
+    const sub = args[1];
+    const { legacyFolderCheck, migrateLegacyFolder } = require('./lib/legacy-folder.cjs');
+    if (sub === 'check') {
+      const result = legacyFolderCheck(process.cwd());
+      if (raw) {
+        console.log(JSON.stringify(result));
+      } else {
+        console.log(`Legacy folder state: ${result.state}`);
+      }
+      process.exit(result.state === 'conflict' ? 1 : 0);
+    } else if (sub === 'migrate') {
+      const result = migrateLegacyFolder(process.cwd());
+      if (raw) {
+        console.log(JSON.stringify(result));
+      } else {
+        console.log(result.ok ? `Migrated ${result.from} -> ${result.to}` : `Error: ${result.error}`);
+      }
+      process.exit(result.ok ? 0 : 1);
+    } else {
+      error('legacy-folder subcommand required: check, migrate');
+    }
+    break;
+  }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder`
     );
 }
