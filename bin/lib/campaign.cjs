@@ -112,7 +112,7 @@ function cmdCampaignInit(slug, name, raw) {
     'ship.shipped_at': 'null',
     'ship.checklist_result': 'null',
   };
-  const bodyContent = `\n# Campaign: ${name}\n\nPhase: created\nNext step: Run \`/ttm-research ${safe}\` to gather market intelligence.\n`;
+  const bodyContent = `\n# Campaign: ${name}\n\nPhase: created\nNext step: Run \`/ttm-discover ${safe}\` to gather market intelligence.\n`;
   const stateContent = serializeFrontmatter(frontmatterObj, bodyContent);
 
   // TOCTOU-safe creation: wx flag fails atomically if file already exists

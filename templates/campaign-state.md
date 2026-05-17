@@ -37,4 +37,4 @@ verify.overall_result: null
 # Campaign: [CAMPAIGN_NAME]
 
 Phase: created
-Next step: Run `/ttm-research [SLUG]` to gather market intelligence.
+Next step: Run `/ttm-discover [SLUG]` to gather market intelligence.
