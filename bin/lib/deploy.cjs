@@ -19,8 +19,7 @@ function detectDeployPath(cwd, opts = {}) {
   const available = [];
 
   const vercelProjectJson = path.join(cwd, '.vercel', 'project.json');
-  const vercelConfig = path.join(cwd, 'vercel.json');
-  const gitConnected = fs.existsSync(vercelProjectJson) || fs.existsSync(vercelConfig);
+  const gitConnected = fs.existsSync(vercelProjectJson);
 
   if (gitConnected) available.push('git-push');
   if (hasCli) available.push('cli');
@@ -34,21 +33,4 @@ function detectDeployPath(cwd, opts = {}) {
   return { available, preferred, gitConnected, hasCli, hasToken: !!env.VERCEL_TOKEN };
 }
 
-function deployGitPush(cwd, message) {
-  execSync('git push', { cwd, stdio: 'inherit' });
-  return { ok: true, method: 'git-push' };
-}
-
-function deployCli(cwd, prod = false) {
-  const flag = prod ? '--prod' : '';
-  execSync(`vercel deploy ${flag}`.trim(), { cwd, stdio: 'inherit' });
-  return { ok: true, method: 'cli' };
-}
-
-function deployApi(cwd, token) {
-  // Stub: actual implementation uses fetch to api.vercel.com.
-  // For v2.3.0 P4 — return not-implemented so users know git-push or CLI is preferred.
-  return { ok: false, method: 'api-token', error: 'API-token deploy not yet implemented. Use git-push or CLI.' };
-}
-
-module.exports = { detectDeployPath, deployGitPush, deployCli, deployApi };
+module.exports = { detectDeployPath };
