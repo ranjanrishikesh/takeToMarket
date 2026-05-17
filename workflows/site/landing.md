@@ -86,12 +86,18 @@ For every generated copy file, invoke `/ttm-humanize` via Skill tool. Replace or
 
 ## Step 7: Initial commit in the landing project
 
-Inside the landing path:
+First detect whether the landing path is already inside a git work tree:
+
+```bash
+cd <landing_path> && git rev-parse --is-inside-work-tree 2>/dev/null
+```
+
+- If the command prints `true`: the landing path is inside an existing repo (parent project). Do NOT `git init` — that would nest repositories. Just `git add . && git commit -m "feat: takeToMarket landing scaffold + initial copy"` at the parent repo level.
+- If the command exits non-zero (not a repo): initialize a fresh repo:
+
 ```bash
 cd <landing_path> && git init && git add . && git commit -m "feat: takeToMarket landing scaffold + initial copy"
 ```
-
-(Or: if landing path is inside the user's existing repo, just git add + commit at the parent repo level.)
 
 ## Step 8: Quality gates
 
