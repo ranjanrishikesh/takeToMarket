@@ -1,5 +1,5 @@
 <purpose>
-Health audit workflow for /ttm-health. Validates .marketing/ directory integrity,
+Health audit workflow for /ttm-health. Validates .taketomarket/ directory integrity,
 reference file completeness, per-campaign state consistency, reference file staleness,
 campaign velocity, DRIFT-LOG integrity, and gate result consistency. Reports text
 output with pass/warn/fail per check category. Does NOT self-heal -- only reports.
@@ -12,7 +12,7 @@ output with pass/warn/fail per check category. Does NOT self-heal -- only report
 <constraints>
 ## POSITIONING.md is READ-ONLY
 
-**Do NOT modify `.marketing/POSITIONING.md` during this workflow.**
+**Do NOT modify `.taketomarket/POSITIONING.md` during this workflow.**
 
 POSITIONING.md is an architectural invariant. If you detect positioning drift:
 - In verify: use the Escalate option to launch /ttm-positioning-shift
@@ -28,6 +28,43 @@ commands or manual actions the user should take.
 </constraints>
 
 <process>
+
+## Step: Legacy folder check
+
+Before running the main audit, detect whether the project still uses the legacy
+`.marketing/` state directory and offer migration to the canonical `.taketomarket/`.
+
+Run the legacy-folder check:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" legacy-folder check --raw
+```
+
+Parse the JSON `state` field:
+
+- **legacy**: print `WARN: Legacy '.marketing/' folder detected. Migration will rename it to '.taketomarket/'. Recommend committing or backing up first (the rename is fast but not reversible from inside the workflow).` Then use `AskUserQuestion`:
+  - question: "Migrate `.marketing/` to `.taketomarket/` now?"
+  - options: "Yes, migrate now" / "Skip for now"
+  - On Yes:
+    ```bash
+    node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" legacy-folder migrate --raw
+    ```
+    Then verify `.taketomarket/` exists.
+  - On Skip: continue to Step 1 with a note that the audit will report `.marketing/` paths.
+- **conflict**: print the error below, then halt the workflow:
+  ```
+  ERROR: Both .marketing/ and .taketomarket/ exist. Manual resolution required.
+
+  To resolve:
+    1. Compare contents:  diff -r .marketing .taketomarket
+    2. Merge any unique files from .marketing/ into .taketomarket/.
+    3. Once .taketomarket/ has everything you need, remove the legacy folder:
+       rm -rf .marketing
+    4. Re-run /ttm-health to confirm.
+  ```
+- **current** or **none**: continue silently to Step 1.
+
+---
 
 ## Step 1: Run Health Audit
 
@@ -80,7 +117,7 @@ Group checks by category based on their `name` prefix or type:
 ## Health Report
 
 ### Structural Integrity
-  [PASS] .marketing/ directory exists
+  [PASS] .taketomarket/ directory exists
   [PASS] CAMPAIGNS/ directory exists
   [PASS] Required subdirectories present
 

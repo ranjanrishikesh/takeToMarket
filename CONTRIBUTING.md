@@ -2,7 +2,7 @@
 
 ## Reporting bugs
 
-Open a GitHub Issue at https://github.com/ranjanrishikesh/takeToMarket/issues.
+Open a GitHub Issue at https://github.com/ranjanrishikesh/taketomarket/issues.
 Include: OS, Node version, runtime (Claude Code/Codex/other), and the exact error output.
 
 ## Proposing features
@@ -13,7 +13,7 @@ Feature PRs without a linked discussion may be closed without review.
 ## Development setup
 
 ```bash
-git clone https://github.com/ranjanrishikesh/takeToMarket
+git clone https://github.com/ranjanrishikesh/taketomarket
 cd takeToMarket
 node --test   # run full test suite — no install step needed
 ```

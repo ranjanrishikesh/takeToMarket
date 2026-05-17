@@ -7,12 +7,22 @@ An open-source Claude Code / Codex skill that brings GSD-style spec-driven devel
 
 **Core Value:** Every marketing asset ships with a verifiable outcome metric and passes through a positioning-invariant quality gate wall — no asset ships without both, ever.
 
+### Target Audience
+
+**Built for developerneurs and solopreneurs** — engineers building and shipping their own products who have zero or near-zero marketing/growth experience.
+
+When assisting the user:
+- Assume strong engineering literacy. They read code fluently.
+- Assume zero marketing literacy. Explain positioning, ICP, AEO, funnels in engineering analogies.
+- Default to opinionated guidance — they came here because they don't know what's "right" in marketing.
+- When suggesting marketing terms, link to `/ttm-101` or run inline explanations on first use.
+
 ### Constraints
 
 - **Platform**: Must work as a Claude Code skill AND Codex skill — skill format must be compatible with both runtimes
 - **Context window**: Production in Produce phase uses fresh 200K-token contexts per wave, loaded with brief + positioning + brand + ICP + playbook
 - **No external dependencies for MVP**: The skill itself should not require external services — analytics data is pasted in manually
-- **State persistence**: All state lives in `.marketing/` directory files — no database, no external storage
+- **State persistence**: All state lives in `.taketomarket/` directory files — no database, no external storage
 <!-- GSD:project-end -->
 
 <!-- GSD:stack-start source:research/STACK.md -->
@@ -76,7 +86,7 @@ An open-source Claude Code / Codex skill that brings GSD-style spec-driven devel
 | TypeScript for bin/ tools | Requires build step, adds complexity to installation. GSD uses plain .cjs files. | Plain CommonJS (.cjs) with no transpilation. |
 | JSON for skill instructions | Not human-readable for the AI or the user. Markdown is the lingua franca of prompt engineering. | Markdown with YAML frontmatter. |
 | Jinja/Handlebars/EJS templates | Template engines add runtime dependencies and complexity. Claude fills in templates natively from Markdown. | Plain Markdown templates with placeholder sections the AI fills in. |
-| Database for state | Skills run in the user's filesystem. No database server to depend on. | Markdown files in `.marketing/` directory. |
+| Database for state | Skills run in the user's filesystem. No database server to depend on. | Markdown files in `.taketomarket/` directory. |
 | External API calls in skill code | MVP has no external dependencies. Analytics data is pasted manually. | Manual paste workflow. MCP integrations deferred to V2. |
 | `.claude/commands/*.md` (flat files) | Legacy format. Skills (directory + SKILL.md) supersede flat command files and support additional features (supporting files, hooks, subagent execution). | `.claude/skills/ttm-*/SKILL.md` directory format. |
 | Putting skills inside .claude-plugin/ | Common mistake documented in official docs. Only plugin.json goes inside .claude-plugin/. Skills, agents, hooks go at plugin root. | Plugin root level: `skills/`, `agents/`, `bin/` at same level as `.claude-plugin/`. |

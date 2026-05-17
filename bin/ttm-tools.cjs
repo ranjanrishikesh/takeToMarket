@@ -11,11 +11,11 @@
  * Commands:
  *   slug <text>              Generate URL-safe slug from text
  *   timestamp [format]       Get timestamp (full|date|filename)
- *   init                     Check .marketing/ initialization status
- *   state <read|update>      Read or update .marketing/STATE.md
+ *   init                     Check .taketomarket/ initialization status
+ *   state <read|update>      Read or update .taketomarket/STATE.md
  *   campaign <sub> [args]    Campaign operations (init, state, update, list)
  *   drift-log <sub> [args]   Drift log operations (append, deprecation)
- *   health                   Validate .marketing/ directory structure
+ *   health                   Validate .taketomarket/ directory structure
  *   commit <msg> [--files]   Stage files and git commit
  */
 
@@ -26,6 +26,15 @@ const { error, parseNamedArgs } = require('./lib/core.cjs');
 const args = process.argv.slice(2);
 const raw = args.includes('--raw');
 const command = args[0];
+
+function ensureMigratedOrExit() {
+  const { requireMigratedState } = require('./lib/legacy-folder.cjs');
+  const result = requireMigratedState(process.cwd());
+  if (!result.ok) {
+    process.stderr.write('Error: ' + result.message + '\n');
+    process.exit(2);
+  }
+}
 
 switch (command) {
   case 'slug': {
@@ -45,6 +54,7 @@ switch (command) {
     break;
   }
   case 'state': {
+    ensureMigratedOrExit();
     const stateArgs = args.slice(1).filter(a => a !== '--raw');
     const subCmd = stateArgs[0];
     const { cmdStateRead, cmdStateUpdate } = require('./lib/state.cjs');
@@ -63,6 +73,7 @@ switch (command) {
     break;
   }
   case 'campaign': {
+    ensureMigratedOrExit();
     const { cmdCampaignInit, cmdCampaignState, cmdCampaignUpdate, cmdCampaignList, cmdCampaignArchive, cmdRepurposeManifest } = require('./lib/campaign.cjs');
     const campaignArgs = args.slice(1).filter(a => a !== '--raw');
     const subCmd = campaignArgs[0];
@@ -97,6 +108,7 @@ switch (command) {
     break;
   }
   case 'deviation': {
+    ensureMigratedOrExit();
     const devArgs = args.slice(1).filter(a => a !== '--raw');
     const devCmd = devArgs[0];
     if (devCmd === 'append') {
@@ -116,6 +128,7 @@ switch (command) {
     break;
   }
   case 'drift-log': {
+    ensureMigratedOrExit();
     const dlArgs = args.slice(1).filter(a => a !== '--raw');
     const dlCmd = dlArgs[0];
     if (dlCmd === 'append') {
@@ -145,13 +158,38 @@ switch (command) {
     break;
   }
   case 'health': {
+    ensureMigratedOrExit();
     const { cmdHealth } = require('./lib/health.cjs');
     const full = args.includes('--full');
     cmdHealth(raw, full);
     break;
   }
+  case 'legacy-folder': {
+    const sub = args[1];
+    const { legacyFolderCheck, migrateLegacyFolder } = require('./lib/legacy-folder.cjs');
+    if (sub === 'check') {
+      const result = legacyFolderCheck(process.cwd());
+      if (raw) {
+        console.log(JSON.stringify(result));
+      } else {
+        console.log(`Legacy folder state: ${result.state}`);
+      }
+      process.exit(result.state === 'conflict' ? 1 : 0);
+    } else if (sub === 'migrate') {
+      const result = migrateLegacyFolder(process.cwd());
+      if (raw) {
+        console.log(JSON.stringify(result));
+      } else {
+        console.log(result.ok ? `Migrated ${result.from} -> ${result.to}` : `Error: ${result.error}`);
+      }
+      process.exit(result.ok ? 0 : 1);
+    } else {
+      error('legacy-folder subcommand required: check, migrate');
+    }
+    break;
+  }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder`
     );
 }

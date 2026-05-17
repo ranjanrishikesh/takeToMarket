@@ -159,7 +159,7 @@ async function promptRuntimeSelection(args, homeDir = os.homedir()) {
   if (choices === null) {
     rl.close();
     console.error('Invalid input after 2 attempts. Exiting.');
-    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/takeToMarket/issues');
+    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/taketomarket/issues');
     process.exit(1);
   }
 
@@ -706,7 +706,7 @@ Options:
       console.log(`  ${f.target.label}: ${f.reason}`);
     }
     console.log('');
-    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/takeToMarket/issues');
+    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/taketomarket/issues');
   }
 
   process.exit(failures.length === results.length ? 1 : 0);
@@ -727,7 +727,7 @@ function printResults(results) {
 if (require.main === module) {
   main().catch(err => {
     console.error(`Fatal: ${err.message}`);
-    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/takeToMarket/issues');
+    console.log('Something went wrong? File an issue: https://github.com/ranjanrishikesh/taketomarket/issues');
     process.exit(1);
   });
 }

@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/ranjanrishikesh/takeToMarket/security/policy
+    url: https://github.com/ranjanrishikesh/taketomarket/security/policy
     about: Do NOT open a public issue. See SECURITY.md for private reporting.
   - name: Question or discussion
-    url: https://github.com/ranjanrishikesh/takeToMarket/discussions
+    url: https://github.com/ranjanrishikesh/taketomarket/discussions
     about: Ask questions or share ideas in Discussions (if enabled). For usage questions, check the README first.
