@@ -42,7 +42,7 @@ node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" legacy-folder check --raw
 
 Parse the JSON `state` field:
 
-- **legacy**: print `WARN: Legacy '.marketing/' folder detected.` Then use `AskUserQuestion`:
+- **legacy**: print `WARN: Legacy '.marketing/' folder detected. Migration will rename it to '.taketomarket/'. Recommend committing or backing up first (the rename is fast but not reversible from inside the workflow).` Then use `AskUserQuestion`:
   - question: "Migrate `.marketing/` to `.taketomarket/` now?"
   - options: "Yes, migrate now" / "Skip for now"
   - On Yes:
@@ -51,7 +51,17 @@ Parse the JSON `state` field:
     ```
     Then verify `.taketomarket/` exists.
   - On Skip: continue to Step 1 with a note that the audit will report `.marketing/` paths.
-- **conflict**: print `ERROR: Both .marketing/ and .taketomarket/ exist. Manual resolution required.` Halt the workflow.
+- **conflict**: print the error below, then halt the workflow:
+  ```
+  ERROR: Both .marketing/ and .taketomarket/ exist. Manual resolution required.
+
+  To resolve:
+    1. Compare contents:  diff -r .marketing .taketomarket
+    2. Merge any unique files from .marketing/ into .taketomarket/.
+    3. Once .taketomarket/ has everything you need, remove the legacy folder:
+       rm -rf .marketing
+    4. Re-run /ttm-health to confirm.
+  ```
 - **current** or **none**: continue silently to Step 1.
 
 ---
