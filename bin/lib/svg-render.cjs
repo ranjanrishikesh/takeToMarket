@@ -1,8 +1,9 @@
 'use strict';
 
-const { execSync } = require('child_process');
-const fs = require('fs');
+const { execSync, execFileSync } = require('child_process');
 
+// `cmd` is always a hardcoded literal (rsvg-convert, inkscape, magick).
+// Not user input, so the shell expansion is safe.
 function commandExists(cmd) {
   try {
     execSync(`command -v ${cmd}`, { stdio: 'ignore' });
@@ -16,10 +17,6 @@ function detectRenderer() {
   if (commandExists('rsvg-convert')) return 'rsvg-convert';
   if (commandExists('inkscape')) return 'inkscape';
   if (commandExists('magick')) return 'magick';
-  try {
-    require.resolve('sharp');
-    return 'sharp';
-  } catch {}
   return 'none';
 }
 
@@ -30,14 +27,11 @@ function renderSvgToPng(svgPath, pngPath, renderer) {
   }
   try {
     if (r === 'rsvg-convert') {
-      execSync(`rsvg-convert "${svgPath}" -o "${pngPath}"`);
+      execFileSync('rsvg-convert', [svgPath, '-o', pngPath]);
     } else if (r === 'inkscape') {
-      execSync(`inkscape "${svgPath}" --export-type=png --export-filename="${pngPath}"`);
+      execFileSync('inkscape', [svgPath, '--export-type=png', `--export-filename=${pngPath}`]);
     } else if (r === 'magick') {
-      execSync(`magick "${svgPath}" "${pngPath}"`);
-    } else if (r === 'sharp') {
-      // sharp path is async - synchronous wrapper not supported here
-      return { ok: false, error: 'sharp path is async - call renderSvgToPngAsync instead' };
+      execFileSync('magick', [svgPath, pngPath]);
     }
     return { ok: true, renderer: r };
   } catch (e) {

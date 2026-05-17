@@ -2,7 +2,8 @@
 Interview-driven onboarding that generates all .taketomarket/ reference files
 from structured questioning. Use when setting up takeToMarket for a new project.
 Orchestrates a 6-section interview with specificity validation, then generates
-9 reference files plus CLAUDE.md and AGENTS.md instruction files.
+10 reference files (including PRODUCT-DNA) plus brand assets (colors.json + logo
+set) plus CLAUDE.md and AGENTS.md instruction files.
 </purpose>
 
 <required_reading>
@@ -78,7 +79,7 @@ Use AskUserQuestion:
     description: "Exit without changes"
 
 **If "Start fresh":** Delete .taketomarket/ contents (except CAMPAIGNS/ and PLAYBOOKS/) and continue to Step 2.
-**If "Update specific files":** Present file picker using AskUserQuestion with multiSelect: true listing all 9 reference files. Run only the interview sections that map to selected files (see Question-to-Template Mapping in init-questions.md). Skip unselected sections and jump to Step 9 for generation.
+**If "Update specific files":** Present file picker using AskUserQuestion with multiSelect: true listing all 10 reference files (POSITIONING, BRAND, ICP, CHANNELS, COMPETITORS, METRICS, CALENDAR, STATE, LEARNINGS, PRODUCT-DNA). Run only the interview sections that map to selected files (see Question-to-Template Mapping in init-questions.md). If PRODUCT-DNA is selected, re-run the sub-workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/setup/init-product-dna.md`. Skip unselected sections and jump to Step 9 for generation.
 **If "Cancel":** Exit with message "No changes made."
 
 **If result is "not initialized":**
@@ -461,6 +462,18 @@ Reference files created:
   .taketomarket/COMPETITORS.md
   .taketomarket/CALENDAR.md
   .taketomarket/LEARNINGS.md
+  .taketomarket/PRODUCT-DNA.md
+
+Brand assets created:
+  .taketomarket/brand/colors.json
+  .taketomarket/brand/logo.svg
+  .taketomarket/brand/logo-mark.svg
+  .taketomarket/brand/logo-wordmark.svg
+  .taketomarket/brand/logo-mono-light.svg
+  .taketomarket/brand/logo-mono-dark.svg
+  .taketomarket/brand/logo-favicon.svg
+  .taketomarket/brand/logo@1x.png
+  .taketomarket/brand/logo@2x.png
 
 Instruction files created:
   CLAUDE.md
@@ -480,9 +493,9 @@ Next step: Run /ttm-new-campaign to create your first campaign.
 - [ ] Brand-colors sub-workflow run; BRAND.md `## Colors` section filled + `.taketomarket/brand/colors.json` written
 - [ ] Logo sub-workflow run; `.taketomarket/brand/` asset set produced + BRAND.md `## Logo` section filled
 - [ ] Confirmation gate passed
-- [ ] 9 reference files generated in .taketomarket/ with _SUMMARY/END_SUMMARY preserved
+- [ ] 10 reference files generated in .taketomarket/ with _SUMMARY/END_SUMMARY preserved
 - [ ] CLAUDE.md and AGENTS.md copied to project root
-- [ ] Health check passes (all 11 checks: taketomarket_dir + campaigns_dir + 9 files)
+- [ ] Health check passes (all 12 checks: taketomarket_dir + campaigns_dir + 10 files)
 - [ ] STATE.md status set to "initialized"
 </success_criteria>
 
@@ -496,6 +509,9 @@ Next step: Run /ttm-new-campaign to create your first campaign.
 - `.taketomarket/COMPETITORS.md`
 - `.taketomarket/CALENDAR.md`
 - `.taketomarket/LEARNINGS.md`
+- `.taketomarket/PRODUCT-DNA.md`
+- `.taketomarket/brand/colors.json`
+- `.taketomarket/brand/logo.svg` (plus mark/wordmark/mono/favicon variants and PNG raster)
 - `CLAUDE.md`
 - `AGENTS.md`
 </output>
