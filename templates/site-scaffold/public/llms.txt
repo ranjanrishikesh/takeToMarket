@@ -1,0 +1,9 @@
+# {{SITE_NAME}}
+
+> {{SITE_DESCRIPTION}}
+
+## Pages
+- [/](/) — Home
+- [/product](/product) — Product overview
+- [/pricing](/pricing) — Pricing
+- [/about](/about) — About + manifesto

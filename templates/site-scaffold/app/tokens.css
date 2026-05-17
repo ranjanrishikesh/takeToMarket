@@ -1,0 +1,21 @@
+@theme {
+  --color-primary: {{COLOR_PRIMARY}};
+  --color-primary-hover: {{COLOR_PRIMARY_HOVER}};
+  --color-primary-active: {{COLOR_PRIMARY_ACTIVE}};
+  --color-secondary: {{COLOR_SECONDARY}};
+  --color-accent: {{COLOR_ACCENT}};
+  --color-success: {{COLOR_SUCCESS}};
+  --color-warning: {{COLOR_WARNING}};
+  --color-error: {{COLOR_ERROR}};
+  --color-info: {{COLOR_INFO}};
+  --color-neutral-50: {{COLOR_NEUTRAL_50}};
+  --color-neutral-100: {{COLOR_NEUTRAL_100}};
+  --color-neutral-200: {{COLOR_NEUTRAL_200}};
+  --color-neutral-300: {{COLOR_NEUTRAL_300}};
+  --color-neutral-400: {{COLOR_NEUTRAL_400}};
+  --color-neutral-500: {{COLOR_NEUTRAL_500}};
+  --color-neutral-600: {{COLOR_NEUTRAL_600}};
+  --color-neutral-700: {{COLOR_NEUTRAL_700}};
+  --color-neutral-800: {{COLOR_NEUTRAL_800}};
+  --color-neutral-900: {{COLOR_NEUTRAL_900}};
+}
