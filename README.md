@@ -115,18 +115,18 @@ All non-Claude runtimes also support `~/.agents/skills/` as a universal path. Se
 
 | Command | Description |
 |---------|-------------|
-| `/ttm-aeo-check` | Check citation status across AI engines for a query |
 | `/ttm-affiliate-kit` | Generate creative kit for affiliate partners |
 | `/ttm-archive` | Archive a completed campaign, finalize state, and update LEARNINGS.md |
 | `/ttm-brand-refresh` | Update BRAND.md with new proof points and deprecate expired ones |
 | `/ttm-brief` | Generate a campaign brief with mandatory outcome metrics, positioning anchor, and channel mix |
 | `/ttm-competitor-scan` | On-demand competitor analysis that updates COMPETITORS.md |
-| `/ttm-email-preflight` | Deliverability, dark-mode, and spam-trigger scan for email assets |
+| `/ttm-discover` | Discover phase: SERP analysis, competitor content audit, ambient narrative mapping (renamed from `/ttm-research`) |
+| `/ttm-email-check` | Deliverability, dark-mode, and spam-trigger check for email assets (renamed from `/ttm-email-preflight`) |
 | `/ttm-fix` | Fix phase: root cause analysis, fix brief, re-produce, re-verify (capped 3×) |
 | `/ttm-health` | Validate .taketomarket/ directory integrity, reference file completeness, and state consistency |
+| `/ttm-humanize` [MANDATORY] | Mandatory final-step humanizer for every audience-facing asset. Runnable ad-hoc. |
 | `/ttm-icp-refresh` | Update ICP.md from new customer data including calls, reviews, and feedback |
 | `/ttm-init` | Interview-driven onboarding that generates all .taketomarket/ reference files |
-| `/ttm-keyword-map` | Generate keyword cluster map with intent tags |
 | `/ttm-learn` | Extract lessons from campaign data, propose reference file edits, log to LEARNINGS.md |
 | `/ttm-measure` | Analyze campaign analytics against outcome metrics using attribution models |
 | `/ttm-new-campaign` | Create a new campaign directory with initialized state and reference file links |
@@ -135,13 +135,14 @@ All non-Claude runtimes also support `~/.agents/skills/` as a universal path. Se
 | `/ttm-positioning-shift` | Controlled positioning change with reasoning, migration plan, and approval gate |
 | `/ttm-produce` | Generate content assets in fresh contexts loaded with brief, positioning, brand, ICP, and playbook |
 | `/ttm-repurpose` | Fan out a long-form asset into derivatives across channels with full brief-produce-verify per derivative |
-| `/ttm-research` | Market and audience research including SERP, competitor content, and narrative mapping |
 | `/ttm-resume` | Resume a paused campaign at its last completed phase |
 | `/ttm-review` | Present assets with structured review checklist for human evaluation |
-| `/ttm-seo-audit` | Technical and content SEO audit of a URL or sitemap |
+| `/ttm-seo audit\|keyword-map\|aeo` | Unified SEO + AEO toolkit with three subcommands (merged from `/ttm-aeo-check`, `/ttm-keyword-map`, `/ttm-seo-audit`) |
 | `/ttm-ship` | Generate launch checklist confirming tracking, UTMs, funnel testing, and asset finalization |
 | `/ttm-state` | Display current campaign states, decisions in flight, blockers, and experiments |
 | `/ttm-verify` | Run all applicable quality gates on every asset with pass/fail report and line-level feedback |
+
+**[MANDATORY]** `/ttm-humanize` runs automatically as the final step of every producing skill (`/ttm-produce`, `/ttm-repurpose`, `/ttm-affiliate-kit`). It can also be invoked ad-hoc to humanize existing copy.
 
 ## Verify Installation
 
