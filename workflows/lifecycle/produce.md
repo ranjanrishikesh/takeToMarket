@@ -381,3 +381,15 @@ Next: Run /ttm-verify ${SLUG} to validate assets against quality gates
 - `.taketomarket/CAMPAIGNS/${SLUG}/ASSETS/*.md` (produced content files)
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (production manifest for /ttm-verify)
 </output>
+
+## Step: Final humanization (MANDATORY)
+
+Every audience-facing asset MUST pass through `/ttm-humanize` before write.
+
+For each draft asset produced in this phase:
+1. Invoke `/ttm-humanize <draft-path>` via the Skill tool.
+2. Wait for the rewritten version.
+3. Write the humanized output to the final asset destination.
+4. Do not write the un-humanized draft.
+
+Internal state files (campaign briefs, manifests, STATE.md) are exempt.
