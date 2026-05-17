@@ -1,22 +1,23 @@
 ---
 name: ttm-keyword-map
 description: >
-  Generate keyword cluster map with intent tags. Use for content planning
-  and SEO strategy development.
+  [DEPRECATED v2.3.0 → removed v2.4.0] Merged into /ttm-seo keyword-map.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read
 ---
 
-# /ttm-keyword-map
+# /ttm-keyword-map (DEPRECATED)
 
-Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/keyword-map.md`
+Merged into `/ttm-seo keyword-map` in v2.3.0.
 
-This command will:
-- Generate keyword clusters from seed terms and competitor analysis
-- Tag each cluster with search intent (informational, navigational, transactional)
-- Map clusters to campaign topics and content types
-- Prioritize clusters by opportunity and alignment with positioning
-- Output a structured keyword map for campaign planning
+Print:
+
+```
+⚠️  /ttm-keyword-map is deprecated.
+   Use /ttm-seo keyword-map [seed-keyword] instead. Running /ttm-seo keyword-map now…
+```
+
+Invoke `Skill` tool with `skill: ttm-seo`, args: `keyword-map` plus any user-passed args.
 
 ## Next steps
 

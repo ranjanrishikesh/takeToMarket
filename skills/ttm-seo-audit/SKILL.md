@@ -1,23 +1,23 @@
 ---
 name: ttm-seo-audit
 description: >
-  Technical and content SEO audit of a URL or sitemap. Use for on-demand
-  SEO analysis of published content.
-argument-hint: "[url-or-sitemap]"
+  [DEPRECATED v2.3.0 → removed v2.4.0] Merged into /ttm-seo audit.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read
 ---
 
-# /ttm-seo-audit
+# /ttm-seo-audit (DEPRECATED)
 
-Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/seo-audit.md`
+Merged into `/ttm-seo audit` in v2.3.0.
 
-This command will:
-- Perform technical SEO analysis (meta tags, structure, schema markup)
-- Audit content SEO (keyword usage, headings, internal linking)
-- Check against SEO playbook best practices
-- Generate an actionable audit report with priorities
-- Suggest fixes aligned with positioning and campaign goals
+Print:
+
+```
+⚠️  /ttm-seo-audit is deprecated.
+   Use /ttm-seo audit <url-or-sitemap> instead. Running /ttm-seo audit now…
+```
+
+Invoke `Skill` tool with `skill: ttm-seo`, args: `audit` plus any user-passed args.
 
 ## Next steps
 
