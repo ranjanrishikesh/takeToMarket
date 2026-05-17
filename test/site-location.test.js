@@ -41,3 +41,11 @@ test('turbo monorepo with apps/ defaults to apps/site/', () => {
   const result = suggestSitePath(d);
   assert.strictEqual(result.default, path.join(d, 'apps', 'site'));
 });
+
+test('monorepo with neither apps/ nor packages/ falls back to apps/site/', () => {
+  const d = tmpDir();
+  fs.writeFileSync(path.join(d, 'turbo.json'), '{}');
+  const result = suggestSitePath(d);
+  assert.strictEqual(result.monorepo, true);
+  assert.strictEqual(result.default, path.join(d, 'apps', 'site'));
+});
