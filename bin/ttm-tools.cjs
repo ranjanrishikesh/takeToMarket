@@ -240,7 +240,8 @@ switch (command) {
   }
   case 'deploy': {
     const { detectDeployPath } = require('./lib/deploy.cjs');
-    const sub = args[1];
+    const deployArgs = args.slice(1).filter(a => a !== '--raw');
+    const sub = deployArgs[0];
     if (sub === 'detect') {
       const result = detectDeployPath(process.cwd());
       console.log(raw ? JSON.stringify(result) : `Preferred: ${result.preferred || 'none'}\nAvailable: ${result.available.join(', ') || 'none'}`);
