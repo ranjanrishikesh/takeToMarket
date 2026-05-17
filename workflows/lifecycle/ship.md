@@ -527,4 +527,4 @@ If SHIPPED_COUNT < 3, do not display anything.
 If any asset in this campaign is a landing-page or pSEO asset:
 1. Invoke `/ttm-deploy` via Skill tool.
 2. Confirm a deploy URL was produced.
-3. Add the deploy URL to the campaign's STATE.md.
+3. Confirm `/ttm-deploy` wrote `last_deploy_url` to `.taketomarket/CONFIG.md` (its Step 4). `CONFIG.md` is the single source of truth — read back by `/ttm-verify`. Do not duplicate into the campaign's STATE.md.
