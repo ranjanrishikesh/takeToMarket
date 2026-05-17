@@ -2,6 +2,29 @@
 
 ## 2.3.0-rc.1 — 2026-05-17
 
+<!--
+RELEASE PROTOCOL (internal — invisible to users on GitHub/npm rendering):
+
+1. Publish under the `next` dist-tag so stable users keep getting 2.2.0:
+     npm publish --tag next
+
+2. Verify dist-tags:
+     npm dist-tag ls taketomarket
+     # expect: latest: 2.2.0, next: 2.3.0-rc.1
+
+3. Add temporary RC install callout near top of README Installation section:
+     > **Trying the v2.3.0 release candidate?**
+     > Run `npx taketomarket@next`. See CHANGELOG for breaking changes + migration.
+
+4. When 2.3.0 final ships, promote it to `latest`:
+     npm dist-tag add taketomarket@2.3.0 latest
+
+5. Remove the temporary RC callout from README.
+
+Source: code review on PR #1, Minor #10. Tracked here (not as an issue) to
+keep the Issues tab focused on bugs and feature requests.
+-->
+
 ### Breaking
 - **State folder renamed `.marketing/` → `.taketomarket/`.** After upgrading, run `/ttm-update` (or `/ttm-health`) — the auto-migration prompt will rename the directory and verify the move. State-reading commands (`/ttm-state`, `/ttm-campaign`, `/ttm-produce`, etc.) now refuse to run while a legacy `.marketing/` exists and print the exact migration command. Commit or back up the directory before accepting the prompt; the rename is fast but the workflow does not snapshot.
 - **GitHub repo renamed `ranjanrishikesh/takeToMarket` → `ranjanrishikesh/taketomarket`** (lowercase). Old URLs redirect on GitHub. No action required for clones. If you scripted anything against the previous URL form, update to lowercase to avoid the redirect hop. If your local remote uses SSH form, update with `git remote set-url origin git@github.com:ranjanrishikesh/taketomarket.git`.
