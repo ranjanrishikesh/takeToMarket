@@ -1,22 +1,23 @@
 ---
 name: ttm-email-preflight
 description: >
-  Deliverability, dark-mode, and spam-trigger scan for email assets.
-  Use before sending any email campaign.
+  [DEPRECATED v2.3.0 → removed v2.4.0] Renamed to /ttm-email-check.
 disable-model-invocation: true
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read
 ---
 
-# /ttm-email-preflight
+# /ttm-email-preflight (DEPRECATED)
 
-Read and follow the workflow at `${CLAUDE_PLUGIN_ROOT}/workflows/discipline/email-preflight.md`
+Renamed to `/ttm-email-check` in v2.3.0.
 
-This command will:
-- Scan email content for spam trigger words and phrases
-- Check dark-mode rendering compatibility
-- Validate deliverability factors (subject line length, preheader, etc.)
-- Verify links, UTM parameters, and unsubscribe compliance
-- Generate a preflight report with pass/fail per check
+Print:
+
+```
+⚠️  /ttm-email-preflight is deprecated.
+   Use /ttm-email-check instead. Running /ttm-email-check now…
+```
+
+Invoke `Skill` tool with `skill: ttm-email-check`.
 
 ## Next steps
 
