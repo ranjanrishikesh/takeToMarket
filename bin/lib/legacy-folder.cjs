@@ -57,4 +57,44 @@ function migrateLegacyFolder(cwd) {
   return { ok: true, from: check.legacyPath, to: check.currentPath };
 }
 
-module.exports = { legacyFolderCheck, migrateLegacyFolder, LEGACY, CURRENT };
+/**
+ * Decide whether a state-reading command can safely proceed.
+ *
+ * Returns { ok: true } when state is `current` or `none` (a fresh project that
+ * the command itself may create state in). Returns { ok: false, message } when
+ * state is `legacy` (user has not migrated) or `conflict` (both folders
+ * present). Callers should print `message` to stderr and exit non-zero so the
+ * user gets actionable guidance instead of a generic "STATE.md not found".
+ */
+function requireMigratedState(cwd) {
+  const check = legacyFolderCheck(cwd);
+  if (check.state === 'legacy') {
+    return {
+      ok: false,
+      state: check.state,
+      message:
+        `Legacy '.marketing/' state directory detected. Run '/ttm-update' (preferred) or ` +
+        `'node ${path.basename(process.argv[1] || 'ttm-tools.cjs')} legacy-folder migrate' to ` +
+        `rename it to '.taketomarket/' before using this command.`,
+    };
+  }
+  if (check.state === 'conflict') {
+    return {
+      ok: false,
+      state: check.state,
+      message:
+        `Conflict: both '.marketing/' and '.taketomarket/' exist. Resolve manually: ` +
+        `diff -r .marketing .taketomarket, merge any unique files, remove the legacy ` +
+        `'.marketing/' once '.taketomarket/' is complete, then re-run.`,
+    };
+  }
+  return { ok: true, state: check.state };
+}
+
+module.exports = {
+  legacyFolderCheck,
+  migrateLegacyFolder,
+  requireMigratedState,
+  LEGACY,
+  CURRENT,
+};

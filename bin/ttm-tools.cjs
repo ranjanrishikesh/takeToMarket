@@ -27,6 +27,15 @@ const args = process.argv.slice(2);
 const raw = args.includes('--raw');
 const command = args[0];
 
+function ensureMigratedOrExit() {
+  const { requireMigratedState } = require('./lib/legacy-folder.cjs');
+  const result = requireMigratedState(process.cwd());
+  if (!result.ok) {
+    process.stderr.write('Error: ' + result.message + '\n');
+    process.exit(2);
+  }
+}
+
 switch (command) {
   case 'slug': {
     const { cmdSlug } = require('./lib/slug.cjs');
@@ -45,6 +54,7 @@ switch (command) {
     break;
   }
   case 'state': {
+    ensureMigratedOrExit();
     const stateArgs = args.slice(1).filter(a => a !== '--raw');
     const subCmd = stateArgs[0];
     const { cmdStateRead, cmdStateUpdate } = require('./lib/state.cjs');
@@ -63,6 +73,7 @@ switch (command) {
     break;
   }
   case 'campaign': {
+    ensureMigratedOrExit();
     const { cmdCampaignInit, cmdCampaignState, cmdCampaignUpdate, cmdCampaignList, cmdCampaignArchive, cmdRepurposeManifest } = require('./lib/campaign.cjs');
     const campaignArgs = args.slice(1).filter(a => a !== '--raw');
     const subCmd = campaignArgs[0];
@@ -97,6 +108,7 @@ switch (command) {
     break;
   }
   case 'deviation': {
+    ensureMigratedOrExit();
     const devArgs = args.slice(1).filter(a => a !== '--raw');
     const devCmd = devArgs[0];
     if (devCmd === 'append') {
@@ -116,6 +128,7 @@ switch (command) {
     break;
   }
   case 'drift-log': {
+    ensureMigratedOrExit();
     const dlArgs = args.slice(1).filter(a => a !== '--raw');
     const dlCmd = dlArgs[0];
     if (dlCmd === 'append') {
@@ -145,6 +158,7 @@ switch (command) {
     break;
   }
   case 'health': {
+    ensureMigratedOrExit();
     const { cmdHealth } = require('./lib/health.cjs');
     const full = args.includes('--full');
     cmdHealth(raw, full);

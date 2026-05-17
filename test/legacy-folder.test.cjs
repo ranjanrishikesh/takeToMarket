@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const { legacyFolderCheck, migrateLegacyFolder } = require('../bin/lib/legacy-folder.cjs');
+const { legacyFolderCheck, migrateLegacyFolder, requireMigratedState } = require('../bin/lib/legacy-folder.cjs');
 
 const created = [];
 function makeTmpDir() {
@@ -93,4 +93,41 @@ test('migrateLegacyFolder returns clear error when nothing to migrate', () => {
   assert.strictEqual(result.ok, false);
   assert.match(result.error, /Nothing to migrate/);
   assert.match(result.error, /State: none/);
+});
+
+test('requireMigratedState ok on fresh project (state: none)', () => {
+  const dir = makeTmpDir();
+  const result = requireMigratedState(dir);
+  assert.strictEqual(result.ok, true);
+  assert.strictEqual(result.state, 'none');
+});
+
+test('requireMigratedState ok on migrated project (state: current)', () => {
+  const dir = makeTmpDir();
+  fs.mkdirSync(path.join(dir, '.taketomarket'));
+  const result = requireMigratedState(dir);
+  assert.strictEqual(result.ok, true);
+  assert.strictEqual(result.state, 'current');
+});
+
+test('requireMigratedState blocks legacy state with actionable message', () => {
+  const dir = makeTmpDir();
+  fs.mkdirSync(path.join(dir, '.marketing'));
+  const result = requireMigratedState(dir);
+  assert.strictEqual(result.ok, false);
+  assert.strictEqual(result.state, 'legacy');
+  assert.match(result.message, /Legacy '\.marketing\/'/);
+  assert.match(result.message, /\/ttm-update/);
+  assert.match(result.message, /legacy-folder migrate/);
+});
+
+test('requireMigratedState blocks conflict state with resolution guidance', () => {
+  const dir = makeTmpDir();
+  fs.mkdirSync(path.join(dir, '.marketing'));
+  fs.mkdirSync(path.join(dir, '.taketomarket'));
+  const result = requireMigratedState(dir);
+  assert.strictEqual(result.ok, false);
+  assert.strictEqual(result.state, 'conflict');
+  assert.match(result.message, /Conflict/);
+  assert.match(result.message, /diff -r/);
 });
