@@ -257,8 +257,14 @@ switch (command) {
     process.exit(result.detected ? 0 : 1);
     break;
   }
+  case 'install-detect': {
+    const { detectInstallMethod } = require('./lib/install-detect.cjs');
+    const result = detectInstallMethod();
+    console.log(raw ? JSON.stringify(result) : `Method: ${result.method}\nRoot: ${result.root}`);
+    break;
+  }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render, site-location, deploy, playwright-check`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render, site-location, deploy, playwright-check, install-detect`
     );
 }
