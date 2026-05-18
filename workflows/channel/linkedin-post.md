@@ -2,7 +2,9 @@
 
 **Required reading:**
 - `${CLAUDE_PLUGIN_ROOT}/references/linkedin-post-patterns.md`
-- `${CLAUDE_PLUGIN_ROOT}/playbooks/linkedin.md` (delivered in P6)
+- `${CLAUDE_PLUGIN_ROOT}/playbooks/linkedin.md`
+- `${CLAUDE_PLUGIN_ROOT}/references/playwright-mcp-setup.md`
+- `${CLAUDE_PLUGIN_ROOT}/templates/linkedin-base-template.md`
 - `.taketomarket/POSITIONING.md`, `BRAND.md`, `PRODUCT-DNA.md`, `ICP.md`
 - `.taketomarket/PLAYBOOKS/linkedin-base.md` (created on first run)
 - `.taketomarket/CAMPAIGNS/linkedin/post-history.md` (created on first run)
@@ -28,11 +30,14 @@ AskUserQuestion (priority: critical):
 node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs playwright-check --raw
 ```
 
-If detected = false: print "Author scraping needs Playwright MCP. Run /ttm-playwright-setup first."
+If detected = false: print "Author scraping needs Playwright MCP. Run /ttm-playwright-setup first." Then exit the workflow.
 
 ## Step 4: Scrape authors
 
-For each profile URL: use Playwright MCP to load the page (uses logged-in Chrome session via bridge → reaches authenticated LinkedIn). Extract recent 10-20 posts.
+For each profile URL:
+- Call `browser_navigate` with the URL (Playwright MCP uses logged-in Chrome session via the bridge → reaches authenticated LinkedIn).
+- Call `browser_snapshot` to read rendered DOM.
+- Scroll-and-snapshot loop until ~10-20 posts are captured.
 
 For each post: capture text + engagement count + post type (text / image / carousel / video).
 
@@ -60,7 +65,9 @@ Synthesize across authors. Apply `references/linkedin-post-patterns.md` framewor
 ## Step 7: Web search for news angles
 
 Unless `--no-news`:
-- Use WebSearch for the user's industry / ICP space, filtered to last 7 days.
+- Read `.taketomarket/ICP.md` (top headings: industry, segments) + `.taketomarket/POSITIONING.md` `## Category`. Extract 2-3 industry terms.
+- Construct 1-2 WebSearch queries combining those terms with `2026` and platform-specific operators (e.g., `site:techcrunch.com`).
+- Pass `recency:7d` (or equivalent) to scope to last 7 days.
 - Surface 3-5 recent stories. Rank by relevance to product positioning.
 
 AskUserQuestion (non-critical, default: top-ranked):
@@ -95,13 +102,17 @@ Loop until user picks.
 
 ## Step 11: Mandatory humanize
 
-Invoke `/ttm-humanize` on the chosen draft via Skill tool. Get rewritten version.
+Generate slug via `node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs slug "<topic-summary>" --raw` for consistency with the codebase's existing slug convention.
+Generate timestamp via `node ${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs timestamp --raw`.
+
+Write the chosen draft to `.taketomarket/CAMPAIGNS/linkedin/drafts/<timestamp>-<slug>.md` (frontmatter: `topic`, `hook_pattern`, `status: draft`).
+
+Then invoke `/ttm-humanize <path>` via Skill tool. Re-read the file after humanize completes — it now contains the rewritten version.
 
 ## Step 12: Save + history append
 
-Output the final post:
-- Print full text for user to copy.
-- Save to `.taketomarket/CAMPAIGNS/linkedin/drafts/<timestamp>-<slug>.md` with frontmatter `topic`, `hook_pattern`, `status: ready`.
+- Print the humanized post text to the user (read from the file you wrote in Step 11).
+- Update frontmatter in `.taketomarket/CAMPAIGNS/linkedin/drafts/<timestamp>-<slug>.md`: change `status: draft` → `status: ready`.
 - Append to `post-history.md`:
   ```
   | YYYY-MM-DD | <topic-tag> | <hook-pattern> | <slug> | <link-to-draft> |
