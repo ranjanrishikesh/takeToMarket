@@ -198,3 +198,10 @@ Next: Run /ttm-positioning-check to verify alignment across recent assets
 - [ ] Summary markers (<!-- _SUMMARY --> / <!-- END_SUMMARY -->) preserved
 - [ ] Completion banner displayed with changed sections
 </success_criteria>
+
+## What if this doesn't fit?
+
+Looks like /ttm-icp-refresh can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

@@ -226,3 +226,10 @@ Next steps:
 - [ ] COMPETITORS.md updated with preserved structure and summary markers
 - [ ] Completion banner displayed with scan results
 </success_criteria>
+
+## What if this doesn't fit?
+
+Looks like /ttm-competitor-scan can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

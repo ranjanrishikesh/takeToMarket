@@ -90,3 +90,10 @@ Capabilities now unlocked:
 
 Run /ttm-next for the recommended next command.
 ```
+
+## What if this doesn't fit?
+
+Looks like /ttm-playwright-setup can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

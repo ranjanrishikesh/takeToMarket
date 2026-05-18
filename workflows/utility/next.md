@@ -185,3 +185,10 @@ append a note: "(Note: this command is not yet available -- coming in Phase 9)"
 <output>
 No files modified (read-only command).
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-next can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

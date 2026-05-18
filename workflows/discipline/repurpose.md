@@ -342,3 +342,10 @@ Internal state files (campaign briefs, manifests, STATE.md) are exempt.
 - `.taketomarket/CAMPAIGNS/${SLUG}/ASSETS/R-*.md` (produced derivative assets)
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (updated with derivative entries)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-repurpose can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

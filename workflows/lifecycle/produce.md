@@ -396,3 +396,10 @@ Internal state files (campaign briefs, manifests, STATE.md) are exempt.
 - `.taketomarket/CAMPAIGNS/${SLUG}/ASSETS/*.md` (produced content files)
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (production manifest for /ttm-verify)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-produce can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

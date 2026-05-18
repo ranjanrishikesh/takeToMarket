@@ -205,3 +205,10 @@ If the campaign has no body content in STATE.md, display:
 <output>
 No files modified (read-only command).
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-state can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

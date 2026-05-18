@@ -515,3 +515,10 @@ If any asset being verified is a landing-page or pSEO asset (detect by path unde
 Read and follow `${CLAUDE_PLUGIN_ROOT}/workflows/site/quality-gates.md`. Run gates 3 (performance budget) and 4 (mobile responsiveness) against the deployed URL recorded at `last_deploy_url` in CONFIG.md.
 
 For v2.3.0 P4 this gate is SOFT: Playwright MCP integration ships in P5. Until then, document the budgets in the verification report and prompt the user to record manual Lighthouse + screenshot results.
+
+## What if this doesn't fit?
+
+Looks like /ttm-verify can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

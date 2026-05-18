@@ -58,3 +58,10 @@ List all existing pSEO routes by scanning `[landing_path]/app/{blog,use-cases,vs
 Run gates from quality-gates.md on each new page.
 
 ## Step 7: Print next steps
+
+## What if this doesn't fit?
+
+Looks like /ttm-pseo can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

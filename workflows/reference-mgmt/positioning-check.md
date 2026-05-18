@@ -337,3 +337,10 @@ Next steps:
 - Audit report displayed to stdout (cross-campaign, no file written)
 - `.taketomarket/DRIFT-LOG.md` updated with audit entry via CLI
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-positioning-check can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

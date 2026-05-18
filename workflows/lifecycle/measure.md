@@ -377,3 +377,10 @@ Next: Run /ttm-learn ${SLUG} to extract lessons and improve future campaigns.
 - [ ] MEASUREMENT.md written with outcome-first ordering
 - [ ] Campaign state updated with measure.* fields
 </checklist>
+
+## What if this doesn't fit?
+
+Looks like /ttm-measure can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

@@ -515,3 +515,10 @@ Next step: Run /ttm-new-campaign to create your first campaign.
 - `CLAUDE.md`
 - `AGENTS.md`
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-init can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

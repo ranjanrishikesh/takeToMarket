@@ -366,3 +366,10 @@ Next steps:
 - `.taketomarket/POSITIONING.md` (updated with new positioning and History table entry)
 - `.taketomarket/DRIFT-LOG.md` (shift event appended + deprecation entries)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-positioning-shift can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

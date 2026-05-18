@@ -493,3 +493,10 @@ Edit the flagged files manually, then run /ttm-verify ${SLUG} to re-check
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (updated with fix results per asset)
 - `.taketomarket/CAMPAIGNS/${SLUG}/VERIFICATION.md` (updated with latest gate results)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-fix can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

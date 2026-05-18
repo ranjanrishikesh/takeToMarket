@@ -1,0 +1,28 @@
+name: Skill request
+description: Request a new takeToMarket skill
+title: "[Skill request] "
+labels: ["enhancement", "skill-request"]
+body:
+  - type: input
+    id: skill-name
+    attributes:
+      label: Skill name
+      placeholder: ttm-twitter-post
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What does it do?
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case (when would you run it?)
+    validations:
+      required: true
+  - type: input
+    id: similar
+    attributes:
+      label: Similar to / extends (optional)

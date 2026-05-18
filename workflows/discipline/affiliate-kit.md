@@ -168,3 +168,10 @@ Internal state files (campaign briefs, manifests, STATE.md) are exempt.
 - [ ] Kit file written to .taketomarket/AFFILIATE-KIT-[product-slug].md
 - [ ] Each external kit asset (partner emails, kit copy, snippets) passed through /ttm-humanize before write.
 </success_criteria>
+
+## What if this doesn't fit?
+
+Looks like /ttm-affiliate-kit can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

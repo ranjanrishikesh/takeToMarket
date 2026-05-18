@@ -269,3 +269,10 @@ Next: Run /ttm-brief ${SLUG}
 <output>
 - `.taketomarket/CAMPAIGNS/<slug>/RESEARCH.md` (populated with research)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-discover can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

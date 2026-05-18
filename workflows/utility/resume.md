@@ -247,3 +247,10 @@ It has been ${days} days since last activity. Consider:
 No files modified. This is a read-only command that displays recovery context
 and suggests the next command for the user to run.
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-resume can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

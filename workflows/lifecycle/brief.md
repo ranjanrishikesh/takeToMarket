@@ -353,3 +353,10 @@ Next: Run /ttm-produce ${SLUG}
 <output>
 - `.taketomarket/CAMPAIGNS/<slug>/BRIEF.md` (populated with all mandatory fields)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-brief can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

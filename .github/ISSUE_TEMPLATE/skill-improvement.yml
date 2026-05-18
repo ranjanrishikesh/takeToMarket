@@ -1,0 +1,28 @@
+name: Skill improvement
+description: Report a bug or request changes to an existing takeToMarket skill
+title: "[Skill improvement] "
+labels: ["bug", "skill-improvement"]
+body:
+  - type: input
+    id: which-skill
+    attributes:
+      label: Which skill?
+      placeholder: ttm-produce
+    validations:
+      required: true
+  - type: textarea
+    id: not-working
+    attributes:
+      label: What's not working?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: Steps to reproduce (if a bug)

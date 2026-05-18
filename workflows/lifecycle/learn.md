@@ -403,3 +403,10 @@ Where `${PATTERN_STATUS}` is one of:
 - [ ] Pattern extraction runs only if 3+ campaign slugs in lessons log
 - [ ] Campaign state updated with learn.* fields
 </checklist>
+
+## What if this doesn't fit?
+
+Looks like /ttm-learn can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

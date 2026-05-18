@@ -148,3 +148,10 @@ VERDICT: [GO / CAUTION / NO-GO]
 ```
 
 </process>
+
+## What if this doesn't fit?
+
+Looks like /ttm-email-check can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

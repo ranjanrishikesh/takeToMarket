@@ -332,3 +332,10 @@ Campaign directory moved to `.taketomarket/CAMPAIGNS/ARCHIVE/${SLUG}/`
 - `.taketomarket/LEARNINGS.md` (updated with extracted lessons)
 - `.taketomarket/CAMPAIGNS/ARCHIVE/${SLUG}/STATE.md` (phase set to archived, via CLI)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-archive can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

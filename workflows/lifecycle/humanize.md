@@ -243,3 +243,10 @@ or proof-point load. Review manually if voice still feels off.
 - Campaign mode: `humanized_at` timestamp added to MANIFEST.json asset entry
 - Inline mode: rewritten text printed to the conversation
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-humanize can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

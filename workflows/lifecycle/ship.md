@@ -528,3 +528,10 @@ If any asset in this campaign is a landing-page or pSEO asset:
 1. Invoke `/ttm-deploy` via Skill tool.
 2. Confirm a deploy URL was produced.
 3. Confirm `/ttm-deploy` wrote `last_deploy_url` to `.taketomarket/CONFIG.md` (its Step 4). `CONFIG.md` is the single source of truth — read back by `/ttm-verify`. Do not duplicate into the campaign's STATE.md.
+
+## What if this doesn't fit?
+
+Looks like /ttm-ship can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

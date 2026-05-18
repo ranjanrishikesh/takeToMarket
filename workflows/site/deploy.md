@@ -60,3 +60,10 @@ last_deploy_at: <timestamp>
 ```
 
 ## Step 5: Print next steps
+
+## What if this doesn't fit?
+
+Looks like /ttm-deploy can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

@@ -141,3 +141,10 @@ No scheduler? Re-run /ttm-linkedin-post when you want the next post.
 
 Next: /ttm-next | /ttm-state
 ```
+
+## What if this doesn't fit?
+
+Looks like /ttm-linkedin-post can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

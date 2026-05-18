@@ -117,3 +117,10 @@ Next:
 - Run /ttm-deploy when ready to ship.
 - Run /ttm-pseo to add blog/use-case/comparison/alternative routes.
 ```
+
+## What if this doesn't fit?
+
+Looks like /ttm-landing can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

@@ -440,3 +440,10 @@ If any asset under review is a landing-page or pSEO asset (detect by path under 
 Read and follow `${CLAUDE_PLUGIN_ROOT}/workflows/site/quality-gates.md`. Pass each gated asset through gates 1-6.
 
 If any gate fails: report failure to user with gate output. Recommend `/ttm-fix`.
+
+## What if this doesn't fit?
+
+Looks like /ttm-review can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill
