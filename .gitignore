@@ -8,5 +8,8 @@
 .taketomarket/
 .marketing/  # legacy folder (v2.2 and earlier) — kept ignored to protect users mid-migration
 
-# Internal dev notes
-docs/
+# Internal dev notes (parent dir negation requires file-level patterns)
+docs/*
+docs/**/
+# Exception: reviewer outreach list is a public-facing launch tracker.
+!docs/reviewer-outreach-list.md
