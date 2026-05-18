@@ -1,167 +1,200 @@
 ---
 discipline: events
-asset_types: [event-landing-page, webinar-script, sponsorship-brief, post-event-recap]
-version: "1.0"
+asset_types: [webinar, meetup, conference, founder-roundtable]
+version: "2.0"
 ---
 
-# Events Discipline Playbook
+# Events Discipline Playbook -- Community-Led Growth (Lloyed Lobo)
 
-This playbook extends the base playbook contract (`base.md`) with events-specific production guidance, discipline gates, and format rules. It is loaded by ttm-producer during content generation and parsed by ttm-verify for gate evaluation.
+This playbook extends the base playbook contract (`base.md`) and is saturated in Lloyed Lobo's Community-Led Growth framework -- the 13 Rules, three community types (Practice / Product / Play), and the Boast.AI / Traction lessons that produced "From Grassroots to Greatness."
+
+Lobo's thesis: **community is your top channel, and events are how community breathes.** A webinar that isn't a community ritual is a sales pitch in disguise. A conference without volunteers is a trade show. The job of an event in takeToMarket is not to fill a funnel -- it is to give members a reason to belong, return, and bring someone with them.
 
 ---
 
 ## Production Guidance
 
-### Pre/During/Post Campaign Phases
+### Community before tactics -- always
 
-Every event campaign must plan content and actions across all 3 phases. Single-phase planning (just the event itself) is the most common failure mode:
+Before producing a single event asset, the producer must locate the event inside Lobo's community map:
 
-**Pre-event phase:**
-- Registration/landing page with clear event value proposition, speaker bios, agenda, and registration CTA
-- Promotional email sequence: announcement (4-6 weeks before), detail reveal (2-3 weeks), early-bird deadline (1-2 weeks), final reminder (48h and 24h before)
-- Social promotion cadence: teaser content, speaker spotlights, countdown posts
-- Partner/sponsor cross-promotion coordination
+- **Community of Practice** -- skill-based, around a craft your member already does (DevRel for engineers, RevOps for ops leaders, fundraising for founders). The event teaches the craft.
+- **Community of Product** -- around the tool you ship. Users helping users. The event deepens usage, not awareness.
+- **Community of Play** -- shared interest unrelated to product (founder dinners, run clubs, board-game nights). The event has no agenda beyond belonging.
 
-**During-event phase:**
-- Live engagement plan: polls, Q&A, chat moderation, social sharing prompts
-- Real-time social coverage: live-tweeting key moments, backstage content, attendee reactions
-- Technical contingency: backup plan for audio/video failures, moderator scripts for dead air
-- Attendee experience touchpoints: welcome message, mid-event check-in, closing thank-you
+If the event doesn't map cleanly to one of these three, it isn't a community event -- it's a webinar. Be honest about which it is. Webinar tactics (Casey Zeman mechanics) belong in a sub-section below, not at the front of the playbook.
 
-**Post-event phase:**
-- Recording delivery to registrants (within 24 hours) and no-shows (within 48 hours)
-- Follow-up email sequence: thank-you + recording (day 1), key takeaways + resources (day 3), CTA or next-event invite (day 7)
-- Post-event survey for attendee feedback
-- Content repurposing plan (see Section 2, DISC-EVENTS-05)
+For solopreneurs with no community yet, **start with a ritual, not a conference.** A recurring office-hours slot beats a one-time summit every time. Compounding cadence is the engine.
 
-### Webinar Funnel Structure
+### The 13 Rules, applied to event production
 
-Webinars are funnel assets, not standalone events. Build the complete funnel before producing any individual piece:
+Lobo's 13 Rules become the production checklist. Every event asset is produced against them:
 
-1. **Registration page:** Headline (benefit-focused, not topic-focused), 3-5 bullet points of what attendees will learn, speaker bio with credibility markers, date/time with timezone, registration form (name, email minimum)
-2. **Confirmation email:** Thank-you, calendar invite (.ics attachment), "add to calendar" links, pre-event resource or teaser
-3. **Reminder sequence:** 24 hours before (agenda preview), 1 hour before (join link), 5 minutes before (final nudge with join link)
-4. **Live event script:** Opening hook (first 60 seconds determine drop-off), content sections with timing, engagement prompts every 8-10 minutes, Q&A segment, closing CTA
-5. **Recording delivery:** Hosted recording link, key timestamps, supplementary resources, next-step CTA
-6. **Post-event CTA:** Product demo offer, free trial, consultation booking, or next webinar registration
+1. **Belong-first** -- the first asset a new member sees (event landing page, invite copy) must answer "do people like me show up here?" before "what will I learn?" Name the member, not the topic.
+2. **Manifesto** -- every recurring event has a one-paragraph manifesto stating why this gathering exists in the world. If you can't write it, don't run the event.
+3. **Founders-as-storytellers** -- the host is visible, named, and present. No anonymous brand events. Lobo at Traction. You at yours.
+4. **Practice-not-just-product** -- at least 70% of stage time is craft, not product. Product mentions are earned through reciprocity, not paid for with the registration fee.
+5. **Rituals** -- recurring formats that repeat: weekly AMA, monthly roundtable, annual conference. Members memorize the cadence and plan around it.
+6. **Reciprocity** -- the event gives more than it takes. If the member leaves with one frame, one introduction, and one specific action, the ratio is correct.
+7. **Recognize members** -- name people from the stage, in follow-up emails, in social posts. The member is the protagonist; you are the host.
+8. **Reduce friction** -- one-click RSVP, calendar files attached, join links in three places, no forms beyond name + email at registration.
+9. **Hand off ownership** -- by event four or five, members should be proposing talks, hosting sub-tracks, moderating breakouts. If you're still the only producer at event ten, you've built a podcast, not a community.
+10. **Layer business model on top, never below** -- the event is free or pay-what-feels-fair until trust is earned. Sponsorships, ticketing, and product CTAs come after the community is real, not before.
+11. **Patience** -- communities compound on the scale of years. The first three events will feel small. The eighth will feel inevitable.
+12. **Compounding cadence** -- commit to a cadence (weekly, monthly, quarterly) before running the first event. Volume × consistency creates the compound; one-shot events evaporate.
+13. **Permission to play** -- the format can be strange. Lunch on Zoom. A walking-and-talking call. A book club. Strangeness is a feature; conformity is the failure mode.
 
-### Community Building at Events
+### Attendee-as-member, not lead
 
-Events are community touchpoints, not isolated transactions. Plan at least 2 community actions:
+Every event communication in takeToMarket addresses the attendee as a member of a community, not as a lead in a funnel. The vocabulary shift is non-cosmetic:
 
-- **During event:** Launch or promote a community channel (Slack workspace, Discord server, LinkedIn group) where attendees can continue conversations
-- **Post-event:** Create a discussion thread in the community channel about event topics, share exclusive post-event content, invite speakers for follow-up Q&A
-- **Ongoing:** Use event attendee lists to seed community membership, track community engagement as a leading indicator of customer retention
+- "Registrants" → "members" or "people coming"
+- "Lead capture form" → "RSVP" (name + email maximum)
+- "Drip sequence" → "warmup notes" before, "thank-you notes" after
+- "Post-event nurture" → "what happens in the community channel next"
+- "Conversion CTA" → "invite a friend to the next one"
 
-### Sponsorship ROI Calculation
+### Recurring cadence is a non-negotiable
 
-Before committing sponsorship budget, project the return:
+Before producing the first event, the campaign brief must commit to a cadence (e.g., "monthly founder roundtable on the first Thursday for the next 6 months"). If the campaign cannot commit to at least 4 instances of the same format, route the work to a different channel (newsletter, LinkedIn, podcast). One-shot events are explicitly out of scope for Community-Led Growth and are flagged at the gate wall.
 
-- **Cost inputs:** Sponsorship fee, booth/setup costs, travel, swag, staff time
-- **Expected outputs:** Estimated reach (attendee count x booth traffic %), leads collected, meetings booked
-- **Cost-per-lead projection:** Total cost / expected leads. Compare to other channel CPLs.
-- **Brand visibility metrics:** Logo impressions, speaking slot value, content distribution reach
-- **Success/failure thresholds:** Define in advance what makes the sponsorship a success (e.g., 50+ qualified leads at <$100 CPL) or failure (e.g., <10 leads or >$500 CPL)
+### Host-with-care: the 48-hour rule
 
-### Content Repurposing from Events
+Lobo's "host" framing is operational, not aesthetic. After every event:
 
-Event recordings and materials are high-value source content. Plan repurposing before the event:
+- Within 24 hours: recording + thank-you note + one specific next step sent to attendees. Tone is personal-from-the-host, not branded-from-the-company.
+- Within 48 hours: every attendee who asked a question, spoke up, or DMed gets a personal reply from the host. No exceptions.
+- Within 7 days: the community channel has a recap thread with quotes and member shout-outs. Members named are notified.
 
-- **Blog recap:** 800-1200 word summary of key insights, published within 1 week
-- **Social clips:** 3-5 short video clips (30-90 seconds) of the best moments
-- **Email highlight:** Key takeaway summary sent to broader email list (not just attendees)
-- **Podcast episode:** Audio extracted and edited into a podcast episode or interview segment
-- **Slide deck:** Published on SlideShare or as a downloadable PDF with added context
-- **Quote graphics:** Speaker quotes formatted as shareable social images
+The 48-hour rule is the difference between an event that builds a community and one that builds a database.
+
+### Volunteers > paid contractors
+
+For multi-day or multi-thousand-person events, the volunteer-to-attendee ratio is the leading indicator of whether community ownership has been handed off. Lobo's Traction ratio is roughly **60–100 volunteers per multi-thousand-person event**. For a founder roundtable of 12, this scales down to "two members helping the host run the agenda" -- still volunteers, still owned.
+
+If the event is staffed entirely by paid agency or company employees, it's an activation, not a community event. Reclassify and adjust the gate evaluation.
+
+### Webinar mechanics (sub-discipline, not the lead)
+
+Casey Zeman-style webinar tactics live here, deliberately below the community-led production guidance because **a webinar is only a community event if it's a recurring ritual inside a named community.** A one-shot promo webinar is a paid-ads asset wearing a webinar costume.
+
+When producing a webinar that does pass the community test:
+
+- Open with the host present and named (not a welcome-slide voiceover).
+- Limit product talk to ≤30% of run time.
+- Make Q&A the load-bearing segment, not the bonus segment.
+- Invite attendees into the community channel by name during the event, not via post-event email only.
+- Commit the date of the next instance live on air.
+
+### In-person dinners outperform everything at small scale
+
+For solopreneurs targeting high-trust B2B, Lobo's empirical bias is clear: a 10-person in-person dinner outperforms a 500-person webinar for downstream pipeline at the small-scale level. When budget is constrained, the playbook routes spend to dinners over digital scale until the community is at least 200 active members.
 
 ---
 
 ## Discipline Gates
 
-### DISC-EVENTS-01: Campaign Phase Coverage -- Tier 1
+### DISC-EVENTS-01: Community Ritual Element -- Tier 1
 
-**Checks:** Event campaign covers all 3 phases (pre, during, post) per PLAY-11
-**Against:** Event brief and campaign plan
-
-#### Evaluation Criteria
-
-1. **Phase completeness**
-   - PASS: Brief defines distinct content and actions for pre-event (promotion, registration), during-event (engagement, live content), and post-event (follow-up, recording, recap)
-   - WARN: Two of three phases covered with specific actions defined
-   - FAIL: Only one phase covered (typically just the event itself with no pre-promotion or post-follow-up plan)
-
-2. **Phase depth**
-   - PASS: Each phase has at least 3 specific action items with owners and timelines
-   - WARN: Phases defined but with only 1-2 vague actions per phase
-   - FAIL: Phase mentioned in passing without specific actions
-
-### DISC-EVENTS-02: Webinar Funnel Integrity -- Tier 1
-
-**Checks:** Webinar has a complete registration-to-follow-up funnel per PLAY-11
-**Against:** Webinar campaign assets and plan
+**Checks:** Event has an explicit community-ritual element -- it belongs to a named recurring format inside a named community of Practice, Product, or Play.
+**Against:** Event brief, campaign plan, and recurring-cadence commitment.
 
 #### Evaluation Criteria
 
-1. **Funnel stage coverage**
-   - PASS: Funnel includes registration page, confirmation email, reminder sequence (24h and 1h before), live event script, recording delivery, and post-event CTA
-   - WARN: Has registration and event but missing reminder sequence or post-event follow-up
-   - FAIL: No registration funnel defined, or event with no follow-up plan
+1. **Community type declaration**
+   - PASS: Brief explicitly names the community (e.g., "Boast.AI Founders Practice Community") and classifies it as Practice, Product, or Play.
+   - WARN: Community is referenced but not classified into one of the three Lobo types.
+   - FAIL: No community is named; event is framed as a standalone broadcast or lead-gen activation.
 
-2. **Funnel continuity**
-   - PASS: Each stage connects to the next with a clear handoff (registration triggers confirmation, confirmation includes calendar link, reminder includes join link)
-   - WARN: Stages exist but transitions are not explicitly defined
-   - FAIL: Stages are disconnected with no clear flow from registration to post-event
+2. **Ritual classification**
+   - PASS: Event is identified as an instance of a recurring format with a manifesto sentence (e.g., "Monthly Founder Roundtable -- first Thursday, 10 founders, no slides, no recording").
+   - WARN: Event is recurring but has no written manifesto or format definition.
+   - FAIL: Event is a one-shot with no recurring cadence and no place inside a ritual.
 
-### DISC-EVENTS-03: Sponsorship ROI -- Tier 2
+### DISC-EVENTS-02: Member-Named Promotion -- Tier 1
 
-**Checks:** Sponsorship brief includes ROI projection and success criteria per PLAY-11
-**Against:** Sponsorship brief and budget documentation
-
-#### Evaluation Criteria
-
-1. **ROI projection**
-   - PASS: Brief includes sponsorship cost, expected reach/leads, cost-per-lead projection, brand visibility metrics, and success/failure thresholds
-   - WARN: Cost and expected reach stated but no per-lead math or success thresholds
-   - FAIL: Sponsorship brief with no ROI projection or success criteria
-
-2. **Comparison baseline**
-   - PASS: CPL projection is compared against at least one other channel's CPL to justify the investment
-   - WARN: CPL calculated but not compared to other channels
-   - FAIL: No CPL calculation present
-
-### DISC-EVENTS-04: Community Building -- Tier 2
-
-**Checks:** Event plan includes community engagement beyond the event itself per PLAY-11
-**Against:** Event campaign plan and post-event strategy
+**Checks:** Promotion targets named members of a community, not bought lists or generic paid audiences.
+**Against:** Promotion plan, invite copy, distribution channels.
 
 #### Evaluation Criteria
 
-1. **Community actions**
-   - PASS: Plan includes at least 2 community actions (e.g., Slack/Discord invite, LinkedIn group creation, follow-up discussion thread, user group formation, exclusive post-event content channel)
-   - WARN: Single community touchpoint defined
-   - FAIL: No community building element in the event plan
+1. **Audience source**
+   - PASS: Promotion routes through community channels (Slack/Discord posts, member newsletters, member-to-member invites). Cold lists and paid audiences are explicitly excluded for the first three instances of any recurring format.
+   - WARN: Mix of community channels and cold outreach; cold outreach <40% of expected attendance.
+   - FAIL: Primary promotion channel is bought lists, paid retargeting, or unwarmed cold email blast.
 
-2. **Community continuity**
-   - PASS: Community actions are connected to ongoing engagement (not one-off), with a plan for sustaining activity after the event
-   - WARN: Community channel created but no plan for ongoing engagement
-   - FAIL: N/A (linked to community actions result)
+2. **Invite tone**
+   - PASS: Invite copy is personal-from-the-host, addresses the recipient as a member ("you", named community), and references something specific the host knows about the audience.
+   - WARN: Invite is community-flavored but generic ("hey community").
+   - FAIL: Invite reads as a marketing blast (third-person company tone, generic "join us for a webinar").
 
-### DISC-EVENTS-05: Content Repurposing Plan -- Tier 2
+### DISC-EVENTS-03: 48-Hour Follow-Up Discipline -- Tier 1
 
-**Checks:** Event recording and materials have a repurposing plan for other channels
-**Against:** Post-event content strategy
+**Checks:** Host commits to and produces a personal follow-up within 48 hours of every event.
+**Against:** Post-event plan, host calendar block, follow-up asset templates.
 
 #### Evaluation Criteria
 
-1. **Derivative asset count**
-   - PASS: Plan specifies at least 3 derivative assets from event content (e.g., blog recap, social clips, email highlight, podcast episode, slide deck, quote graphics)
-   - WARN: 1-2 derivative assets planned
-   - FAIL: No repurposing plan for event content
+1. **24-hour recording + thank-you**
+   - PASS: Recording, host-signed thank-you, and one specific next step are sent within 24 hours of event end. Tone is personal-from-the-host, not company-broadcast.
+   - WARN: Asset goes out within 48 hours, OR tone is branded-broadcast rather than host-personal.
+   - FAIL: No 24-hour follow-up planned, or follow-up is delegated to automated nurture sequence with no host signature.
 
-2. **Channel mapping**
-   - PASS: Each derivative asset is mapped to a specific distribution channel with a timeline
-   - WARN: Assets listed but distribution channels or timelines not specified
-   - FAIL: N/A (linked to derivative asset count result)
+2. **48-hour personal reply to engaged members**
+   - PASS: Plan blocks host calendar time within 48 hours for personal replies to every attendee who asked a question, spoke, or DMed.
+   - WARN: Plan acknowledges the need but assigns it to a CSM/SDR, not the host.
+   - FAIL: No personal-reply plan; engaged attendees are folded into generic post-event nurture.
+
+### DISC-EVENTS-04: Recurring Cadence Commitment -- Tier 1
+
+**Checks:** Recurring cadence is committed in writing before the first event in a series is produced.
+**Against:** Campaign brief, calendar artifacts, public commitment.
+
+#### Evaluation Criteria
+
+1. **Cadence commitment**
+   - PASS: Brief commits to at least 4 instances of the same format on a defined cadence (weekly, biweekly, monthly, quarterly), with the next 3 dates already on the calendar.
+   - WARN: Cadence stated but only the first event is scheduled.
+   - FAIL: Event is a one-shot with no cadence commitment; no follow-on dates exist.
+
+2. **Public commitment**
+   - PASS: The cadence is announced to members on the event itself or in the registration page ("we run this every first Thursday -- next ones are Oct 3, Nov 7, Dec 5").
+   - WARN: Cadence is committed internally but not communicated to members.
+   - FAIL: N/A (rolls up to cadence commitment).
+
+### DISC-EVENTS-05: Practice-Not-Product Ratio -- Tier 1
+
+**Checks:** Event content is dominated by craft/practice value, not product pitch.
+**Against:** Event agenda, script, run-of-show.
+
+#### Evaluation Criteria
+
+1. **Product talk budget**
+   - PASS: Product/company mentions consume ≤30% of total run time. The remaining ≥70% is craft, teaching, member stories, or open discussion.
+   - WARN: Product talk is 31–50% of run time.
+   - FAIL: Product talk exceeds 50% of run time, OR the event is structured as a demo/pitch with token discussion bolted on.
+
+2. **Pitch-vs-ritual placement**
+   - PASS: If a product CTA exists, it lives in the final 5 minutes as an opt-in next step, after value has been delivered.
+   - WARN: Product CTA appears in the first half but is brief (<2 minutes) and not the focus.
+   - FAIL: Event opens with a product pitch, or product talk is interleaved with content rather than confined to a closing window.
+
+### DISC-EVENTS-06: Member Recognition & Ownership Handoff -- Tier 2
+
+**Checks:** Event recognizes specific members and (by event 4+) hands off real production ownership to community volunteers.
+**Against:** Run-of-show, follow-up artifacts, volunteer plan.
+
+#### Evaluation Criteria
+
+1. **Member recognition**
+   - PASS: At least 3 specific members are named from the stage, in chat, or in follow-up notes (with their permission). Names appear in the recap thread.
+   - WARN: 1–2 members named, or recognition is generic ("thanks to everyone who showed up").
+   - FAIL: No member is named individually anywhere in the event or its artifacts.
+
+2. **Ownership handoff (event 4+)**
+   - PASS: From the fourth instance of any recurring format, at least one structural component (a talk slot, a sub-track, a breakout, MC duties) is owned by a community volunteer, not the host or company.
+   - WARN: Volunteers help with logistics but no content slot is owned by a member.
+   - FAIL: Event 4+ in the series is still produced 100% by the host/company with no member ownership; OR (for events 1–3) no plan exists to begin handing off by event 4.
 
 ---
 
@@ -169,152 +202,209 @@ Event recordings and materials are high-value source content. Plan repurposing b
 
 | Base Gate ID | Default Tier | Override Tier | Reason |
 |-------------|-------------|---------------|--------|
-| GATE-05 (Funnel Integrity) | Tier 2 | Tier 1 | Event funnels (registration to attendance to follow-up) are critical to ROI; broken funnels waste the entire event investment |
+| GATE-05 (Funnel Integrity) | Tier 2 | Tier 1 | In Community-Led Growth the "funnel" is the community ritual itself -- registration → attendance → community channel → next event. Breaking any link breaks the compound. Lobo's reciprocity rule and 48-hour discipline raise this to blocking. |
 
 ---
 
 ## Format Rules
 
-### Event Landing Page Structure
+### Invite copy
 
-1. **Headline:** Benefit-focused, 8-12 words (what attendees will gain, not just the topic)
-2. **Subhead:** Event type, date, time with timezone, duration
-3. **Value bullets:** 3-5 specific takeaways attendees will leave with
-4. **Speaker section:** Photo, name, title, 2-3 sentence bio with credibility markers
-5. **Agenda/outline:** Timed agenda or topic outline showing the event flow
-6. **Social proof:** Past event metrics, testimonials, notable past attendees (if applicable)
-7. **Registration CTA:** Above the fold AND at page bottom. Minimal form fields (name, email, company).
-8. **Calendar integration:** Auto-generated .ics file or "add to calendar" links upon registration
+- **Length:** 60–150 words. Anything longer reads as a marketing email, anything shorter feels impersonal.
+- **From:** A named human (the host), never a company alias.
+- **Subject line:** Personal and specific ("Roundtable Thursday -- can I save you a seat?"), not branded-broadcast ("Join our exclusive webinar on AI trends").
+- **Body:** One sentence on why this gathering exists, one sentence on what the recipient specifically will get, one sentence on the cadence ("we do this every first Thursday"), one-click RSVP at the bottom.
+- **No marketing footer.** Plain text wins.
 
-### Webinar Script Format
+### Scheduled cadence
 
-```
-[0:00-1:00] OPENING HOOK
-- Attention-grabbing question, statistic, or story
-- Brief overview of what attendees will learn
-- Housekeeping (recording available, Q&A at end, mute/unmute)
+- **Minimum commitment:** 4 instances of the same format on a defined cadence before the first event ships.
+- **Cadence options:** weekly (office hours, AMA), biweekly (workshop series), monthly (founder roundtable, dinner), quarterly (member summit), annual (community conference).
+- **Calendar artifacts:** Next 3 dates on every event landing page. Members must be able to see the rhythm.
 
-[1:00-5:00] SPEAKER INTRO + CONTEXT
-- Speaker credibility (why should they listen to you)
-- Problem framing (why this topic matters now)
+### Follow-up timeline
 
-[5:00-35:00] CORE CONTENT (3-4 sections)
-- Section 1: [Topic] (8-10 min)
-  - Key point + supporting evidence
-  - ENGAGEMENT PROMPT: [Poll/question at 10-min mark]
-- Section 2: [Topic] (8-10 min)
-  - Key point + supporting evidence
-  - ENGAGEMENT PROMPT: [Poll/question at 20-min mark]
-- Section 3: [Topic] (8-10 min)
-  - Key point + supporting evidence
-  - ENGAGEMENT PROMPT: [Poll/question at 30-min mark]
+- **T+0 (event ends):** Host posts a thank-you message in the community channel naming 3+ members.
+- **T+24h:** Recording + host-signed thank-you + one specific next step to every attendee. Personal tone.
+- **T+48h:** Host personally replies to every engaged attendee (questions, comments, DMs).
+- **T+7d:** Recap thread in community channel with quotes, member shout-outs, and the date of the next instance pinned.
+- **T+14d:** First "where are they now" follow-up to attendees -- did they try the thing? Did the introduction land?
 
-[35:00-45:00] Q&A
-- Prepared seed questions (in case of slow start)
-- Moderator selects and reads questions
+### Host-to-attendee ratio
 
-[45:00-48:00] CLOSING
-- 3 key takeaways (repeat the value)
-- CTA: [Specific next step with link]
-- Thank you + where to continue the conversation
-```
+- **Founder roundtable (dinner format):** 1 host + 8–12 attendees. Above 12 the ritual breaks; the conversation fragments.
+- **Webinar / AMA:** 1 host + 1 moderator per 100 attendees. The moderator is named and visible, not invisible chat support.
+- **Workshop:** 1 host + 1 helper per 25 attendees for true workshop interaction (breakouts, hands-on).
+- **Conference / multi-day:** 60–100 volunteer organizers per 1,000 attendees. If your volunteer ratio is below this, you've under-delegated and the community doesn't own the event.
 
-### Sponsorship Brief Template
+### Registration form
 
-1. **Event overview:** Name, date, location, expected attendance, audience profile
-2. **Sponsorship tier:** What is included (logo placement, speaking slot, booth, leads)
-3. **Cost breakdown:** Fee + estimated additional costs (travel, booth setup, swag)
-4. **ROI projection:** Expected leads, CPL, comparison to other channels
-5. **Success criteria:** Specific thresholds that define success vs. failure
-6. **Measurement plan:** How leads and brand visibility will be tracked
-7. **Go/no-go deadline:** Date by which decision must be made
-
-### Post-Event Recap Format
-
-1. **Headline:** Key insight or outcome from the event
-2. **Event context:** 1-2 sentences on what the event was and who attended
-3. **Key takeaways:** 3-5 numbered insights with supporting detail
-4. **Quotes:** 2-3 notable quotes from speakers or attendees
-5. **Data points:** Attendance numbers, engagement metrics, survey highlights
-6. **Resources:** Links to recording, slides, related content
-7. **Next steps:** Upcoming events, community link, CTA
+- **Maximum fields:** name, email, one optional context question (role / community / what brought you).
+- **No lead-qualification questions.** No company size, no budget, no buying timeline. Members are not leads.
+- **One-click calendar add** in the confirmation. The .ics file is non-negotiable.
 
 ---
 
 ## Examples
 
-### Good: Complete 3-Phase Event Plan
+### Good: Lobo-flavored founder roundtable invite
 
 ```
-PRE-EVENT (4 weeks before):
-- Landing page with benefit headline, speaker bios, timed agenda
-- Email sequence: announcement (week 1), speaker spotlight (week 2),
-  early-bird deadline (week 3), final reminder (24h + 1h before)
-- Social: 8 posts across LinkedIn and X (2/week) with speaker quotes
-- Partner cross-promotion with 2 co-marketing partners
+Subject: Roundtable Thursday — can I save you a seat?
 
-DURING-EVENT:
-- Live polls every 10 minutes via webinar platform
-- Dedicated chat moderator for Q&A curation
-- Live-tweeting 5 key moments with event hashtag
-- Technical backup: co-host can take over if primary speaker drops
+Hey Maya,
 
-POST-EVENT:
-- Recording sent within 24h to attendees, 48h to no-shows
-- Follow-up sequence: thank-you (day 1), takeaways (day 3), CTA (day 7)
-- Blog recap published day 5 with key insights
-- 4 social clips (60s each) from recording, published over 2 weeks
-- Attendees invited to Slack community channel
-- Post-event survey sent with recording email
+We're running the Bootstrapped Founder Roundtable this Thursday at
+4pm PT — it's a 90-minute dinner-style call where 10 of us trade
+notes on what's actually working this quarter. No slides, no
+recording, no sponsors. Just founders.
+
+I'm running this every first Thursday for the rest of the year
+(next ones: Nov 7, Dec 5, Jan 2). The seats fill on a first-come
+basis and I keep it to 10 to protect the conversation quality.
+
+You came up because of the post you wrote about pricing AI
+features — the others would learn a lot from how you're thinking
+about it. Want in?
+
+RSVP: [one-click link]
+
+— Lloyed
 ```
 
-### Bad: Single-Phase Event Plan
+Why this passes:
+- Host is named and personal (rule 3: founders-as-storytellers).
+- Cadence is committed and visible (rule 12: compounding cadence).
+- Member is recognized by name with a specific reason (rule 7: recognize members).
+- Format is small enough to be a real ritual, not a broadcast (rule 5: rituals).
+- No company branding, no marketing footer (rule 6: reciprocity, rule 8: reduce friction).
+
+### Bad: webinar-as-thinly-veiled-pitch
 
 ```
-EVENT:
-- Host a webinar about our product on Tuesday
-- Send recording to people who signed up
+Subject: 🚀 Join our exclusive webinar: How AI is Transforming
+       Marketing in 2026
 
-Problems:
-- No pre-event promotion or registration funnel
-- No reminder sequence (expect 50%+ drop-off)
-- No engagement plan during the event
-- Recording sent but no follow-up sequence or CTA
-- No content repurposing
-- No community building
-- No measurement plan
+Hi there,
+
+Acme Corp is excited to invite you to our exclusive webinar where
+our CEO will reveal how Acme's platform is helping 10,000+
+marketing teams unlock AI-powered growth. You'll learn:
+
+✓ The 5 trends defining marketing in 2026
+✓ How Acme's AI features deliver 10x ROI
+✓ Why teams are switching from legacy tools
+✓ Live demo of our newest release
+✓ Exclusive Q&A with our product team
+
+Date: TBD
+Format: 60-minute webinar with live demo
+BONUS: First 100 registrants get a free trial!
+
+Register now → [marketing landing page]
+
+Best,
+The Acme Marketing Team
 ```
+
+Why this fails:
+- DISC-EVENTS-01 FAIL: no community is named; event is positioned as a broadcast.
+- DISC-EVENTS-02 FAIL: tone is "Acme Marketing Team", not a host. Recipient is "Hi there", not a member.
+- DISC-EVENTS-04 FAIL: one-shot, no cadence, no next dates.
+- DISC-EVENTS-05 FAIL: 4 of 5 bullets are product talk; structure is a demo with token Q&A.
+- Casey Zeman could fix the funnel mechanics here, but Lobo would refuse to call this a community event at all.
+
+### Good: recurring ritual landing page (sketch)
+
+```
+THE BOOTSTRAPPED FOUNDER ROUNDTABLE
+Monthly, first Thursday, 4pm PT. 10 founders. 90 minutes.
+Hosted by Lloyed Lobo.
+
+Why this exists:
+Bootstrapped founders make the same five mistakes every year and
+no one tells us. This roundtable is where we tell each other.
+
+Format:
+- 10 founders, max. No slides. No recording. No sponsors.
+- Each founder brings one problem they're stuck on.
+- The room workshops it for 8 minutes.
+- We close with one specific commitment per person.
+
+Next dates: Nov 7 • Dec 5 • Jan 2 • Feb 6
+RSVP for any → [link]
+
+Past members include: [3 named members with permission]
+```
+
+### Bad: one-shot conference with no community spine
+
+```
+SaaS Growth Summit 2026 — Register Now!
+500+ marketers, 30+ speakers, 1 day in San Francisco.
+
+Tickets: $499 early bird / $799 regular
+Platinum sponsors: [10 logos]
+Speakers: [thumbnail wall]
+
+Don't miss the marketing event of the year.
+```
+
+Why this fails:
+- DISC-EVENTS-01 FAIL: no named community; the event is a trade show.
+- DISC-EVENTS-04 FAIL: one-shot; no recurring cadence visible.
+- DISC-EVENTS-06 FAIL: 30+ speakers, 0 named members. The audience is anonymous.
+- Sponsorships are leading the brand rather than layered on top (rule 10 violation).
 
 ---
 
 ## Anti-Patterns
 
-1. **Events with no follow-up** -- Hosting a webinar or conference session and never contacting attendees again. The event is the beginning of a relationship, not the end. Post-event follow-up within 48 hours is when intent is highest.
+1. **Pitch-disguised-as-event** -- the webinar exists to demo the product; "community" is in the title but the agenda is a sales deck. Reciprocity violated. Members feel the bait-and-switch and never return.
 
-2. **Sponsorships with no ROI tracking** -- Paying $10K for a conference booth without defining what success looks like or how leads will be tracked. Every sponsorship needs a CPL projection and measurement plan before committing budget.
+2. **One-shot events with no rhythm** -- a single summit, a single AMA, a single dinner with no committed follow-on. Compounding cadence violated. The investment evaporates because no member can plan around it.
 
-3. **Webinars without registration funnels** -- Sending a single "join our webinar" email with a direct meeting link. Without a registration page, you lose the ability to send reminders, measure attendance rate, and follow up with no-shows.
+3. **No follow-up** -- recording is sent (maybe), and that's it. No personal reply, no community channel post, no member recognition. The 48-hour window where intent is highest is wasted.
 
-4. **Single-phase planning** -- Planning only the event itself without pre-promotion or post-follow-up. This is the number one event marketing failure mode. All 3 phases must have defined actions.
+4. **Sponsorships leading the brand** -- platinum sponsors are above the fold, member stories are below. Lobo's rule 10 violated: business model is layered *below* community, not on top. Members read sponsors-first as "this event is for the sponsors."
 
-5. **No content repurposing** -- Investing 20+ hours in an event and generating zero derivative content. Every event should produce at least 3 derivative assets (recap, clips, email highlight).
+5. **Anonymous mass promotion** -- buying a list of 50K marketers and blasting them to fill seats. The community type is "none." The invite tone is broadcast. Members who do show up arrive distrustful.
 
-6. **Engagement-free webinars** -- A 45-minute monologue with no polls, questions, or interactive elements. Attendees start dropping off after 8-10 minutes without engagement prompts.
+6. **Centralized control past event 3** -- by the fourth instance, members should be proposing talks, moderating breakouts, or hosting sub-tracks. If the host is still doing everything at event 10, it's a podcast with a chat window, not a community.
 
-7. **Community as afterthought** -- Launching a Slack channel at the end of an event with no plan to sustain it. Community channels without ongoing content and moderation become ghost towns within 2 weeks.
+7. **Webinar without a community channel** -- the event runs, attendees leave, and there is nowhere for them to continue the conversation. The single biggest leak in event-driven Community-Led Growth.
+
+8. **Generic event name and manifesto** -- "AI Marketing Webinar Series" instead of "The Bootstrapped Founder Roundtable." Specificity is belonging; generality is broadcast.
+
+9. **Lead-capture-as-RSVP** -- requiring company size, budget, buying timeline at registration. Attendees are treated as leads, not members. Reciprocity is broken before they arrive.
+
+10. **No volunteer plan at scale** -- a 1,000-person event run entirely by paid agency staff. Volunteer-to-attendee ratio is the leading indicator of real community ownership; staffed-only events are activations dressed up as community.
 
 ---
 
 ## Metrics
 
-Track these indicators for event content after shipping:
+Track these post-event signals. The first four are leading indicators of community health; the rest are lagging.
 
-- **Registrations** -- Total registrations and registration conversion rate (landing page visits to registrations)
-- **Attendance rate** -- Percentage of registrants who actually attended. Benchmark: 35-45% for webinars, 60-80% for in-person.
-- **Engagement during event** -- Poll participation rate, Q&A questions submitted, chat messages, average watch time (for webinars)
-- **Post-event conversions** -- Actions taken from post-event follow-up (demo requests, trial signups, content downloads)
-- **Content repurposing output** -- Number of derivative assets created from event content and their individual performance metrics
-- **Sponsorship ROI** -- Actual leads and CPL compared to pre-event projections. Actual vs. projected comparison.
-- **Community growth** -- New community members attributed to the event, 30-day retention of event-sourced members
-- **NPS/satisfaction score** -- Post-event survey results, likelihood to attend future events
-- **No-show recovery rate** -- Percentage of no-shows who engaged with the recording delivery email
+- **Attendee return rate (next instance)** -- the share of this event's attendees who show up to the next recurring instance. Target: ≥40% by event 4. Below 20% sustained means the ritual isn't sticking.
+- **Community NPS** -- post-event one-question survey: "How likely are you to recommend this gathering to another [member type]?" Lobo's threshold: ≥50 sustained. Below 30 means the event isn't giving more than it takes.
+- **Referral attendance** -- share of attendees who came because another member invited them. Target: ≥25% by event 6. This is the compounding signal.
+- **Post-event community-channel activity** -- new posts, replies, and DMs in the community channel within 7 days of the event, attributable to attendees. Target: ≥1 attributable interaction per 5 attendees within 7 days.
+- **Member recognition density** -- count of specific members named (with permission) in the event, follow-up notes, and recap thread. Target: ≥3 per event.
+- **Volunteer ratio** -- volunteers / attendees for multi-track or multi-day events. Target: ≥6 per 100 attendees by event 5; ≥6 per 100 attendees sustained at scale.
+- **Practice-to-product ratio** -- audited from the recording / agenda: minutes of craft talk vs. minutes of product talk. Target: ≥70/30 practice-to-product.
+- **48-hour follow-up compliance** -- share of engaged attendees who received a personal host reply within 48 hours. Target: 100%. This is a hygiene gate, not a stretch metric.
+- **Cadence integrity** -- share of committed dates actually held on schedule across a rolling 12-month window. Target: ≥90%. Skipped instances break the ritual.
+- **Member-led content share** -- by event 6+, share of stage time / agenda owned by community members vs. host/company. Target: ≥30% by event 6, ≥50% by event 12.
+
+Downstream business metrics (pipeline, revenue) are deliberately not led with. Lobo's frame: business outcomes are layered on top of community health, not measured in place of it. If the leading indicators above are green, the lagging ones follow.
+
+---
+
+## Sources
+
+- [Lloyed Lobo personal site -- "From Grassroots to Greatness" and Community-Led Growth resources](https://www.lloyedlobo.com/)
+- [Marketing Powerups podcast -- Lloyed Lobo on Community-Led Growth](https://www.marketingpowerups.com/podcast/lloyed-lobo-community-led-growth/)
+- [Userlist podcast -- Community-Led Growth with Lloyed Lobo](https://userlist.com/podcast/community-led-growth-with-lloyed-lobo/)
+- [Boast.AI -- the company Lobo built on Community-Led Growth](https://boast.ai/)
+- [Traction conference -- 100K+ innovator community Lobo co-founded](https://www.tractionconf.io/)
