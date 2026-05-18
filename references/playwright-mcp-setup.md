@@ -27,7 +27,7 @@ Source of truth: <https://github.com/microsoft/playwright-mcp> and <https://play
 The server is the npm package `@playwright/mcp`. You normally do **not** install it globally — runtimes invoke it via `npx`, which fetches and caches it on first run. To pre-warm the cache and confirm Node finds it:
 
 ```bash
-npx -y @playwright/mcp@latest --help
+npx -y @playwright/mcp@0.0.75 --help
 ```
 
 Pin to the current verified version if you want reproducible behavior:
@@ -69,7 +69,7 @@ The flag that connects the MCP server to the extension is `--extension`. Without
 **Claude Code (recommended: CLI command):**
 
 ```bash
-claude mcp add playwright npx @playwright/mcp@latest -- --extension
+claude mcp add playwright -- npx -y @playwright/mcp@0.0.75 --extension
 ```
 
 This writes the entry to `~/.claude.json` (or `~/.claude/settings.json` depending on Claude Code version). Equivalent manual JSON if you prefer to edit by hand:
@@ -79,7 +79,7 @@ This writes the entry to `~/.claude.json` (or `~/.claude/settings.json` dependin
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--extension"]
+      "args": ["-y", "@playwright/mcp@0.0.75", "--extension"]
     }
   }
 }
@@ -92,13 +92,13 @@ Drop `--extension` from `args` if you want headless mode only (faster for non-au
 ```toml
 [mcp_servers.playwright]
 command = "npx"
-args = ["-y", "@playwright/mcp@latest", "--extension"]
+args = ["-y", "@playwright/mcp@0.0.75", "--extension"]
 ```
 
 Or via Codex CLI:
 
 ```bash
-codex mcp add playwright npx -- -y "@playwright/mcp@latest" --extension
+codex mcp add playwright npx -- -y "@playwright/mcp@0.0.75" --extension
 ```
 
 **Cursor (`~/.cursor/mcp.json` for global, or `.cursor/mcp.json` per-project):**
@@ -108,7 +108,7 @@ codex mcp add playwright npx -- -y "@playwright/mcp@latest" --extension
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--extension"]
+      "args": ["-y", "@playwright/mcp@0.0.75", "--extension"]
     }
   }
 }
@@ -129,7 +129,7 @@ The skill performs a sanity test: opens `https://example.com`, takes a screensho
 Manual sanity check without the skill:
 
 ```bash
-npx -y @playwright/mcp@latest --extension --port 8931
+npx -y @playwright/mcp@0.0.75 --extension --port 8931
 # Server prints: "Listening on http://localhost:8931/sse"
 # Then in the MCP runtime call the `browser_navigate` tool with url=https://example.com
 ```
@@ -153,7 +153,7 @@ After setup, the following skills can use Playwright:
 | `--user-data-dir <path>` | Use a persistent profile directory. Different workspaces auto-namespace via hash. |
 | `--port <n>` | Run as a standalone SSE/HTTP server instead of stdio (useful for debugging). |
 
-Full flag list: `npx -y @playwright/mcp@latest --help`.
+Full flag list: `npx -y @playwright/mcp@0.0.75 --help`.
 
 ## Troubleshooting
 
