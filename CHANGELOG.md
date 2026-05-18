@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.3.0-rc.5 - 2026-05-18
+
+### Added
+- `/ttm-playwright-setup` — install walkthrough for Playwright MCP server + Chrome extension bridge. Detects target runtime (Claude Code / Codex / Cursor), prints runtime-specific install steps, smoke-tests the connection (bounded to 2 retries), marks `.taketomarket/CONFIG.md` on success.
+- `/ttm-linkedin-post` — manual LinkedIn post generator. First-run interviews 2-5 author URLs and scrapes them via Playwright MCP to build `.taketomarket/PLAYBOOKS/linkedin-base.md`. Subsequent runs load base + post-history + 7-day news WebSearch, generate 2-3 candidates with varied hooks, then route through `/ttm-humanize` before saving. Tracks history in `.taketomarket/CAMPAIGNS/linkedin/post-history.md`. Flags: `--rebuild-base`, `--no-news`, `--topic <text>`.
+- `references/playwright-mcp-setup.md` — install reference (Microsoft `@playwright/mcp@0.0.75` + "Playwright Extension" Chrome bridge + Claude Code / Codex TOML / Cursor configs + 8-mode troubleshooting).
+- `references/linkedin-post-patterns.md` — pattern catalog (7 hook patterns, 5 templates incl. PAIPS, 2025-2026 length norms with citations, banned moves with humanizer cross-refs).
+- `templates/linkedin-base-template.md` — per-user LinkedIn style-guide skeleton filled on first run.
+- `bin/lib/playwright-check.cjs` + tests — detects `mcpServers.playwright` in Claude Code settings JSON.
+- `node bin/ttm-tools.cjs playwright-check` subcommand.
+- `.taketomarket/CAMPAIGNS/linkedin/` workspace scaffold (drafts/, scrapes/, README).
+
+### Changed
+- `workflows/site/quality-gates.md` Gates 3 (performance) + 4 (mobile responsiveness) upgraded from soft documentation to Playwright-driven enforcement. Both skip with WARN when Playwright MCP isn't installed.
+
+### Notes
+- Stantly (named in plan as a LinkedIn pattern source) is unfindable as of 2026-05-18 — `references/linkedin-post-patterns.md` documents the audit and substitutes verifiable public creator playbooks (Welsh, Bloom, Schafer, AuthoredUp data).
+
 ## 2.3.0-rc.4 - 2026-05-18
 
 ### Added
