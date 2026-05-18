@@ -255,6 +255,7 @@ switch (command) {
     const result = checkPlaywrightMcp();
     console.log(raw ? JSON.stringify(result) : `${result.detected ? '✓' : '✗'} ${result.setupHint}`);
     process.exit(result.detected ? 0 : 1);
+    break;
   }
   default:
     error(
