@@ -19,6 +19,7 @@
  *   commit <msg> [--files]   Stage files and git commit
  *   scan-codebase            Detect stack, monorepo, feature candidates
  *   config <read|set>        Read or set .taketomarket/CONFIG.md
+ *   first-run <sub> <skill>  Check or mark first-run inline-education seen state
  *   svg-render <in> <out>    Render SVG file to PNG via local converter
  */
 
@@ -220,6 +221,24 @@ switch (command) {
     }
     break;
   }
+  case 'first-run': {
+    const sub = args[1];
+    const skillName = args[2];
+    if (!sub || !skillName) {
+      error('Usage: ttm-tools.cjs first-run check|mark <skill>');
+    }
+    const { isFirstRunSeen, markFirstRunSeen } = require('./lib/config.cjs');
+    if (sub === 'check') {
+      const seen = isFirstRunSeen(process.cwd(), skillName);
+      console.log(raw ? JSON.stringify({ seen }) : (seen ? 'seen' : 'first'));
+    } else if (sub === 'mark') {
+      markFirstRunSeen(process.cwd(), skillName);
+      console.log(raw ? '{"ok":true}' : `Marked ${skillName} as seen.`);
+    } else {
+      error('first-run subcommand required: check, mark');
+    }
+    break;
+  }
   case 'svg-render': {
     const { renderSvgToPng } = require('./lib/svg-render.cjs');
     const svgArgs = args.slice(1).filter(a => a !== '--raw');
@@ -265,6 +284,6 @@ switch (command) {
   }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render, site-location, deploy, playwright-check, install-detect`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, first-run, svg-render, site-location, deploy, playwright-check, install-detect`
     );
 }

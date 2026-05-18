@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-state` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-state
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-state --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-state`
+
+`/ttm-state` is the read-only dashboard. With no argument it prints
+every campaign (active and archived) with its current phase, blockers,
+shipped-asset count, and last activity timestamp. With a slug, it
+prints the per-campaign detail view from that campaign's STATE.md.
+
+Why it matters: state is the truth file in takeToMarket -- not your
+memory, not the conversation history. This skill is how you check
+that truth without mutating it. Use it before running any campaign
+action when you're not sure where you left off.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 State dashboard workflow for /ttm-state. Displays all campaigns (active and
 archived) in a summary table. No-argument mode shows the full campaign dashboard;

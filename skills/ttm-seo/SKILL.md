@@ -9,6 +9,36 @@ allowed-tools: Read Write Bash Glob Grep WebSearch WebFetch
 
 # /ttm-seo
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-seo` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-seo
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-seo --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-seo`
+
+`/ttm-seo` is the unified SEO + AEO toolkit. Subcommands: `audit`
+runs a URL or sitemap through technical and content checks;
+`keyword-map` generates a topic cluster with intent tags;
+`aeo` measures your citation status across Google AI Overviews,
+ChatGPT search, and Perplexity for a target query.
+
+Why it matters: SEO and Answer Engine Optimization (AEO) share most
+fundamentals -- structured content, clear claims, citation-worthy
+formatting -- but diverge on a few signals. Treating them as one
+toolkit with three modes prevents the trap of optimizing for Google
+in a way that breaks AEO citation.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 Routes to one of three subcommand workflows based on the first argument.
 
 ## Usage

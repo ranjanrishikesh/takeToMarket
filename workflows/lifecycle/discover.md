@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-discover` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-discover
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-discover --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-discover`
+
+`/ttm-discover` is the research phase. It scans your competitors, your category,
+and your ICP's actual language to surface angles, claims, and proof points
+worth building campaigns around. Output is a structured discovery doc with
+candidate hooks, ranked by confidence, that feed into `/ttm-brief`.
+
+Why it matters: without discovery, briefs come from your own head -- which is
+how positioning drifts and how every campaign starts to sound the same. This
+step is the marketing equivalent of profiling before you optimize: do not skip
+to production until you know what's actually resonating.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <!--
   NOTE: This workflow was renamed `research.md` -> `discover.md` in v2.3.0.
   The artifact filename (`RESEARCH.md`) and state-machine identifier

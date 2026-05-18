@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-review` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-review
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-review --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-review`
+
+`/ttm-review` is human-in-the-loop sign-off. After verify passes the
+automated wall, review surfaces the asset with diff context and the gate
+results so you can sanity-check tone, claims, and channel fit before it
+ships. You can approve, reject with feedback, or escalate to a positioning
+shift.
+
+Why it matters: automated gates catch invariant violations but not subjective
+calls about whether an asset is the right one for this moment. Review is the
+human commit-message step: the system stops, surfaces context, and waits for
+your decision rather than auto-shipping.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Review workflow for /ttm-review. Presents verified assets with structured
 review checklist for human evaluation (LIFE-10). Collects per-asset outcomes

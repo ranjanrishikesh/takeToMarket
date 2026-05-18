@@ -1,5 +1,34 @@
 # pSEO Workflow
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-pseo` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-pseo
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-pseo --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-pseo`
+
+`/ttm-pseo` is programmatic SEO: given a template and a dataset
+(competitors-vs-you, alternatives, integrations, etc.), it generates
+N landing pages with consistent positioning across all of them. Each
+page passes the same gate wall as a single landing page, but in bulk.
+
+Why it matters: pSEO is one of the few SEO plays still worth running
+in the AI-search era because the long tail of "X vs Y" queries doesn't
+get cannibalized as quickly. The catch is that ungoverned pSEO produces
+thousands of near-duplicate, positioning-drifted pages. The gate wall
+is what makes pSEO defensible at scale.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 **Required reading:**
 - `${CLAUDE_PLUGIN_ROOT}/references/pseo-page-anatomy.md`
 - `${CLAUDE_PLUGIN_ROOT}/references/pseo-templates/[template]-anatomy.md`

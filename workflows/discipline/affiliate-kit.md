@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-affiliate-kit` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-affiliate-kit
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-affiliate-kit --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-affiliate-kit`
+
+`/ttm-affiliate-kit` generates a complete affiliate / partner enablement
+package: positioned creative, copy variants per channel, claim cards
+with substantiation, and a one-pager partners can drop into their
+own funnels. Everything inherits your positioning invariant.
+
+Why it matters: affiliates and partners are the highest-drift channel
+because the assets leave your control. A structured kit with explicit
+positioning rails is the difference between affiliate-driven growth
+that compounds and affiliate-driven content that contradicts your
+own site within a quarter.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Generate a creative kit for affiliate partners including approved messaging, banner specs,
 email swipes, and tracking requirements. Uses affiliate playbook constraints for quality.

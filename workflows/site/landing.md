@@ -1,5 +1,35 @@
 # Landing Page Workflow
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-landing` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-landing
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-landing --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-landing`
+
+`/ttm-landing` produces a landing page from your positioning, brand,
+ICP, and a brief. It generates the HTML, applies the brand tokens,
+writes the page into your site directory, and queues the four landing
+quality gates (positioning, copy clarity, conversion fundamentals,
+visual review via Playwright).
+
+Why it matters: landing pages are the highest-leverage marketing
+asset for developerneurs because they're the conversion surface for
+every other campaign. Treating them as one-off prose vs. spec-driven
+generation is the difference between A/B testing your way upward
+and rewriting from scratch every two months.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 **Required reading:**
 - `.taketomarket/POSITIONING.md`
 - `.taketomarket/BRAND.md`

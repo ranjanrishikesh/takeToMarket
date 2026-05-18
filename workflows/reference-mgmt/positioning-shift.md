@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-positioning-shift` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-positioning-shift
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-positioning-shift --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-positioning-shift`
+
+`/ttm-positioning-shift` is the only skill (besides init) that may modify
+POSITIONING.md. It walks you through a deliberate positioning change:
+documents the old position, captures the rationale, writes the new one,
+and flags every existing campaign that needs re-verification under the
+new invariant.
+
+Why it matters: positioning changes are schema migrations. If you edit
+POSITIONING.md ad-hoc, you've silently invalidated every shipped asset
+and there's no audit trail. This skill makes the change explicit,
+auditable, and propagates the consequences across active campaigns.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Controlled positioning shift workflow for /ttm-positioning-shift. Requires explicit
 reasoning for the change, collects new positioning fields, generates a migration plan

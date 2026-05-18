@@ -1,5 +1,34 @@
 # Playwright Setup Workflow
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-playwright-setup` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-playwright-setup
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-playwright-setup --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-playwright-setup`
+
+`/ttm-playwright-setup` installs and configures the Playwright MCP
+required for the visual landing-page gate (gate 4) and any future
+browser-based verification. It detects your existing MCP config,
+adds the Playwright entry, and confirms the tool is reachable from
+the runtime.
+
+Why it matters: the landing-page gate wall includes a Playwright-driven
+visual check, and without the MCP installed it falls back to a softer
+gate. This skill turns the soft gate into a hard one. Treat it as the
+runtime equivalent of installing a missing test dependency.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 **Required reading:** `${CLAUDE_PLUGIN_ROOT}/references/playwright-mcp-setup.md`
 
 ## Step 1: Detect current state

@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-archive` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-archive
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-archive --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-archive`
+
+`/ttm-archive` moves a finished campaign out of the active set into
+`.taketomarket/archive/`. It freezes STATE.md, preserves the gate
+results and ship records, and removes the campaign from the
+`/ttm-next` queue. Archived campaigns still feed `/ttm-learn`.
+
+Why it matters: campaigns that should be done but stay marked active
+pollute scheduling and waste cognitive budget every time you run
+`/ttm-state`. Archive is the marketing equivalent of merging and
+deleting a branch -- the work is preserved, but it's out of your
+active workspace.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Archive workflow for /ttm-archive. Validates campaign is shipped or learned (only
 shipped or learned campaigns can be archived per D-08), extracts structured learnings from campaign

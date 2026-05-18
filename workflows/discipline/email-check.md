@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-email-check` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-email-check
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-email-check --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-email-check`
+
+`/ttm-email-check` is the email pre-flight. It runs a draft email
+through deliverability checks (spam-trigger phrases, structural red
+flags, list-hygiene reminders) and the positioning gate, plus a
+voice check against your BRAND.md. Output is a pass/fix-list.
+
+Why it matters: email is unforgiving -- one drift-laden send to a
+warm list can damage open rates for weeks. Treat this skill like a
+pre-commit hook for outbound: cheap, fast, and the only thing
+standing between your draft and your domain reputation.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Pre-send deliverability, dark-mode compatibility, and spam-trigger scan for email content.
 Evaluates against email playbook gate definitions and generates a go/no-go recommendation.

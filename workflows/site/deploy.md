@@ -1,5 +1,34 @@
 # Deploy Workflow
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-deploy` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-deploy
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-deploy --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-deploy`
+
+`/ttm-deploy` ships your generated site (landing + pSEO + any static
+assets) to the deploy target detected from your project (Vercel,
+Netlify, Cloudflare Pages, etc.) or guides manual deployment if no
+target is detected. It does not bypass the gate wall -- only verified,
+reviewed assets are pushed.
+
+Why it matters: a verified asset that isn't deployed is functionally
+equivalent to no asset. This skill is the bridge between the
+spec-driven pipeline and the live URL, and it preserves the audit trail
+so you can correlate a deployed page back to its brief and gate results.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 ## Step 1: Read landing path
 
 ```bash

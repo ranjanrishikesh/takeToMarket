@@ -1,3 +1,33 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-improve-skill` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-improve-skill
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-improve-skill --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-improve-skill`
+
+`/ttm-improve-skill` opens a feedback loop on a specific takeToMarket
+skill. It diffs your last few invocations of a skill, asks what felt
+wrong or missing, and either drafts a local skill override or files a
+structured issue against the takeToMarket repo so the change can land
+upstream.
+
+Why it matters: takeToMarket is opinionated, which means it'll be
+wrong about your context sometimes. This skill is the structured
+escape hatch -- instead of fighting the skill in-conversation, you
+record the friction, get a fix, and avoid that friction permanently.
+Treat it like filing a linter rule exemption.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Skill improvement workflow for /ttm-improve-skill. Gathers details about an
 EXISTING skill that needs changes and files a GitHub issue at

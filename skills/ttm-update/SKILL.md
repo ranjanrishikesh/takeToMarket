@@ -9,6 +9,35 @@ allowed-tools: Bash Read
 
 # /ttm-update
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-update` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-update
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-update --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-update`
+
+`/ttm-update` checks your installed takeToMarket version against the
+npm registry, detects whether you installed via npm or git clone,
+runs the appropriate upgrade path, then reconciles any locally-edited
+skill files against the new source and offers per-file diffs.
+
+Why it matters: skills evolve quickly and an out-of-date install
+silently misses gate improvements and bug fixes. This skill is the
+opinionated upgrader -- it knows the right command for your install
+method and preserves your local edits behind explicit prompts rather
+than overwriting them.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 Check if takeToMarket needs updating and upgrade if available.
 
 ## Step: Detect install method

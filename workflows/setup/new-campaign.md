@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-new-campaign` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-new-campaign
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-new-campaign --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-new-campaign`
+
+`/ttm-new-campaign` creates an isolated workspace under `.taketomarket/campaigns/<slug>/`
+with its own STATE.md, brief slot, and asset directory. It's the marketing
+equivalent of `git checkout -b feature/X`: campaigns are independent units that
+can be at different lifecycle phases simultaneously, and the state machine
+tracks each one separately.
+
+Why it matters: takeToMarket is multi-campaign by design. Without a campaign
+slug, briefs, assets, and verification results have no home and bleed into
+each other. Run this before `/ttm-brief` for any new initiative -- it locks in
+the campaign id that subsequent skills route work into.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Campaign scaffolding workflow that creates a CAMPAIGNS/<slug>/ directory with
 initialized STATE.md, empty RESEARCH.md, empty BRIEF.md, and ASSETS/ directory.

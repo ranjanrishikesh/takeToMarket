@@ -1,3 +1,34 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-request-skill` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-request-skill
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-request-skill --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-request-skill`
+
+`/ttm-request-skill` is the proposal pipeline for new skills. You
+describe a marketing job you keep doing manually, the skill asks
+structured questions (inputs, outputs, gates, frequency), and
+produces either a local SKILL.md draft you can iterate on or a
+formatted feature request against the upstream repo.
+
+Why it matters: solopreneurs hit recurring marketing tasks that
+nobody else's playbook covers because nobody else has your product.
+Rather than re-prompting from scratch each time, this skill turns
+your repeated workflow into a versioned, gated skill -- the same
+way you'd extract a utility function after writing the same code
+three times.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Skill request workflow for /ttm-request-skill. Gathers details about a NEW
 skill the user wants and files a GitHub issue at ranjanrishikesh/taketomarket.

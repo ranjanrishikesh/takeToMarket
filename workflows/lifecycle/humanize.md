@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-humanize` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-humanize
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-humanize --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-humanize`
+
+`/ttm-humanize` rewrites AI-flavored prose into something that sounds like a
+person wrote it: varied sentence rhythm, fewer hedges, specific verbs, no
+"furthermore" or "in today's fast-paced." It runs after verify, before review,
+and only on assets flagged for tone tuning.
+
+Why it matters: detection models and human readers both pattern-match on the
+same tells, and AI-fingerprinted copy converts worse and damages trust. Think
+of humanize as a code formatter that targets the LLM-prose anti-patterns the
+way Prettier targets whitespace.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Humanization workflow for /ttm-humanize. Detects and rewrites the AI-writing patterns
 cataloged in references/humanizer-patterns.md against an audience-facing asset, calibrated
