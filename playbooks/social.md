@@ -1,134 +1,166 @@
 ---
 discipline: social
-asset_types: [tweet, instagram-post, instagram-carousel, instagram-reel-caption, facebook-post, facebook-ad-copy]
-version: "1.0"
+asset_types: [tweet, thread, instagram-post, tiktok-script]
+version: "2.0"
 ---
 
 # Social Playbook
 
+> Built on Dan Koe's **One-Person Business** model and the **2 Hour Writer** content engine. The frame: you are not running a social media account. You are running a one-person business whose distribution layer happens to look like X, Threads, Instagram, and TikTok. Posts are not the work. Posts are the visible exhaust of daily writing on a specialized topic. Read in Koe's voice: produce yourself, productize your specific knowledge, distill long-form into atomic ideas, ship daily, compound.
+>
+> **Scope:** This playbook covers the multi-platform short-form surface — X/Twitter, Threads, Instagram, TikTok. LinkedIn lives in its own playbook under Justin Welsh's Operating System. Both playbooks share the "one idea, many surfaces" instinct but optimize for different rooms.
+
 ## Production Guidance
 
-Social media is not one channel -- it is three distinct platforms with different algorithms, audiences, and content rules. This playbook covers X/Twitter, Instagram, and Facebook. Every post must be written for a specific platform, not adapted from a generic template. Copy-pasting the same content across platforms is an anti-pattern that violates native format rules on every platform.
+### The One-Person Business Frame
 
-### General Social Principles
+Every post produced under this playbook serves a **one-person business** — a single specialized human monetizing their accumulated knowledge × perspective × skill stack. Social is not a megaphone for a brand voice committee. It is leverage applied to one mind. Two consequences:
 
-- **Native format preference:** Each platform rewards native content (text, image, video created for that platform) over link posts. Link-only posts get suppressed across all three platforms.
-- **Platform voice:** Adapt tone per platform while maintaining brand voice from BRAND.md. X is concise and direct. Instagram is visual-first with descriptive captions. Facebook allows longer narrative and community engagement.
-- **One idea per post:** Social posts succeed by delivering one clear point, not summarizing multiple ideas. If the idea is complex, break it into a thread (X) or carousel (Instagram).
+1. **The voice belongs to one named human.** Not a brand. Not a "we." If the post could have been written by any marketer on the team, the post is off-thesis and gets rewritten.
+2. **The niche is non-negotiable.** A one-person business is built on a micro-niche so specific that demand is undeniable and you can charge premium for what you know. Generalist content gets buried. If a post drifts toward mass-audience self-help, it gets rewritten.
 
-### X/Twitter Production Rules
+When in doubt, ask: *would this post make sense if it were the only thing a stranger ever read from this account?* If the answer is no — if it requires the broader brand context to land — it isn't a one-person-business post yet.
 
-- Maximum value in minimum words. Target under 200 characters for highest engagement even though the limit is 280.
-- **No rhetorical questions.** The X algorithm deprioritizes posts with rhetorical questions (questions that do not expect an answer). Use statements, data points, or direct challenges instead. Questions that genuinely invite a response are acceptable.
-- Thread-first for longer content: if the idea needs more than 280 characters, write as a thread with each tweet standalone-valuable. Number tweets in threads longer than 3 posts.
-- URLs count as 23 characters regardless of actual length (X's t.co link wrapping).
-- Hashtags: 1-3 maximum, integrated naturally or at end. More than 3 looks spammy on X.
+### The 2 Hour Writer Engine
 
-### Instagram Production Rules
+Production runs on Koe's **2 Hour Writer** rhythm: one daily writing session produces one long-form anchor (the newsletter or essay), and the social surfaces are downstream **distillations** of that anchor. The pipeline:
 
-- **Visual-first:** The image or carousel IS the content. The caption supports and extends the visual, not the other way around. Do not write a caption that makes sense without seeing the image.
-- **Carousel structure:** 1:1 (feed-optimized) or 4:5 (maximum vertical space) ratio. Maximum 10 slides. Cover slide must have a hook. Content slides should have one point each. Closing slide should have a CTA.
-- **Caption structure:** Hook in first line (before "more" truncation at ~125 characters), value in body, CTA and hashtags at end.
-- **Hashtags:** 5-15 relevant hashtags, placed at the end of caption or in the first comment. Mix of broad and niche tags.
-- **Reel captions:** Under 150 characters for visibility -- reels have less caption real estate.
-- If a CTA needs a link, reference "link in bio" -- Instagram does not allow clickable links in post captions.
+1. **Capture** — sentences, observations, sharp lines collected throughout the day.
+2. **Anchor (daily, long-form)** — one essay, one newsletter section, one chapter draft. This is the original thinking.
+3. **Distill (social surfaces)** — atomic ideas extracted from the anchor:
+   - 3–5 X/Threads posts (one idea each)
+   - 1 X thread (the spine of the essay, compressed)
+   - 1 Instagram carousel (visual breakdown)
+   - 1 TikTok script (one idea, performed)
+4. **Compound** — the same idea reappears across platforms over weeks because compounding requires repetition, not novelty.
 
-### Facebook Production Rules
+**A standalone social post that did not come from a longer original work is a smell.** It usually means the writer skipped the thinking step and went straight to performance. The remediation is not "write a better post." The remediation is to write the essay first, then distill.
 
-- **Text before media:** Facebook shows text above images/videos. Lead with the hook in the first sentence -- do not let an image speak for itself.
-- **Longer narrative acceptable:** 100-500 words perform well on Facebook. The first 100 words are visible before the "See more" truncation.
-- **Community engagement:** Ask questions, run polls, invite shares. Facebook's algorithm weights shares and meaningful comments over reactions.
-- **Hashtags: minimal.** 0-2 hashtags maximum. Facebook hashtags have minimal discovery benefit and look out of place in the feed.
-- **Video preference:** Native video (uploaded directly, not linked from YouTube) gets significantly more reach. Square (1:1) or vertical (4:5) formats preferred in feed.
+### Specialized Knowledge, Not Mass Appeal
+
+Niche-down until it feels uncomfortable. Then niche-down again. The audience-of-one principle:
+
+- Write for one specific person who looks like the customer of the one-person business. Not "marketers." Not "founders." A named role with a named problem at a named stage.
+- The litmus test: *would a generalist content creator be embarrassed to publish this because it's too specific?* If yes, you are in the right zone.
+- Mass-audience platitudes ("hustle harder," "consistency is key," "your mindset is everything") are anti-content under this playbook. They get followers who will never buy.
+
+### Distillation, Not Performance
+
+The first line of a post is **a sharp idea**, not a hook-bait device. Koe's distinction:
+
+- **Sharp idea opener** — a complete claim that earns the rest of the post. ("Most one-person businesses fail because the founder confuses output with leverage.")
+- **Hook-bait opener** — a pattern-interrupt device that promises something the post doesn't pay off. ("I lost $80K in 90 days. Here's what I learned.") This is engagement-farming, not writing.
+
+If the first line could be the only line and still teach something, the post is doing distillation. If the first line only makes sense because of what follows, the post is doing performance — rewrite.
+
+### Authenticity Over Polish
+
+Engineer-creators win when they sound like themselves. Koe is explicit: outsourcing your voice to a ghostwriter before the audience knows who you are kills the trust signal that makes a one-person business work. Applied here:
+
+- Write in the voice you actually speak in. If you say "honestly" out loud, write "honestly." If you would never say "leverage your synergies," never write that.
+- Idiosyncratic phrasing is a feature. The audience is buying *this specific human*, not a polished feed.
+- Verifier note: voice deviations between platforms beyond the format constraints listed below are an anti-pattern (see DISC-SOCIAL-04).
+
+### Build Assets, Not Posts
+
+Every distilled post must be **reusable**. The asset graph:
+
+- A line of the essay → a tweet → a thread tweet → a carousel slide → a TikTok hook → a chapter sub-heading.
+- Atomic ideas have IDs in the writer's swipe file. Reposting the same atomic idea every 90 days with a new framing is the engine, not duplication.
+- A post that cannot be reused anywhere else is a leak in the system. Either upgrade the idea or cut it.
+
+### Long-Form Anchor Is Required
+
+Per Koe: **top of funnel = social platforms. Long-form = the relationship layer.** A social-only operation with no newsletter, no blog, no essay archive is a treadmill. Posts vanish; long-form compounds. The verifier checks (via DISC-SOCIAL-05) that the parent campaign declares its long-form anchor — and that the social distillation traces back to it.
 
 ---
 
 ## Discipline Gates
 
-### DISC-SOC-01: Platform Character Limits -- Tier 1
+### DISC-SOCIAL-01: Distilled From Long-Form Anchor -- Tier 1
 
-**Checks:** Content length against platform-specific maximums
-**Against:** Platform specifications for the target platform
+**Checks:** Whether the post is a distillation of a longer original work, not a standalone performance
+**Against:** The campaign's declared long-form anchor (newsletter issue, essay, blog post) referenced in the asset metadata or campaign brief
 
 #### Evaluation Criteria
 
-1. **X/Twitter limit**
-   - PASS: Post is under 280 characters with URLs counted as 23 characters each
-   - WARN: Post is 260-280 characters (functional but no room for retweet commentary or quote-tweet additions)
-   - FAIL: Post exceeds 280 characters (will not publish)
-   - N/A: Asset is not targeting X/Twitter
+1. **Anchor traceability**
+   - PASS: The asset metadata names a specific long-form anchor (essay slug, newsletter issue number, blog URL) and the post's core idea appears in that anchor
+   - WARN: An anchor is referenced but the connection is loose — the post extends the theme but not a specific passage
+   - FAIL: No anchor declared, or the anchor declared does not contain the idea — the post is a freestyle performance with no upstream thinking
 
-2. **Instagram caption limit**
-   - PASS: Caption is under 2,200 characters
-   - WARN: Caption is 2,000-2,200 characters (approaching limit, may need trimming)
-   - FAIL: Caption exceeds 2,200 characters (will be truncated by platform)
+### DISC-SOCIAL-02: Sharp-Idea First Line -- Tier 1
+
+**Checks:** The first line is a complete, sharp idea — not a hook-bait device, rhetorical pattern-interrupt, or curiosity-gap setup
+**Against:** Post body (first sentence)
+
+#### Evaluation Criteria
+
+1. **Opener type**
+   - PASS: First line states a complete claim or observation that teaches something on its own ("Specialized knowledge compounds; generalist content evaporates.")
+   - WARN: First line is a partial idea that requires the next line to land but is still substantive ("There's a reason most one-person businesses stall at $10K/month.")
+   - FAIL: First line is engagement-bait — a rhetorical question ("Ever wonder why...?"), a loss-confession hook ("I lost $X in Y days"), a curiosity-gap tease ("Nobody talks about this but..."), or a pattern-interrupt with no payoff ("STOP scrolling.")
+
+### DISC-SOCIAL-03: Niche-Relevant, Not Mass-Audience -- Tier 1
+
+**Checks:** The post speaks to a specific micro-niche, not a generalist self-improvement audience
+**Against:** Post body + campaign ICP definition
+
+#### Evaluation Criteria
+
+1. **Niche specificity**
+   - PASS: The post names a specific role, stage, or situation that the campaign ICP would recognize as theirs ("If you're an engineer-founder shipping your first SaaS solo, your distribution problem is not a marketing problem.")
+   - WARN: The post is on-topic for the niche but uses generalist framing — the specificity is implied, not stated
+   - FAIL: The post could appear on a generic motivation/hustle/mindset account and nobody would notice — no named role, no named stage, no named problem unique to the niche
+
+### DISC-SOCIAL-04: Same-Human Voice Across Platforms -- Tier 2
+
+**Checks:** Voice consistency across the X/Threads/Instagram/TikTok variants of the same idea — one human, not four marketing teams
+**Against:** All asset variants in the same distillation group
+
+#### Evaluation Criteria
+
+1. **Voice coherence**
+   - PASS: Variants share vocabulary, cadence, and idiosyncratic phrasing — only format-driven differences (length, line breaks, visual structure) vary
+   - WARN: One variant drifts toward a different register (e.g., the TikTok script suddenly uses creator-economy slang the X post would never use)
+   - FAIL: Variants read as if written by different people — different vocabulary, different stance, different level of formality with no platform reason
+
+### DISC-SOCIAL-05: Compounding-Friendly Asset Design -- Tier 2
+
+**Checks:** The post is built as a reusable asset, not a one-shot performance
+**Against:** Post body + swipe-file metadata (if present)
+
+#### Evaluation Criteria
+
+1. **Reusability**
+   - PASS: The atomic idea in the post is one that could be reframed and republished in 90 days, or recycled into another surface (thread, carousel, chapter) without modification beyond format
+   - WARN: The post is timely (references a current event or thread) and would need fresh framing to recycle, but the underlying claim is reusable
+   - FAIL: The post is so tied to a transient moment (a viral tweet reply, a one-off meme) that it has no second life — the asset is consumed on publish
+
+### DISC-SOCIAL-06: Platform-Native Format Compliance -- Tier 1
+
+**Checks:** Content respects the platform's native format constraints
+**Against:** Platform specifications for the target surface
+
+#### Evaluation Criteria
+
+1. **X/Twitter (single post or thread)**
+   - PASS: Each tweet ≤ 280 characters (URLs counted as 23); thread ≤ 9 tweets; each tweet stands alone as a teachable unit
+   - WARN: Tweet is 260–280 characters (no room for quote-tweet additions), or thread is 10–12 tweets (long but functional)
+   - FAIL: Any tweet exceeds 280 characters, or thread exceeds 12 tweets, or thread has tweets that cannot stand alone
+   - N/A: Asset is not targeting X/Twitter or Threads
+
+2. **Instagram (post or carousel)**
+   - PASS: Carousel ≤ 10 slides, 1:1 or 4:5 ratio, cover slide carries the sharp idea, one teaching point per content slide, closing slide names the long-form anchor or CTA
+   - WARN: Carousel uses 11 slides via a workaround, or cover slide is decorative rather than idea-carrying
+   - FAIL: Carousel exceeds 10 slides natively (impossible — auto-truncated), or has slides with walls of text that should have been the caption
    - N/A: Asset is not targeting Instagram
 
-3. **Facebook limit**
-   - PASS: Post is under 1,500 characters with key message in first 100 words (visible before truncation)
-   - WARN: Post is 1,500-2,000 characters (long but functional; key message should be front-loaded)
-   - FAIL: Post exceeds 2,000 characters or key message is buried after the first 200 words
-   - N/A: Asset is not targeting Facebook
-
-### DISC-SOC-02: Native Format Preference -- Tier 2
-
-**Checks:** Content formatted for native platform consumption
-**Against:** Platform best practices for native content
-
-#### Evaluation Criteria
-
-1. **Format appropriateness**
-   - PASS: Content uses native format -- X: text, image, or thread; Instagram: image, carousel, or reel; Facebook: text+image, native video, or poll
-   - WARN: Link-based post but with substantial native text that delivers value independently of the link
-   - FAIL: Link-only post with no native content -- just a URL or "Check this out: [link]" with no additional context
-
-2. **Media format**
-   - PASS: Images or video in platform-preferred ratios (Instagram: 1:1 or 4:5; Facebook: 1.91:1 for link previews, 1:1 or 4:5 for native; X: 16:9 or 1:1)
-   - WARN: Media present but uses non-standard ratio (will display with cropping or letterboxing)
-   - FAIL: N/A -- media is optional on some platforms. Only FAIL if media is present but severely wrong format (e.g., portrait video in a landscape container, or image so distorted it hurts readability)
-
-### DISC-SOC-03: Platform-Specific Rules -- Tier 1
-
-**Checks:** Platform-specific content rules that affect reach and engagement
-**Against:** Current platform algorithm guidelines
-
-#### Evaluation Criteria
-
-1. **X/Twitter rhetorical questions**
-   - PASS: No rhetorical questions -- post uses statements, data points, or direct challenges
-   - WARN: Question present but phrased as a genuine request for response (e.g., "What tool do you use for email automation?" -- expects real answers)
-   - FAIL: Rhetorical question that does not expect an answer (e.g., "Don't you hate when...?", "Who else thinks...?", "Isn't it crazy that...?")
-   - N/A: Asset is not targeting X/Twitter
-
-2. **Instagram carousel structure**
-   - PASS: Carousel has a cover slide with a hook, content slides with one key point each, and a closing CTA slide
-   - WARN: Carousel present but missing clear structure (e.g., no cover hook, or CTA buried mid-carousel)
-   - FAIL: Carousel with walls of text per slide, or slides with no narrative flow (random order would not change meaning)
-   - N/A: Asset is not an Instagram carousel
-
-3. **Facebook text-before-media**
-   - PASS: Text appears above any image or video with a hook in the first sentence
-   - WARN: Text present but hook is weak or buried after generic opening
-   - FAIL: Image or video posted with no text or minimal text (under 20 characters)
-   - N/A: Asset is not targeting Facebook
-
-### DISC-SOC-04: Hashtag and Mention Hygiene -- Tier 2
-
-**Checks:** Platform-appropriate hashtag and mention usage
-**Against:** Platform-specific engagement data and best practices
-
-#### Evaluation Criteria
-
-1. **Hashtag count**
-   - PASS: X/Twitter 1-3 hashtags; Instagram 5-15 hashtags; Facebook 0-2 hashtags
-   - WARN: Slightly above or below optimal range per platform (e.g., X with 4 hashtags, Instagram with 3-4 or 16-20, Facebook with 3)
-   - FAIL: X 5+ hashtags; Instagram 25+ hashtags; Facebook 5+ hashtags
-   - N/A: Platform does not benefit from hashtags or post intentionally omits them with documented reason
-
-2. **Mention accounting**
-   - PASS: Mentions are relevant to the content, and character count including mentions stays within platform limits
-   - WARN: Mentions present and character limit is tight -- removing a mention would improve readability
-   - FAIL: Mentions push content over the platform character limit, or mentions are irrelevant tag-spam
+3. **TikTok script**
+   - PASS: Script ≤ 90 seconds spoken, opens with the sharp idea in the first 3 seconds, one teaching point, no engagement-bait CTA at end
+   - WARN: Script is 90–120 seconds (over native sweet spot but still in algorithmic range)
+   - FAIL: Script exceeds 120 seconds, or opens with a pattern-interrupt with no payoff in the first 3 seconds
+   - N/A: Asset is not a TikTok script
 
 ---
 
@@ -140,166 +172,205 @@ None -- all base gates keep default tiers.
 
 ## Format Rules
 
-Platform-specific formatting enforced during production:
+Platform-specific formatting enforced during production. These constraints are the *containers*; the One-Person Business thesis is the content.
 
-### X/Twitter
+### X / Twitter / Threads
 
-- **Character limit:** 280 (URLs count as 23 characters regardless of actual length)
-- **Hashtags:** 1-3, integrated naturally in text or placed at end
-- **Thread posts:** Each tweet standalone-valuable, numbered if thread exceeds 3 tweets
-- **Media:** 16:9 or 1:1 images, 4 images maximum per tweet
-- **No rhetorical questions:** Use statements or genuine questions only
-- **Quote tweets:** Under 200 characters to leave room for the quoted content
+- **Single post:** ≤ 280 characters (URLs count as 23 regardless of actual length).
+- **Thread length:** ≤ 9 tweets per thread is the sweet spot. Threads over 12 tweets get truncated by reader attention long before by the platform.
+- **Each tweet standalone-teachable.** Strip the surrounding tweets and any single tweet should still teach. If a tweet only exists as connective tissue, cut it.
+- **Numbered threads** only when sequence matters (a how-to). Idea threads (Koe's default) do not need numbering — each tweet is its own atom.
+- **Hashtags:** 0–2 maximum. Hashtags on X are vestigial. Use them only when joining an active conversation.
+- **Media:** 16:9 or 1:1. Quote-tweet additions stay under 200 characters to leave room for the quoted content.
 
 ### Instagram
 
-- **Caption limit:** 2,200 characters
-- **Carousel:** 1:1 or 4:5 ratio, maximum 10 slides, cover slide with hook, closing slide with CTA
-- **Hashtags:** 5-15, placed at end of caption or in first comment
-- **Bio link reference:** If CTA needs a link, reference "link in bio" -- no clickable links in captions
-- **Reel caption:** Under 150 characters for visibility
-- **Image minimum resolution:** 1080x1080 (1:1) or 1080x1350 (4:5)
+- **Caption:** ≤ 2,200 characters. The first 125 characters before the "more" truncation must carry the sharp idea — not a generic intro.
+- **Carousel:** 1:1 or 4:5 ratio, **maximum 10 slides** (platform-enforced).
+  - Slide 1 (cover): the sharp idea, large type, no visual clutter.
+  - Slides 2–9 (content): one teaching point per slide.
+  - Slide 10 (closing): the long-form anchor reference ("Full essay in bio") or one CTA. Not both.
+- **Reels caption:** ≤ 150 characters for visibility.
+- **Hashtags:** 5–10 niche-specific tags. Avoid mass-audience tags (#motivation, #entrepreneur) — they pull the wrong audience.
+- **No clickable links** in captions — reference "link in bio."
 
-### Facebook
+### TikTok
 
-- **Post limit:** Practical limit 1,500 characters (first 100 words visible before "See more" truncation)
-- **Link preview:** 1.91:1 image ratio for link card previews
-- **Hashtags:** 0-2 maximum (Facebook hashtags have minimal discovery benefit)
-- **Video:** Square (1:1) or vertical (4:5) preferred in feed; native upload only (no YouTube links)
-- **Text before media:** Always include text above images or videos
-- **Polls:** Use native poll feature for engagement; keep options to 2-4 choices
+- **Script length:** ≤ 90 seconds spoken. The native sweet spot is 30–60 seconds.
+- **First 3 seconds carry the sharp idea.** No "What's up everyone" intros. No "Wait for it" tease. The idea opens; the body proves.
+- **One teaching point per script.** Multi-point TikToks get cut at retention drops. Save the second point for the next video.
+- **No engagement-bait CTA.** "Comment X for the template" is a farming pattern. Instead: "Full breakdown in this week's newsletter — link in bio."
+- **Caption:** ≤ 150 characters. The caption supports the spoken script — it doesn't replace it.
 
 ---
 
 ## Examples
 
-### Good: Native X/Twitter Thread
+### Good: X Thread Distilled From a Newsletter Essay
 
 ```
-Tweet 1 (178 chars):
-We analyzed 2,000 B2B tweets from last quarter.
+Tweet 1 (212 chars):
+Most one-person businesses fail at the same step.
 
-The ones that got 10x more engagement had one thing in common:
+It's not pricing. It's not the product. It's not even the audience.
 
-They made a claim in the first sentence. Not a question.
+It's that the founder confuses output with leverage — and burns out producing content that doesn't compound.
 
-Thread:
+Tweet 2 (231 chars):
+Output is what you produce in a day.
 
-Tweet 2:
-Here's the data:
+Leverage is what one day of output keeps producing for the next 12 months.
 
-- Claim-first tweets: 4.2% engagement rate
-- Question-first tweets: 0.8% engagement rate
-- Link-first tweets: 0.3% engagement rate
+A daily essay with no distillation strategy is output.
 
-The algorithm rewards conviction.
+A daily essay that becomes 5 posts, 1 thread, 1 carousel, 1 short — is leverage.
 
-Tweet 3:
-The best-performing claim format:
+Tweet 3 (244 chars):
+The 2-hour writer's pipeline:
 
-"[Specific number] + [counterintuitive insight]"
+1. Write the essay first
+2. Pull 5 atomic ideas out of it
+3. Each atom becomes a post
+4. The spine of the essay becomes a thread
+5. The frame becomes a carousel
+6. The hook becomes a short
 
-Example: "83% of B2B buyers make their decision before talking to sales."
+One session. Five surfaces. Twelve months of compounding.
 
-Not: "Did you know most buyers decide early?"
+Tweet 4 (188 chars):
+The mistake almost everyone makes:
 
-#B2B #ContentStrategy
+They write posts directly.
+
+So the posts have no upstream thinking. So the posts don't compound. So they burn out in 90 days wondering why content doesn't work.
+
+Write the essay first.
 ```
 
-**Why it works:** Opens with data (not a question), each tweet stands alone, no external links, 2 hashtags on final tweet only, rhetorical-question-free.
+**Why it works:** Opens with a sharp idea, not a hook-bait. Each tweet stands alone — strip any one and the others still teach. Distilled directly from a newsletter essay (anchor traceability). Niche-specific (one-person business operators, not "creators in general"). Voice is unmistakably the same human across all four tweets. The thread is reusable in 90 days with new framing because the underlying claim is evergreen.
 
-### Good: Instagram Carousel with Structure
+---
 
-```
-[Slide 1 - Cover/Hook]: "The 5-metric dashboard that replaced our 47-metric report"
-[Slide 2]: Metric 1 -- Revenue per campaign (not total revenue)
-[Slide 3]: Metric 2 -- CAC by channel (not blended CAC)
-[Slide 4]: Metric 3 -- Pipeline velocity (not pipeline value)
-[Slide 5]: Metric 4 -- Content-to-conversion ratio
-[Slide 6]: Metric 5 -- Customer expansion rate
-[Slide 7 - CTA]: "Save this for your next dashboard review. Follow @brand for more."
-
-Caption (412 chars):
-We deleted 42 metrics from our marketing dashboard last month.
-
-Not because they weren't important.
-Because they weren't actionable.
-
-Here are the 5 metrics we kept -- and why each one drives a specific decision.
-
-Swipe through to see the full breakdown.
-
-Which metric would you add to this list? Drop it in the comments.
-
-#MarketingMetrics #B2BMarketing #DataDriven #MarketingDashboard #GrowthMarketing
-```
-
-**Why it works:** Cover slide has hook, one point per slide, CTA on final slide, caption has hook before truncation, 5 hashtags, engagement question.
-
-### Bad: Rhetorical Question on X/Twitter
+### Good: Instagram Carousel Distilled From the Same Essay
 
 ```
-Don't you just HATE it when your marketing metrics don't make sense?
+Slide 1 (cover): "Output is not leverage."
+Slide 2: "Output = what you produce in a day."
+Slide 3: "Leverage = what one day of output keeps producing for 12 months."
+Slide 4: "Daily essay with no distillation = output. Daily essay distilled into 5 posts, 1 thread, 1 carousel, 1 short = leverage."
+Slide 5: "The 2-hour pipeline: write essay first. Pull 5 atoms. Each atom → a post. Spine → a thread. Frame → a carousel. Hook → a short."
+Slide 6: "One session. Five surfaces. Twelve months of compounding."
+Slide 7: "Most creators write posts directly. So the posts have no upstream thinking. So they don't compound."
+Slide 8 (closing): "Full breakdown in this week's newsletter — link in bio."
 
-We've all been there. Check out our new guide to fix it: https://example.com/guide
+Caption (first line, before "more" cut):
+The reason your daily posting isn't compounding isn't your hook. It's your pipeline.
 
-#Marketing #Metrics #Guide #Data #Analytics #B2B #Growth #Strategy
+[remainder of caption mirrors the carousel + hashtags]
+
+#onepersonbusiness #soloprenership #writingonline #digitalleverage #2hourwriter
 ```
 
-**Why it fails:** DISC-SOC-03 FAIL (rhetorical question "Don't you just HATE..."), DISC-SOC-02 WARN (link-based post), DISC-SOC-04 FAIL (8 hashtags on X).
+**Why it works:** Same atomic idea as the X thread (compounding asset design). Cover slide is a sharp idea, not a decorative quote. One teaching point per slide. Closing slide names the anchor. Caption hook lives before the truncation. Hashtags are niche-specific (one-person business operators), not mass-audience (#hustle, #entrepreneur).
 
-### Bad: Link-Only Facebook Post
+---
+
+### Bad: Engagement-Bait X Post
 
 ```
-https://example.com/blog/new-post
+I lost $80,000 in my first year as a creator.
 
-[Auto-generated link preview with generic image]
+Here's the ONE thing I wish someone had told me 👇
+
+(comment "YES" if you want the full breakdown)
 ```
 
-**Why it fails:** DISC-SOC-02 FAIL (link-only, no native content), DISC-SOC-03 FAIL (no text before media/link).
+**Why it fails:** DISC-SOCIAL-02 FAIL (loss-confession hook with curiosity-gap setup — performance, not distillation). DISC-SOCIAL-01 FAIL (no traceable anchor — the "ONE thing" is bait, not a real idea from a real essay). DISC-SOCIAL-05 FAIL (one-shot performance — cannot be reused; the value is in the cliffhanger). Pure engagement-farming. Builds the wrong audience: people who comment "YES" for free content, not people who buy specialized knowledge.
+
+---
+
+### Bad: Mass-Audience Platitude
+
+```
+Consistency is the difference between successful creators and everyone else.
+
+Post every day.
+Show up.
+Trust the process.
+
+That's it. That's the secret.
+```
+
+**Why it fails:** DISC-SOCIAL-03 FAIL (mass-audience generic — could appear on any motivation account and nobody would notice). DISC-SOCIAL-01 FAIL (no anchor — this is filler, not a distillation of any specific thinking). DISC-SOCIAL-02 WARN at best (the opening line is a generic claim, not a sharp idea — "consistency is key" is the most-repeated cliché in the genre). Pulls in followers who will never become customers of a one-person business because they aren't looking for specialized knowledge; they're looking for permission.
+
+---
+
+### Bad: Hookless Long-Form Dump on X
+
+```
+So I've been thinking a lot about the creator economy and how everyone keeps
+saying the same things over and over. There are so many takes out there but
+I think the real issue people miss is that content is downstream of thinking
+and thinking is downstream of writing and most people skip the writing part
+and go straight to performing on camera or in text and that's why their
+content doesn't land and they wonder why nothing works after 90 days...
+```
+
+**Why it fails:** DISC-SOCIAL-02 FAIL (no sharp idea opener — "So I've been thinking" is meandering setup). DISC-SOCIAL-06 FAIL (single tweet exceeds 280; would need to be a thread, but each tweet wouldn't stand alone — the writer is dumping a half-finished essay into X). DISC-SOCIAL-01 WARN (the underlying observation about "content is downstream of writing" is a real Koe-flavored idea, but it's buried in 200 words of mush instead of distilled). The fix: write the essay, then come back and pull this paragraph apart into 3 tweets with a sharp opener.
 
 ---
 
 ## Anti-Patterns
 
-1. **Rhetorical questions on X/Twitter:** The algorithm deprioritizes posts with questions that do not expect genuine answers. "Who else thinks...?" and "Don't you hate when...?" get lower distribution than direct statements or genuine questions.
+1. **Engagement-bait hooks.** Loss-confessions ("I lost $X in Y days"), curiosity gaps ("Nobody talks about this but..."), and pattern-interrupts ("STOP scrolling.") farm engagement from the wrong audience. The audience that responds to bait is the audience that never buys. Anti-Koe.
 
-2. **Link-only posts across all platforms:** Posting a bare URL with no native content gets suppressed on every major platform. Always provide standalone value in the post text itself.
+2. **Content-marketing-for-content's-sake.** Posting daily because "the algorithm rewards consistency" with no upstream essay, no anchor, no distillation pipeline is treadmill content. Output, not leverage. The fix is not more posts; the fix is a long-form anchor.
 
-3. **Same content copy-pasted across platforms:** Each platform has different character limits, audience expectations, hashtag norms, and content formats. A tweet is not a Facebook post is not an Instagram caption. Write platform-native content for each.
+3. **Mass-audience platitudes.** "Hustle harder," "consistency is key," "mindset is everything." These pull in mass followers who will never buy specialized knowledge from a one-person business. They look like growth; they are a tax. Niche-down ruthlessly.
 
-4. **Excessive hashtags:** 25+ hashtags on Instagram looks spammy, 5+ on X is excessive, and any hashtags on Facebook have minimal value. Stay within platform-optimal ranges.
+4. **Niche-hopping.** Switching topic every 30 days — productivity this month, AI next month, fitness the month after — destroys the compounding effect. Specialized knowledge requires staying specialized. Pick one niche and stay long enough for the audience to know you for it.
 
-5. **Instagram carousel with walls of text:** Each carousel slide should have one key point, not a paragraph. If you need more text, use the caption. Slides are visual -- treat them like presentation slides, not blog pages.
+5. **Outsourcing the voice early.** Ghostwriters for a one-person business before the audience knows who the human is kills the trust signal that makes a one-person business work in the first place. The voice IS the moat. Outsource production logistics, never voice.
 
-6. **Facebook posts with no text before media:** Posting an image or video with no text (or just an emoji) wastes the text space that Facebook displays prominently above media. Always lead with a text hook.
+6. **Treating every platform as a separate brand.** Copy-paste-then-edit is fine; but the human behind the posts should sound the same across X, Threads, Instagram, and TikTok. Different format, same human. Voice fragmentation across platforms reads as a marketing team — exactly what a one-person business is not.
+
+7. **Posting without a long-form anchor.** Pure short-form operations with no newsletter, no blog, no essay archive are a treadmill. Short-form is the discovery layer; long-form is the relationship layer. No anchor → no compounding.
+
+8. **Skill-multiplying instead of skill-stacking.** Adding five unrelated skills (design + copywriting + video editing + cold email + SEO + ads + community management + ...) is scatter. The one-person business compounds when 2–3 stacked skills (writing + niche expertise + one production craft) meet a specific micro-niche. Anti-pattern in production: trying to be a polymath account.
 
 ---
 
 ## Metrics
 
-What to measure post-ship per platform:
+What to measure post-ship. Metrics under this playbook prioritize signals of **specialized-knowledge demand** over generic engagement.
 
-### X/Twitter
-- **Impressions:** How many times the tweet appeared in feeds
-- **Engagements:** Likes, retweets, quote tweets, replies combined
-- **Repost rate:** Retweets + quote tweets / impressions -- indicates content worth sharing
-- **Link clicks:** If link in reply strategy used, track clicks via UTM parameters
+### Primary (the ones that map to a one-person business)
 
-### Instagram
-- **Reach:** Unique accounts that saw the post (more meaningful than impressions for Instagram)
-- **Saves:** The strongest content quality signal on Instagram -- saved posts indicate reference-worthy content
-- **Carousel completion rate:** What percentage of viewers reached the last slide? Below 40% suggests weak slide structure
-- **Profile visits:** Did the post drive curiosity about the brand? Track within 48 hours of posting
+- **Saves.** The strongest content-quality signal across platforms. A save means the audience plans to come back. Niche-relevant saves > mass likes every time.
+- **Profile clicks → newsletter subscriptions.** The handoff from short-form (discovery) to long-form (relationship) is the entire game. Track profile clicks within 48h of posting and the resulting newsletter signups.
+- **Niche-relevant follower growth.** Net new followers whose own profiles match the campaign ICP. Vanity follower count is a lagging indicator of the wrong thing; niche-match growth is a leading indicator of the right thing.
+- **Shares to a specific named recipient.** Generic shares are noise. Shares with a comment to a named friend ("@you need to read this") indicate the content hit a real role-specific problem.
 
-### Facebook
-- **Reach:** Organic reach per post (Facebook's most throttled metric -- track trends, not absolutes)
-- **Engagement rate:** (Reactions + comments + shares) / reach
-- **Shares:** The highest-value engagement on Facebook -- shares drive exponential reach
-- **Link clicks:** If post includes a link, track CTR via UTM parameters
+### Secondary (the surface signals)
 
-### Cross-Platform
-- **Sentiment:** Are replies positive, negative, or neutral? Track qualitative patterns across platforms
-- **Reply quality:** Meaningful replies (2+ sentences, on-topic) vs. emoji-only reactions
-- **Follower growth rate:** Net new followers within 48 hours of posting, per platform
-- **Content-to-platform fit score:** Which platforms generate the highest engagement for which content types? Track to optimize channel allocation
+- **Reach / impressions** per surface — track trend, not absolute. Algorithmic noise dominates short-term absolute numbers.
+- **Engagement rate** — (saves + shares + comments) / reach. Likes intentionally de-weighted because likes are the most-farmed engagement signal.
+- **Reply quality** — substantive replies (≥ 2 sentences, on-topic, from accounts that match the niche) over emoji/one-word reactions. Track the *type* of reply, not just count.
+- **Carousel completion rate (Instagram)** — % reaching slide 10. Below 40% suggests weak slide structure or cover slide that didn't earn the swipe.
+- **TikTok average watch time** — % of script consumed. Below 50% on a 60-second script suggests the first 3 seconds didn't land the sharp idea.
+
+### Compounding signals (the ones that prove the engine works)
+
+- **Atomic-idea reuse rate.** % of monthly posts that are re-framings or recycles of ideas from older essays. Healthy engines run at 30–50% reuse. 0% reuse means the writer is reinventing the wheel weekly.
+- **Anchor → social attribution.** For each long-form essay published, the count of distilled posts produced from it. Target ≥ 7 distilled assets per essay in a mature pipeline.
+- **Content-to-customer conversion.** The compounding north star: of every 1,000 niche-matched followers, how many become customers of the one-person business over 12 months? This is the only metric that proves the social system is doing its job.
+
+---
+
+## Sources
+
+- Dan Koe, *The One-Person Business Model: How to Monetize Yourself* — https://thedankoe.com/letters/the-one-person-business-model-how-to-monetize-yourself/
+- Dan Koe, *The One-Person Business Roadmap: 99% of Creators Make This Mistake* — https://thedankoe.com/letters/the-one-person-business-roadmap-99-of-creators-make-this-mistake/
+- Dan Koe, *Modern Mastery* (course / community hub for the 2 Hour Writer methodology) — https://www.modernmastery.co/
+- Dan Koe, *The 2 Hour Writer* (productized course on the daily writing → distillation engine) — https://thedankoe.com/the-2-hour-writer/
+- Dan Koe, YouTube essays and long-form video archive — https://www.youtube.com/@thedankoe
