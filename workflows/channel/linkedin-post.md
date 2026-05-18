@@ -65,10 +65,10 @@ Synthesize across authors. Apply `references/linkedin-post-patterns.md` framewor
 ## Step 6: Load context for this post
 
 - Load linkedin-base.md, POSITIONING, BRAND, PRODUCT-DNA, ICP.
-- Load post-history.md to extract:
-  - Recent topics (last 30 days).
-  - Recent hook patterns used.
-- Avoid: same topic in last 30 days, same hook pattern in last 5 posts.
+- Load post-history.md and extract from each row (pipe-format `| YYYY-MM-DD | <topic-tag> | <hook-pattern> | <slug> | <link> |`):
+  - `<topic-tag>` values from the last 30 days — these are the canonical topic keys (set by frontmatter `topic` in Step 11 and copied into the history row in Step 12).
+  - `<hook-pattern>` values from the last 5 rows.
+- Avoid: any `<topic-tag>` that appears in the last 30 days; any `<hook-pattern>` that appears in the last 5 posts.
 
 ## Step 7: Web search for news angles
 
@@ -131,11 +131,13 @@ Then invoke `/ttm-humanize <path>` via Skill tool. Re-read the file after humani
 ```
 ✓ Post ready. Copy from .taketomarket/CAMPAIGNS/linkedin/drafts/<file>.md
 
-Want daily cadence? Set up a Claude routine:
+Want daily cadence? If you have a scheduler skill installed (e.g. /schedule),
+you can set up a recurring run — example syntax:
 
   /schedule create "0 9 * * 1-5" "/ttm-linkedin-post"
 
-This runs the skill every weekday at 9am. You'll review + post manually.
+This would run the skill every weekday at 9am. You'd review + post manually.
+No scheduler? Re-run /ttm-linkedin-post when you want the next post.
 
 Next: /ttm-next | /ttm-state
 ```

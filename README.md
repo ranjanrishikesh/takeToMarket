@@ -120,6 +120,7 @@ All non-Claude runtimes also support `~/.agents/skills/` as a universal path. Se
 | `/ttm-brand-refresh` | Update BRAND.md with new proof points and deprecate expired ones |
 | `/ttm-brief` | Generate a campaign brief with mandatory outcome metrics, positioning anchor, and channel mix |
 | `/ttm-competitor-scan` | On-demand competitor analysis that updates COMPETITORS.md |
+| `/ttm-deploy` | Vercel deploy with auto-detected best path (git-push, Vercel CLI, API token) |
 | `/ttm-discover` | Discover phase: SERP analysis, competitor content audit, ambient narrative mapping (renamed from `/ttm-research`) |
 | `/ttm-email-check` | Deliverability, dark-mode, and spam-trigger check for email assets (renamed from `/ttm-email-preflight`) |
 | `/ttm-fix` | Fix phase: root cause analysis, fix brief, re-produce, re-verify (capped 3×) |
@@ -127,13 +128,17 @@ All non-Claude runtimes also support `~/.agents/skills/` as a universal path. Se
 | `/ttm-humanize` [MANDATORY] | Mandatory final-step humanizer for every audience-facing asset. Runnable ad-hoc. |
 | `/ttm-icp-refresh` | Update ICP.md from new customer data including calls, reviews, and feedback |
 | `/ttm-init` | Interview-driven onboarding that generates all .taketomarket/ reference files |
+| `/ttm-landing` | Next.js 15 + Tailwind v4 + React 19 marketing site scaffold with brand-token integration |
 | `/ttm-learn` | Extract lessons from campaign data, propose reference file edits, log to LEARNINGS.md |
+| `/ttm-linkedin-post` | Manual LinkedIn post generator. Author-mimic style + post-history tracking + last-7-day news WebSearch. Final draft passes through `/ttm-humanize` |
 | `/ttm-measure` | Analyze campaign analytics against outcome metrics using attribution models |
 | `/ttm-new-campaign` | Create a new campaign directory with initialized state and reference file links |
 | `/ttm-next` | Guide user to the right next command based on current campaign state |
+| `/ttm-playwright-setup` | Install walkthrough for Playwright MCP server + Chrome extension bridge. Run once per machine to unlock author scraping, competitor render, and Lighthouse/visual gates |
 | `/ttm-positioning-check` | Sample recent assets and report positioning drift percentage and analysis |
 | `/ttm-positioning-shift` | Controlled positioning change with reasoning, migration plan, and approval gate |
 | `/ttm-produce` | Generate content assets in fresh contexts loaded with brief, positioning, brand, ICP, and playbook |
+| `/ttm-pseo` | Programmatic SEO route generator for blog, use-case, comparison, alternative templates. JSON CMS input. AEO + SEO optimized |
 | `/ttm-repurpose` | Fan out a long-form asset into derivatives across channels with full brief-produce-verify per derivative |
 | `/ttm-resume` | Resume a paused campaign at its last completed phase |
 | `/ttm-review` | Present assets with structured review checklist for human evaluation |
