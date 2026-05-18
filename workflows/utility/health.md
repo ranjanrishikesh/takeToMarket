@@ -1,3 +1,33 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-health` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-health
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-health --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-health`
+
+`/ttm-health` audits the integrity of your `.taketomarket/` directory.
+It checks that reference files exist and aren't suspiciously empty,
+flags stale references, validates per-campaign STATE.md against the
+file system, surfaces DRIFT-LOG anomalies, and reports gate-result
+inconsistencies. It only reports -- it does not self-heal.
+
+Why it matters: state corruption in a long-running multi-campaign
+project is silent until something breaks. Running health periodically
+(or letting it auto-trigger on detected issues) catches drift like a
+filesystem fsck -- before it forces a manual rebuild of a campaign's
+state.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Health audit workflow for /ttm-health. Validates .taketomarket/ directory integrity,
 reference file completeness, per-campaign state consistency, reference file staleness,
@@ -201,3 +231,10 @@ All systems healthy. No action needed.
 <output>
 No files modified (diagnostic command).
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-health can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

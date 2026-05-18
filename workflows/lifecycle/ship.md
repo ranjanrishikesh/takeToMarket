@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-ship` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-ship
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-ship --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-ship`
+
+`/ttm-ship` is the publish step. It packages the approved asset for its
+target channel, writes the canonical version into the campaign's `shipped/`
+directory, updates STATE.md to `shipped`, and records the outcome metric
+hooks so `/ttm-measure` knows what to read later.
+
+Why it matters: shipping in marketing is when a campaign becomes a measurable
+unit. Without the structured ship step, you've got files in a folder and no
+way to attribute results back to the brief. Treat this like `git tag` plus
+deployment: the moment the asset goes live and starts producing data.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Ship workflow for /ttm-ship. Generates a dynamic launch checklist per campaign
 based on channel mix and asset types (D-09). AI auto-checks verifiable items,
@@ -528,3 +556,10 @@ If any asset in this campaign is a landing-page or pSEO asset:
 1. Invoke `/ttm-deploy` via Skill tool.
 2. Confirm a deploy URL was produced.
 3. Confirm `/ttm-deploy` wrote `last_deploy_url` to `.taketomarket/CONFIG.md` (its Step 4). `CONFIG.md` is the single source of truth — read back by `/ttm-verify`. Do not duplicate into the campaign's STATE.md.
+
+## What if this doesn't fit?
+
+Looks like /ttm-ship can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

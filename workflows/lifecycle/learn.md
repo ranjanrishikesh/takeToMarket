@@ -1,3 +1,33 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-learn` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-learn
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-learn --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-learn`
+
+`/ttm-learn` reads finished campaigns -- briefs, gate results, ship records,
+measurement output -- and extracts compound learnings into
+`.taketomarket/LEARNINGS.md`: what positioning angles converted, which
+channels under- or over-delivered, which playbook variants worked. Future
+briefs auto-load this file.
+
+Why it matters: marketing learnings without a structured store dissolve into
+folklore inside three months. Learn turns each campaign's data into a
+versioned doc that biases the next brief toward what actually worked --
+the marketing equivalent of a postmortem doc plus a regression suite of
+tactics.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Learn workflow for /ttm-learn. Extracts lessons from campaign measurement data
 and campaign history. Proposes reference file edits as narratives with per-edit
@@ -403,3 +433,10 @@ Where `${PATTERN_STATUS}` is one of:
 - [ ] Pattern extraction runs only if 3+ campaign slugs in lessons log
 - [ ] Campaign state updated with learn.* fields
 </checklist>
+
+## What if this doesn't fit?
+
+Looks like /ttm-learn can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

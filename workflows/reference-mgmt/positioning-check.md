@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-positioning-check` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-positioning-check
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-positioning-check --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-positioning-check`
+
+`/ttm-positioning-check` audits a campaign's brief and assets against the
+positioning invariant declared in POSITIONING.md. Output is a drift report:
+which claims diverge, by how much, and whether the drift is small enough to
+correct in-place or large enough to require a positioning shift.
+
+Why it matters: positioning drift is the single most common cause of
+inconsistent marketing across a year. This skill is the linter for that --
+run it after producing if anything feels off, and absolutely run it before
+shipping a campaign that hits a new channel or audience.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Positioning drift audit workflow for /ttm-positioning-check. Samples recent assets
 across all campaigns within a configurable time window (default 30 days per D-01),
@@ -337,3 +365,10 @@ Next steps:
 - Audit report displayed to stdout (cross-campaign, no file written)
 - `.taketomarket/DRIFT-LOG.md` updated with audit entry via CLI
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-positioning-check can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

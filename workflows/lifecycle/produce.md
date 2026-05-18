@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-produce` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-produce
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-produce --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-produce`
+
+`/ttm-produce` is the production wave. It loads the brief, positioning, brand,
+ICP, and playbook into a fresh 200K-token Task() subagent context, generates
+the hero asset, then fans out parallel subagents for derivatives. Each producer
+runs in isolation and writes to `MANIFEST.json` for the verify step to consume.
+
+Why it matters: producing in the main conversation context means your generic
+chat history pollutes the output. Fresh contexts + structured inputs are why
+takeToMarket assets pass verification at a higher rate than free-form prompts.
+This is also the only place where multiple assets are built in parallel --
+sequential production is two-to-five times slower at the same quality.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Production orchestration workflow for /ttm-produce. Generates content assets in
 fresh Task() subagent contexts loaded with brief + positioning (full) + brand (full) +
@@ -396,3 +425,10 @@ Internal state files (campaign briefs, manifests, STATE.md) are exempt.
 - `.taketomarket/CAMPAIGNS/${SLUG}/ASSETS/*.md` (produced content files)
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (production manifest for /ttm-verify)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-produce can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-brief` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-brief
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-brief --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-brief`
+
+`/ttm-brief` is the spec-writing step. You describe the audience, the outcome
+metric, the channel, and the angle; the skill writes a structured BRIEF.md that
+the production wave will load. It also runs a positioning sanity check against
+your `.taketomarket/POSITIONING.md` so the brief can't silently contradict the
+invariant.
+
+Why it matters: a brief is the request payload that fans out to multiple parallel
+producer subagents. Vague briefs produce inconsistent assets that fail review.
+The structured-question format is the equivalent of writing a typed function
+signature before implementing the body.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Campaign brief generation workflow with outcome metric enforcement (LIFE-04) and
 positioning check gate (LIFE-05). Collects all mandatory brief fields (D-07),
@@ -353,3 +382,10 @@ Next: Run /ttm-produce ${SLUG}
 <output>
 - `.taketomarket/CAMPAIGNS/<slug>/BRIEF.md` (populated with all mandatory fields)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-brief can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

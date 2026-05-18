@@ -1,3 +1,33 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-init` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-init
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-init --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-init`
+
+`/ttm-init` is the bootstrap interview. It asks you ~30 structured questions
+about your product, audience, positioning, and brand, then generates the
+`.taketomarket/` reference files (POSITIONING.md, ICP.md, BRAND.md, PRODUCT-DNA.md,
+plus brand colors and a logo set) and writes CLAUDE.md / AGENTS.md so the runtime
+knows the rules. Think of it as `npm init` for marketing: one interactive pass
+produces the config that every other `/ttm-*` skill reads.
+
+Why it matters now: every downstream skill -- produce, verify, ship, measure --
+loads these reference files as their context. If you skip init, every later
+skill is operating without your positioning invariant and will drift. Run init
+once per project; re-run only on a real positioning shift via `/ttm-positioning-shift`.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Interview-driven onboarding that generates all .taketomarket/ reference files
 from structured questioning. Use when setting up takeToMarket for a new project.
@@ -515,3 +545,10 @@ Next step: Run /ttm-new-campaign to create your first campaign.
 - `CLAUDE.md`
 - `AGENTS.md`
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-init can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

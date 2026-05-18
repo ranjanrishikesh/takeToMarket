@@ -167,3 +167,10 @@ Offer: "Save this report to .taketomarket/AUDITS/seo-audit-[date].md? (yes/no)"
 If yes: create `.taketomarket/AUDITS/` directory if needed and write the report.
 
 </process>
+
+## What if this doesn't fit?
+
+Looks like /ttm-seo can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

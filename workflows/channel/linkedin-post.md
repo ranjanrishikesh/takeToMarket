@@ -1,5 +1,33 @@
 # LinkedIn Post Workflow
 
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-linkedin-post` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-linkedin-post
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-linkedin-post --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-linkedin-post`
+
+`/ttm-linkedin-post` generates a LinkedIn post from a campaign brief or
+a raw thought, applies the LinkedIn-specific patterns (hook, scannable
+structure, comment-bait, no link in body), and routes it through the
+gate wall. Output is a ready-to-post draft plus a comment-thread plan.
+
+Why it matters: LinkedIn rewards a specific format that violates
+general copywriting rules (short lines, deliberate whitespace,
+no-link bodies). Generic LLM output writes essays; this skill writes
+posts that match the platform's actual distribution mechanics.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 **Required reading:**
 - `${CLAUDE_PLUGIN_ROOT}/references/linkedin-post-patterns.md`
 - `${CLAUDE_PLUGIN_ROOT}/playbooks/linkedin.md`
@@ -141,3 +169,10 @@ No scheduler? Re-run /ttm-linkedin-post when you want the next post.
 
 Next: /ttm-next | /ttm-state
 ```
+
+## What if this doesn't fit?
+
+Looks like /ttm-linkedin-post can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

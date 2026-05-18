@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-competitor-scan` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-competitor-scan
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-competitor-scan --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-competitor-scan`
+
+`/ttm-competitor-scan` surveys your declared competitors' positioning,
+recent campaigns, and channel mix, then writes a structured comparison
+into `.taketomarket/COMPETITORS.md`. Discover and brief consume this to
+avoid sounding identical to whoever you're against.
+
+Why it matters: differentiation is a verifiable property only if you
+have an explicit competitor reference. Without one, your assets drift
+toward the category mean because that's what the model has seen most.
+Run this periodically -- competitor positioning is the input that
+goes stalest fastest.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 On-demand competitor analysis that updates COMPETITORS.md with new intelligence.
 Detects WebSearch/WebFetch MCP tools for automated research; falls back to manual
@@ -226,3 +255,10 @@ Next steps:
 - [ ] COMPETITORS.md updated with preserved structure and summary markers
 - [ ] Completion banner displayed with scan results
 </success_criteria>
+
+## What if this doesn't fit?
+
+Looks like /ttm-competitor-scan can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

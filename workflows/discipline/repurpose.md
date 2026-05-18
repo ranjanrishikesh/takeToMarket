@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-repurpose` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-repurpose
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-repurpose --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-repurpose`
+
+`/ttm-repurpose` takes a shipped hero asset and generates derivative
+assets for other channels (LinkedIn from a blog, email from a landing
+page, threads from a podcast transcript) while preserving the
+positioning invariant. Each derivative runs the full gate wall.
+
+Why it matters: most marketing teams produce one-off assets; the
+compound advantage comes from making one hero work across five
+channels. Repurpose is the systematic version of that, with explicit
+provenance so you can trace any channel asset back to the parent and
+the brief.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Fan out a long-form source asset into derivative assets across channels. Executes full
 brief-produce-verify per derivative with hero-first Task() orchestration. Each derivative
@@ -342,3 +371,10 @@ Internal state files (campaign briefs, manifests, STATE.md) are exempt.
 - `.taketomarket/CAMPAIGNS/${SLUG}/ASSETS/R-*.md` (produced derivative assets)
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (updated with derivative entries)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-repurpose can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

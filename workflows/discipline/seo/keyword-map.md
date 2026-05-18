@@ -123,3 +123,10 @@ Clusters: [N] | Keywords: [total] | File: .taketomarket/KEYWORD-MAP.md
 Display a summary table of clusters with keyword counts per cluster.
 
 </process>
+
+## What if this doesn't fit?
+
+Looks like /ttm-seo can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

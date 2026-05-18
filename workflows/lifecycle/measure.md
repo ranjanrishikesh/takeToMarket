@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-measure` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-measure
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-measure --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-measure`
+
+`/ttm-measure` ingests analytics data (pasted in manually for the MVP) and
+matches it against the outcome metric declared in the brief. Output is a
+pass/fail per campaign plus a per-asset performance summary written to
+MEASURE.md.
+
+Why it matters: every brief committed to an outcome metric, and measure is
+where that commitment gets checked. Skipping measure means you never learn
+which positioning angles, channels, or hooks actually moved the number --
+the production loop becomes vibes-driven. This is the closing parenthesis on
+the spec-driven cycle.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Measurement workflow for /ttm-measure. Accepts analytics data via 3 pathways
 (MCP tools, CSV/Markdown paste, structured batch questions). Applies 3 attribution
@@ -377,3 +406,10 @@ Next: Run /ttm-learn ${SLUG} to extract lessons and improve future campaigns.
 - [ ] MEASUREMENT.md written with outcome-first ordering
 - [ ] Campaign state updated with measure.* fields
 </checklist>
+
+## What if this doesn't fit?
+
+Looks like /ttm-measure can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

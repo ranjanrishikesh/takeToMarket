@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-icp-refresh` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-icp-refresh
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-icp-refresh --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-icp-refresh`
+
+`/ttm-icp-refresh` updates `.taketomarket/ICP.md` -- the Ideal Customer
+Profile reference. It asks updated questions about the audience: their
+jobs, pains, sophistication level, channels, and the exact words they
+use. The new ICP propagates to every brief written afterward.
+
+Why it matters: ICPs drift as your real customer base shifts away from
+who you thought you were selling to. If your last three campaigns
+under-performed and you can't explain why, the ICP doc is usually six
+months stale. Refresh is cheap insurance against marketing to a
+customer who no longer exists.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Update ICP.md from new customer data (calls, reviews, feedback, surveys). Validates
 all changes against POSITIONING.md target audience field before writing. Single-pass
@@ -198,3 +227,10 @@ Next: Run /ttm-positioning-check to verify alignment across recent assets
 - [ ] Summary markers (<!-- _SUMMARY --> / <!-- END_SUMMARY -->) preserved
 - [ ] Completion banner displayed with changed sections
 </success_criteria>
+
+## What if this doesn't fit?
+
+Looks like /ttm-icp-refresh can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

@@ -1,3 +1,33 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-brand-refresh` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-brand-refresh
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-brand-refresh --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-brand-refresh`
+
+`/ttm-brand-refresh` updates `.taketomarket/BRAND.md`, the brand colors,
+and the logo set. It re-asks the brand questions from init, regenerates
+the color tokens, and either regenerates the logo or imports a new one
+you supply. Existing campaigns get flagged for re-verification on brand
+gates only.
+
+Why it matters: brand and positioning are different invariants. You can
+refresh brand (palette, logo, voice tweaks) without a full positioning
+shift, and this skill keeps that boundary clean. Use it for visual
+refreshes and voice retunes; use positioning-shift for what you're
+actually saying.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Update BRAND.md with new proof points, deprecate expired ones, and refresh voice
 guidelines. Validates all changes against POSITIONING.md invariant before writing.
@@ -191,3 +221,10 @@ Next: Run /ttm-positioning-check to verify alignment across recent assets
 - [ ] Summary markers (<!-- _SUMMARY --> / <!-- END_SUMMARY -->) preserved
 - [ ] Completion banner displayed with changed sections
 </success_criteria>
+
+## What if this doesn't fit?
+
+Looks like /ttm-brand-refresh can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

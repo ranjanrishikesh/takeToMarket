@@ -1,5 +1,73 @@
 # Changelog
 
+## 2.3.0 - 2026-05-18 (GA)
+
+The "developerneur-ready" release. Reframes takeToMarket as the marketing OS for engineers + solopreneurs with zero marketing experience.
+
+### Breaking
+- State folder renamed `.marketing/` → `.taketomarket/`. Auto-migrated by `/ttm-update` and `/ttm-health`.
+- GitHub repo renamed lowercase: `ranjanrishikesh/taketomarket`. Old URL redirects.
+- Skill renames (deprecation stubs remain until v2.4.0):
+  - `/ttm-research` → `/ttm-discover`
+  - `/ttm-email-preflight` → `/ttm-email-check`
+  - `/ttm-aeo-check` + `/ttm-keyword-map` + `/ttm-seo-audit` merged into `/ttm-seo` with subcommands.
+
+### Added (9 new skills)
+- `/ttm-humanize` — mandatory final-step humanizer on every audience-facing asset.
+- `/ttm-landing` — Next.js 15 marketing site scaffold + design + copy.
+- `/ttm-pseo` — programmatic SEO route generator (blog/use-case/comparison/alternative).
+- `/ttm-deploy` — Vercel deploy with 3-path detection.
+- `/ttm-linkedin-post` — manual LinkedIn post generator with author-mimic + history + news.
+- `/ttm-playwright-setup` — Playwright MCP install walkthrough.
+- `/ttm-101` — marketing fundamentals for engineers.
+- `/ttm-request-skill` + `/ttm-improve-skill` — file GitHub issues for new + improved skills.
+
+### Added (PRODUCT-DNA + brand + logo onboarding)
+- `/ttm-init` extended: generates `.taketomarket/PRODUCT-DNA.md` (code-scan WHAT + manifesto WHY).
+- Brand color flow with WCAG accessibility checks → `.taketomarket/BRAND.md` `## Colors` + `colors.json`.
+- Logo flow with SVG-first generation + vision self-review loop (up to 3 rounds) → full asset set under `.taketomarket/brand/`.
+- YOLO mode — non-critical questions skipped with defaults; critical questions always asked.
+
+### Added (audience + identity)
+- Audience-explicit identity ("Marketing OS for developerneurs and solopreneurs — engineers with zero marketing experience") across README hero, package.json, plugin manifests, CLAUDE.md, GEMINI.md, templates.
+- "Who this is for" + "Who this is NOT for" sections in README.
+
+### Added (playbooks)
+- Every playbook rewritten under THE industry leader's framework for that topic. 11 existing + 3 new (`landing-pages`, `pseo`, `manifesto`). See `references/playbook-leaders.md` for the leader mapping. Hybrid template: base.md 7-section contract preserved, leader-voiced content fills the sections.
+
+### Added (references)
+- 15+ new research-backed reference files: obra/superpowers conventions, brand-color-theory, logo-design-principles, codex-image-gen-research, landing-page-anatomy, pSEO page anatomy + 4 per-template anatomies + 4 per-template content playbooks, linkedin-post-patterns, playwright-mcp-setup, playbook-leaders, inline-education-blurbs, humanizer-patterns.
+
+### Added (bin/lib)
+- `legacy-folder.cjs` (P1) — migration helper.
+- `codebase-scan.cjs` (P3) — tech-stack + feature-area detection.
+- `config.cjs` (P3) — `.taketomarket/CONFIG.md` reader/writer + first-run-seen tracker.
+- `svg-render.cjs` (P3) — SVG→PNG conversion via best available tool.
+- `site-location.cjs` (P4) — landing path auto-detection.
+- `deploy.cjs` (P4) — Vercel deploy path detection.
+- `playwright-check.cjs` (P5) — Playwright MCP detection.
+- `install-detect.cjs` (P6) — install-method detection (clone vs npm).
+
+### Changed
+- All ttm-* skills get standardized next-step footer routing to `/ttm-next`.
+- All non-meta ttm-* skills get first-run inline education (one-time per skill, controllable via `inline_education: false` in CONFIG.md).
+- `/ttm-produce`, `/ttm-repurpose`, `/ttm-affiliate-kit`, `/ttm-landing`, `/ttm-pseo`, `/ttm-linkedin-post` now mandate `/ttm-humanize` as final step.
+- `/ttm-review` + `/ttm-verify` gain landing-specific quality gates (positioning integrity, schema, performance budget via Playwright, mobile responsiveness via Playwright, internal linking, llms.txt).
+- `/ttm-ship` calls `/ttm-deploy` for landing/pSEO assets.
+- `/ttm-update` detects install method, syncs stale skill files, runs folder migration check.
+- `/ttm-health` runs legacy-folder check.
+
+### Repo + identity
+- `docs/reviewer-outreach-list.md` — tracking for launch outreach to Maja Voje, Akash Gupta, and the playbook leaders.
+
+### Migration guide
+Run `/ttm-update`. It will:
+1. Detect legacy `.marketing/` folder + prompt to migrate.
+2. Sync stale skill files.
+3. Print summary of changes.
+
+If you call `/ttm-research`, `/ttm-email-preflight`, `/ttm-aeo-check`, `/ttm-keyword-map`, or `/ttm-seo-audit`: deprecation stubs auto-route to the new skills. Stubs removed in v2.4.0.
+
 ## 2.3.0-rc.5 - 2026-05-18
 
 ### Added

@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-verify` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-verify
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-verify --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-verify`
+
+`/ttm-verify` runs every produced asset through the quality-gate wall:
+positioning invariant, factual accuracy, brand-voice match, channel-format
+compliance, and outcome-metric instrumentation. Failures are written as
+structured findings the `/ttm-fix` skill can act on; passes get marked
+ready-to-ship.
+
+Why it matters: in marketing, "looks good" is the bug. Without an automated
+gate wall, you ship assets that subtly contradict your positioning and only
+discover it weeks later in analytics. Verify is the marketing equivalent of
+CI: cheap to run, expensive to skip.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Verification workflow for /ttm-verify. Evaluates every produced asset against
 10 base quality gates (per D-06) with structured PASS/WARN/FAIL output and
@@ -515,3 +544,10 @@ If any asset being verified is a landing-page or pSEO asset (detect by path unde
 Read and follow `${CLAUDE_PLUGIN_ROOT}/workflows/site/quality-gates.md`. Run gates 3 (performance budget) and 4 (mobile responsiveness) against the deployed URL recorded at `last_deploy_url` in CONFIG.md.
 
 For v2.3.0 P4 this gate is SOFT: Playwright MCP integration ships in P5. Until then, document the budgets in the verification report and prompt the user to record manual Lighthouse + screenshot results.
+
+## What if this doesn't fit?
+
+Looks like /ttm-verify can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

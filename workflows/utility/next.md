@@ -1,3 +1,32 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-next` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-next
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-next --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-next`
+
+`/ttm-next` scans every active campaign in the project and proposes
+the single highest-priority next move across the whole portfolio.
+Output is a ranked list with one top recommendation plus up to
+three alternatives, each as a runnable `/ttm-*` command.
+
+Why it matters: when more than two campaigns are active, "what
+should I do next" becomes a meaningful decision that depends on
+which campaigns are stuck, which are about to lose momentum, and
+which have the soonest measurable outcome. This skill is the
+scheduler for your marketing pipeline.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Next-command routing workflow for /ttm-next. Looks across ALL active campaigns,
 prioritizes which needs attention most, and suggests the specific /ttm-* command
@@ -185,3 +214,10 @@ append a note: "(Note: this command is not yet available -- coming in Phase 9)"
 <output>
 No files modified (read-only command).
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-next can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill

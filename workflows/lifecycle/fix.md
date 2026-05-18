@@ -1,3 +1,31 @@
+## Step 0: First-run inline education
+
+Read `.taketomarket/CONFIG.md`. Parse `first_run_seen` (object) and `inline_education` (boolean, default true).
+
+If `inline_education` is false: skip this step. Else if `first_run_seen.ttm-fix` is not `true`, print the explainer below verbatim, then mark this skill as seen:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run mark ttm-fix
+```
+
+Use this exact check (bash) to decide whether to print: `node "${CLAUDE_PLUGIN_ROOT}/bin/ttm-tools.cjs" first-run check ttm-fix --raw` -- the JSON `seen` field is `true` once the explainer has run before.
+
+### Explainer for `/ttm-fix`
+
+`/ttm-fix` reads the verification findings, opens the offending asset, applies
+targeted corrections, and re-runs only the affected gates. It's deliberately
+narrow -- it does not regenerate from scratch, it patches. The fix-verify loop
+continues until either all gates pass or you escalate.
+
+Why it matters: regenerating an asset for a small drift wastes context and
+loses good prose that was almost right. Fix is the surgical tool; produce is
+the hammer. Most assets need one or two fix passes before shipping, and that
+loop is where positioning drift gets caught before it leaves the repo.
+
+(Canonical source: `references/inline-education-blurbs.md`. Embedded verbatim because workflows do not @-resolve files at runtime.)
+
+---
+
 <purpose>
 Fix workflow for /ttm-fix. Performs root cause analysis on assets marked
 "needs-fix" during review, generates targeted fix briefs, re-produces in
@@ -493,3 +521,10 @@ Edit the flagged files manually, then run /ttm-verify ${SLUG} to re-check
 - `.taketomarket/CAMPAIGNS/${SLUG}/MANIFEST.json` (updated with fix results per asset)
 - `.taketomarket/CAMPAIGNS/${SLUG}/VERIFICATION.md` (updated with latest gate results)
 </output>
+
+## What if this doesn't fit?
+
+Looks like /ttm-fix can't do that yet.
+
+- Want a new skill? /ttm-request-skill
+- Existing skill needs work? /ttm-improve-skill
