@@ -250,8 +250,14 @@ switch (command) {
     }
     break;
   }
+  case 'playwright-check': {
+    const { checkPlaywrightMcp } = require('./lib/playwright-check.cjs');
+    const result = checkPlaywrightMcp();
+    console.log(raw ? JSON.stringify(result) : `${result.detected ? '✓' : '✗'} ${result.setupHint}`);
+    process.exit(result.detected ? 0 : 1);
+  }
   default:
     error(
-      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render, site-location, deploy`
+      `Unknown command: ${command || '(none)'}. Available: slug, timestamp, init, state, campaign, commit, deviation, drift-log, health, legacy-folder, scan-codebase, config, svg-render, site-location, deploy, playwright-check`
     );
 }
